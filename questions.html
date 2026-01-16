@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Deep Questions</title>
+    <title>Reality Checking Questions - Galaxy Edition</title>
     <style>
         * {
             margin: 0;
@@ -13,12 +13,62 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Deep Space Background */
+            background: radial-gradient(circle at center, #1b2735 0%, #050508 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Star Field */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 150px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 100px 100px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 250px 250px, #fff, transparent);
+            background-size: 400px 400px;
+            animation: moveStars 120s linear infinite;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        @keyframes moveStars {
+            from { transform: translate(0, 0); }
+            to { transform: translate(-400px, -400px); }
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(183, 196, 255, 0.6);
+        }
+
+        .main-content p {
+            font-size: 20px;
+            opacity: 0.8;
+            margin-bottom: 30px;
         }
 
         /* Modal Overlay */
@@ -28,235 +78,173 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
-        /* Modal Content */
+        /* The Galaxy Box Modal */
         .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
+            background: 
+                radial-gradient(circle at 10% 90%, rgba(81, 58, 119, 0.4) 0%, transparent 45%),
+                radial-gradient(circle at 90% 10%, rgba(4, 43, 31, 0.4) 0%, transparent 45%),
+                #0a0a0c;
+            padding: 45px;
+            border-radius: 24px;
             max-width: 550px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             position: relative;
-            animation: fadeIn 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 0 60px rgba(81, 58, 119, 0.2), 
+                inset 0 0 50px rgba(0, 0, 0, 0.9);
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.8) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .close-btn {
             position: absolute;
-            top: 15px;
+            top: 20px;
             right: 20px;
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            color: #999;
-            transition: color 0.3s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            color: #666;
+            transition: all 0.3s;
         }
 
-        .close-btn:hover {
-            color: #333;
-            background: rgba(0,0,0,0.05);
-        }
+        .close-btn:hover { color: #fff; transform: rotate(90deg); }
 
         .question-icon {
-            font-size: 50px;
+            font-size: 60px;
             margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
         .question-category {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 10px;
+            font-size: 13px;
+            color: #b7c4ff;
+            margin-bottom: 12px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .question-title {
-            font-size: 22px;
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: bold;
-            line-height: 1.4;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 24px;
+            color: #f0f0ff;
+            margin-bottom: 35px;
+            line-height: 1.5;
+            text-shadow: 0 0 15px rgba(118, 75, 162, 0.4);
         }
 
+        /* Cosmic Buttons */
         .options-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 20px;
         }
 
         .option-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #1b2735 0%, #3a2a54 100%);
             color: white;
-            border: none;
-            padding: 15px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 28px;
             font-size: 16px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 120px;
+            min-width: 130px;
             font-weight: 600;
         }
 
         .option-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .option-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .result-box {
-            margin-top: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-text {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .quote-author {
-            font-style: italic;
-            color: #666;
-            font-size: 14px;
-            text-align: right;
-            margin-top: 10px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Main content */
-        .main-content {
-            text-align: center;
-            color: white;
-            padding: 40px;
-            max-width: 800px;
-        }
-
-        .main-content h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .main-content p {
-            font-size: 20px;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #2c3e50 0%, #513a77 100%);
+            box-shadow: 0 0 20px rgba(81, 58, 119, 0.6);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .reset-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: transparent;
             color: white;
-            border: 2px solid white;
-            padding: 12px 25px;
-            font-size: 16px;
-            border-radius: 25px;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 35px;
+            font-size: 18px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
         }
 
         .reset-btn:hover {
             background: white;
-            color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: #050508;
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
+        }
+
+        /* Result Area */
+        .result-box {
+            margin-top: 20px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            border-left: 4px solid #513a77;
+            text-align: left;
+        }
+
+        .result-text {
+            font-size: 17px;
+            color: #d1d1ff;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .quote-author {
+            color: #b7c4ff;
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: right;
+            font-weight: bold;
         }
 
         .stats {
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 14px;
-            opacity: 0.8;
+            color: #b7c4ff;
+            opacity: 0.6;
         }
 
+        .hidden { display: none; }
+
         @media (max-width: 600px) {
-            .modal-content {
-                padding: 30px 20px;
-            }
-            
-            .main-content h1 {
-                font-size: 36px;
-            }
-            
-            .main-content p {
-                font-size: 18px;
-            }
-            
-            .options-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .option-btn {
-                width: 100%;
-                max-width: 200px;
-            }
+            .main-content h1 { font-size: 32px; }
+            .modal-content { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-<!-- Main Content -->
-<div class="main-content" id="mainContent">
-    <h1>🌟 Deep Questions 🌟</h1>
-    <p>Discover thought-provoking questions that inspire self-reflection and personal growth.</p>
-    <button class="reset-btn" onclick="showNewQuestion()">Get New Question</button>
-    <div class="stats" id="stats">
-        Questions answered today: <span id="questionCount">0</span>
+<div class="main-content">
+    <h1>🌟 Reality Checking 🌟</h1>
+    <p>Peer through the cosmic window to find clarity.</p>
+    <button class="reset-btn" onclick="showNewQuestion()">Begin Reflection</button>
+    <div class="stats">
+        Stardust gathered today: <span id="questionCount">0</span>
     </div>
 </div>
 
-<!-- Question Modal -->
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
         <button class="close-btn" onclick="closeModal()">&times;</button>
@@ -264,221 +252,46 @@
         <div id="questionArea">
             <div class="question-icon" id="questionIcon">🤔</div>
             <div class="question-category" id="questionCategory">Life Reflection</div>
-            <h2 class="question-title" id="questionTitle">
-                Loading your question...
-            </h2>
+            <h2 class="question-title" id="questionTitle">Loading...</h2>
             <div class="options-container">
-                <button class="option-btn" onclick="answerQuestion('yes')">
-                    Yes ✨
-                </button>
-                <button class="option-btn" onclick="answerQuestion('no')">
-                    No 🤔
-                </button>
+                <button class="option-btn" onclick="answerQuestion('yes')">Yes ✨</button>
+                <button class="option-btn" onclick="answerQuestion('no')">No 🤔</button>
             </div>
         </div>
         
         <div id="resultArea" class="result-box hidden">
             <div id="resultText" class="result-text"></div>
             <div id="quoteAuthor" class="quote-author"></div>
-            <br>
-            <div class="options-container">
-                <button class="option-btn" onclick="getAnotherQuestion()">
-                    Another Question ❓
-                </button>
-                <button class="option-btn" onclick="closeModal()">
-                    Close ✨
-                </button>
+            <div class="options-container" style="margin-top:25px;">
+                <button class="option-btn" onclick="getAnotherQuestion()">Next Star ❓</button>
+                <button class="option-btn" style="background:transparent;" onclick="closeModal()">Exit</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// Updated questions with only yes/no answers
 const questions = [
-    {
-        id: 1,
-        category: "Personal Growth",
-        icon: "🌱",
-        question: "Do you try to learn new things often?",
-        quotes: {
-            yes: {
-                text: "Continuous learning is the minimum requirement for success in any field. Your curiosity is your compass.",
-                author: "Brian Tracy"
-            },
-            no: {
-                text: "The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice.",
-                author: "Brian Herbert"
-            }
-        }
-    },
-    {
-        id: 2,
-        category: "Relationships",
-        icon: "❤️",
-        question: "Do people feel listened to when they talk to you?",
-        quotes: {
-            yes: {
-                text: "The most basic of all human needs is the need to understand and be understood. The best way to understand people is to listen to them.",
-                author: "Ralph G. Nichols"
-            },
-            no: {
-                text: "Listening is an art that requires attention over talent, spirit over ego, others over self.",
-                author: "Dean Jackson"
-            }
-        }
-    },
-    {
-        id: 3,
-        category: "Self-Awareness",
-        icon: "🔍",
-        question: "Do you notice how your emotions affect your choices?",
-        quotes: {
-            yes: {
-                text: "Emotional awareness is the key to self-mastery. When you understand your emotions, you can direct your life.",
-                author: "Daniel Goleman"
-            },
-            no: {
-                text: "The unexamined emotion is not worth feeling. Self-awareness is the first step toward emotional intelligence.",
-                author: "Socrates (adapted)"
-            }
-        }
-    },
-    {
-        id: 4,
-        category: "Purpose",
-        icon: "🎯",
-        question: "Do your daily actions match what you believe in?",
-        quotes: {
-            yes: {
-                text: "The meaning of life is to find your gift. The purpose of life is to give it away.",
-                author: "Pablo Picasso"
-            },
-            no: {
-                text: "Your purpose is not a destination, but a direction. Each day is an opportunity to realign.",
-                author: "Purpose Principle"
-            }
-        }
-    },
-    {
-        id: 5,
-        category: "Resilience",
-        icon: "🛡️",
-        question: "When things go wrong, do you try to fix them?",
-        quotes: {
-            yes: {
-                text: "The oak fought the wind and was broken, the willow bent when it must and survived.",
-                author: "Robert Jordan"
-            },
-            no: {
-                text: "It's not the load that breaks you down, it's the way you carry it. Resilience is a skill you can develop.",
-                author: "Lena Horne"
-            }
-        }
-    },
-    {
-        id: 6,
-        category: "Gratitude",
-        icon: "🙏",
-        question: "Do you often feel thankful for what you have?",
-        quotes: {
-            yes: {
-                text: "Gratitude turns what we have into enough, and more. It turns denial into acceptance, chaos into order, confusion into clarity.",
-                author: "Melody Beattie"
-            },
-            no: {
-                text: "Happiness is not having what you want, but wanting what you have. Gratitude is the key that unlocks abundance.",
-                author: "Rabbi Hyman Schachtel"
-            }
-        }
-    },
-    {
-        id: 7,
-        category: "Integrity",
-        icon: "⚖️",
-        question: "Do you do the right thing even when no one knows?",
-        quotes: {
-            yes: {
-                text: "Integrity is doing the right thing, even when no one is watching. It's the foundation of character.",
-                author: "C.S. Lewis"
-            },
-            no: {
-                text: "Who you are in the dark reveals who you truly are. Every private choice shapes your public character.",
-                author: "Character Principle"
-            }
-        }
-    },
-    {
-        id: 8,
-        category: "Mindfulness",
-        icon: "🌅",
-        question: "Are you focused on what is happening right now?",
-        quotes: {
-            yes: {
-                text: "The present moment is the only time over which we have dominion. Mindfulness is the miracle by which we master ourselves.",
-                author: "Thich Nhat Hanh"
-            },
-            no: {
-                text: "Realize deeply that the present moment is all you ever have. Make the NOW the primary focus of your life.",
-                author: "Eckhart Tolle"
-            }
-        }
-    },
-    {
-        id: 9,
-        category: "Courage",
-        icon: "🦁",
-        question: "Do you do things that scare you but matter?",
-        quotes: {
-            yes: {
-                text: "Courage is not the absence of fear, but the triumph over it. The brave person is not who does not feel afraid, but who conquers that fear.",
-                author: "Nelson Mandela"
-            },
-            no: {
-                text: "Your comfort zone is a beautiful place, but nothing ever grows there. Every great achievement requires stepping into the unknown.",
-                author: "Growth Principle"
-            }
-        }
-    },
-    {
-        id: 10,
-        category: "Legacy",
-        icon: "🌟",
-        question: "Are you creating something that helps others?",
-        quotes: {
-            yes: {
-                text: "The legacy you leave is the life you lead. What you do for yourself dies with you; what you do for others lives on.",
-                author: "Legacy Principle"
-            },
-            no: {
-                text: "Plant trees under whose shade you do not expect to sit. True legacy is about creating value beyond your own lifetime.",
-                author: "Nelson Henderson"
-            }
-        }
-    }
+    { id: 1, category: "Personal Growth", icon: "🌱", question: "Do you try to learn new things often?", quotes: { yes: { text: "Continuous learning is the minimum requirement for success in any field.", author: "Brian Tracy" }, no: { text: "The willingness to learn is a choice that unlocks every door.", author: "Brian Herbert" } } },
+    { id: 2, category: "Relationships", icon: "❤️", question: "Do people feel listened to when they talk to you?", quotes: { yes: { text: "The best way to understand people is to listen to them.", author: "Ralph G. Nichols" }, no: { text: "Listening is an art that requires spirit over ego.", author: "Dean Jackson" } } },
+    { id: 3, category: "Self-Awareness", icon: "🔍", question: "Do you notice how your emotions affect your choices?", quotes: { yes: { text: "Emotional awareness is the key to self-mastery.", author: "Daniel Goleman" }, no: { text: "Self-awareness is the first step toward emotional intelligence.", author: "Socrates" } } },
+    { id: 4, category: "Purpose", icon: "🎯", question: "Do your daily actions match what you believe in?", quotes: { yes: { text: "The meaning of life is to find your gift. The purpose is to give it away.", author: "Pablo Picasso" }, no: { text: "Your purpose is not a destination, but a direction.", author: "Purpose Principle" } } },
+    { id: 5, category: "Resilience", icon: "🛡️", question: "When things go wrong, do you try to fix them?", quotes: { yes: { text: "The willow bent when it must and survived.", author: "Robert Jordan" }, no: { text: "Resilience is a skill you can develop by carrying your load differently.", author: "Lena Horne" } } },
+    { id: 6, category: "Gratitude", icon: "🙏", question: "Do you often feel thankful for what you have?", quotes: { yes: { text: "Gratitude turns what we have into enough.", author: "Melody Beattie" }, no: { text: "Happiness is wanting what you already have.", author: "Hyman Schachtel" } } },
+    { id: 7, category: "Integrity", icon: "⚖️", question: "Do you do the right thing even when no one knows?", quotes: { yes: { text: "Integrity is doing the right thing when no one is watching.", author: "C.S. Lewis" }, no: { text: "Who you are in the dark reveals your true character.", author: "Character Principle" } } },
+    { id: 8, category: "Mindfulness", icon: "🌅", question: "Are you focused on what is happening right now?", quotes: { yes: { text: "The present moment is the only time we truly possess.", author: "Thich Nhat Hanh" }, no: { text: "Realize deeply that the present moment is all you ever have.", author: "Eckhart Tolle" } } },
+    { id: 9, category: "Courage", icon: "🦁", question: "Do you do things that scare you but matter?", quotes: { yes: { text: "Courage is not the absence of fear, but the triumph over it.", author: "Nelson Mandela" }, no: { text: "Your comfort zone is beautiful, but nothing grows there.", author: "Growth Principle" } } },
+    { id: 10, category: "Legacy", icon: "🌟", question: "Are you creating something that helps others?", quotes: { yes: { text: "The legacy you leave is the life you lead.", author: "Legacy Principle" }, no: { text: "Plant trees under whose shade you do not expect to sit.", author: "Nelson Henderson" } } }
 ];
-
-
 
 let currentQuestion = null;
 let usedQuestions = new Set();
 let dailyCount = 0;
 
 function getRandomQuestion() {
-    // Reset if all questions have been used
-    if (usedQuestions.size >= questions.length) {
-        usedQuestions.clear();
-    }
-    
-    let availableQuestions = questions.filter(q => !usedQuestions.has(q.id));
-    
-    if (availableQuestions.length === 0) {
-        availableQuestions = questions;
-        usedQuestions.clear();
-    }
-    
-    const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-    const question = availableQuestions[randomIndex];
+    if (usedQuestions.size >= questions.length) usedQuestions.clear();
+    let available = questions.filter(q => !usedQuestions.has(q.id));
+    const question = available[Math.floor(Math.random() * available.length)];
     usedQuestions.add(question.id);
     return question;
 }
@@ -486,16 +299,13 @@ function getRandomQuestion() {
 function showNewQuestion() {
     resetModal();
     currentQuestion = getRandomQuestion();
-    
     document.getElementById('questionIcon').textContent = currentQuestion.icon;
     document.getElementById('questionCategory').textContent = currentQuestion.category;
     document.getElementById('questionTitle').textContent = currentQuestion.question;
-    
     document.getElementById('modalOverlay').style.display = 'flex';
 }
 
 function getAnotherQuestion() {
-    resetModal();
     showNewQuestion();
 }
 
@@ -506,75 +316,35 @@ function resetModal() {
 
 function answerQuestion(answer) {
     if (!currentQuestion) return;
-    
     document.getElementById('questionArea').classList.add('hidden');
     document.getElementById('resultArea').classList.remove('hidden');
-    
     const quote = currentQuestion.quotes[answer];
     document.getElementById('resultText').textContent = quote.text;
     document.getElementById('quoteAuthor').textContent = `— ${quote.author}`;
-    
-    // Update daily count
-    dailyCount++;
-    updateDailyStats();
-    
-    // Store in localStorage
-    const today = new Date().toDateString();
-    const stats = JSON.parse(localStorage.getItem('deepQuestionsStats') || '{}');
-    
-    if (!stats[today]) {
-        stats[today] = { count: 0, questions: [] };
-    }
-    
-    stats[today].count++;
-    stats[today].questions.push({
-        id: currentQuestion.id,
-        question: currentQuestion.question,
-        answer: answer,
-        timestamp: new Date().toISOString()
-    });
-    
-    localStorage.setItem('deepQuestionsStats', JSON.stringify(stats));
+    updateDailyStats(true);
 }
 
 function closeModal() {
     document.getElementById('modalOverlay').style.display = 'none';
 }
 
-function updateDailyStats() {
+function updateDailyStats(increment = false) {
     const today = new Date().toDateString();
-    const stats = JSON.parse(localStorage.getItem('deepQuestionsStats') || '{}');
-    const todayStats = stats[today] || { count: 0 };
-    
-    document.getElementById('questionCount').textContent = todayStats.count;
-    dailyCount = todayStats.count;
+    let stats = JSON.parse(localStorage.getItem('deepQuestionsStats') || '{}');
+    if (!stats[today]) stats[today] = { count: 0 };
+    if (increment) stats[today].count++;
+    localStorage.setItem('deepQuestionsStats', JSON.stringify(stats));
+    document.getElementById('questionCount').textContent = stats[today].count;
 }
 
-// Initialize on page load
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
     updateDailyStats();
-    
-    // Show a question if user hasn't answered any today
-    const today = new Date().toDateString();
-    const stats = JSON.parse(localStorage.getItem('deepQuestionsStats') || '{}');
-    
-    if (!stats[today] || stats[today].count === 0) {
-        setTimeout(showNewQuestion, 1500);
-    }
+    setTimeout(showNewQuestion, 1000);
 });
 
-// Close modal when clicking outside
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-
-// Close with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.getElementById('modalOverlay').style.display === 'flex') {
-        closeModal();
-    }
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'modalOverlay') closeModal();
 });
 </script>
-
 </body>
 </html>

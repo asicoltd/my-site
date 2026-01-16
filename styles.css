@@ -211,7 +211,7 @@ section {
 
 .text-gradient {
   background: linear-gradient(45deg, #20c997, #0d6efd);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
 }
 
@@ -305,7 +305,7 @@ section {
 /* Gradient text */
 .text-gradient {
   background: linear-gradient(90deg, #ff007f, #20c997);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   color: transparent;
 }
 
@@ -565,4 +565,67 @@ h4 {
   display: inline-block;
   padding-bottom: 5px;
   align-items: center;
+}
+
+#cuteBtn {
+    /* position: fixed; */
+    bottom: 25px;
+    /* right: 25px; */
+    padding: 12px 18px;
+    font-size: 15px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: #176177;
+    color: #dddddd;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#cuteBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+#popupOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 999;
+}
+
+#popupBox {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    height: 85%;
+    margin: 5% auto;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+#popupBox iframe {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+}
+
+#closePopup {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 10;
+}
+#popupOverlay {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+#popupBox {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
 }

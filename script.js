@@ -155,3 +155,13 @@ window.addEventListener("resize", () => {
 animateStars();
 changeNebulaColor();
 
+
+const btn = document.getElementById("cuteBtn");
+const overlay = document.getElementById("popupOverlay");
+const close = document.getElementById("closePopup");
+
+btn.onclick = () => overlay.style.display = "block";
+close.onclick = () => overlay.style.display = "none";
+overlay.onclick = (e) => {
+    if (e.target === overlay) overlay.style.display = "none";
+};
