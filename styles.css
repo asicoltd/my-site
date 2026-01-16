@@ -211,7 +211,7 @@ section {
 
 .text-gradient {
   background: linear-gradient(45deg, #20c997, #0d6efd);
-  /* -webkit-background-clip: text; */
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -305,7 +305,7 @@ section {
 /* Gradient text */
 .text-gradient {
   background: linear-gradient(90deg, #ff007f, #20c997);
-  /* -webkit-background-clip: text; */
+  -webkit-background-clip: text;
   color: transparent;
 }
 
@@ -629,3 +629,4 @@ h4 {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
 }
+
