@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which AI Model Are You? - Cosmic Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            /* Deep Space Background */
+            background: radial-gradient(circle at center, #1b2735 0%, #050508 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Star Field */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 150px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 100px 100px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1px 1px at 250px 250px, #fff, transparent);
+            background-size: 400px 400px;
+            animation: moveStars 120s linear infinite;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        @keyframes moveStars {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-400px, -400px);
+            }
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(183, 196, 255, 0.6);
+            background: linear-gradient(45deg, #b7c4ff, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-content p {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            color: #b7c4ff;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            display: none;
+            /* Hide modal by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+
+        /* The Galaxy Box Modal */
+        .modal-content {
+            background:
+                radial-gradient(circle at 10% 90%, rgba(81, 58, 119, 0.4) 0%, transparent 45%),
+                radial-gradient(circle at 90% 10%, rgba(4, 43, 31, 0.4) 0%, transparent 45%),
+                #0a0a0c;
+            padding: 45px;
+            border-radius: 24px;
+            max-width: 650px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 0 60px rgba(81, 58, 119, 0.2),
+                inset 0 0 50px rgba(0, 0, 0, 0.9);
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .question-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .question-category {
+            font-size: 13px;
+            color: #b7c4ff;
+            margin-bottom: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .question-title {
+            font-size: 26px;
+            color: #f0f0ff;
+            margin-bottom: 35px;
+            line-height: 1.5;
+            text-shadow: 0 0 15px rgba(118, 75, 162, 0.4);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Cosmic Buttons */
+        .options-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, #1b2735 0%, #3a2a54 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 16px 30px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            font-weight: 600;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #2c3e50 0%, #513a77 100%);
+            box-shadow: 0 0 20px rgba(81, 58, 119, 0.6);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            margin-top: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(118, 75, 162, 0.6);
+        }
+
+        /* Result Area */
+        .result-box {
+            margin-top: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            border-left: 4px solid #513a77;
+            text-align: left;
+        }
+
+        .model-name {
+            font-size: 36px;
+            color: #b7c4ff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(118, 75, 162, 0.6);
+        }
+
+        .model-explanation {
+            font-size: 18px;
+            color: #d1d1ff;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .stats {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #b7c4ff;
+            opacity: 0.6;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #764ba2, #667eea);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            color: #b7c4ff;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .main-content h1 {
+                font-size: 32px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+
+            .question-title {
+                font-size: 22px;
+            }
+
+            .option-btn {
+                min-width: 140px;
+                padding: 14px 20px;
+            }
+
+            .model-name {
+                font-size: 28px;
+            }
+
+            .model-explanation {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-content">
+        <h2>🤖</h2><h1> Which AI Model Are You? </h1>
+        <p>Discover which artificial intelligence model matches your personality through cosmic reflection</p>
+        <button class="start-btn" onclick="startQuiz()">Begin AI Discovery</button>
+        <div class="stats">
+            Models analyzed today: <span id="quizCount">0</span>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <div id="questionArea">
+                <div class="question-icon" id="questionIcon">🤔</div>
+                <div class="question-category" id="questionCategory">AI Personality Assessment</div>
+
+                <div class="progress-text">Question <span id="currentQuestion">1</span> of <span
+                        id="totalQuestions">12</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="options-container">
+                    <button class="option-btn" id="option1Btn"></button>
+                    <button class="option-btn" id="option2Btn"></button>
+                </div>
+            </div>
+
+            <div id="resultArea" class="result-box hidden">
+                <div class="model-name" id="modelName"></div>
+                <div class="model-explanation" id="modelExplanation"></div>
+                <div class="options-container" style="margin-top:25px;">
+                    <button class="option-btn" onclick="restartQuiz()">Retake Quiz 🔄</button>
+                    <button class="option-btn" style="background:transparent;" onclick="closeModal()">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define models and explanations
+        const models = [
+            "LSTM", "GRU", "Transformer", "CNN", "DQN", "PPO", "GAN", "VAE", "RNN", "MLP",
+            "BERT", "GPT", "Autoencoder", "Reinforce", "DDDQN", "XLSTM", "Hopfield", "SOM",
+            "Deep Belief Network", "Capsule Network"
+        ];
+
+        const explanation = {
+            "LSTM": "You like to take things step by step and never forget important details. You remember past experiences and use them wisely—like that friend who always remembers your birthday.",
+            "GRU": "You're flexible and efficient. You can adapt quickly to new situations without overthinking. Think of someone who can pack light and still be ready for anything.",
+            "Transformer": "You can focus on many things at once and see connections others miss. Like a multitasking wizard who notices patterns in chaos.",
+            "CNN": "You're amazing at spotting patterns and details. Like the friend who notices when someone got a haircut or when a picture has a hidden detail.",
+            "DQN": "You learn by trying things out and seeing what works. Like the kid who tests every shortcut in a video game to find the fastest way.",
+            "PPO": "You plan smart, balance risks, and make steady progress. Like a strategist who knows when to take a leap and when to wait.",
+            "GAN": "You're super creative and love making new things from scratch. Like an artist who can turn a blank canvas into something magical.",
+            "VAE": "You're curious and analytical, always exploring new possibilities. Like an inventor who asks, 'What if…?' and experiments until it works.",
+            "RNN": "You process things in order and learn from the past. Like someone who reads every chapter carefully and remembers the story.",
+            "MLP": "You're practical and logical, tackling problems straightforwardly. Like the friend who gives simple, solid advice that always works.",
+            "BERT": "You understand context and nuance perfectly. Like the person who can read between the lines and get the hidden meaning.",
+            "GPT": "You're talkative, creative, and adapt to any conversation. Like that friend who always has the right words and stories for any situation.",
+            "Autoencoder": "You notice hidden patterns and like making sense of messy things. Like a detective who finds clues nobody else sees.",
+            "Reinforce": "You learn from feedback and get better with every try. Like a gamer who keeps improving with every match, learning from mistakes.",
+            "DDDQN": "You plan ahead and think strategically. Like a chess player always considering the next three moves.",
+            "XLSTM": "You remember the long-term and think about the big picture. Like someone who saves everything for the future, from old photos to life lessons.",
+            "Hopfield": "You connect ideas and memories quickly. Like the friend who remembers everyone's preferences and past conversations.",
+            "SOM": "You organize information efficiently and see patterns in chaos. Like a librarian who knows exactly where every book belongs.",
+            "Deep Belief Network": "You're intuitive and understand deep connections. Like someone who senses how things will turn out without needing all the details.",
+            "Capsule Network": "You understand structure and relationships. Like an architect who sees the whole building in their mind before laying a single brick."
+        };
+
+        // Questions with 2 options each
+        const questions = [
+            { q: "You prefer to solve problems...", options: [{ text: "Step by step", models: ["LSTM", "GRU"] }, { text: "All at once", models: ["Transformer", "GPT"] }], icon: "🧩" },
+            { q: "Your learning style is...", options: [{ text: "Trial and error", models: ["DQN", "Reinforce"] }, { text: "Pattern recognition", models: ["CNN", "Autoencoder"] }], icon: "🎓" },
+            { q: "Your creative side is...", options: [{ text: "Generative ideas", models: ["GAN", "GPT"] }, { text: "Analytical solutions", models: ["VAE", "MLP"] }], icon: "🎨" },
+            { q: "When remembering information...", options: [{ text: "Short-term focus", models: ["RNN", "MLP"] }, { text: "Long-term focus", models: ["LSTM", "XLSTM"] }], icon: "💾" },
+            { q: "In a team, you...", options: [{ text: "Analyze relationships", models: ["Transformer", "BERT"] }, { text: "Follow structured steps", models: ["MLP", "Capsule Network"] }], icon: "👥" },
+            { q: "When exploring new concepts...", options: [{ text: "Cluster and categorize", models: ["SOM", "Deep Belief Network"] }, { text: "Associate with past knowledge", models: ["Hopfield", "Autoencoder"] }], icon: "🔍" },
+            { q: "You handle mistakes by...", options: [{ text: "Learning quickly from feedback", models: ["Reinforce", "DQN"] }, { text: "Adjusting strategies carefully", models: ["PPO", "XLSTM"] }], icon: "⚡" },
+            { q: "Your approach to creativity is...", options: [{ text: "Mixing known ideas to create new things", models: ["GAN", "VAE"] }, { text: "Following structured templates", models: ["MLP", "Capsule Network"] }], icon: "✨" },
+            { q: "You are best at tasks that involve...", options: [{ text: "Finding visual patterns", models: ["CNN", "SOM"] }, { text: "Understanding context and meaning", models: ["BERT", "Transformer"] }], icon: "🎯" },
+            { q: "You prefer decisions that are...", options: [{ text: "Exploratory and experimental", models: ["DQN", "GAN"] }, { text: "Planned and precise", models: ["PPO", "XLSTM"] }], icon: "⚖️" },
+            { q: "When faced with complexity...", options: [{ text: "Break it into hierarchies", models: ["Capsule Network", "Deep Belief Network"] }, { text: "Associate with past experiences", models: ["Hopfield", "RNN"] }], icon: "🌌" },
+            { q: "Your ideal problem-solving style is...", options: [{ text: "Abstract and intuitive", models: ["Deep Belief Network", "VAE"] }, { text: "Concrete and stepwise", models: ["LSTM", "MLP"] }], icon: "🔮" }
+        ];
+
+        let scores = {};
+        let currentQuestionIndex = 0;
+        let quizActive = false;
+
+        // DOM Elements
+        const modalOverlay = document.getElementById('modalOverlay');
+        const questionArea = document.getElementById('questionArea');
+        const resultArea = document.getElementById('resultArea');
+        const questionIcon = document.getElementById('questionIcon');
+        const questionCategory = document.getElementById('questionCategory');
+        const questionTitle = document.getElementById('questionTitle');
+        const option1Btn = document.getElementById('option1Btn');
+        const option2Btn = document.getElementById('option2Btn');
+        const currentQuestionSpan = document.getElementById('currentQuestion');
+        const totalQuestionsSpan = document.getElementById('totalQuestions');
+        const progressFill = document.getElementById('progressFill');
+        const modelName = document.getElementById('modelName');
+        const modelExplanation = document.getElementById('modelExplanation');
+        const quizCountSpan = document.getElementById('quizCount');
+
+        function initializeQuiz() {
+            // Reset scores
+            scores = {};
+            models.forEach(m => scores[m] = 0);
+            currentQuestionIndex = 0;
+            quizActive = true;
+
+            // Update progress display
+            totalQuestionsSpan.textContent = questions.length;
+
+            // Show first question
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (!quizActive) return;
+
+            if (currentQuestionIndex >= questions.length) {
+                showResult();
+                return;
+            }
+
+            const question = questions[currentQuestionIndex];
+
+            // Update UI
+            questionIcon.textContent = question.icon;
+            questionCategory.textContent = "AI Personality Assessment";
+            questionTitle.textContent = question.question;
+            currentQuestionSpan.textContent = currentQuestionIndex + 1;
+
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+
+            // Set up option buttons
+            option1Btn.textContent = question.options[0].text;
+            option2Btn.textContent = question.options[1].text;
+
+            option1Btn.onclick = () => selectOption(0);
+            option2Btn.onclick = () => selectOption(1);
+
+            // Show question area, hide result area
+            questionArea.classList.remove('hidden');
+            resultArea.classList.add('hidden');
+        }
+
+        function selectOption(optionIndex) {
+            if (!quizActive) return;
+
+            const question = questions[currentQuestionIndex];
+            const selectedModels = question.options[optionIndex].models;
+
+            // Add scores for selected models
+            selectedModels.forEach(model => {
+                scores[model]++;
+            });
+
+            // Move to next question
+            currentQuestionIndex++;
+            showQuestion();
+        }
+
+        function showResult() {
+            quizActive = false;
+
+            // Find the model with highest score
+            let maxScore = 0;
+            let topModel = "";
+
+            for (const model in scores) {
+                if (scores[model] > maxScore) {
+                    maxScore = scores[model];
+                    topModel = model;
+                }
+            }
+
+            // If there's a tie, pick randomly from top scorers
+            const topScorers = Object.keys(scores).filter(m => scores[m] === maxScore);
+            const finalModel = topScorers[Math.floor(Math.random() * topScorers.length)];
+
+            // Update result UI
+            modelName.textContent = finalModel;
+            modelExplanation.textContent = explanation[finalModel];
+
+            // Show result area, hide question area
+            questionArea.classList.add('hidden');
+            resultArea.classList.remove('hidden');
+
+            // Update quiz count
+            updateQuizCount();
+        }
+
+        function startQuiz() {
+            modalOverlay.style.display = 'flex';
+            initializeQuiz();
+        }
+
+        function restartQuiz() {
+            initializeQuiz();
+        }
+
+        function closeModal() {
+            modalOverlay.style.display = 'none';
+        }
+
+        function updateQuizCount() {
+            const today = new Date().toDateString();
+            let stats = JSON.parse(localStorage.getItem('aiQuizStats') || '{}');
+
+            if (!stats[today]) {
+                stats[today] = { count: 0 };
+            }
+
+            stats[today].count++;
+            localStorage.setItem('aiQuizStats', JSON.stringify(stats));
+            quizCountSpan.textContent = stats[today].count;
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateQuizCount();
+            totalQuestionsSpan.textContent = questions.length;
+        });
+
+        // Close modal when clicking outside
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
