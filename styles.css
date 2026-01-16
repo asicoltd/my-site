@@ -630,3 +630,6 @@ h4 {
     backdrop-filter: blur(12px);
 }
 
+.navbar .btn:hover {
+    box-shadow: 0 0 10px rgba(0,255,204,0.4);
+}

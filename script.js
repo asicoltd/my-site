@@ -165,3 +165,13 @@ close.onclick = () => overlay.style.display = "none";
 overlay.onclick = (e) => {
     if (e.target === overlay) overlay.style.display = "none";
 };
+
+function openPopup(page) {
+    document.getElementById("popupFrame").src = page;
+    document.getElementById("popupOverlay").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+    document.getElementById("popupFrame").src = "";
+}
