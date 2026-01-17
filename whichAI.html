@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,6 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            /* Deep Space Background */
             background: radial-gradient(circle at center, #1b2735 0%, #050508 100%);
             min-height: 100vh;
             display: flex;
@@ -33,10 +31,10 @@
             height: 200%;
             top: -50%;
             left: -50%;
-            background-image:
+            background-image: 
                 radial-gradient(1px 1px at 20px 30px, #fff, transparent),
                 radial-gradient(1.5px 1.5px at 150px 40px, #fff, transparent),
-                radial-gradient(2px 2px at 100px 100px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 100px 100px, rgba(255,255,255,0.4), transparent),
                 radial-gradient(1px 1px at 250px 250px, #fff, transparent);
             background-size: 400px 400px;
             animation: moveStars 120s linear infinite;
@@ -45,13 +43,8 @@
         }
 
         @keyframes moveStars {
-            from {
-                transform: translate(0, 0);
-            }
-
-            to {
-                transform: translate(-400px, -400px);
-            }
+            from { transform: translate(0, 0); }
+            to { transform: translate(-400px, -400px); }
         }
 
         /* Main Content Styling */
@@ -59,27 +52,22 @@
             text-align: center;
             color: white;
             padding: 40px;
-            max-width: 900px;
+            max-width: 800px;
             z-index: 2;
             position: relative;
         }
 
         .main-content h1 {
             font-size: 48px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
             text-shadow: 0 0 20px rgba(183, 196, 255, 0.6);
-            background: linear-gradient(45deg, #b7c4ff, #764ba2);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .main-content p {
-            font-size: 18px;
+            font-size: 20px;
             opacity: 0.8;
-            margin-bottom: 40px;
-            color: #b7c4ff;
+            margin-bottom: 30px;
         }
 
         /* Modal Overlay */
@@ -92,43 +80,34 @@
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(12px);
             display: none;
-            /* Hide modal by default */
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
-
         /* The Galaxy Box Modal */
         .modal-content {
-            background:
+            background: 
                 radial-gradient(circle at 10% 90%, rgba(81, 58, 119, 0.4) 0%, transparent 45%),
                 radial-gradient(circle at 90% 10%, rgba(4, 43, 31, 0.4) 0%, transparent 45%),
                 #0a0a0c;
             padding: 45px;
             border-radius: 24px;
-            max-width: 650px;
+            max-width: 550px;
             width: 90%;
             text-align: center;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow:
-                0 0 60px rgba(81, 58, 119, 0.2),
+            box-shadow: 
+                0 0 60px rgba(81, 58, 119, 0.2), 
                 inset 0 0 50px rgba(0, 0, 0, 0.9);
             animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: white;
         }
 
         @keyframes modalPop {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.8) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .close-btn {
@@ -143,15 +122,12 @@
             transition: all 0.3s;
         }
 
-        .close-btn:hover {
-            color: #fff;
-            transform: rotate(90deg);
-        }
+        .close-btn:hover { color: #fff; transform: rotate(90deg); }
 
         .question-icon {
             font-size: 60px;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
         .question-category {
@@ -164,15 +140,11 @@
         }
 
         .question-title {
-            font-size: 26px;
+            font-size: 24px;
             color: #f0f0ff;
             margin-bottom: 35px;
             line-height: 1.5;
             text-shadow: 0 0 15px rgba(118, 75, 162, 0.4);
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* Cosmic Buttons */
@@ -181,22 +153,19 @@
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 20px;
         }
 
         .option-btn {
             background: linear-gradient(135deg, #1b2735 0%, #3a2a54 100%);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 16px 30px;
+            padding: 14px 28px;
             font-size: 16px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 160px;
+            min-width: 130px;
             font-weight: 600;
-            flex: 1;
-            max-width: 250px;
         }
 
         .option-btn:hover {
@@ -206,34 +175,47 @@
             border-color: rgba(255, 255, 255, 0.4);
         }
 
-        .start-btn {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        .reset-btn {
+            background: transparent;
             color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 35px;
+            font-size: 18px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
             backdrop-filter: blur(5px);
-            margin-top: 20px;
-            font-weight: bold;
-            letter-spacing: 1px;
         }
 
-        .start-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(118, 75, 162, 0.6);
+        .reset-btn:hover {
+            background: white;
+            color: #050508;
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
         }
 
         /* Result Area */
         .result-box {
             margin-top: 20px;
-            padding: 30px;
+            padding: 25px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 18px;
             border-left: 4px solid #513a77;
             text-align: left;
+        }
+
+        .result-text {
+            font-size: 17px;
+            color: #d1d1ff;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .quote-author {
+            color: #b7c4ff;
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: right;
+            font-weight: bold;
         }
 
         .model-name {
@@ -249,8 +231,8 @@
             font-size: 18px;
             color: #d1d1ff;
             line-height: 1.7;
-            margin-bottom: 25px;
             text-align: center;
+            font-style: normal;
         }
 
         .stats {
@@ -258,19 +240,16 @@
             font-size: 14px;
             color: #b7c4ff;
             opacity: 0.6;
-            text-align: center;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
 
         .progress-bar {
             width: 100%;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
-            margin: 25px 0;
+            margin: 20px 0 35px 0;
             overflow: hidden;
         }
 
@@ -285,277 +264,299 @@
             color: #b7c4ff;
             font-size: 14px;
             margin-bottom: 10px;
+            text-align: center;
         }
 
         @media (max-width: 600px) {
-            .main-content h1 {
-                font-size: 32px;
-            }
-
-            .modal-content {
-                padding: 30px 20px;
-            }
-
-            .question-title {
-                font-size: 22px;
-            }
-
-            .option-btn {
-                min-width: 140px;
-                padding: 14px 20px;
-            }
-
-            .model-name {
-                font-size: 28px;
-            }
-
-            .model-explanation {
-                font-size: 16px;
-            }
+            .main-content h1 { font-size: 32px; }
+            .modal-content { padding: 30px 20px; }
+            .question-title { font-size: 22px; }
+            .model-name { font-size: 28px; }
+            .model-explanation { font-size: 16px; }
         }
     </style>
 </head>
-
 <body>
 
-    <div class="main-content">
-        <h2>🤖</h2><h1> Which AI Model Are You? </h1>
-        <p>Discover which artificial intelligence model matches your personality through cosmic reflection</p>
-        <button class="start-btn" onclick="startQuiz()">Begin AI Discovery</button>
-        <div class="stats">
-            Models analyzed today: <span id="quizCount">0</span>
-        </div>
+<div class="main-content">
+    <h1>🤖 AI Model Match 🌌</h1>
+    <p>Discover which artificial intelligence model reflects your cosmic personality</p>
+    <button class="reset-btn" onclick="startQuiz()">Begin Discovery</button>
+    <div class="stats">
+        Models analyzed today: <span id="quizCount">0</span>
     </div>
+</div>
 
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-
-            <div id="questionArea">
-                <div class="question-icon" id="questionIcon">🤔</div>
-                <div class="question-category" id="questionCategory">AI Personality Assessment</div>
-
-                <div class="progress-text">Question <span id="currentQuestion">1</span> of <span
-                        id="totalQuestions">12</span></div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-
-                <div class="options-container">
-                    <button class="option-btn" id="option1Btn"></button>
-                    <button class="option-btn" id="option2Btn"></button>
-                </div>
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        
+        <div id="questionArea">
+            <div class="question-icon" id="questionIcon">🤖</div>
+            <div class="question-category" id="questionCategory">AI Personality Assessment</div>
+            
+            <div class="progress-text">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">12</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
-
-            <div id="resultArea" class="result-box hidden">
-                <div class="model-name" id="modelName"></div>
-                <div class="model-explanation" id="modelExplanation"></div>
-                <div class="options-container" style="margin-top:25px;">
-                    <button class="option-btn" onclick="restartQuiz()">Retake Quiz 🔄</button>
-                    <button class="option-btn" style="background:transparent;" onclick="closeModal()">Exit</button>
-                </div>
+            
+            <h2 class="question-title" id="questionTitle">Loading...</h2>
+            <div class="options-container">
+                <button class="option-btn" onclick="selectOption(0)">Option 1</button>
+                <button class="option-btn" onclick="selectOption(1)">Option 2</button>
             </div>
         </div>
+        
+        <div id="resultArea" class="result-box hidden">
+            <div class="model-name" id="modelName"></div>
+            <div id="fullForm" class="model-explanation"></div><br>
+            <div id="resultText" class="model-explanation"></div><br>
+            <div id="explain" class="model-explanation"></div>
+            <div class="options-container" style="margin-top:25px;">
+                <button class="option-btn" onclick="restartQuiz()">Retake Quiz 🔄</button>
+                <button class="option-btn" style="background:transparent;" onclick="closeModal()">Exit</button>
+            </div>
+        </div>
     </div>
+</div>
 
-    <script>
-        // Define models and explanations
-        const models = [
-            "LSTM", "GRU", "Transformer", "CNN", "DQN", "PPO", "GAN", "VAE", "RNN", "MLP",
-            "BERT", "GPT", "Autoencoder", "Reinforce", "DDDQN", "XLSTM", "Hopfield", "SOM",
-            "Deep Belief Network", "Capsule Network"
-        ];
+<script>
+// Define models and explanations (simplified for the format)
+const models = [
+    "LSTM", "GRU", "Transformer", "CNN", "DQN", "PPO", "GAN", "VAE", "RNN", "MLP",
+    "BERT", "GPT", "Autoencoder", "Reinforce", "DDDQN", "XLSTM", "Hopfield", "SOM",
+    "Deep Belief Network", "Capsule Network"
+];
 
-        const explanation = {
-            "LSTM": "You like to take things step by step and never forget important details. You remember past experiences and use them wisely—like that friend who always remembers your birthday.",
-            "GRU": "You're flexible and efficient. You can adapt quickly to new situations without overthinking. Think of someone who can pack light and still be ready for anything.",
-            "Transformer": "You can focus on many things at once and see connections others miss. Like a multitasking wizard who notices patterns in chaos.",
-            "CNN": "You're amazing at spotting patterns and details. Like the friend who notices when someone got a haircut or when a picture has a hidden detail.",
-            "DQN": "You learn by trying things out and seeing what works. Like the kid who tests every shortcut in a video game to find the fastest way.",
-            "PPO": "You plan smart, balance risks, and make steady progress. Like a strategist who knows when to take a leap and when to wait.",
-            "GAN": "You're super creative and love making new things from scratch. Like an artist who can turn a blank canvas into something magical.",
-            "VAE": "You're curious and analytical, always exploring new possibilities. Like an inventor who asks, 'What if…?' and experiments until it works.",
-            "RNN": "You process things in order and learn from the past. Like someone who reads every chapter carefully and remembers the story.",
-            "MLP": "You're practical and logical, tackling problems straightforwardly. Like the friend who gives simple, solid advice that always works.",
-            "BERT": "You understand context and nuance perfectly. Like the person who can read between the lines and get the hidden meaning.",
-            "GPT": "You're talkative, creative, and adapt to any conversation. Like that friend who always has the right words and stories for any situation.",
-            "Autoencoder": "You notice hidden patterns and like making sense of messy things. Like a detective who finds clues nobody else sees.",
-            "Reinforce": "You learn from feedback and get better with every try. Like a gamer who keeps improving with every match, learning from mistakes.",
-            "DDDQN": "You plan ahead and think strategically. Like a chess player always considering the next three moves.",
-            "XLSTM": "You remember the long-term and think about the big picture. Like someone who saves everything for the future, from old photos to life lessons.",
-            "Hopfield": "You connect ideas and memories quickly. Like the friend who remembers everyone's preferences and past conversations.",
-            "SOM": "You organize information efficiently and see patterns in chaos. Like a librarian who knows exactly where every book belongs.",
-            "Deep Belief Network": "You're intuitive and understand deep connections. Like someone who senses how things will turn out without needing all the details.",
-            "Capsule Network": "You understand structure and relationships. Like an architect who sees the whole building in their mind before laying a single brick."
-        };
+const explanation = {
+    "LSTM": "You like to take things step by step and never forget important details. You remember past experiences and use them wisely.",
+    "GRU": "You're flexible and efficient. You can adapt quickly to new situations without overthinking.",
+    "Transformer": "You can focus on many things at once and see connections others miss. Like a multitasking wizard.",
+    "CNN": "You're amazing at spotting patterns and details. You notice when things change or have hidden details.",
+    "DQN": "You learn by trying things out and seeing what works. Like testing every shortcut to find the fastest way.",
+    "PPO": "You plan smart, balance risks, and make steady progress. You know when to take leaps and when to wait.",
+    "GAN": "You're super creative and love making new things from scratch. Like an artist with a blank canvas.",
+    "VAE": "You're curious and analytical, always exploring new possibilities. You ask 'What if...?' and experiment.",
+    "RNN": "You process things in order and learn from the past. Like reading every chapter carefully.",
+    "MLP": "You're practical and logical, tackling problems straightforwardly. You give simple, solid advice.",
+    "BERT": "You understand context and nuance perfectly. You can read between the lines and get hidden meanings.",
+    "GPT": "You're talkative, creative, and adapt to any conversation. You always have the right words and stories.",
+    "Autoencoder": "You notice hidden patterns and like making sense of messy things. Like a detective finding clues.",
+    "Reinforce": "You learn from feedback and get better with every try. You keep improving and learning from mistakes.",
+    "DDDQN": "You plan ahead and think strategically. Like a chess player considering multiple moves ahead.",
+    "XLSTM": "You remember the long-term and think about the big picture. You save everything for the future.",
+    "Hopfield": "You connect ideas and memories quickly. You remember everyone's preferences and past conversations.",
+    "SOM": "You organize information efficiently and see patterns in chaos. You know exactly where everything belongs.",
+    "Deep Belief Network": "You're intuitive and understand deep connections. You sense how things will turn out.",
+    "Capsule Network": "You understand structure and relationships. You see the whole picture before the details."
+};
 
-        // Questions with 2 options each
-        const questions = [
-            { q: "You prefer to solve problems...", options: [{ text: "Step by step", models: ["LSTM", "GRU"] }, { text: "All at once", models: ["Transformer", "GPT"] }], icon: "🧩" },
-            { q: "Your learning style is...", options: [{ text: "Trial and error", models: ["DQN", "Reinforce"] }, { text: "Pattern recognition", models: ["CNN", "Autoencoder"] }], icon: "🎓" },
-            { q: "Your creative side is...", options: [{ text: "Generative ideas", models: ["GAN", "GPT"] }, { text: "Analytical solutions", models: ["VAE", "MLP"] }], icon: "🎨" },
-            { q: "When remembering information...", options: [{ text: "Short-term focus", models: ["RNN", "MLP"] }, { text: "Long-term focus", models: ["LSTM", "XLSTM"] }], icon: "💾" },
-            { q: "In a team, you...", options: [{ text: "Analyze relationships", models: ["Transformer", "BERT"] }, { text: "Follow structured steps", models: ["MLP", "Capsule Network"] }], icon: "👥" },
-            { q: "When exploring new concepts...", options: [{ text: "Cluster and categorize", models: ["SOM", "Deep Belief Network"] }, { text: "Associate with past knowledge", models: ["Hopfield", "Autoencoder"] }], icon: "🔍" },
-            { q: "You handle mistakes by...", options: [{ text: "Learning quickly from feedback", models: ["Reinforce", "DQN"] }, { text: "Adjusting strategies carefully", models: ["PPO", "XLSTM"] }], icon: "⚡" },
-            { q: "Your approach to creativity is...", options: [{ text: "Mixing known ideas to create new things", models: ["GAN", "VAE"] }, { text: "Following structured templates", models: ["MLP", "Capsule Network"] }], icon: "✨" },
-            { q: "You are best at tasks that involve...", options: [{ text: "Finding visual patterns", models: ["CNN", "SOM"] }, { text: "Understanding context and meaning", models: ["BERT", "Transformer"] }], icon: "🎯" },
-            { q: "You prefer decisions that are...", options: [{ text: "Exploratory and experimental", models: ["DQN", "GAN"] }, { text: "Planned and precise", models: ["PPO", "XLSTM"] }], icon: "⚖️" },
-            { q: "When faced with complexity...", options: [{ text: "Break it into hierarchies", models: ["Capsule Network", "Deep Belief Network"] }, { text: "Associate with past experiences", models: ["Hopfield", "RNN"] }], icon: "🌌" },
-            { q: "Your ideal problem-solving style is...", options: [{ text: "Abstract and intuitive", models: ["Deep Belief Network", "VAE"] }, { text: "Concrete and stepwise", models: ["LSTM", "MLP"] }], icon: "🔮" }
-        ];
+const fullForm = {
+    "LSTM": {
+        full: "Long Short-Term Memory",
+        explain: "A type of RNN designed to capture long-range dependencies and avoid vanishing gradients using gating mechanisms."
+    },
+    "GRU": {
+        full: "Gated Recurrent Unit",
+        explain: "A simplified variant of LSTM with fewer gates (reset and update), offering similar performance with less computation."
+    },
+    "Transformer": {
+        full: "Transformer",
+        explain: "An attention-based architecture that processes all input tokens in parallel, enabling efficient modeling of long-range dependencies without recurrence."
+    },
+    "CNN": {
+        full: "Convolutional Neural Network",
+        explain: "Uses convolutional filters to extract spatial or temporal features, especially effective for image, video, and sequence data."
+    },
+    "DQN": {
+        full: "Deep Q-Network",
+        explain: "Combines Q-learning with deep neural networks to enable reinforcement learning agents to learn from high-dimensional inputs."
+    },
+    "PPO": {
+        full: "Proximal Policy Optimization",
+        explain: "A popular policy gradient RL algorithm that updates policies within a trust region to ensure stable and efficient learning."
+    },
+    "GAN": {
+        full: "Generative Adversarial Network",
+        explain: "Consists of a generator and a discriminator trained adversarially; the generator learns to produce realistic synthetic data."
+    },
+    "VAE": {
+        full: "Variational Autoencoder",
+        explain: "A generative model that learns a latent representation of data and can generate new samples by sampling from the latent space."
+    },
+    "RNN": {
+        full: "Recurrent Neural Network",
+        explain: "Neural networks with loops, allowing them to maintain a 'memory' of previous inputs, suited for sequential data."
+    },
+    "MLP": {
+        full: "Multilayer Perceptron",
+        explain: "A classic feedforward neural network with one or more hidden layers, capable of learning complex nonlinear relationships."
+    },
+    "BERT": {
+        full: "Bidirectional Encoder Representations from Transformers",
+        explain: "A transformer-based language model pre-trained on large corpora using masked language modeling and next-sentence prediction."
+    },
+    "GPT": {
+        full: "Generative Pre-trained Transformer",
+        explain: "An autoregressive language model based on the transformer decoder, pre-trained on large text and fine-tuned for specific tasks."
+    },
+    "Autoencoder": {
+        full: "Autoencoder",
+        explain: "An unsupervised neural network that learns to compress input into a latent representation and then reconstruct it, used for dimensionality reduction and denoising."
+    },
+    "Reinforce": {
+        full: "REINFORCE (Monte Carlo Policy Gradient)",
+        explain: "A basic policy gradient algorithm in RL that optimizes policy parameters using Monte Carlo estimates of rewards."
+    },
+    "DDDQN": {
+        full: "Dueling Double Deep Q-Network",
+        explain: "An extension of DQN combining dueling networks (separating value and advantage) and double Q-learning to reduce overestimation bias."
+    },
+    "XLSTM": {
+        full: "Extended Long Short-Term Memory",
+        explain: "A recent enhancement to LSTM incorporating exponential gating and modified memory structures for improved long-sequence modeling."
+    },
+    "Hopfield": {
+        full: "Hopfield Network",
+        explain: "A type of recurrent neural network that serves as an associative memory, capable of storing and retrieving patterns."
+    },
+    "SOM": {
+        full: "Self-Organizing Map",
+        explain: "An unsupervised neural network that produces a low-dimensional (typically 2D) discretized representation of input space, preserving topological properties."
+    },
+    "Deep Belief Network": {
+        full: "Deep Belief Network",
+        explain: "A generative graphical model composed of multiple layers of stochastic, latent variables, often pre-trained as stacked Restricted Boltzmann Machines."
+    },
+    "Capsule Network": {
+        full: "Capsule Network (CapsNet)",
+        explain: "A neural network architecture designed to better model hierarchical relationships by grouping neurons into capsules that encode specific entity properties."
+    }
+};
+const questions = [
+    { q: "You prefer to solve problems...", options: ["Step by step", "All at once"], icon: "🧩", models: [["LSTM", "GRU"], ["Transformer", "GPT"]] },
+    { q: "Your learning style is...", options: ["Trial and error", "Pattern recognition"], icon: "🎓", models: [["DQN", "Reinforce"], ["CNN", "Autoencoder"]] },
+    { q: "Your creative side is...", options: ["Generative ideas", "Analytical solutions"], icon: "🎨", models: [["GAN", "GPT"], ["VAE", "MLP"]] },
+    { q: "When remembering information...", options: ["Short-term focus", "Long-term focus"], icon: "💾", models: [["RNN", "MLP"], ["LSTM", "XLSTM"]] },
+    { q: "In a team, you...", options: ["Analyze relationships", "Follow structured steps"], icon: "👥", models: [["Transformer", "BERT"], ["MLP", "Capsule Network"]] },
+    { q: "When exploring new concepts...", options: ["Cluster and categorize", "Associate with past knowledge"], icon: "🔍", models: [["SOM", "Deep Belief Network"], ["Hopfield", "Autoencoder"]] },
+    { q: "You handle mistakes by...", options: ["Learning quickly from feedback", "Adjusting strategies carefully"], icon: "⚡", models: [["Reinforce", "DQN"], ["PPO", "XLSTM"]] },
+    { q: "Your approach to creativity is...", options: ["Mixing known ideas", "Following structured templates"], icon: "✨", models: [["GAN", "VAE"], ["MLP", "Capsule Network"]] },
+    { q: "You are best at tasks that involve...", options: ["Finding visual patterns", "Understanding context"], icon: "🎯", models: [["CNN", "SOM"], ["BERT", "Transformer"]] },
+    { q: "You prefer decisions that are...", options: ["Exploratory and experimental", "Planned and precise"], icon: "⚖️", models: [["DQN", "GAN"], ["PPO", "XLSTM"]] },
+    { q: "When faced with complexity...", options: ["Break it into hierarchies", "Associate with past experiences"], icon: "🌌", models: [["Capsule Network", "Deep Belief Network"], ["Hopfield", "RNN"]] },
+    { q: "Your ideal problem-solving style is...", options: ["Abstract and intuitive", "Concrete and stepwise"], icon: "🔮", models: [["Deep Belief Network", "VAE"], ["LSTM", "MLP"]] }
+];
 
-        let scores = {};
-        let currentQuestionIndex = 0;
-        let quizActive = false;
+let scores = {};
+let currentQuestionIndex = 0;
+let quizActive = false;
 
-        // DOM Elements
-        const modalOverlay = document.getElementById('modalOverlay');
-        const questionArea = document.getElementById('questionArea');
-        const resultArea = document.getElementById('resultArea');
-        const questionIcon = document.getElementById('questionIcon');
-        const questionCategory = document.getElementById('questionCategory');
-        const questionTitle = document.getElementById('questionTitle');
-        const option1Btn = document.getElementById('option1Btn');
-        const option2Btn = document.getElementById('option2Btn');
-        const currentQuestionSpan = document.getElementById('currentQuestion');
-        const totalQuestionsSpan = document.getElementById('totalQuestions');
-        const progressFill = document.getElementById('progressFill');
-        const modelName = document.getElementById('modelName');
-        const modelExplanation = document.getElementById('modelExplanation');
-        const quizCountSpan = document.getElementById('quizCount');
+function initializeQuiz() {
+    scores = {};
+    models.forEach(m => scores[m] = 0);
+    currentQuestionIndex = 0;
+    quizActive = true;
+    
+    document.getElementById('totalQuestions').textContent = questions.length;
+    showQuestion();
+}
 
-        function initializeQuiz() {
-            // Reset scores
-            scores = {};
-            models.forEach(m => scores[m] = 0);
-            currentQuestionIndex = 0;
-            quizActive = true;
+function showQuestion() {
+    if (!quizActive) return;
+    
+    if (currentQuestionIndex >= questions.length) {
+        showResult();
+        return;
+    }
+    
+    const question = questions[currentQuestionIndex];
+    
+    document.getElementById('questionIcon').textContent = question.icon;
+    document.getElementById('questionCategory').textContent = "AI Personality Assessment";
+    document.getElementById('questionTitle').textContent = question.question;
+    document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+    
+    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+    
+    const optionBtns = document.querySelectorAll('.option-btn');
+    optionBtns[0].textContent = question.options[0];
+    optionBtns[1].textContent = question.options[1];
+    
+    document.getElementById('questionArea').classList.remove('hidden');
+    document.getElementById('resultArea').classList.add('hidden');
+}
 
-            // Update progress display
-            totalQuestionsSpan.textContent = questions.length;
+function selectOption(optionIndex) {
+    if (!quizActive) return;
+    
+    const question = questions[currentQuestionIndex];
+    const selectedModels = question.models[optionIndex];
+    
+    selectedModels.forEach(model => {
+        scores[model]++;
+    });
+    
+    currentQuestionIndex++;
+    showQuestion();
+}
 
-            // Show first question
-            showQuestion();
+function showResult() {
+    quizActive = false;
+    
+    let maxScore = 0;
+    let topModel = "";
+    
+    for (const model in scores) {
+        if (scores[model] > maxScore) {
+            maxScore = scores[model];
+            topModel = model;
         }
+    }
+    
+    const topScorers = Object.keys(scores).filter(m => scores[m] === maxScore);
+    const finalModel = topScorers[Math.floor(Math.random() * topScorers.length)];
+    
+    document.getElementById('modelName').textContent = finalModel;
+    document.getElementById('resultText').textContent = explanation[finalModel];
+    document.getElementById('fullForm').textContent = fullForm[finalModel]['full'];
+    document.getElementById('explain').textContent = fullForm[finalModel]['explain'];
+    document.getElementById('questionArea').classList.add('hidden');
+    document.getElementById('resultArea').classList.remove('hidden');
+    
+    updateQuizCount();
+}
 
-        function showQuestion() {
-            if (!quizActive) return;
+function startQuiz() {
+    document.getElementById('modalOverlay').style.display = 'flex';
+    initializeQuiz();
+}
 
-            if (currentQuestionIndex >= questions.length) {
-                showResult();
-                return;
-            }
+function restartQuiz() {
+    initializeQuiz();
+}
 
-            const question = questions[currentQuestionIndex];
+function closeModal() {
+    document.getElementById('modalOverlay').style.display = 'none';
+}
 
-            // Update UI
-            questionIcon.textContent = question.icon;
-            questionCategory.textContent = "AI Personality Assessment";
-            questionTitle.textContent = question.question;
-            currentQuestionSpan.textContent = currentQuestionIndex + 1;
+function updateQuizCount() {
+    const today = new Date().toDateString();
+    let stats = JSON.parse(localStorage.getItem('aiQuizStats') || '{}');
+    if (!stats[today]) stats[today] = { count: 0 };
+    stats[today].count++;
+    localStorage.setItem('aiQuizStats', JSON.stringify(stats));
+    document.getElementById('quizCount').textContent = stats[today].count;
+}
 
-            // Update progress bar
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            progressFill.style.width = `${progress}%`;
+window.addEventListener('load', () => {
+    updateQuizCount();
+});
 
-            // Set up option buttons
-            option1Btn.textContent = question.options[0].text;
-            option2Btn.textContent = question.options[1].text;
-
-            option1Btn.onclick = () => selectOption(0);
-            option2Btn.onclick = () => selectOption(1);
-
-            // Show question area, hide result area
-            questionArea.classList.remove('hidden');
-            resultArea.classList.add('hidden');
-        }
-
-        function selectOption(optionIndex) {
-            if (!quizActive) return;
-
-            const question = questions[currentQuestionIndex];
-            const selectedModels = question.options[optionIndex].models;
-
-            // Add scores for selected models
-            selectedModels.forEach(model => {
-                scores[model]++;
-            });
-
-            // Move to next question
-            currentQuestionIndex++;
-            showQuestion();
-        }
-
-        function showResult() {
-            quizActive = false;
-
-            // Find the model with highest score
-            let maxScore = 0;
-            let topModel = "";
-
-            for (const model in scores) {
-                if (scores[model] > maxScore) {
-                    maxScore = scores[model];
-                    topModel = model;
-                }
-            }
-
-            // If there's a tie, pick randomly from top scorers
-            const topScorers = Object.keys(scores).filter(m => scores[m] === maxScore);
-            const finalModel = topScorers[Math.floor(Math.random() * topScorers.length)];
-
-            // Update result UI
-            modelName.textContent = finalModel;
-            modelExplanation.textContent = explanation[finalModel];
-
-            // Show result area, hide question area
-            questionArea.classList.add('hidden');
-            resultArea.classList.remove('hidden');
-
-            // Update quiz count
-            updateQuizCount();
-        }
-
-        function startQuiz() {
-            modalOverlay.style.display = 'flex';
-            initializeQuiz();
-        }
-
-        function restartQuiz() {
-            initializeQuiz();
-        }
-
-        function closeModal() {
-            modalOverlay.style.display = 'none';
-        }
-
-        function updateQuizCount() {
-            const today = new Date().toDateString();
-            let stats = JSON.parse(localStorage.getItem('aiQuizStats') || '{}');
-
-            if (!stats[today]) {
-                stats[today] = { count: 0 };
-            }
-
-            stats[today].count++;
-            localStorage.setItem('aiQuizStats', JSON.stringify(stats));
-            quizCountSpan.textContent = stats[today].count;
-        }
-
-        // Initialize on load
-        window.addEventListener('load', () => {
-            updateQuizCount();
-            totalQuestionsSpan.textContent = questions.length;
-        });
-
-        // Close modal when clicking outside
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                closeModal();
-            }
-        });
-    </script>
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'modalOverlay') closeModal();
+});
+</script>
 </body>
-
 </html>
