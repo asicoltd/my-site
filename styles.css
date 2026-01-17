@@ -262,27 +262,42 @@ section {
   }
 }
 
-/* Fixed color for each word */
+/* Bold text for all highlights */
 .highlight-text {
   font-weight: bold;
+  background-size: 300% 300%;
+  animation: deepCottonShift 12s ease-in-out infinite;
 }
 
+/* Richer, deeper cotton-candy gradients */
 .highlight-text.researcher {
-  color: #f90000;
-  /* Medium Sea Green */
+  background: linear-gradient(90deg, #ff6b81, #ff3d6b, #d6004f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Define colors for each word */
 .highlight-text.engineer {
-  color: #009342;
-  /* Tomato Red */
+  background: linear-gradient(90deg, #33ffad, #00c37a, #009e59);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
 
 .highlight-text.developer {
-  color: #0f58a1;
-  /* Dodger Blue */
+  background: linear-gradient(90deg, #5aa8ff, #1f6fff, #004abf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+/* Smooth, slow, flowing animation */
+@keyframes deepCottonShift {
+  0% { background-position: 15% 50%; }
+  50% { background-position: 85% 50%; }
+  100% { background-position: 15% 50%; }
+}
+
+
+
+
 
 /* Transparent container with glass effect */
 .bg-glass {
@@ -635,3 +650,5 @@ h4 {
 .navbar .btn:hover {
     box-shadow: 0 0 10px rgba(0,255,204,0.4);
 }
+
+
