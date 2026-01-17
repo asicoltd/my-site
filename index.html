@@ -27,59 +27,45 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="70" tabindex="0">
     <!-- Navbar -->
+<!-- Main Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
-    <div class="container-fluid px-3">
-        <!-- Brand -->
-        <a class="navbar-brand fw-bold" href="#home">
-            Asico<span class="highlight-text engineer">L</span><span class="highlight-text developer">T</span><span class="highlight-text researcher">D</span>
-        </a>
+  <div class="container-fluid px-3">
 
-        <!-- Mobile Actions - Always Visible -->
-        <div class="d-flex d-lg-none align-items-center gap-2">
-            <button class="btn btn-outline-danger btn-sm py-1 px-2" onclick="openPopup('questions.html')">
-                <small>Self Reflect</small>
-            </button>
-            <button class="btn btn-outline-info btn-sm py-1 px-2" onclick="openPopup('quiz.html')">
-                <small>Find The AI</small>
-            </button>
-            <button class="btn btn-outline-success btn-sm py-1 px-2" onclick="openPopup('whichAI.html')">
-                <small>Which AI R U?</small>
-            </button>
-            <button class="btn btn-outline-warning btn-sm py-1 px-2" onclick="openPopup('neverWin.html')">
-                <small>Loss or Draw</small>
-            </button>
-            <button class="btn btn-outline-info btn-sm py-1 px-2" onclick="openPopup('areWeSame.html')">
-                <small>Are We Same</small>
-            </button>
-        </div>
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="#home">
+      Asico<span class="highlight-text engineer">L</span><span class="highlight-text developer">T</span><span class="highlight-text researcher">D</span>
+    </a>
 
-        <!-- Mobile Toggle -->
-        <button class="navbar-toggler ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <!-- Collapsible Content -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- Navigation Links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            </ul>
+    <!-- Collapsible Content -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
 
-            <!-- Desktop Actions -->
-            <div class="d-none d-lg-flex align-items-center gap-2">
-                <button class="btn btn-outline-danger btn-sm" onclick="openPopup('questions.html')">Self Reflection</button>
-                <button class="btn btn-outline-info btn-sm" onclick="openPopup('quiz.html')">Find AI</button>
-                <button class="btn btn-outline-success btn-sm" onclick="openPopup('whichAI.html')">Which AI ARE YOU?</button>
-                <button class="btn btn-outline-warning btn-sm" onclick="openPopup('neverWin.html')">Loss/Draw</button>
-                <button class="btn btn-outline-info btn-sm" onclick="openPopup('areWeSame.html')">Are We Same?</button>
-            </div>
-        </div>
+      <!-- Basic Links -->
+      <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Interactive Buttons -->
+      <div class="d-flex flex-column flex-lg-row gap-2">
+        <button class="btn btn-outline-danger btn-sm" onclick="openPopup('questions.html')">Self Reflection</button>
+        <button class="btn btn-outline-info btn-sm" onclick="openPopup('quiz.html')">Find AI</button>
+        <button class="btn btn-outline-success btn-sm" onclick="openPopup('whichAI.html')">Are You AI?</button>
+        <button class="btn btn-outline-warning btn-sm" onclick="openPopup('neverWin.html')">Loss / Draw</button>
+        <button class="btn btn-outline-info btn-sm" onclick="openPopup('areWeSame.html')">Are We Same?</button>
+      </div>
+
     </div>
+  </div>
 </nav>
+
 
 <div id="popupOverlay" style="display:none;">
     <div id="popupBox">
@@ -1326,5 +1312,6 @@
     <script src="script.js"></script>
 
 </body>
+
 
 </html>
