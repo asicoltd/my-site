@@ -1,451 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24-Hour Color Grid Tracker</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #f0f0f0;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .date-display {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #6ee7b7;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 20px;
-            border-radius: 10px;
-        }
-        
-        .title {
-            font-size: 2.5rem;
-            text-align: center;
-            background: linear-gradient(90deg, #6ee7b7, #3b82f6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 700;
-        }
-        
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-        
-        .instructions {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .instructions h3 {
-            color: #3b82f6;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-        
-        .color-legend {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .color-box {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-        
-        .black { background-color: #1f2937; }
-        .green { background-color: #10b981; }
-        .yellow { background-color: #f59e0b; }
-        .red { background-color: #ef4444; }
-        
-        .grid-container {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hour-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 10px;
-        }
-        
-        .hour-cell {
-            aspect-ratio: 1;
-            background-color: #1f2937;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            border: 2px solid transparent;
-            position: relative;
-        }
-        
-        .hour-cell:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hour-cell.active {
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .hour-label {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #9ca3af;
-        }
-        
-        .hour-cell.black .hour-label {
-            color: #9ca3af;
-        }
-        
-        .hour-cell.green .hour-label {
-            color: #ffffff;
-        }
-        
-        .hour-cell.yellow .hour-label {
-            color: #1f2937;
-        }
-        
-        .hour-cell.red .hour-label {
-            color: #ffffff;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .download-btn {
-            background: linear-gradient(90deg, #10b981, #059669);
-            color: white;
-        }
-        
-        .download-btn:hover {
-            background: linear-gradient(90deg, #059669, #047857);
-            transform: translateY(-3px);
-        }
-        
-        .reset-btn {
-            background: linear-gradient(90deg, #3b82f6, #2563eb);
-            color: white;
-        }
-        
-        .reset-btn:hover {
-            background: linear-gradient(90deg, #2563eb, #1d4ed8);
-            transform: translateY(-3px);
-        }
-        
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            color: #9ca3af;
-            font-size: 0.9rem;
-            padding: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .hour-grid {
-                grid-template-columns: repeat(8, 1fr);
-                grid-template-rows: repeat(3, 1fr);
-                gap: 8px;
-            }
-            
-            .header {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            
-            .title {
-                font-size: 2rem;
-            }
-            
-            .date-display {
-                font-size: 1.4rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hour-grid {
-                grid-template-columns: repeat(6, 1fr);
-                grid-template-rows: repeat(4, 1fr);
-                gap: 6px;
-            }
-            
-            .btn {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>24-Hour Color Grid Tracker</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #f0f0f0;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(8px);
+    padding: 14px;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #6ee7b7, #3b82f6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.date-input {
+    margin-top: 8px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #6ee7b7;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* LAYOUT */
+.container {
+    padding: 16px;
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* GRID */
+.grid-container {
+    background: rgba(255,255,255,0.05);
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.hour-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.hour-cell {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.hour-cell.black { background: #1f2937; }
+.hour-cell.green { background: #10b981; color: #fff; }
+.hour-cell.yellow { background: #f59e0b; color: #1f2937; }
+.hour-cell.red { background: #ef4444; color: #fff; }
+
+.hour-cell:active {
+    transform: scale(0.95);
+}
+
+/* CONTROLS */
+.controls {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.download-btn { background: #10b981; }
+.reset-btn { background: #3b82f6; }
+
+/* RESPONSIVE */
+@media (min-width: 600px) {
+    .hour-grid { grid-template-columns: repeat(6, 1fr); }
+}
+@media (min-width: 900px) {
+    .hour-grid { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* ===== DOWNLOAD CAPTURE ONLY ===== */
+#captureOnly {
+    position: fixed;
+    left: -9999px;
+    top: 0;
+    background: #1a1a2e;
+    padding: 20px;
+    border-radius: 16px;
+    width: 900px;
+}
+
+#captureDate {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #6ee7b7;
+    margin-bottom: 16px;
+}
+</style>
 </head>
+
 <body>
-    <div class="header">
-        <h1 class="title">24-Hour Color Grid Tracker</h1>
-        <div class="date-display" id="currentDate"></div>
-    </div>
-    
-    <div class="container">
-        <div class="instructions">
-            <h3>How to Use</h3>
-            <p>Click on any hour block to cycle through colors: <strong>Black → Green → Yellow → Red</strong></p>
-            <div class="color-legend">
-                <div class="legend-item">
-                    <div class="color-box black"></div>
-                    <span>Unselected / Default</span>
-                </div>
-                <div class="legend-item">
-                    <div class="color-box green"></div>
-                    <span>First Click (Green)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="color-box yellow"></div>
-                    <span>Second Click (Yellow)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="color-box red"></div>
-                    <span>Third Click (Red)</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-container">
-            <div class="hour-grid" id="hourGrid"></div>
-        </div>
-        
-        <div class="controls">
-            <button class="btn download-btn" id="downloadBtn">
-                <i class="fas fa-download"></i> Download Grid as Image
-            </button>
-            <button class="btn reset-btn" id="resetBtn">
-                <i class="fas fa-redo"></i> Reset All Colors
-            </button>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>Click on any hour block to track your activities. Your grid will be saved with the current date when downloaded.</p>
+
+<div class="header">
+    <div class="title">24-Hour Color Grid Tracker</div>
+    <input type="date" class="date-input" id="dateInput">
+</div>
+
+<div class="container">
+    <div class="grid-container">
+        <div class="hour-grid" id="hourGrid"></div>
     </div>
 
-    <script>
-        // Wait for the page to load completely
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current date
-            function updateDate() {
-                const now = new Date();
-                const options = { 
-                    weekday: 'long', 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                };
-                document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
-            }
-            
-            // Initialize the grid
-            function initializeGrid() {
-                const grid = document.getElementById('hourGrid');
-                grid.innerHTML = '';
-                
-                // Create 24 hour cells
-                for (let i = 0; i < 24; i++) {
-                    const hour = i;
-                    const hourLabel = hour === 0 ? '12 AM' : 
-                                    hour < 12 ? `${hour} AM` : 
-                                    hour === 12 ? '12 PM' : 
-                                    `${hour - 12} PM`;
-                    
-                    const cell = document.createElement('div');
-                    cell.className = 'hour-cell black';
-                    cell.dataset.hour = hour;
-                    cell.dataset.state = '0'; // 0=black, 1=green, 2=yellow, 3=red
-                    
-                    const label = document.createElement('div');
-                    label.className = 'hour-label';
-                    label.textContent = hourLabel;
-                    
-                    cell.appendChild(label);
-                    grid.appendChild(cell);
-                    
-                    // Add click event
-                    cell.addEventListener('click', function() {
-                        const currentState = parseInt(this.dataset.state);
-                        const newState = (currentState + 1) % 4;
-                        
-                        // Update state
-                        this.dataset.state = newState.toString();
-                        
-                        // Update color class
-                        this.className = 'hour-cell';
-                        if (newState === 0) {
-                            this.classList.add('black');
-                        } else if (newState === 1) {
-                            this.classList.add('green');
-                        } else if (newState === 2) {
-                            this.classList.add('yellow');
-                        } else {
-                            this.classList.add('red');
-                        }
-                        
-                        // Add active class for visual feedback
-                        this.classList.add('active');
-                        setTimeout(() => {
-                            this.classList.remove('active');
-                        }, 300);
-                    });
-                }
-            }
-            
-            // Download grid as image
-            function downloadGridAsImage() {
-                const gridContainer = document.querySelector('.grid-container');
-                const dateDisplay = document.getElementById('currentDate').textContent;
-                
-                // Create a temporary element to display the date with the grid
-                const container = document.createElement('div');
-                container.style.position = 'relative';
-                container.style.width = gridContainer.offsetWidth + 'px';
-                container.style.padding = '20px';
-                container.style.backgroundColor = '#1a1a2e';
-                container.style.borderRadius = '15px';
-                
-                // Add date to the container
-                const dateElement = document.createElement('div');
-                dateElement.textContent = dateDisplay;
-                dateElement.style.color = '#6ee7b7';
-                dateElement.style.fontSize = '1.8rem';
-                dateElement.style.fontWeight = '600';
-                dateElement.style.marginBottom = '20px';
-                dateElement.style.textAlign = 'center';
-                container.appendChild(dateElement);
-                
-                // Clone the grid
-                const gridClone = gridContainer.cloneNode(true);
-                gridClone.style.boxShadow = 'none';
-                gridClone.style.margin = '0';
-                container.appendChild(gridClone);
-                
-                // Temporarily add to document
-                container.style.position = 'fixed';
-                container.style.left = '-9999px';
-                document.body.appendChild(container);
-                
-                // Load html2canvas dynamically
-                const script = document.createElement('script');
-                script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
-                script.onload = function() {
-                    html2canvas(container, {
-                        backgroundColor: '#1a1a2e',
-                        scale: 2,
-                        useCORS: true,
-                        logging: false
-                    }).then(canvas => {
-                        // Create download link
-                        const link = document.createElement('a');
-                        link.download = `24-hour-grid-${new Date().toISOString().slice(0,10)}.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
-                        
-                        // Remove temporary container
-                        document.body.removeChild(container);
-                    });
-                };
-                document.head.appendChild(script);
-            }
-            
-            // Reset all grid cells to black
-            function resetGrid() {
-                const cells = document.querySelectorAll('.hour-cell');
-                cells.forEach(cell => {
-                    cell.dataset.state = '0';
-                    cell.className = 'hour-cell black';
-                });
-            }
-            
-            // Initialize the page
-            updateDate();
-            initializeGrid();
-            
-            // Add event listeners to buttons
-            document.getElementById('downloadBtn').addEventListener('click', downloadGridAsImage);
-            document.getElementById('resetBtn').addEventListener('click', resetGrid);
-            
-            // Update date every minute (in case the page is open past midnight)
-            setInterval(updateDate, 60000);
+    <div class="controls">
+        <button class="btn download-btn" id="downloadBtn">
+            <i class="fas fa-download"></i> Download
+        </button>
+        <button class="btn reset-btn" id="resetBtn">
+            <i class="fas fa-redo"></i> Reset
+        </button>
+    </div>
+</div>
+
+<!-- HIDDEN DOWNLOAD AREA -->
+<div id="captureOnly">
+    <div id="captureDate"></div>
+    <div class="grid-container">
+        <div class="hour-grid" id="captureGrid"></div>
+    </div>
+</div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const dateInput = document.getElementById('dateInput');
+    dateInput.valueAsDate = new Date();
+
+    const states = ['black','green','yellow','red'];
+
+    function createGrid(targetId) {
+        const grid = document.getElementById(targetId);
+        grid.innerHTML = '';
+
+        for (let i = 0; i < 24; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'hour-cell black';
+            cell.dataset.state = '0';
+            cell.textContent =
+                i === 0 ? '12 AM' :
+                i < 12 ? `${i} AM` :
+                i === 12 ? '12 PM' :
+                `${i - 12} PM`;
+
+            cell.onclick = () => {
+                let s = (parseInt(cell.dataset.state) + 1) % 4;
+                cell.dataset.state = s;
+                cell.className = 'hour-cell ' + states[s];
+            };
+
+            grid.appendChild(cell);
+        }
+    }
+
+    function syncToCapture() {
+        const mainCells = document.querySelectorAll('#hourGrid .hour-cell');
+        const captureCells = document.querySelectorAll('#captureGrid .hour-cell');
+
+        mainCells.forEach((cell, i) => {
+            captureCells[i].className = cell.className;
         });
-    </script>
+
+        document.getElementById('captureDate').textContent =
+            new Date(dateInput.value).toDateString();
+    }
+
+    document.getElementById('resetBtn').onclick = () => {
+        document.querySelectorAll('.hour-cell').forEach(c => {
+            c.dataset.state = '0';
+            c.className = 'hour-cell black';
+        });
+    };
+
+    document.getElementById('downloadBtn').onclick = () => {
+        syncToCapture();
+        html2canvas(document.getElementById('captureOnly'), { scale: 2 })
+        .then(canvas => {
+            const link = document.createElement('a');
+            link.download = `24-hour-grid-${dateInput.value}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    };
+
+    createGrid('hourGrid');
+    createGrid('captureGrid');
+});
+</script>
+
 </body>
 </html>
