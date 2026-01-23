@@ -3,235 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weekly Time Grid (Transposed)</title>
+<title>Transposed Performance Tracker</title>
 
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
-}
-
 body {
-    background: #0f172a;
-    color: #e5e7eb;
-    padding: 16px;
+    margin:0;
+    font-family: system-ui,sans-serif;
+    background:#0f172a;
+    color:#e5e7eb;
+    padding:12px;
 }
+h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
 
-/* HEADER */
-.header {
-    text-align: center;
-    margin-bottom: 14px;
-}
-
-.header h1 {
-    color: #6ee7b7;
-    font-size: 1.6rem;
-}
-
-.date-input {
-    margin-top: 6px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    background: #1f2937;
-    color: #6ee7b7;
-}
-
-/* GRID */
-.grid-wrapper {
-    overflow-x: auto;
-    background: #020617;
-    padding: 12px;
-    border-radius: 12px;
-}
-
-.week-grid {
-    display: grid;
-    grid-template-columns: 70px repeat(7, minmax(40px, 1fr));
-    gap: 6px;
-    min-width: 500px;
-}
-
-/* LABELS */
-.corner {
-    font-size: 0.8rem;
-    color: #94a3b8;
-}
-
-.day-label {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #93c5fd;
-}
-
-.hour-label {
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    color: #cbd5f5;
-}
-
-/* CELLS */
-.hour-cell {
-    aspect-ratio: 1;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.black { background: #1f2937; }
-.green { background: #10b981; }
-.yellow { background: #f59e0b; }
-.red { background: #ef4444; }
-
-/* CONTROLS */
+/* Controls */
 .controls {
-    margin-top: 14px;
-    display: flex;
-    gap: 10px;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:12px;
+}
+.controls input, .controls select, .controls button {
+    padding:6px 10px; border-radius:6px; border:none; font-size:14px;
+}
+.controls input, .controls select { background:#1e293b; color:#e5e7eb; }
+.controls button { background:#2563eb; color:white; cursor:pointer; }
+
+/* Grid container */
+#weekView { overflow:auto; margin-bottom:12px; }
+.week-grid {
+    display:grid;
+    gap:4px;
 }
 
-button {
-    flex: 1;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    color: white;
+/* Transposed grid: first column = hour, rest = days */
+.hour-label {
+    background:#020617; text-align:center; font-size:12px; padding:6px 2px; border-radius:4px;
 }
+.day-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size:12px; text-align:center; padding:2px; color:#93c5fd; }
 
-.download { background: #10b981; }
-.reset { background: #3b82f6; }
+.hour-cell { width:32px; height:32px; border:1px solid #334155; cursor:pointer; }
+.black { background:#111827; }
+.sleep { background:#1e40af; }
+.wasted { background:#4b5563; }
+.full { background:#059669; }
+.semi { background:#f59e0b; }
+.clg { background:#7c3aed; }
 
-/* DOWNLOAD ONLY */
-#capture {
-    position: fixed;
-    left: -9999px;
-    top: 0;
-    background: #020617;
-    padding: 16px;
-    border-radius: 12px;
-}
+/* Legend */
+.legend { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:12px; }
+.color-box { width:18px; height:18px; border-radius:3px; }
+
+/* Capture hidden */
+#capture { position:fixed; left:-9999px; top:0; padding:16px; background:#0f172a; border-radius:12px; }
 </style>
 </head>
-
 <body>
 
-<div class="header">
-    <h1>Weekly Time Grid</h1>
-    <input type="date" id="startDate" class="date-input">
+<h1>Transposed Tracker</h1>
+
+<div class="controls">
+    <input type="date" id="startDate">
+    <select id="modeSelect">
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+    </select>
+    <button onclick="generate()">Apply</button>
+    <button onclick="downloadGrid()">Download</button>
 </div>
 
-<div class="grid-wrapper">
+<div id="weekView">
     <div class="week-grid" id="weekGrid"></div>
 </div>
 
-<div class="controls">
-    <button class="download" id="downloadBtn">Download Week</button>
-    <button class="reset" id="resetBtn">Reset</button>
+<div class="legend">
+    <div class="legend-item"><div class="color-box sleep"></div>Sleep</div>
+    <div class="legend-item"><div class="color-box wasted"></div>Wasted</div>
+    <div class="legend-item"><div class="color-box full"></div>Full Focused</div>
+    <div class="legend-item"><div class="color-box semi"></div>Semi Focused</div>
+    <div class="legend-item"><div class="color-box clg"></div>CLG</div>
+    <div class="legend-item"><div class="color-box black"></div>Idle</div>
 </div>
 
-<!-- Hidden capture -->
 <div id="capture">
     <div class="week-grid" id="captureGrid"></div>
 </div>
 
 <script>
-const states = ['black','green','yellow','red'];
-const weekGrid = document.getElementById('weekGrid');
-const captureGrid = document.getElementById('captureGrid');
-const startDateInput = document.getElementById('startDate');
+const states = ["black","sleep","wasted","full","semi","clg"];
+const weekGrid = document.getElementById("weekGrid");
+const captureGrid = document.getElementById("captureGrid");
+const startInput = document.getElementById("startDate");
+const modeSelect = document.getElementById("modeSelect");
 
-startDateInput.valueAsDate = new Date();
+startInput.valueAsDate = new Date();
 
-function formatDay(date) {
-    return date.toLocaleDateString('en-US', {
-        weekday: 'short',
-        day: 'numeric'
-    });
+function formatDate(date){
+    const d=String(date.getDate()).padStart(2,'0');
+    const m=String(date.getMonth()+1).padStart(2,'0');
+    const y=String(date.getFullYear()).slice(-2);
+    return `${d}/${m}/${y}`;
 }
 
-function hourLabel(h) {
-    if (h === 0) return '12 AM';
-    if (h < 12) return h + ' AM';
-    if (h === 12) return '12 PM';
-    return (h - 12) + ' PM';
+function loadHistory(key){
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : {};
+}
+function saveHistory(key,data){
+    localStorage.setItem(key,JSON.stringify(data));
 }
 
-function buildWeek(target) {
-    target.innerHTML = '';
-    const start = new Date(startDateInput.value);
+function generate(){
+    weekGrid.innerHTML = ""; captureGrid.innerHTML="";
+    const mode = modeSelect.value;
+    const start = new Date(startInput.value);
+    const days = mode==="weekly"?7:28;
+    const historyKey = mode==="weekly"?"weekHistory":"monthHistory";
+    const history = loadHistory(historyKey);
 
-    /* Top-left corner */
-    const corner = document.createElement('div');
-    corner.className = 'corner';
-    corner.textContent = 'Hour';
-    target.appendChild(corner);
+    // grid-template: rows = hours, columns = days+1
+    weekGrid.style.gridTemplateColumns=`repeat(${days+1}, auto)`;
+    captureGrid.style.gridTemplateColumns=`repeat(${days+1}, auto)`;
 
-    /* Day headers */
-    for (let d = 0; d < 7; d++) {
-        const day = new Date(start);
-        day.setDate(start.getDate() + d);
-
-        const label = document.createElement('div');
-        label.className = 'day-label';
-        label.textContent = formatDay(day);
-        target.appendChild(label);
+    // header row (empty top-left + day labels)
+    const header = document.createElement("div"); header.className="hour-label"; header.textContent="Hour"; weekGrid.appendChild(header);
+    const headerC = header.cloneNode(true); captureGrid.appendChild(headerC);
+    for(let d=0; d<days; d++){
+        const day = new Date(start); day.setDate(start.getDate()+d);
+        const dayLabel = document.createElement("div"); dayLabel.className="day-label"; dayLabel.textContent=formatDate(day);
+        const dayLabelC = dayLabel.cloneNode(true);
+        weekGrid.appendChild(dayLabel); captureGrid.appendChild(dayLabelC);
     }
 
-    /* Hour rows */
-    for (let h = 0; h < 24; h++) {
-        const hLabel = document.createElement('div');
-        hLabel.className = 'hour-label';
-        hLabel.textContent = hourLabel(h);
-        target.appendChild(hLabel);
+    // rows for each hour
+    for(let h=0; h<24; h++){
+        const hourLabel = document.createElement("div"); hourLabel.className="hour-label"; hourLabel.textContent=h;
+        const hourLabelC = hourLabel.cloneNode(true);
+        weekGrid.appendChild(hourLabel); captureGrid.appendChild(hourLabelC);
 
-        for (let d = 0; d < 7; d++) {
-            const cell = document.createElement('div');
-            cell.className = 'hour-cell black';
-            cell.dataset.state = 0;
+        for(let d=0; d<days; d++){
+            const day = new Date(start); day.setDate(start.getDate()+d);
+            const fdate = formatDate(day);
 
-            cell.onclick = () => {
-                let s = (+cell.dataset.state + 1) % 4;
-                cell.dataset.state = s;
-                cell.className = 'hour-cell ' + states[s];
+            const cell = document.createElement("div"); cell.className="hour-cell black"; cell.dataset.state=0;
+            const cellC = cell.cloneNode(true);
+
+            if(history[fdate] && history[fdate][h]!=undefined){
+                cell.dataset.state=history[fdate][h]; cell.className="hour-cell "+states[history[fdate][h]];
+            }
+
+            cell.onclick = ()=>{
+                let s=Number(cell.dataset.state); cell.classList.remove(states[s]);
+                s=(s+1)%states.length; cell.dataset.state=s; cell.classList.add(states[s]);
+                history[fdate]=history[fdate]||[]; history[fdate][h]=s; saveHistory(historyKey,history);
             };
 
-            target.appendChild(cell);
+            weekGrid.appendChild(cell); captureGrid.appendChild(cellC);
         }
     }
 }
 
-function syncCapture() {
-    captureGrid.innerHTML = weekGrid.innerHTML;
+/* Download */
+function downloadGrid(){
+    html2canvas(document.getElementById("capture"),{scale:2,backgroundColor:"#0f172a"}).then(canvas=>{
+        const link=document.createElement("a"); link.download="transposed-grid.png";
+        link.href=canvas.toDataURL(); link.click();
+    });
 }
 
-document.getElementById('resetBtn').onclick = () => {
-    document.querySelectorAll('.hour-cell').forEach(c => {
-        c.dataset.state = 0;
-        c.className = 'hour-cell black';
-    });
-};
+/* Reminder Notifications */
+if("Notification" in window){
+    Notification.requestPermission();
+    setInterval(()=>{
+        if(Notification.permission==="granted"){
+            new Notification("Update Performance Tracker","Click hour blocks to update your status!");
+        }
+    },3600*1000);
+}
 
-document.getElementById('downloadBtn').onclick = () => {
-    syncCapture();
-    html2canvas(document.getElementById('capture'), { scale: 2 })
-    .then(canvas => {
-        const link = document.createElement('a');
-        link.download = `weekly-grid-${startDateInput.value}.png`;
-        link.href = canvas.toDataURL();
-        link.click();
-    });
-};
-
-startDateInput.onchange = () => buildWeek(weekGrid);
-
-buildWeek(weekGrid);
+generate();
 </script>
-
 </body>
 </html>
