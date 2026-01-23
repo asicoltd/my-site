@@ -3,17 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transposed Performance Tracker</title>
+<title>Performance Tracker</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
+:root {
+    --bg-dark: #0f172a;
+    --bg-light: #f8fafc;
+    --text-dark: #e5e7eb;
+    --text-light: #111827;
+}
+
 body {
     margin:0;
     font-family: system-ui,sans-serif;
-    background:#0f172a;
-    color:#e5e7eb;
+    background: var(--bg-dark);
+    color: var(--text-dark);
     padding:12px;
+    transition: background 0.3s, color 0.3s;
 }
 h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
 
@@ -24,8 +32,9 @@ h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
 .controls input, .controls select, .controls button {
     padding:6px 10px; border-radius:6px; border:none; font-size:14px;
 }
-.controls input, .controls select { background:#1e293b; color:#e5e7eb; }
+.controls input, .controls select { background:#1e293b; color:var(--text-dark); }
 .controls button { background:#2563eb; color:white; cursor:pointer; }
+.controls button#modeToggle { background:#6b7280; }
 
 /* Grid container */
 #weekView { overflow:auto; margin-bottom:12px; }
@@ -34,13 +43,16 @@ h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
     gap:4px;
 }
 
-/* Transposed grid: first column = hour, rest = days */
-.hour-label {
-    background:#020617; text-align:center; font-size:12px; padding:6px 2px; border-radius:4px;
+/* Header and cell styles */
+.hour-label, .day-label {
+    text-align:center; font-size:12px; padding:6px 2px; border-radius:4px;
+    transition: background 0.3s, color 0.3s;
 }
-.day-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size:12px; text-align:center; padding:2px; color:#93c5fd; }
+.hour-label { background:#020617; color:#93c5fd; }
+.day-label { background:transparent; color:#e5e7eb; }
 
-.hour-cell { width:32px; height:32px; border:1px solid #334155; cursor:pointer; }
+/* Cells */
+.hour-cell { width:32px; height:32px; border:1px solid #334155; cursor:pointer; transition: background 0.3s; }
 .black { background:#111827; }
 .sleep { background:#1e40af; }
 .wasted { background:#4b5563; }
@@ -51,15 +63,19 @@ h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
 /* Legend */
 .legend { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px; }
 .legend-item { display:flex; align-items:center; gap:6px; font-size:12px; }
-.color-box { width:18px; height:18px; border-radius:3px; }
+.color-box { width:18px; height:18px; border-radius:3px; transition: background 0.3s; }
 
 /* Capture hidden */
-#capture { position:fixed; left:-9999px; top:0; padding:16px; background:#0f172a; border-radius:12px; }
+#capture { position:fixed; left:-9999px; top:0; padding:16px; background: var(--bg-dark); border-radius:12px; }
+
+@media(max-width:768px){
+    .hour-cell{width:28px;height:28px;}
+}
 </style>
 </head>
 <body>
 
-<h1>Transposed Tracker</h1>
+<h1></h1>
 
 <div class="controls">
     <input type="date" id="startDate">
@@ -69,6 +85,7 @@ h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
     </select>
     <button onclick="generate()">Apply</button>
     <button onclick="downloadGrid()">Download</button>
+    <button id="modeToggle">Toggle Light/Dark</button>
 </div>
 
 <div id="weekView">
@@ -94,14 +111,33 @@ const weekGrid = document.getElementById("weekGrid");
 const captureGrid = document.getElementById("captureGrid");
 const startInput = document.getElementById("startDate");
 const modeSelect = document.getElementById("modeSelect");
+const modeToggle = document.getElementById("modeToggle");
 
 startInput.valueAsDate = new Date();
+let darkMode = true;
 
+// Toggle dark/light mode
+modeToggle.onclick = ()=>{
+    darkMode = !darkMode;
+    document.body.style.background = darkMode ? 'var(--bg-dark)' : 'var(--bg-light)';
+    document.body.style.color = darkMode ? 'var(--text-dark)' : 'var(--text-light)';
+    document.getElementById('capture').style.background = darkMode ? 'var(--bg-dark)' : 'var(--bg-light)';
+    document.querySelectorAll('.hour-label').forEach(e=>e.style.background= darkMode ? '#020617' : '#e5e7eb');
+};
+
+// Format date as dd/mm/yy
 function formatDate(date){
     const d=String(date.getDate()).padStart(2,'0');
     const m=String(date.getMonth()+1).padStart(2,'0');
     const y=String(date.getFullYear()).slice(-2);
     return `${d}/${m}/${y}`;
+}
+
+// Format hour to 12-hour format
+function formatHour(h){
+    const ampm = h<12 ? "AM" : "PM";
+    let hour = h%12; if(hour===0) hour=12;
+    return `${hour}${ampm}`;
 }
 
 function loadHistory(key){
@@ -112,6 +148,7 @@ function saveHistory(key,data){
     localStorage.setItem(key,JSON.stringify(data));
 }
 
+// Generate tracker grid
 function generate(){
     weekGrid.innerHTML = ""; captureGrid.innerHTML="";
     const mode = modeSelect.value;
@@ -120,30 +157,29 @@ function generate(){
     const historyKey = mode==="weekly"?"weekHistory":"monthHistory";
     const history = loadHistory(historyKey);
 
-    // grid-template: rows = hours, columns = days+1
-    weekGrid.style.gridTemplateColumns=`repeat(${days+1}, auto)`;
-    captureGrid.style.gridTemplateColumns=`repeat(${days+1}, auto)`;
+    // Set columns = 24 hours + 1 for day label
+    weekGrid.style.gridTemplateColumns=`repeat(${25}, auto)`;
+    captureGrid.style.gridTemplateColumns=`repeat(${25}, auto)`;
 
-    // header row (empty top-left + day labels)
-    const header = document.createElement("div"); header.className="hour-label"; header.textContent="Hour"; weekGrid.appendChild(header);
-    const headerC = header.cloneNode(true); captureGrid.appendChild(headerC);
+    // Header row: empty first cell + 24 hours
+    weekGrid.appendChild(document.createElement("div")); // top-left empty
+    captureGrid.appendChild(document.createElement("div"));
+
+    for(let h=0; h<24; h++){
+        const header = document.createElement("div"); header.className="hour-label"; header.textContent=formatHour(h);
+        const headerC = header.cloneNode(true);
+        weekGrid.appendChild(header); captureGrid.appendChild(headerC);
+    }
+
+    // Rows: one per day
     for(let d=0; d<days; d++){
         const day = new Date(start); day.setDate(start.getDate()+d);
         const dayLabel = document.createElement("div"); dayLabel.className="day-label"; dayLabel.textContent=formatDate(day);
         const dayLabelC = dayLabel.cloneNode(true);
         weekGrid.appendChild(dayLabel); captureGrid.appendChild(dayLabelC);
-    }
 
-    // rows for each hour
-    for(let h=0; h<24; h++){
-        const hourLabel = document.createElement("div"); hourLabel.className="hour-label"; hourLabel.textContent=h;
-        const hourLabelC = hourLabel.cloneNode(true);
-        weekGrid.appendChild(hourLabel); captureGrid.appendChild(hourLabelC);
-
-        for(let d=0; d<days; d++){
-            const day = new Date(start); day.setDate(start.getDate()+d);
+        for(let h=0; h<24; h++){
             const fdate = formatDate(day);
-
             const cell = document.createElement("div"); cell.className="hour-cell black"; cell.dataset.state=0;
             const cellC = cell.cloneNode(true);
 
@@ -162,20 +198,20 @@ function generate(){
     }
 }
 
-/* Download */
+// Download as image
 function downloadGrid(){
-    html2canvas(document.getElementById("capture"),{scale:2,backgroundColor:"#0f172a"}).then(canvas=>{
-        const link=document.createElement("a"); link.download="transposed-grid.png";
+    html2canvas(document.getElementById("capture"),{scale:2,backgroundColor:darkMode ? "#0f172a" : "#f8fafc"}).then(canvas=>{
+        const link=document.createElement("a"); link.download="grid.png";
         link.href=canvas.toDataURL(); link.click();
     });
 }
 
-/* Reminder Notifications */
+// Reminder notifications
 if("Notification" in window){
     Notification.requestPermission();
     setInterval(()=>{
         if(Notification.permission==="granted"){
-            new Notification("Update Performance Tracker","Click hour blocks to update your status!");
+            new Notification("Update ","Click hour blocks to update your status!");
         }
     },3600*1000);
 }
