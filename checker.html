@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>24-Hour Color Grid Tracker</title>
+<title>Weekly Time Grid (Transposed)</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <style>
 * {
@@ -16,133 +16,105 @@
 }
 
 body {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: #f0f0f0;
-    min-height: 100vh;
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 16px;
 }
 
 /* HEADER */
 .header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: rgba(26,26,46,0.95);
-    backdrop-filter: blur(8px);
-    padding: 14px;
     text-align: center;
+    margin-bottom: 14px;
 }
 
-.title {
-    font-size: 1.7rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #6ee7b7, #3b82f6);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+.header h1 {
+    color: #6ee7b7;
+    font-size: 1.6rem;
 }
 
 .date-input {
-    margin-top: 8px;
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: #6ee7b7;
+    margin-top: 6px;
     padding: 8px 12px;
     border-radius: 8px;
-    font-size: 1rem;
-}
-
-/* LAYOUT */
-.container {
-    padding: 16px;
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    border: none;
+    background: #1f2937;
+    color: #6ee7b7;
 }
 
 /* GRID */
-.grid-container {
-    background: rgba(255,255,255,0.05);
-    padding: 16px;
-    border-radius: 14px;
+.grid-wrapper {
+    overflow-x: auto;
+    background: #020617;
+    padding: 12px;
+    border-radius: 12px;
 }
 
-.hour-grid {
+.week-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    grid-template-columns: 70px repeat(7, minmax(40px, 1fr));
+    gap: 6px;
+    min-width: 500px;
 }
 
-.hour-cell {
-    aspect-ratio: 1;
-    border-radius: 10px;
+/* LABELS */
+.corner {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.day-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #93c5fd;
+}
+
+.hour-label {
+    font-size: 0.75rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 0.9rem;
+    color: #cbd5f5;
+}
+
+/* CELLS */
+.hour-cell {
+    aspect-ratio: 1;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.hour-cell.black { background: #1f2937; }
-.hour-cell.green { background: #10b981; color: #fff; }
-.hour-cell.yellow { background: #f59e0b; color: #1f2937; }
-.hour-cell.red { background: #ef4444; color: #fff; }
-
-.hour-cell:active {
-    transform: scale(0.95);
-}
+.black { background: #1f2937; }
+.green { background: #10b981; }
+.yellow { background: #f59e0b; }
+.red { background: #ef4444; }
 
 /* CONTROLS */
 .controls {
+    margin-top: 14px;
     display: flex;
-    gap: 12px;
-}
-
-.btn {
-    flex: 1;
-    padding: 14px;
-    border-radius: 12px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
     cursor: pointer;
+    color: white;
 }
 
-.download-btn { background: #10b981; }
-.reset-btn { background: #3b82f6; }
+.download { background: #10b981; }
+.reset { background: #3b82f6; }
 
-/* RESPONSIVE */
-@media (min-width: 600px) {
-    .hour-grid { grid-template-columns: repeat(6, 1fr); }
-}
-@media (min-width: 900px) {
-    .hour-grid { grid-template-columns: repeat(12, 1fr); }
-}
-
-/* ===== DOWNLOAD CAPTURE ONLY ===== */
-#captureOnly {
+/* DOWNLOAD ONLY */
+#capture {
     position: fixed;
     left: -9999px;
     top: 0;
-    background: #1a1a2e;
-    padding: 20px;
-    border-radius: 16px;
-    width: 900px;
-}
-
-#captureDate {
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #6ee7b7;
-    margin-bottom: 16px;
+    background: #020617;
+    padding: 16px;
+    border-radius: 12px;
 }
 </style>
 </head>
@@ -150,100 +122,115 @@ body {
 <body>
 
 <div class="header">
-    <div class="title">24-Hour Color Grid Tracker</div>
-    <input type="date" class="date-input" id="dateInput">
+    <h1>Weekly Time Grid</h1>
+    <input type="date" id="startDate" class="date-input">
 </div>
 
-<div class="container">
-    <div class="grid-container">
-        <div class="hour-grid" id="hourGrid"></div>
-    </div>
-
-    <div class="controls">
-        <button class="btn download-btn" id="downloadBtn">
-            <i class="fas fa-download"></i> Download
-        </button>
-        <button class="btn reset-btn" id="resetBtn">
-            <i class="fas fa-redo"></i> Reset
-        </button>
-    </div>
+<div class="grid-wrapper">
+    <div class="week-grid" id="weekGrid"></div>
 </div>
 
-<!-- HIDDEN DOWNLOAD AREA -->
-<div id="captureOnly">
-    <div id="captureDate"></div>
-    <div class="grid-container">
-        <div class="hour-grid" id="captureGrid"></div>
-    </div>
+<div class="controls">
+    <button class="download" id="downloadBtn">Download Week</button>
+    <button class="reset" id="resetBtn">Reset</button>
 </div>
 
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<!-- Hidden capture -->
+<div id="capture">
+    <div class="week-grid" id="captureGrid"></div>
+</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+const states = ['black','green','yellow','red'];
+const weekGrid = document.getElementById('weekGrid');
+const captureGrid = document.getElementById('captureGrid');
+const startDateInput = document.getElementById('startDate');
 
-    const dateInput = document.getElementById('dateInput');
-    dateInput.valueAsDate = new Date();
+startDateInput.valueAsDate = new Date();
 
-    const states = ['black','green','yellow','red'];
+function formatDay(date) {
+    return date.toLocaleDateString('en-US', {
+        weekday: 'short',
+        day: 'numeric'
+    });
+}
 
-    function createGrid(targetId) {
-        const grid = document.getElementById(targetId);
-        grid.innerHTML = '';
+function hourLabel(h) {
+    if (h === 0) return '12 AM';
+    if (h < 12) return h + ' AM';
+    if (h === 12) return '12 PM';
+    return (h - 12) + ' PM';
+}
 
-        for (let i = 0; i < 24; i++) {
+function buildWeek(target) {
+    target.innerHTML = '';
+    const start = new Date(startDateInput.value);
+
+    /* Top-left corner */
+    const corner = document.createElement('div');
+    corner.className = 'corner';
+    corner.textContent = 'Hour';
+    target.appendChild(corner);
+
+    /* Day headers */
+    for (let d = 0; d < 7; d++) {
+        const day = new Date(start);
+        day.setDate(start.getDate() + d);
+
+        const label = document.createElement('div');
+        label.className = 'day-label';
+        label.textContent = formatDay(day);
+        target.appendChild(label);
+    }
+
+    /* Hour rows */
+    for (let h = 0; h < 24; h++) {
+        const hLabel = document.createElement('div');
+        hLabel.className = 'hour-label';
+        hLabel.textContent = hourLabel(h);
+        target.appendChild(hLabel);
+
+        for (let d = 0; d < 7; d++) {
             const cell = document.createElement('div');
             cell.className = 'hour-cell black';
-            cell.dataset.state = '0';
-            cell.textContent =
-                i === 0 ? '12 AM' :
-                i < 12 ? `${i} AM` :
-                i === 12 ? '12 PM' :
-                `${i - 12} PM`;
+            cell.dataset.state = 0;
 
             cell.onclick = () => {
-                let s = (parseInt(cell.dataset.state) + 1) % 4;
+                let s = (+cell.dataset.state + 1) % 4;
                 cell.dataset.state = s;
                 cell.className = 'hour-cell ' + states[s];
             };
 
-            grid.appendChild(cell);
+            target.appendChild(cell);
         }
     }
+}
 
-    function syncToCapture() {
-        const mainCells = document.querySelectorAll('#hourGrid .hour-cell');
-        const captureCells = document.querySelectorAll('#captureGrid .hour-cell');
+function syncCapture() {
+    captureGrid.innerHTML = weekGrid.innerHTML;
+}
 
-        mainCells.forEach((cell, i) => {
-            captureCells[i].className = cell.className;
-        });
+document.getElementById('resetBtn').onclick = () => {
+    document.querySelectorAll('.hour-cell').forEach(c => {
+        c.dataset.state = 0;
+        c.className = 'hour-cell black';
+    });
+};
 
-        document.getElementById('captureDate').textContent =
-            new Date(dateInput.value).toDateString();
-    }
+document.getElementById('downloadBtn').onclick = () => {
+    syncCapture();
+    html2canvas(document.getElementById('capture'), { scale: 2 })
+    .then(canvas => {
+        const link = document.createElement('a');
+        link.download = `weekly-grid-${startDateInput.value}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+};
 
-    document.getElementById('resetBtn').onclick = () => {
-        document.querySelectorAll('.hour-cell').forEach(c => {
-            c.dataset.state = '0';
-            c.className = 'hour-cell black';
-        });
-    };
+startDateInput.onchange = () => buildWeek(weekGrid);
 
-    document.getElementById('downloadBtn').onclick = () => {
-        syncToCapture();
-        html2canvas(document.getElementById('captureOnly'), { scale: 2 })
-        .then(canvas => {
-            const link = document.createElement('a');
-            link.download = `24-hour-grid-${dateInput.value}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    };
-
-    createGrid('hourGrid');
-    createGrid('captureGrid');
-});
+buildWeek(weekGrid);
 </script>
 
 </body>
