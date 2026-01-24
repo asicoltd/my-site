@@ -1151,4 +1151,11 @@
       ]
     }
   }
+  ,
+  "test-company": {
+    "name": "Test Company Ltd",
+    "years": [2022, 2023],
+    "pdfFiles": [],
+    "inspectorNotes": "Test company for demonstration purposes."
+  }
 }
