@@ -1524,8 +1524,7 @@
                 // Simulate step processing time
                 const duration = analysisSteps[i].duration;
                 const match = duration.match(/(\d+)-(\d+)s/);
-                const SPEED_MULTIPLIER = 0;
-                const stepTime = match ? (parseInt(match[1]) + Math.random() * (parseInt(match[2]) - parseInt(match[1]))) * 1000*SPEED_MULTIPLIER : 5000*SPEED_MULTIPLIER;
+                const stepTime = match ? (parseInt(match[1]) + Math.random() * (parseInt(match[2]) - parseInt(match[1]))) * 1000*1 : 5000*1;
                 
                 // Add step-specific logs
                 addLog("PROCESS", `Starting: ${analysisSteps[i].title}`);
@@ -1573,103 +1572,143 @@
             // Generate and download report
             setTimeout(() => {
                 generateReport();
-            }, 1500);
+            },1500);
         }
 
         function delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        function generateReport() {
-            // Create analysis report
-            const report = {
-                analysisId: 'FRC-' + Date.now(),
-                timestamp: new Date().toISOString(),
-                aiModel: selectedAI === 'online' ? 'DeepSeek API (V3)' : 'DeepSeek 14B (Local)',
-                filesAnalyzed: uploadedFiles.map(f => f.name),
-                analysisSteps: analysisSteps.map(step => ({
-                    step: step.title,
-                    status: "COMPLETED",
-                    duration: step.duration
-                })),
-                summary: {
-                    totalChecks: 156,
-                    complianceRate: "94.8%",
-                    issuesFound: 8,
-                    recommendations: 12
-                }
-            };
-            
-            // Convert to JSON and download
-            const jsonStr = JSON.stringify(report, null, 2);
-            const blob = new Blob([jsonStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `frc_financial_analysis_${Date.now()}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            addLog("SYSTEM", "✓ Analysis report downloaded successfully");
-            
-            // Show completion message
-            setTimeout(() => {
-                alert(
-                    "Analysis Complete! 🎉\n\n" +
-                    "Detailed financial analysis report has been downloaded.\n\n" +
-                    "The report includes:\n" +
-                    "• Financial ratio analysis\n" +
-                    "• IFRS compliance check\n" +
-                    "• Corporate governance review\n" +
-                    "• Risk assessment\n" +
-                    "• Regulatory compliance findings"
-                );
-                
-                resetUI();
-            }, 1000);
+function generateReport() {
+    // Create analysis report
+    const report = {
+        analysisId: 'FRC-' + Date.now(),
+        timestamp: new Date().toISOString(),
+        aiModel: selectedAI === 'online' ? 'DeepSeek API (V3)' : 'DeepSeek 14B (Local)',
+        filesAnalyzed: uploadedFiles.map(f => f.name),
+        analysisSteps: analysisSteps.map(step => ({
+            step: step.title,
+            status: "COMPLETED",
+            duration: step.duration
+        })),
+        summary: {
+            totalChecks: 156,
+            complianceRate: "94.8%",
+            issuesFound: 8,
+            recommendations: 12
+        },
+        financialData: {
+            companyName: "Anwer Khan Modern Hospital Ltd.",
+            analysisPeriod: "2022-2024",
+            revenueTrend: "+18.5% YoY",
+            profitMargin: "12.3%",
+            currentRatio: "1.8",
+            debtToEquity: "0.45"
         }
-
-        function resetUI() {
-            // Hide modal
+    };
+    
+    // Convert to JSON and download
+    const jsonStr = JSON.stringify(report, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `frc_financial_analysis_${Date.now()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    addLog("SYSTEM", "✓ Analysis report downloaded successfully");
+    addLog("SYSTEM", "✓ Redirecting to results dashboard...");
+    
+    // Store report data in localStorage for the results page
+    localStorage.setItem('frcAnalysisReport', jsonStr);
+    localStorage.setItem('lastAnalysisTimestamp', new Date().toISOString());
+    
+    // Show redirect message and then redirect
+    setTimeout(() => {
+        // Update the modal to show redirect message
+        const llmHeader = document.querySelector('.llm-header');
+        llmHeader.innerHTML = `
+            <div class="llm-avatar">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+                <h2 style="color:#2ecc71; font-size:28px; margin-bottom:8px;">Analysis Complete!</h2>
+                <p style="color:#94a3b8; font-size:15px;">Redirecting to results dashboard...</p>
+            </div>
+        `;
+        
+        updateProgress(100, "Report downloaded. Redirecting...");
+        
+        // Add success log
+        addLog("SYSTEM", "✓ Report saved to localStorage");
+        addLog("SYSTEM", "✓ Preparing results dashboard");
+        
+        // Short delay for user to see completion message
+        setTimeout(() => {
             processingModal.classList.remove('active');
-            
-            // Reset state
-            isProcessing = false;
-            uploadedFiles = [];
-            selectedAI = null;
-            fileInput.value = '';
-            
-            // Reset UI
-            updateFileDisplay();
-            processLog.innerHTML = `
-                <div class="log-line">
-                    <span class="log-time">[14:30:45]</span>
-                    <span class="log-module">[SYSTEM]</span>
-                    <span class="log-message">FRC AI Financial Analyzer v2.0 Initialized</span>
-                </div>
-                <div class="log-line">
-                    <span class="log-time">[14:30:46]</span>
-                    <span class="log-module">[SYSTEM]</span>
-                    <span class="log-message">Ready to process financial statements...</span>
-                </div>
-            `;
-            
-            // Reset progress
-            updateProgress(0, "Ready for analysis");
-            
-            // Reset steps
-            analysisStepsContainer.innerHTML = '';
-            
-            // Show AI selection again
-            aiSelectionCard.style.display = 'block';
-            uploadSection.classList.remove('active');
-            proceedBtn.disabled = true;
-            onlineAI.classList.remove('selected');
-            localAI.classList.remove('selected');
-        }
+            window.location.href = 'frc.html';
+        }, 1500);
+        
+    }, 500);
+}
+
+function resetUI() {
+    // Hide modal
+    processingModal.classList.remove('active');
+    
+    // Reset state
+    isProcessing = false;
+    uploadedFiles = [];
+    selectedAI = null;
+    fileInput.value = '';
+    
+    // Reset UI
+    updateFileDisplay();
+    
+    // Reset progress
+    updateProgress(0, "Ready for analysis");
+    
+    // Reset steps
+    analysisStepsContainer.innerHTML = '';
+    
+    // Reset LLM header back to original
+    const llmHeader = document.querySelector('.llm-header');
+    llmHeader.innerHTML = `
+        <div class="llm-avatar">
+            <i class="fas fa-brain"></i>
+        </div>
+        <div>
+            <h2 style="color:white; font-size:28px; margin-bottom:8px;">FRC AI Chartered Accountant</h2>
+            <p style="color:#94a3b8; font-size:15px;">Professional Financial Statement Analysis in Progress</p>
+        </div>
+    `;
+    
+    // Reset logs
+    processLog.innerHTML = `
+        <div class="log-line">
+            <span class="log-time">[14:30:45]</span>
+            <span class="log-module">[SYSTEM]</span>
+            <span class="log-message">FRC AI Financial Analyzer v2.0 Initialized</span>
+        </div>
+        <div class="log-line">
+            <span class="log-time">[14:30:46]</span>
+            <span class="log-module">[SYSTEM]</span>
+            <span class="log-message">Ready to process financial statements...</span>
+        </div>
+    `;
+    
+    // Show AI selection again
+    aiSelectionCard.style.display = 'block';
+    uploadSection.classList.remove('active');
+    proceedBtn.disabled = true;
+    onlineAI.classList.remove('selected');
+    localAI.classList.remove('selected');
+}
+    
     </script>
 </body>
 </html>
