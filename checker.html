@@ -10,34 +10,386 @@
 <style>
 :root {
     --bg-dark: #0f172a;
-    --bg-light: #f8fafc;
+    --bg-light: #1a1a1a;
     --text-dark: #e5e7eb;
-    --text-light: #111827;
+    --text-light: #ffffff;
+    --border-light: #333333;
+    --border-dark: #334155;
+    --cell-bg-light: #ffffff;
+    --cell-bg-dark: #ffffff;
+    --today-row-bg: rgba(220, 38, 38, 0.1);
+    --today-border: #dc2626;
 }
 
 body {
     margin:0;
     font-family: system-ui,sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-dark);
+    background: var(--bg-light);
+    color: var(--text-light);
     padding:12px;
     transition: background 0.3s, color 0.3s;
 }
-h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
+h1 { 
+    text-align:center; 
+    margin-bottom:12px; 
+    color:#ffffff; 
+    font-size:1.8rem; 
+    font-weight:600;
+}
 
 /* Controls */
 .controls {
-    display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:12px;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-bottom:12px;
 }
 .controls input, .controls select, .controls button {
-    padding:6px 10px; border-radius:6px; border:none; font-size:14px;
+    padding:4px 8px; border-radius:6px; border:1px solid var(--border-light);
+    font-size:12px;
 }
-.controls input, .controls select { background:#1e293b; color:var(--text-dark); }
-.controls button { background:#2563eb; color:white; cursor:pointer; }
+.controls input, .controls select { 
+    background:#2d2d2d; 
+    color:var(--text-light);
+    border-color: #444444;
+    min-height: 32px;
+}
+.controls button { 
+    background:#3b82f6; 
+    color:white; 
+    cursor:pointer;
+    border: none;
+    transition: opacity 0.2s;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.controls button:hover {
+    opacity: 0.9;
+}
 .controls button#modeToggle { background:#6b7280; }
 
+/* View Toggle Buttons */
+.view-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 10px 0;
+}
+.view-button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-light);
+    background: #2d2d2d;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+    border-radius: 6px;
+    min-width: 80px;
+}
+.view-button.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+/* Modal for download options */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    color: var(--text-light);
+}
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #3b82f6;
+}
+.modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.modal-option {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.modal-option:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+}
+.modal-option-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+.modal-option-icon {
+    font-size: 24px;
+}
+.modal-option-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+.modal-option-desc {
+    font-size: 12px;
+    color: #ccc;
+    margin-left: 34px;
+}
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.modal-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 80px;
+}
+.modal-button-cancel {
+    background: #6b7280;
+    color: white;
+}
+.modal-button-cancel:hover {
+    background: #4b5563;
+}
+
+/* Edit color section */
+.edit-color {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+    border: 1px solid #3b82f6;
+}
+.edit-color-input {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.edit-color-input label {
+    font-size: 10px;
+    color: #ccc;
+    white-space: nowrap;
+}
+.edit-color-input input[type="color"] {
+    width: 30px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid #444;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.edit-color-buttons {
+    display: flex;
+    gap: 4px;
+}
+.edit-color-button {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+}
+.edit-color-save {
+    background: #10b981;
+    color: white;
+}
+.edit-color-cancel {
+    background: #6b7280;
+    color: white;
+}
+
+/* Add new activity section */
+.add-activity {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+.add-activity-input {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.add-activity-input input[type="text"] {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background: #2d2d2d;
+    color: var(--text-light);
+    font-size: 11px;
+    min-width: 100px;
+}
+.add-activity-input input[type="color"] {
+    width: 30px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid #444;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.add-activity-button {
+    padding: 4px 8px;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+/* Color preview section */
+.color-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 4px;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+.preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    position: relative;
+}
+.preview-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.preview-color:hover {
+    transform: scale(1.1);
+}
+.preview-label {
+    font-size: 9px;
+    color: #ccc;
+    text-align: center;
+}
+.activity-actions {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: none;
+    gap: 2px;
+}
+.preview-item:hover .activity-actions {
+    display: flex;
+}
+.remove-activity, .edit-activity {
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-activity {
+    background: #3b82f6;
+    position: relative;
+    left: -18px;
+}
+
+/* Mobile optimized buttons */
+.mobile-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 6px;
+    margin: 10px 0;
+}
+.mobile-button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 4px;
+    font-size: 11px;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.2s;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+}
+.mobile-button:hover {
+    opacity: 0.9;
+}
+.mobile-button.secondary {
+    background: #6b7280;
+}
+.mobile-button.success {
+    background: #059669;
+}
+.mobile-button.purple {
+    background: #8b5cf6;
+}
+
+/* File input styling */
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+.file-input-wrapper input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
 /* Grid container */
-#weekView { overflow:auto; margin-bottom:12px; }
+#weekView { 
+    overflow:auto; 
+    margin-bottom:12px; 
+    max-width: 100%;
+}
 .week-grid {
     display:grid;
     gap:4px;
@@ -45,178 +397,1319 @@ h1 { text-align:center; margin-bottom:12px; color:#6ee7b7; font-size:1.8rem; }
 
 /* Header and cell styles */
 .hour-label, .day-label {
-    text-align:center; font-size:12px; padding:6px 2px; border-radius:4px;
+    text-align:center; font-size:11px; padding:4px 2px; border-radius:4px;
     transition: background 0.3s, color 0.3s;
 }
-.hour-label { background:#020617; color:#93c5fd; }
-.day-label { background:transparent; color:#e5e7eb; }
+.hour-label { 
+    background:#2d2d2d; 
+    color:#ffffff; 
+    border:1px solid #444444;
+    font-weight: 500;
+}
+.day-label { 
+    background:transparent; 
+    color:var(--text-light); 
+    font-weight:600;
+    font-size: 11px;
+}
 
-/* Cells */
-.hour-cell { width:32px; height:32px; border:1px solid #334155; cursor:pointer; transition: background 0.3s; }
-.black { background:#111827; }
-.sleep { background:#1e40af; }
-.wasted { background:#4b5563; }
-.full { background:#059669; }
-.semi { background:#f59e0b; }
-.clg { background:#7c3aed; }
+/* Today row styling */
+.today-row {
+    background-color: var(--today-row-bg) !important;
+    border: 2px solid var(--today-border) !important;
+    border-radius: 6px;
+    position: relative;
+}
+.today-row::before {
+    content: "TODAY";
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    background: #dc2626;
+    color: white;
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Cells - White tiles in both modes */
+.hour-cell { 
+    width:28px; 
+    height:28px; 
+    border:2px solid #444444;
+    cursor:pointer; 
+    transition: background 0.3s, transform 0.1s, border-color 0.3s;
+    background: var(--cell-bg-light);
+    border-radius: 4px;
+}
+.hour-cell:hover {
+    transform: scale(1.08);
+    z-index: 1;
+    position: relative;
+    border-color: #3b82f6;
+}
+
+/* Default color classes - now dynamic */
+.color-box { 
+    width:16px; 
+    height:16px; 
+    border-radius:3px; 
+    border:1px solid #444444;
+    transition: background 0.3s; 
+}
+
+/* Color indicators for today row */
+.today-row .hour-cell {
+    border-color: rgba(220, 38, 38, 0.3);
+}
+
+/* Dark mode adjustments */
+body.dark-mode {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+body.dark-mode .hour-label { 
+    background:#020617; 
+    color:#93c5fd;
+    border-color: var(--border-dark);
+}
+body.dark-mode #capture { 
+    background: var(--bg-dark);
+    border-color: var(--border-dark);
+}
+body.dark-mode .modal-content {
+    background: var(--bg-dark);
+    border-color: var(--border-dark);
+}
 
 /* Legend */
-.legend { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px; }
-.legend-item { display:flex; align-items:center; gap:6px; font-size:12px; }
-.color-box { width:18px; height:18px; border-radius:3px; transition: background 0.3s; }
+.legend { 
+    display:flex; 
+    flex-wrap:wrap; 
+    justify-content:center; 
+    gap:10px; 
+    margin-top:12px; 
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+.legend-item { 
+    display:flex; 
+    align-items:center; 
+    gap:5px; 
+    font-size:11px; 
+    color: #ffffff;
+}
 
-/* Capture hidden */
-#capture { position:fixed; left:-9999px; top:0; padding:16px; background: var(--bg-dark); border-radius:12px; }
+/* Capture container - FIXED: No size constraints */
+#capture { 
+    position: fixed;
+    left: 0;
+    top: -10000px; /* Move off-screen but still renderable */
+    padding: 20px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: visible !important; /* Allow full content to show */
+    z-index: -1000; /* Hide from view */
+}
+#capture * {
+    box-sizing: border-box;
+}
+.capture-header {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: bold;
+}
+.capture-grid-container {
+    margin-bottom: 15px;
+    overflow: visible !important;
+}
+.capture-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+.capture-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+.capture-color-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid #444;
+}
+.capture-footer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #999;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-light);
+}
 
-@media(max-width:768px){
-    .hour-cell{width:28px;height:28px;}
+/* Mobile responsive */
+@media(max-width:480px){
+    .controls {
+        gap: 4px;
+    }
+    .controls input, .controls select, .controls button {
+        font-size: 11px;
+        padding: 3px 6px;
+        min-height: 28px;
+    }
+    .hour-cell {
+        width: 24px;
+        height: 24px;
+    }
+    .hour-label, .day-label {
+        font-size: 10px;
+        padding: 3px 1px;
+    }
+    .mobile-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .mobile-button {
+        font-size: 10px;
+        padding: 6px 3px;
+        min-height: 32px;
+    }
+    .color-customizer, .add-activity, .edit-color {
+        gap: 4px;
+    }
+    .color-input label, .add-activity-input label, .edit-color-input label {
+        font-size: 9px;
+    }
+    .color-input input, .add-activity-input input, .edit-color-input input {
+        width: 26px;
+        height: 22px;
+    }
+    .preview-item {
+        gap: 2px;
+    }
+    .preview-color {
+        width: 20px;
+        height: 20px;
+    }
+    .preview-label {
+        font-size: 8px;
+    }
+    .capture-legend {
+        gap: 8px;
+    }
+    .capture-legend-item {
+        font-size: 10px;
+    }
+    .modal-content {
+        padding: 15px;
+    }
+    .modal-option {
+        padding: 10px;
+    }
+    .modal-option-icon {
+        font-size: 20px;
+    }
+    .modal-option-title {
+        font-size: 14px;
+    }
+    .activity-actions {
+        top: -3px;
+        right: -3px;
+    }
+    .remove-activity, .edit-activity {
+        width: 14px;
+        height: 14px;
+        font-size: 9px;
+    }
+}
+
+@media(min-width:481px) and (max-width:768px){
+    .mobile-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 </style>
 </head>
 <body>
 
-<h1></h1>
+<h1>Performance Tracker</h1>
+
+<!-- View Toggle Buttons -->
+<div class="view-toggle">
+    <button class="view-button active" id="weeklyBtn" onclick="setViewMode('weekly')">Weekly</button>
+    <button class="view-button" id="monthlyBtn" onclick="setViewMode('monthly')">Monthly</button>
+</div>
+
+<!-- Download Options Modal -->
+<div class="modal-overlay" id="downloadModal">
+    <div class="modal-content">
+        <div class="modal-title">📥 Download Options</div>
+        <div class="modal-options">
+            <div class="modal-option" onclick="selectDownloadOption('current')">
+                <div class="modal-option-header">
+                    <div class="modal-option-icon">📊</div>
+                    <div class="modal-option-title">Current View</div>
+                </div>
+                <div class="modal-option-desc">
+                    Download the grid currently displayed on screen
+                </div>
+            </div>
+            <div class="modal-option" onclick="selectDownloadOption('previousWeek')">
+                <div class="modal-option-header">
+                    <div class="modal-option-icon">🗓️</div>
+                    <div class="modal-option-title">Previous Week (24h)</div>
+                </div>
+                <div class="modal-option-desc">
+                    Download complete previous week (Monday-Sunday)
+                </div>
+            </div>
+            <div class="modal-option" onclick="selectDownloadOption('previousMonth')">
+                <div class="modal-option-header">
+                    <div class="modal-option-icon">📅</div>
+                    <div class="modal-option-title">Previous Month (24h)</div>
+                </div>
+                <div class="modal-option-desc">
+                    Download complete previous calendar month
+                </div>
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-cancel" onclick="closeDownloadModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Optimized Buttons -->
+<div class="mobile-buttons">
+    <button class="mobile-button" onclick="showDownloadModal()">📥 Download Image</button>
+    <button class="mobile-button success" onclick="downloadAllData()">💾 Download All Data</button>
+    <div class="file-input-wrapper">
+        <button class="mobile-button purple">📂 Load Save File</button>
+        <input type="file" id="fileInput" accept=".json" onchange="loadSaveFile(event)">
+    </div>
+    <button class="mobile-button secondary" onclick="toggleColorCustomizer()">🎨 Show Colors</button>
+    <button class="mobile-button secondary" id="modeToggle">🌙 Dark Mode</button>
+</div>
+
+<!-- Edit Color Section -->
+<div class="edit-color" id="editColorSection">
+    <div class="edit-color-input">
+        <label id="editActivityName">Editing: Idle</label>
+        <input type="color" id="editActivityColor" value="#ffffff">
+    </div>
+    <div class="edit-color-buttons">
+        <button class="edit-color-button edit-color-save" onclick="saveEditedColor()">Save</button>
+        <button class="edit-color-button edit-color-cancel" onclick="cancelEditColor()">Cancel</button>
+    </div>
+</div>
+
+<!-- Add New Activity Section -->
+<div class="add-activity" id="addActivitySection">
+    <div class="add-activity-input">
+        <input type="text" id="newActivityName" placeholder="Activity name" maxlength="20">
+    </div>
+    <div class="add-activity-input">
+        <input type="color" id="newActivityColor" value="#8b5cf6">
+    </div>
+    <button class="add-activity-button" onclick="addNewActivity()">+ Add Activity</button>
+</div>
+
+<!-- Color Preview -->
+<div class="color-preview" id="colorPreview">
+    <!-- Will be populated by JavaScript -->
+</div>
 
 <div class="controls">
     <input type="date" id="startDate">
-    <select id="modeSelect">
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-    </select>
-    <button onclick="generate()">Apply</button>
-    <button onclick="downloadGrid()">Download</button>
-    <button id="modeToggle">Toggle Light/Dark</button>
+    <button onclick="generate()">Apply View</button>
 </div>
 
 <div id="weekView">
     <div class="week-grid" id="weekGrid"></div>
 </div>
 
-<div class="legend">
-    <div class="legend-item"><div class="color-box sleep"></div>Sleep</div>
-    <div class="legend-item"><div class="color-box wasted"></div>Wasted</div>
-    <div class="legend-item"><div class="color-box full"></div>Full Focused</div>
-    <div class="legend-item"><div class="color-box semi"></div>Semi Focused</div>
-    <div class="legend-item"><div class="color-box clg"></div>CLG</div>
-    <div class="legend-item"><div class="color-box black"></div>Idle</div>
+<div class="legend" id="legendContainer">
+    <!-- Will be populated by JavaScript -->
 </div>
 
+<!-- Hidden capture container with legend -->
 <div id="capture">
-    <div class="week-grid" id="captureGrid"></div>
+    <div class="capture-header" id="captureHeader">Performance Tracker</div>
+    <div class="capture-grid-container">
+        <div class="week-grid" id="captureGrid"></div>
+    </div>
+    <div class="capture-legend" id="captureLegend">
+        <!-- Legend will be populated by JavaScript -->
+    </div>
+    <div class="capture-footer">
+        Generated on <span id="captureDate"></span>
+    </div>
 </div>
 
 <script>
-const states = ["black","sleep","wasted","full","semi","clg"];
-const weekGrid = document.getElementById("weekGrid");
-const captureGrid = document.getElementById("captureGrid");
-const startInput = document.getElementById("startDate");
-const modeSelect = document.getElementById("modeSelect");
-const modeToggle = document.getElementById("modeToggle");
+// Dynamic states - start with defaults but allow user to add/remove
+let states = [];
+let stateLabels = {};
+let stateColors = {};
+let nextStateId = 0;
 
-startInput.valueAsDate = new Date();
-let darkMode = true;
+// Default activities
+const defaultActivities = [
+    { id: 0, name: "Idle", color: "#ffffff" },
+    { id: 1, name: "Sleep", color: "#3b82f6" },
+    { id: 2, name: "Wasted", color: "#9ca3af" },
+    { id: 3, name: "Full Focus", color: "#10b981" },
+    { id: 4, name: "Semi Focus", color: "#f59e0b" },
+    { id: 5, name: "CLG", color: "#8b5cf6" }
+];
 
-// Toggle dark/light mode
-modeToggle.onclick = ()=>{
-    darkMode = !darkMode;
-    document.body.style.background = darkMode ? 'var(--bg-dark)' : 'var(--bg-light)';
-    document.body.style.color = darkMode ? 'var(--text-dark)' : 'var(--text-light)';
-    document.getElementById('capture').style.background = darkMode ? 'var(--bg-dark)' : 'var(--bg-light)';
-    document.querySelectorAll('.hour-label').forEach(e=>e.style.background= darkMode ? '#020617' : '#e5e7eb');
-};
+let weekGrid = document.getElementById("weekGrid");
+let captureGrid = document.getElementById("captureGrid");
+let startInput = document.getElementById("startDate");
+let modeToggle = document.getElementById("modeToggle");
+let colorPreview = document.getElementById("colorPreview");
+let addActivitySection = document.getElementById("addActivitySection");
+let editColorSection = document.getElementById("editColorSection");
+let captureLegend = document.getElementById("captureLegend");
+let captureDate = document.getElementById("captureDate");
+let downloadModal = document.getElementById("downloadModal");
+let captureHeader = document.getElementById("captureHeader");
+let legendContainer = document.getElementById("legendContainer");
+let weeklyBtn = document.getElementById("weeklyBtn");
+let monthlyBtn = document.getElementById("monthlyBtn");
+let editActivityColor = document.getElementById("editActivityColor");
+let editActivityName = document.getElementById("editActivityName");
 
-// Format date as dd/mm/yy
-function formatDate(date){
-    const d=String(date.getDate()).padStart(2,'0');
-    const m=String(date.getMonth()+1).padStart(2,'0');
-    const y=String(date.getFullYear()).slice(-2);
-    return `${d}/${m}/${y}`;
+// Track which activity is being edited
+let editingActivityId = null;
+
+// Set today's date as default
+const today = new Date();
+startInput.valueAsDate = today;
+
+// START TIME from 6AM (0-23 hour array starting at 6)
+const startHour = 6; // Start at 6 AM
+const hourSequence = Array.from({length: 24}, (_, i) => (i + startHour) % 24);
+
+// Single shared data storage
+const STORAGE_KEY = "performanceData";
+const ACTIVITIES_KEY = "customActivities";
+
+// Initialize activities
+function initializeActivities() {
+    const savedActivities = localStorage.getItem(ACTIVITIES_KEY);
+    if (savedActivities) {
+        const activities = JSON.parse(savedActivities);
+        states = activities.map(a => a.id.toString());
+        activities.forEach(activity => {
+            stateLabels[activity.id] = activity.name;
+            stateColors[activity.id] = activity.color;
+        });
+        nextStateId = Math.max(...activities.map(a => a.id)) + 1;
+    } else {
+        // Load defaults
+        states = defaultActivities.map(a => a.id.toString());
+        defaultActivities.forEach(activity => {
+            stateLabels[activity.id] = activity.name;
+            stateColors[activity.id] = activity.color;
+        });
+        nextStateId = defaultActivities.length;
+        saveActivities();
+    }
 }
 
-// Format hour to 12-hour format
+// Save activities to localStorage
+function saveActivities() {
+    const activities = states.map(id => ({
+        id: parseInt(id),
+        name: stateLabels[id],
+        color: stateColors[id]
+    }));
+    localStorage.setItem(ACTIVITIES_KEY, JSON.stringify(activities));
+}
+
+// Modal functions
+function showDownloadModal() {
+    downloadModal.style.display = 'flex';
+}
+
+function closeDownloadModal() {
+    downloadModal.style.display = 'none';
+}
+
+let selectedDownloadOption = 'current';
+
+function selectDownloadOption(option) {
+    selectedDownloadOption = option;
+    closeDownloadModal();
+    
+    switch(option) {
+        case 'current':
+            downloadCurrentView();
+            break;
+        case 'previousWeek':
+            downloadPreviousWeek();
+            break;
+        case 'previousMonth':
+            downloadPreviousMonth();
+            break;
+    }
+}
+
+// Toggle color customizer visibility
+function toggleColorCustomizer() {
+    const isVisible = addActivitySection.style.display !== 'none';
+    if (isVisible) {
+        // Hide everything
+        addActivitySection.style.display = 'none';
+        editColorSection.style.display = 'none';
+    } else {
+        // Show add activity section
+        addActivitySection.style.display = 'flex';
+        editColorSection.style.display = 'none';
+    }
+    updateColorPreview();
+}
+
+// Set view mode (weekly/monthly)
+function setViewMode(mode) {
+    if (mode === 'weekly') {
+        weeklyBtn.classList.add('active');
+        monthlyBtn.classList.remove('active');
+    } else {
+        monthlyBtn.classList.add('active');
+        weeklyBtn.classList.remove('active');
+    }
+    generate();
+}
+
+// Get current view mode
+function getViewMode() {
+    return weeklyBtn.classList.contains('active') ? 'weekly' : 'monthly';
+}
+
+// Toggle dark/light mode
+modeToggle.onclick = () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    document.getElementById('capture').style.background = isDark ? 'var(--bg-dark)' : 'var(--bg-light)';
+    document.getElementById('capture').style.borderColor = isDark ? 'var(--border-dark)' : 'var(--border-light)';
+    modeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    updateLegendColors();
+    updateColorPreview();
+    updateCaptureLegend();
+};
+
+// Update color preview
+function updateColorPreview() {
+    colorPreview.innerHTML = '';
+    
+    states.forEach(id => {
+        const previewItem = document.createElement('div');
+        previewItem.className = 'preview-item';
+        previewItem.dataset.id = id;
+        
+        const previewColor = document.createElement('div');
+        previewColor.className = 'preview-color';
+        previewColor.style.backgroundColor = stateColors[id];
+        previewColor.style.borderColor = document.body.classList.contains('dark-mode') ? '#444' : '#666';
+        previewColor.onclick = () => startEditColor(id);
+        
+        const previewLabel = document.createElement('div');
+        previewLabel.className = 'preview-label';
+        previewLabel.textContent = stateLabels[id];
+        
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'activity-actions';
+        
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-activity';
+        editBtn.innerHTML = '✎';
+        editBtn.title = 'Edit color';
+        editBtn.onclick = (e) => {
+            e.stopPropagation();
+            startEditColor(id);
+        };
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-activity';
+        removeBtn.innerHTML = '×';
+        removeBtn.title = 'Remove activity';
+        removeBtn.onclick = (e) => {
+            e.stopPropagation();
+            removeActivity(id);
+        };
+        
+        actionsDiv.appendChild(editBtn);
+        actionsDiv.appendChild(removeBtn);
+        
+        previewItem.appendChild(previewColor);
+        previewItem.appendChild(previewLabel);
+        previewItem.appendChild(actionsDiv);
+        colorPreview.appendChild(previewItem);
+    });
+}
+
+// Start editing a color
+function startEditColor(activityId) {
+    editingActivityId = activityId;
+    editActivityName.textContent = `Editing: ${stateLabels[activityId]}`;
+    editActivityColor.value = stateColors[activityId];
+    
+    // Show edit section, hide add section
+    editColorSection.style.display = 'flex';
+    addActivitySection.style.display = 'none';
+    
+    // Scroll to edit section
+    editColorSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Save edited color
+function saveEditedColor() {
+    if (editingActivityId === null) return;
+    
+    const newColor = editActivityColor.value;
+    stateColors[editingActivityId] = newColor;
+    
+    saveActivities();
+    
+    // Update all grids and displays
+    updateGridColors();
+    updateLegend();
+    updateColorPreview();
+    updateCaptureLegend();
+    generate();
+    
+    // Hide edit section
+    editColorSection.style.display = 'none';
+    editingActivityId = null;
+}
+
+// Cancel editing color
+function cancelEditColor() {
+    editColorSection.style.display = 'none';
+    editingActivityId = null;
+}
+
+// Update capture legend
+function updateCaptureLegend() {
+    captureLegend.innerHTML = '';
+    
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    states.forEach(id => {
+        const legendItem = document.createElement('div');
+        legendItem.className = 'capture-legend-item';
+        
+        const colorBox = document.createElement('div');
+        colorBox.className = 'capture-color-box';
+        colorBox.style.backgroundColor = stateColors[id];
+        colorBox.style.borderColor = isDark ? '#444' : '#666';
+        
+        const label = document.createElement('span');
+        label.textContent = stateLabels[id];
+        label.style.color = isDark ? 'var(--text-dark)' : 'var(--text-light)';
+        
+        legendItem.appendChild(colorBox);
+        legendItem.appendChild(label);
+        captureLegend.appendChild(legendItem);
+    });
+}
+
+// Update main legend
+function updateLegend() {
+    legendContainer.innerHTML = '';
+    
+    states.forEach(id => {
+        const legendItem = document.createElement('div');
+        legendItem.className = 'legend-item';
+        
+        const colorBox = document.createElement('div');
+        colorBox.className = 'color-box';
+        colorBox.style.backgroundColor = stateColors[id];
+        colorBox.style.borderColor = document.body.classList.contains('dark-mode') ? '#444' : '#666';
+        
+        const label = document.createElement('span');
+        label.textContent = stateLabels[id];
+        
+        legendItem.appendChild(colorBox);
+        legendItem.appendChild(label);
+        legendContainer.appendChild(legendItem);
+    });
+}
+
+// Add new activity
+function addNewActivity() {
+    const nameInput = document.getElementById('newActivityName');
+    const colorInput = document.getElementById('newActivityColor');
+    
+    const name = nameInput.value.trim();
+    const color = colorInput.value;
+    
+    if (!name) {
+        alert('Please enter an activity name');
+        return;
+    }
+    
+    if (Object.values(stateLabels).includes(name)) {
+        alert('An activity with this name already exists');
+        return;
+    }
+    
+    const newId = nextStateId++;
+    states.push(newId.toString());
+    stateLabels[newId] = name;
+    stateColors[newId] = color;
+    
+    saveActivities();
+    
+    // Clear inputs
+    nameInput.value = '';
+    colorInput.value = '#8b5cf6';
+    
+    updateLegend();
+    updateColorPreview();
+    updateCaptureLegend();
+    generate();
+}
+
+// Remove activity
+function removeActivity(id) {
+    if (states.length <= 1) {
+        alert('Cannot remove all activities');
+        return;
+    }
+    
+    if (stateLabels[id] === "Idle") {
+        alert('Cannot remove the "Idle" activity');
+        return;
+    }
+    
+    // If we're editing this activity, cancel editing
+    if (editingActivityId === id) {
+        cancelEditColor();
+    }
+    
+    // Remove from arrays
+    const index = states.indexOf(id.toString());
+    if (index > -1) {
+        states.splice(index, 1);
+        delete stateLabels[id];
+        delete stateColors[id];
+    }
+    
+    // Remove from localStorage data
+    const allData = loadAllData();
+    for (const date in allData) {
+        for (const hour in allData[date]) {
+            if (allData[date][hour] === parseInt(id)) {
+                delete allData[date][hour]; // Remove data for this activity
+            }
+        }
+    }
+    saveAllData(allData);
+    
+    saveActivities();
+    
+    updateLegend();
+    updateColorPreview();
+    updateCaptureLegend();
+    generate();
+}
+
+// Update grid with current colors
+function updateGridColors() {
+    const cells = document.querySelectorAll('.hour-cell');
+    cells.forEach(cell => {
+        const state = cell.dataset.state;
+        if (state !== undefined && stateColors[state]) {
+            cell.style.backgroundColor = stateColors[state];
+        }
+    });
+}
+
+// Update legend colors
+function updateLegendColors() {
+    const legendItems = document.querySelectorAll('.legend-item');
+    legendItems.forEach(item => {
+        const colorBox = item.querySelector('.color-box');
+        const label = item.textContent.toLowerCase();
+        
+        // Find matching activity
+        let activityId = null;
+        for (const id in stateLabels) {
+            if (stateLabels[id].toLowerCase() === label) {
+                activityId = id;
+                break;
+            }
+        }
+        
+        if (activityId && colorBox) {
+            colorBox.style.backgroundColor = stateColors[activityId];
+        }
+    });
+}
+
+// Format hour to 12-hour format starting from 6AM
 function formatHour(h){
-    const ampm = h<12 ? "AM" : "PM";
-    let hour = h%12; if(hour===0) hour=12;
+    const hour24 = hourSequence[h];
+    const ampm = hour24 < 12 ? "AM" : "PM";
+    let hour = hour24 % 12;
+    if(hour === 0) hour = 12;
     return `${hour}${ampm}`;
 }
 
-function loadHistory(key){
-    const data = localStorage.getItem(key);
+// Get the actual hour for data storage (0-23)
+function getActualHour(index) {
+    return hourSequence[index];
+}
+
+// Load all data from single storage
+function loadAllData() {
+    const data = localStorage.getItem(STORAGE_KEY);
     return data ? JSON.parse(data) : {};
 }
-function saveHistory(key,data){
-    localStorage.setItem(key,JSON.stringify(data));
+
+// Save data to single storage
+function saveAllData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-// Generate tracker grid
-function generate(){
-    weekGrid.innerHTML = ""; captureGrid.innerHTML="";
-    const mode = modeSelect.value;
-    const start = new Date(startInput.value);
-    const days = mode==="weekly"?7:28;
-    const historyKey = mode==="weekly"?"weekHistory":"monthHistory";
-    const history = loadHistory(historyKey);
+// Get data for a specific date
+function getDateData(fdate) {
+    const allData = loadAllData();
+    return allData[fdate] || {};
+}
 
-    // Set columns = 24 hours + 1 for day label
-    weekGrid.style.gridTemplateColumns=`repeat(${25}, auto)`;
-    captureGrid.style.gridTemplateColumns=`repeat(${25}, auto)`;
+// Set data for a specific date
+function setDateData(fdate, hourData) {
+    const allData = loadAllData();
+    allData[fdate] = hourData;
+    saveAllData(allData);
+}
 
-    // Header row: empty first cell + 24 hours
-    weekGrid.appendChild(document.createElement("div")); // top-left empty
-    captureGrid.appendChild(document.createElement("div"));
+// Helper function to parse date from dd/mm/yy format
+function parseFormattedDate(dateStr) {
+    const parts = dateStr.split('/');
+    if (parts.length !== 3) return null;
+    
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1;
+    const year = 2000 + parseInt(parts[2], 10);
+    
+    return new Date(year, month, day);
+}
 
-    for(let h=0; h<24; h++){
-        const header = document.createElement("div"); header.className="hour-label"; header.textContent=formatHour(h);
-        const headerC = header.cloneNode(true);
-        weekGrid.appendChild(header); captureGrid.appendChild(headerC);
+// Get all data for export
+function getAllData() {
+    return {
+        data: loadAllData(),
+        activities: states.map(id => ({
+            id: parseInt(id),
+            name: stateLabels[id],
+            color: stateColors[id]
+        })),
+        metadata: {
+            exportedAt: new Date().toISOString(),
+            version: "3.0",
+            note: "All performance tracker data with custom activities",
+            startHour: startHour
+        }
+    };
+}
+
+// Format date as dd/mm/yy
+function formatDate(date){
+    const d = String(date.getDate()).padStart(2,'0');
+    const m = String(date.getMonth()+1).padStart(2,'0');
+    const y = String(date.getFullYear()).slice(-2);
+    return `${d}/${m}/${y}`;
+}
+
+// Format date for capture footer
+function formatCaptureDate(date){
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    return date.toLocaleDateString('en-US', options);
+}
+
+// Check if date is today
+function isToday(date) {
+    return date.getDate() === today.getDate() &&
+           date.getMonth() === today.getMonth() &&
+           date.getFullYear() === today.getFullYear();
+}
+
+// Get start of week (Monday)
+function getStartOfWeek(date) {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
+    return new Date(date.setDate(diff));
+}
+
+// Get start of month
+function getStartOfMonth(date) {
+    return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+
+// Get previous week range (Monday to Sunday)
+function getPreviousWeekRange() {
+    const now = new Date();
+    const lastWeek = new Date(now);
+    lastWeek.setDate(now.getDate() - 7);
+    
+    // Get Monday of last week
+    const startOfLastWeek = getStartOfWeek(lastWeek);
+    const endOfLastWeek = new Date(startOfLastWeek);
+    endOfLastWeek.setDate(startOfLastWeek.getDate() + 6);
+    
+    return { start: startOfLastWeek, end: endOfLastWeek };
+}
+
+// Get previous month range
+function getPreviousMonthRange() {
+    const now = new Date();
+    const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    
+    const startOfLastMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth(), 1);
+    const endOfLastMonth = new Date(lastMonth.getFullYear(), lastMonth.getMonth() + 1, 0);
+    
+    return { start: startOfLastMonth, end: endOfLastMonth };
+}
+
+// Generate grid for a specific date range
+function generateGridForRange(startDate, endDate, forCapture = false) {
+    const grid = forCapture ? document.getElementById('captureGrid') : document.getElementById('weekGrid');
+    grid.innerHTML = "";
+    
+    // Calculate days difference
+    const diffTime = Math.abs(endDate - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    const days = diffDays;
+    
+    // Set columns (24 hours + 1 for day label)
+    grid.style.gridTemplateColumns = `repeat(${25}, auto)`;
+    grid.style.width = 'fit-content'; // Important: Let grid expand naturally
+
+    // Header row - empty first cell
+    const emptyCell = document.createElement("div");
+    emptyCell.style.minWidth = '40px'; // Make day label column wider
+    grid.appendChild(emptyCell);
+
+    // Create hour labels starting from 6AM
+    for(let displayHour = 0; displayHour < 24; displayHour++){
+        const header = document.createElement("div"); 
+        header.className = "hour-label"; 
+        header.textContent = formatHour(displayHour);
+        header.style.minWidth = window.innerWidth <= 480 ? '24px' : '28px';
+        header.style.minHeight = window.innerWidth <= 480 ? '24px' : '28px';
+        grid.appendChild(header);
     }
 
-    // Rows: one per day
-    for(let d=0; d<days; d++){
-        const day = new Date(start); day.setDate(start.getDate()+d);
-        const dayLabel = document.createElement("div"); dayLabel.className="day-label"; dayLabel.textContent=formatDate(day);
-        const dayLabelC = dayLabel.cloneNode(true);
-        weekGrid.appendChild(dayLabel); captureGrid.appendChild(dayLabelC);
+    // Rows for each day
+    for(let d = 0; d < days; d++){
+        const day = new Date(startDate); 
+        day.setDate(startDate.getDate() + d);
+        const fdate = formatDate(day);
+        
+        const dayLabel = document.createElement("div"); 
+        dayLabel.className = "day-label"; 
+        dayLabel.textContent = fdate;
+        dayLabel.style.minWidth = '40px'; // Make day label wider
+        dayLabel.style.minHeight = window.innerWidth <= 480 ? '24px' : '28px';
+        
+        // Check if this is today's row (for current view only)
+        if (!forCapture && isToday(day)) {
+            dayLabel.classList.add('today-row');
+        }
+        
+        grid.appendChild(dayLabel);
 
-        for(let h=0; h<24; h++){
-            const fdate = formatDate(day);
-            const cell = document.createElement("div"); cell.className="hour-cell black"; cell.dataset.state=0;
-            const cellC = cell.cloneNode(true);
-
-            if(history[fdate] && history[fdate][h]!=undefined){
-                cell.dataset.state=history[fdate][h]; cell.className="hour-cell "+states[history[fdate][h]];
+        // Load data for this date
+        const dateData = getDateData(fdate);
+        
+        // Create cells for each hour (display order: 6AM to 5AM)
+        for(let displayHour = 0; displayHour < 24; displayHour++){
+            const actualHour = getActualHour(displayHour);
+            const cell = document.createElement("div"); 
+            cell.className = "hour-cell"; 
+            cell.dataset.state = states[0]; // Start with first activity (Idle)
+            cell.dataset.actualHour = actualHour;
+            cell.dataset.date = fdate;
+            
+            // Set fixed dimensions
+            if (window.innerWidth <= 480) {
+                cell.style.width = '24px';
+                cell.style.height = '24px';
+                cell.style.minWidth = '24px';
+                cell.style.minHeight = '24px';
+            } else {
+                cell.style.width = '28px';
+                cell.style.height = '28px';
+                cell.style.minWidth = '28px';
+                cell.style.minHeight = '28px';
+            }
+            
+            // Apply color based on state (using shared data)
+            if(dateData[actualHour] !== undefined){
+                const stateId = dateData[actualHour].toString();
+                cell.dataset.state = stateId;
+                if (stateColors[stateId]) {
+                    cell.style.backgroundColor = stateColors[stateId];
+                } else {
+                    cell.style.backgroundColor = stateColors[states[0]]; // Default to idle
+                }
+            } else {
+                cell.style.backgroundColor = stateColors[states[0]]; // Default to idle
             }
 
-            cell.onclick = ()=>{
-                let s=Number(cell.dataset.state); cell.classList.remove(states[s]);
-                s=(s+1)%states.length; cell.dataset.state=s; cell.classList.add(states[s]);
-                history[fdate]=history[fdate]||[]; history[fdate][h]=s; saveHistory(historyKey,history);
-            };
+            if (!forCapture) {
+                cell.onclick = () => {
+                    let currentState = cell.dataset.state;
+                    let currentIndex = states.indexOf(currentState);
+                    let nextIndex = (currentIndex + 1) % states.length;
+                    let nextState = states[nextIndex];
+                    
+                    cell.dataset.state = nextState;
+                    cell.style.backgroundColor = stateColors[nextState];
+                    
+                    // Store data using shared storage
+                    const actualHour = parseInt(cell.dataset.actualHour);
+                    const fdate = cell.dataset.date;
+                    
+                    const dateData = getDateData(fdate);
+                    dateData[actualHour] = parseInt(nextState);
+                    setDateData(fdate, dateData);
+                    
+                    // Update capture grid if it exists for this date
+                    updateCaptureGridForDate(fdate, actualHour, parseInt(nextState));
+                };
+            }
 
-            weekGrid.appendChild(cell); captureGrid.appendChild(cellC);
+            grid.appendChild(cell);
         }
+    }
+    
+    return days;
+}
+
+// Update capture grid for specific date
+function updateCaptureGridForDate(fdate, hour, stateId) {
+    const captureCells = document.querySelectorAll('#captureGrid .hour-cell');
+    captureCells.forEach(cell => {
+        if (cell.dataset.date === fdate && parseInt(cell.dataset.actualHour) === hour) {
+            cell.style.backgroundColor = stateColors[stateId.toString()];
+            cell.dataset.state = stateId.toString();
+        }
+    });
+}
+
+// Calculate start date to center today
+function getCenteredStartDate() {
+    const mode = getViewMode();
+    
+    if (mode === "weekly") {
+        const start = new Date(today);
+        start.setDate(today.getDate() - 3);
+        return start;
+    } else {
+        const start = new Date(today);
+        start.setDate(today.getDate() - 14);
+        return start;
     }
 }
 
-// Download as image
-function downloadGrid(){
-    html2canvas(document.getElementById("capture"),{scale:2,backgroundColor:darkMode ? "#0f172a" : "#f8fafc"}).then(canvas=>{
-        const link=document.createElement("a"); link.download="grid.png";
-        link.href=canvas.toDataURL(); link.click();
-    });
+// Download all data
+function downloadAllData() {
+    try {
+        const data = getAllData();
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `performance-data-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        alert('All data downloaded successfully!');
+        
+    } catch (error) {
+        alert('Error downloading data: ' + error.message);
+    }
+}
+
+// Load save file
+function loadSaveFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            
+            if (importedData.activities) {
+                // Clear existing activities
+                states = [];
+                stateLabels = {};
+                stateColors = {};
+                
+                // Load imported activities
+                importedData.activities.forEach(activity => {
+                    states.push(activity.id.toString());
+                    stateLabels[activity.id] = activity.name;
+                    stateColors[activity.id] = activity.color;
+                });
+                nextStateId = Math.max(...importedData.activities.map(a => a.id)) + 1;
+                saveActivities();
+            }
+            
+            if (importedData.data) {
+                const existingData = loadAllData();
+                const mergedData = { ...existingData, ...importedData.data };
+                saveAllData(mergedData);
+            }
+            
+            generate();
+            updateLegend();
+            updateColorPreview();
+            updateCaptureLegend();
+            alert('Save file loaded successfully! Data merged with existing records.');
+            
+        } catch (error) {
+            alert('Error loading save file: ' + error.message);
+        }
+    };
+    reader.readAsText(file);
+    
+    event.target.value = '';
+}
+
+// Generate tracker grid for current view
+function generate(){
+    const mode = getViewMode();
+    
+    // Auto-center today based on mode
+    const start = getCenteredStartDate();
+    startInput.valueAsDate = start;
+    
+    const days = mode === "weekly" ? 7 : 28;
+    const end = new Date(start);
+    end.setDate(start.getDate() + days - 1);
+    
+    // Generate both grids
+    generateGridForRange(start, end, false); // Main grid
+    generateGridForRange(start, end, true); // Capture grid
+    
+    // Update capture date
+    captureDate.textContent = formatCaptureDate(new Date());
+    
+    // Update capture legend
+    updateCaptureLegend();
+    
+    // Set capture header
+    captureHeader.textContent = `Performance Tracker - ${mode === 'weekly' ? 'Weekly View' : 'Monthly View'}`;
+}
+
+// Download current view
+function downloadCurrentView() {
+    const mode = getViewMode();
+    const start = getCenteredStartDate();
+    const days = mode === "weekly" ? 7 : 28;
+    const end = new Date(start);
+    end.setDate(start.getDate() + days - 1);
+    
+    // Regenerate capture grid
+    generateGridForRange(start, end, true);
+    
+    // Update capture header and date
+    captureDate.textContent = formatCaptureDate(new Date());
+    captureHeader.textContent = `Performance Tracker - ${mode === 'weekly' ? 'Weekly View' : 'Monthly View'}`;
+    
+    downloadImage('current');
+}
+
+// Download previous week
+function downloadPreviousWeek() {
+    const range = getPreviousWeekRange();
+    const days = generateGridForRange(range.start, range.end, true);
+    
+    // Update capture header and date
+    captureDate.textContent = formatCaptureDate(new Date());
+    const startStr = formatDate(range.start);
+    const endStr = formatDate(range.end);
+    captureHeader.textContent = `Performance Tracker - Previous Week (${startStr} to ${endStr})`;
+    
+    downloadImage('previous-week');
+}
+
+// Download previous month
+function downloadPreviousMonth() {
+    const range = getPreviousMonthRange();
+    const days = generateGridForRange(range.start, range.end, true);
+    
+    // Update capture header and date
+    captureDate.textContent = formatCaptureDate(new Date());
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                       "July", "August", "September", "October", "November", "December"];
+    const monthName = monthNames[range.start.getMonth()];
+    const year = range.start.getFullYear();
+    captureHeader.textContent = `Performance Tracker - ${monthName} ${year}`;
+    
+    downloadImage('previous-month');
+}
+
+// Download as image - FIXED to capture ALL hours
+function downloadImage(type = 'current'){
+    const isDark = document.body.classList.contains('dark-mode');
+    const captureContainer = document.getElementById('capture');
+    const captureGrid = document.getElementById('captureGrid');
+    
+    // Ensure capture container is properly sized
+    captureContainer.style.width = 'auto';
+    captureContainer.style.height = 'auto';
+    captureContainer.style.overflow = 'visible';
+    captureContainer.style.position = 'fixed';
+    captureContainer.style.left = '0';
+    captureContainer.style.top = '0';
+    captureContainer.style.zIndex = '10000';
+    captureContainer.style.visibility = 'hidden';
+    captureContainer.style.display = 'block';
+    
+    // Force reflow and get actual dimensions
+    setTimeout(() => {
+        // Get actual content dimensions
+        const contentWidth = captureGrid.scrollWidth + 40; // Add padding
+        const contentHeight = captureGrid.scrollHeight + 200; // Add header, legend, footer
+        
+        // Set container to exact content size
+        captureContainer.style.width = contentWidth + 'px';
+        captureContainer.style.height = contentHeight + 'px';
+        captureContainer.style.visibility = 'visible';
+        
+        // Wait for next frame to ensure rendering
+        requestAnimationFrame(() => {
+            html2canvas(captureContainer, {
+                scale: 2,
+                backgroundColor: isDark ? "#0f172a" : "#1a1a1a",
+                useCORS: true,
+                logging: false,
+                allowTaint: true,
+                width: contentWidth,
+                height: contentHeight,
+                windowWidth: contentWidth,
+                windowHeight: contentHeight,
+                scrollX: 0,
+                scrollY: 0,
+                x: 0,
+                y: 0
+            }).then(canvas => {
+                const link = document.createElement("a");
+                
+                let fileName = '';
+                if (type === 'previous-week') {
+                    const todayStr = new Date().toISOString().split('T')[0];
+                    fileName = `performance-tracker-previous-week-${todayStr}.png`;
+                } else if (type === 'previous-month') {
+                    const todayStr = new Date().toISOString().split('T')[0];
+                    fileName = `performance-tracker-previous-month-${todayStr}.png`;
+                } else {
+                    const mode = getViewMode();
+                    const todayStr = new Date().toISOString().split('T')[0];
+                    fileName = `performance-tracker-${mode}-${todayStr}.png`;
+                }
+                
+                link.download = fileName;
+                link.href = canvas.toDataURL(); 
+                link.click();
+                
+                // Reset capture container
+                captureContainer.style.width = 'auto';
+                captureContainer.style.height = 'auto';
+                captureContainer.style.position = 'fixed';
+                captureContainer.style.left = '0';
+                captureContainer.style.top = '-10000px';
+                captureContainer.style.zIndex = '-1000';
+                captureContainer.style.visibility = 'hidden';
+                captureContainer.style.overflow = 'visible';
+                
+                // Regenerate current view
+                generate();
+                
+            }).catch(error => {
+                console.error("Error generating image:", error);
+                alert("Error generating image. Please try again.");
+                
+                // Reset capture container even on error
+                captureContainer.style.width = 'auto';
+                captureContainer.style.height = 'auto';
+                captureContainer.style.position = 'fixed';
+                captureContainer.style.left = '0';
+                captureContainer.style.top = '-10000px';
+                captureContainer.style.zIndex = '-1000';
+                captureContainer.style.visibility = 'hidden';
+                captureContainer.style.overflow = 'visible';
+                
+                // Regenerate current view
+                generate();
+            });
+        });
+    }, 100);
 }
 
 // Reminder notifications
 if("Notification" in window){
     Notification.requestPermission();
-    setInterval(()=>{
-        if(Notification.permission==="granted"){
-            new Notification("Update ","Click hour blocks to update your status!");
+    setInterval(() => {
+        if(Notification.permission === "granted"){
+            new Notification("Update Time!", {
+                body: "Click hour blocks to update your status!",
+                icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2310b981'/><text x='50' y='60' font-size='40' text-anchor='middle' fill='white'>✓</text></svg>"
+            });
         }
-    },3600*1000);
+    }, 3600 * 1000);
 }
 
+// Handle window resize
+window.addEventListener('resize', () => {
+    generate();
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', (event) => {
+    if (event.target === downloadModal) {
+        closeDownloadModal();
+    }
+});
+
+// Initialize
+initializeActivities();
 generate();
+updateLegend();
+updateColorPreview();
+updateCaptureLegend();
 </script>
 </body>
 </html>
