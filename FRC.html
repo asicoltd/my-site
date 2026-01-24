@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <style>
-        /* All your existing CSS styles remain exactly the same */
+        /* All existing CSS remains the same */
         * {
             margin: 0;
             padding: 0;
@@ -382,6 +382,7 @@
             display: flex;
             margin-bottom: 15px;
             border-bottom: 1px solid #ddd;
+            overflow-x: auto;
         }
 
         .year-tab {
@@ -391,6 +392,7 @@
             color: #555;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .year-tab:hover {
@@ -593,6 +595,106 @@
             box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
         }
 
+        /* New styles for data display */
+        .data-table {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .data-table table {
+            min-width: 800px;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #1a3a8f;
+        }
+
+        .metric-trend-up {
+            color: #2e7d32;
+        }
+
+        .metric-trend-down {
+            color: #d32f2f;
+        }
+
+        .metric-trend-stable {
+            color: #f57c00;
+        }
+
+        .standard-compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .standard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid;
+        }
+
+        .standard-card.compliant {
+            border-left-color: #2e7d32;
+        }
+
+        .standard-card.partial {
+            border-left-color: #f57c00;
+        }
+
+        .standard-card.non-compliant {
+            border-left-color: #d32f2f;
+        }
+
+        .standard-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .standard-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .standard-card .status {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .company-upload {
+            margin-bottom: 25px;
+        }
+
+        .btn-upload {
+            background: linear-gradient(to right, #1a3a8f, #2a5bd7);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 58, 143, 0.3);
+        }
+
         @media (max-width: 1200px) {
             .container {
                 flex-direction: column;
@@ -611,6 +713,11 @@
             .tab {
                 white-space: nowrap;
             }
+
+            .key-findings,
+            .standard-compliance-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -618,39 +725,38 @@
 <body>
     <div class="header">
         <h1><i class="fas fa-gavel"></i> Financial Reporting Council (FRC), Bangladesh</h1>
-        <p>Regulatory Inspection Portal - Select a company to begin analysis</p>
+        <p id="header-subtitle">Regulatory Inspection Portal - Select a company to begin analysis</p>
     </div>
 
-    <div class="container">
-        <!-- Left Panel - Analysis Content with Tabs -->
-        <div class="left-panel">
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab(0)">
-                    <i class="fas fa-home"></i> Overview
-                </div>
-                <div class="tab" onclick="switchTab(1)">
-                    <i class="fas fa-search"></i> Audit Analysis
-                </div>
-                <div class="tab" onclick="switchTab(2)">
-                    <i class="fas fa-chart-line"></i> IFRS Compliance
-                </div>
-                <div class="tab" onclick="switchTab(3)">
-                    <i class="fas fa-file-invoice-dollar"></i> Financial Analysis
-                </div>
-                <div class="tab" onclick="switchTab(4)">
-                    <i class="fas fa-exclamation-circle"></i> Risk Indicators
-                </div>
-                <div class="tab" onclick="switchTab(5)">
-                    <i class="fas fa-user-tie"></i> Governance
-                </div>
-                <div class="tab" onclick="switchTab(6)">
-                    <i class="fas fa-gavel"></i> Enforcement
-                </div>
-            </div>
+    <div class="tabs-container" style="position: sticky; top: 0; z-index: 100; background: white; border-radius: 10px 10px 0 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);">
+    <div class="tabs">
+        <div class="tab" onclick="switchTab(0)">
+            <i class="fas fa-home"></i> Overview
+        </div>
+        <div class="tab" onclick="switchTab(1)">
+            <i class="fas fa-search"></i> Audit Analysis
+        </div>
+        <div class="tab" onclick="switchTab(2)">
+            <i class="fas fa-chart-line"></i> IFRS Compliance
+        </div>
+        <div class="tab active" onclick="switchTab(3)">
+            <i class="fas fa-file-invoice-dollar"></i> Financial Analysis
+        </div>
+        <div class="tab" onclick="switchTab(4)">
+            <i class="fas fa-exclamation-circle"></i> Risk Indicators
+        </div>
+        <div class="tab" onclick="switchTab(5)">
+            <i class="fas fa-user-tie"></i> Governance
+        </div>
+        <div class="tab" onclick="switchTab(6)">
+            <i class="fas fa-gavel"></i> Enforcement
+        </div>
+    </div>
+</div>
 
             <!-- All Tab Contents - Initially empty -->
             <div class="tab-content active" id="tab-overview">
-                <div class="blank-state">
+                <div class="blank-state" id="overview-blank">
                     <i class="fas fa-building"></i>
                     <h3>No Company Selected</h3>
                     <p>Select a company from the right panel to load its regulatory inspection data. The analysis
@@ -661,60 +767,67 @@
                         <i class="fas fa-folder-open"></i> Select a Company
                     </button>
                 </div>
+                <!-- Overview content will be loaded here dynamically -->
             </div>
 
             <div class="tab-content" id="tab-audit">
-                <div class="blank-state">
+                <div class="blank-state" id="audit-blank">
                     <i class="fas fa-search"></i>
                     <h3>Audit Analysis</h3>
                     <p>Select a company to view detailed audit analysis including auditor opinions, emphasis of matter
                         paragraphs, and scope limitations across multiple years.</p>
                 </div>
+                <!-- Audit content will be loaded here dynamically -->
             </div>
 
             <div class="tab-content" id="tab-compliance">
-                <div class="blank-state">
+                <div class="blank-state" id="compliance-blank">
                     <i class="fas fa-chart-line"></i>
                     <h3>IFRS Compliance</h3>
                     <p>Select a company to view IFRS/IAS compliance assessment with year-wise comparison and compliance
                         trend analysis.</p>
                 </div>
+                <!-- Compliance content will be loaded here dynamically -->
             </div>
 
             <div class="tab-content" id="tab-financial">
-                <div class="blank-state">
+                <div class="blank-state" id="financial-blank">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <h3>Financial Analysis</h3>
                     <p>Select a company to view comprehensive financial statement analysis including profit & loss,
                         balance sheet, cash flow, and key financial ratios.</p>
                 </div>
+                <!-- Financial content will be loaded here dynamically -->
             </div>
 
             <div class="tab-content" id="tab-risk">
-                <div class="blank-state">
+                <div class="blank-state" id="risk-blank">
                     <i class="fas fa-exclamation-circle"></i>
                     <h3>Risk Indicators</h3>
                     <p>Select a company to view fraud and manipulation risk indicators with materiality assessment
                         across multiple years.</p>
                 </div>
+                <!-- Risk content will be loaded here dynamically -->
             </div>
 
             <div class="tab-content" id="tab-governance">
-                <div class="blank-state">
+                <div class="blank-state" id="governance-blank">
                     <i class="fas fa-user-tie"></i>
                     <h3>Governance</h3>
                     <p>Select a company to view governance assessment including board effectiveness, audit quality, and
                         internal control environment.</p>
                 </div>
+                <!-- Governance content will be loaded here dynamically -->
             </div>
 
             <div class="tab-content" id="tab-enforcement">
-                <div class="blank-state">
+                <div class="blank-state" id="enforcement-blank">
                     <i class="fas fa-gavel"></i>
                     <h3>Enforcement</h3>
                     <p>Select a company to view regulatory findings, materiality assessment, and recommended enforcement
                         actions.</p>
                 </div>
+                <!-- Enforcement content will be loaded here dynamically -->
             </div>
         </div>
 
@@ -731,14 +844,14 @@
                     <!-- Options will be populated dynamically -->
                 </select>
             </div>
-            <div class="company-upload" style="margin-bottom: 25px;">
-    <a href="form.html" style="text-decoration: none;">
-        <button class="btn-upload"
-            style="background: linear-gradient(to right, #1a3a8f, #2a5bd7); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
-            <i class="fas fa-upload"></i> Upload Company Data
-        </button>
-    </a>
-</div>
+            
+            <div class="company-upload">
+                <a href="form.html" style="text-decoration: none;">
+                    <button class="btn-upload">
+                        <i class="fas fa-upload"></i> Upload Company Data
+                    </button>
+                </a>
+            </div>
 
             <div id="fileNavigation" style="display: none;">
                 <h3 style="color: #1a3a8f; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
@@ -751,10 +864,12 @@
                     <!-- Files will be loaded here -->
                 </div>
             </div>
+            
             <div class="pdf-viewer-container">
                 <h3><i class="fas fa-eye"></i> Document Viewer</h3>
                 <iframe id="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file="></iframe>
             </div>
+            
             <div id="inspectorNotes"
                 style="margin-top: 25px; padding: 15px; background-color: #f0f5ff; border-radius: 8px; display: none;">
                 <h4 style="color: #1a3a8f; margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Inspector Notes</h4>
@@ -837,12 +952,19 @@
             }
 
             // Update header
-            document.querySelector('.header p').textContent = `Regulatory Inspection Portal - ${currentCompany.name}`;
+            document.getElementById('header-subtitle').textContent = `Regulatory Inspection Portal - ${currentCompany.name}`;
 
             // Show file navigation
             document.getElementById('fileNavigation').style.display = 'block';
             document.getElementById('inspectorNotes').style.display = 'block';
-            document.getElementById('notesContent').textContent = currentCompany.inspectorNotes || 'No inspector notes available.';
+            
+            // Display inspector notes
+            const notesContent = document.getElementById('notesContent');
+            if (currentCompany.inspectorNotes) {
+                notesContent.textContent = currentCompany.inspectorNotes;
+            } else {
+                notesContent.textContent = 'No inspector notes available.';
+            }
 
             // Load PDF files
             loadPDFFiles();
@@ -872,9 +994,9 @@
                 fileItem.onclick = () => selectFile(index);
 
                 fileItem.innerHTML = `
-                    <div class="file-name"><i class="fas fa-file-pdf"></i> ${file.name}</div>
-                    <div><span class="file-type">PDF</span> <span class="file-year">${file.year}</span></div>
-                    <div style="margin-top: 8px; font-size: 14px; color: #555;">${file.type}</div>
+                    <div class="file-name"><i class="fas fa-file-pdf"></i> ${file.name || 'Unnamed File'}</div>
+                    <div><span class="file-type">PDF</span> <span class="file-year">${file.year || 'N/A'}</span></div>
+                    <div style="margin-top: 8px; font-size: 14px; color: #555;">${file.type || 'Unknown Type'}</div>
                 `;
 
                 fileList.appendChild(fileItem);
@@ -894,26 +1016,27 @@
             const pdfViewer = document.getElementById('pdf-viewer');
             if (pdfViewer && currentCompany.pdfFiles && currentCompany.pdfFiles[index]) {
                 const file = currentCompany.pdfFiles[index];
-                pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(file.url)}`;
+                // Use a placeholder if no URL is provided
+                const fileUrl = file.url || `placeholder_${file.name || 'document'}.pdf`;
+                pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(fileUrl)}`;
             }
         }
 
         // Load all tab data
         function loadAllTabData() {
-            // Remove blank states and clear existing content
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(tab => {
-                const blankState = tab.querySelector('.blank-state');
-                if (blankState) blankState.style.display = 'none';
+            // Hide blank states
+            document.querySelectorAll('.blank-state').forEach(state => {
+                state.style.display = 'none';
+            });
 
-                // Clear any previously loaded content
-                const existingContent = tab.querySelectorAll('.section');
-                existingContent.forEach(content => content.remove());
+            // Clear any previously loaded content
+            document.querySelectorAll('.section').forEach(section => {
+                section.remove();
             });
 
             // Check if company has the required data structure
-            if (!currentCompany.overview) {
-                console.warn('Company data is missing required sections');
+            if (!currentCompany) {
+                console.warn('No company data available');
                 return;
             }
 
@@ -931,127 +1054,112 @@
         function loadOverviewData() {
             const overviewTab = document.getElementById('tab-overview');
             
-            // Check if overview data exists
             if (!currentCompany.overview) {
-                overviewTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Overview Data Available</h3><p>This company does not have overview data in the JSON file.</p></div>';
+                overviewTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Overview Data</h2><p>This company does not have overview data available.</p></div>';
                 return;
             }
 
-            const overviewContent = `
+            let overviewContent = `
                 <div class="section">
                     <h2><i class="fas fa-info-circle"></i> Inspection Overview</h2>
                     <p>${currentCompany.overview.description || 'No description available.'}</p>
                     
-                    ${currentCompany.overview.keyFindings ? `
-                    <div class="key-findings">
-                        ${currentCompany.overview.keyFindings.map(finding => `
-                            <div class="finding-card ${finding.severity || 'moderate'}">
-                                <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled Finding'}</h4>
-                                <p>${finding.description || 'No description'}</p>
-                                <div class="action">${finding.action || 'Action required'}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    ` : '<p>No key findings available.</p>'}
-                </div>
-
-                ${currentCompany.overview.yearData ? `
-                <div class="section">
-                    <h2><i class="fas fa-calendar-alt"></i> Year-Wise Summary</h2>
-                    
-                    <div class="year-tabs">
-                        ${currentCompany.years.map((year, index) => `
-                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('overview', ${index})">${year}</div>
-                        `).join('')}
-                        <div class="year-tab" onclick="switchYear('overview', ${currentCompany.years.length})">Comparison</div>
-                    </div>
-                    
-                    ${currentCompany.years.map((year, index) => {
-                        const yearData = currentCompany.overview.yearData[year];
-                        if (!yearData) return '';
-                        
-                        return `
-                            <div class="year-content ${index === 0 ? 'active' : ''}" id="overview-year-${year}">
-                                <div class="comparison-table">
-                                    <div class="comparison-col">
-                                        <h4>Audit Report</h4>
-                                        <div class="comparison-item">
-                                            <div class="label">Opinion Type</div>
-                                            <div class="value">${yearData.auditOpinion || 'Not available'}</div>
-                                        </div>
-                                        <div class="comparison-item">
-                                            <div class="label">Revenue (Tk. thousands)</div>
-                                            <div class="value">${yearData.revenue || 'Not available'}</div>
-                                        </div>
-                                        <div class="comparison-item">
-                                            <div class="label">Net Loss (Tk. thousands)</div>
-                                            <div class="value">${yearData.netLoss || 'Not available'}</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="comparison-col">
-                                        <h4>Financial Position</h4>
-                                        <div class="comparison-item">
-                                            <div class="label">Total Liabilities (Tk. thousands)</div>
-                                            <div class="value">${yearData.totalLiabilities || 'Not available'}</div>
-                                        </div>
-                                        <div class="comparison-item">
-                                            <div class="label">Going Concern</div>
-                                            <div class="value">${year === 2024 && currentCompany.name.includes('Hospital') ? '<span class="risk-high">Material Uncertainty</span>' : 'Not mentioned'}</div>
-                                        </div>
-                                    </div>
-                                    
-                                    ${yearData.compliance ? `
-                                    <div class="comparison-col">
-                                        <h4>Compliance Status</h4>
-                                        ${Object.entries(yearData.compliance).map(([standard, status]) => `
-                                            <div class="comparison-item">
-                                                <div class="label">${standard.toUpperCase()}</div>
-                                                <div class="value"><span class="compliance-badge ${status}">${status === 'partial' ? 'Partial' : status === 'non-compliant' ? 'Non-compliant' : 'Compliant'}</span></div>
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                    ` : ''}
+                    ${currentCompany.overview.keyFindings && currentCompany.overview.keyFindings.length > 0 ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Key Findings</h3>
+                        <div class="key-findings">
+                            ${currentCompany.overview.keyFindings.map(finding => `
+                                <div class="finding-card ${finding.severity || 'moderate'}">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled Finding'}</h4>
+                                    <p>${finding.description || 'No description'}</p>
+                                    <div class="action">${finding.action || 'Action required'}</div>
                                 </div>
-                                <div class="source-ref">Source: ${year} Auditor's Report & Financial Statements</div>
-                            </div>
-                        `;
-                    }).join('')}
-                    
-                    <div class="year-content" id="overview-year-comparison">
-                        <div class="subsection">
-                            <h3><i class="fas fa-chart-bar"></i> Year Trend Analysis</h3>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Metric</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Trend</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Revenue (Tk. thousands)</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.overview.yearData[year]?.revenue || 'N/A'}</td>`).join('')}
-                                        <td><i class="fas fa-arrow-up" style="color:green"></i> Increasing</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Net Loss (Tk. thousands)</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.overview.yearData[year]?.netLoss || 'N/A'}</td>`).join('')}
-                                        <td><i class="fas fa-arrow-down" style="color:green"></i> Improving</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total Liabilities (Tk. thousands)</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.overview.yearData[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
-                                        <td><i class="fas fa-minus" style="color:orange"></i> Stable High</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            `).join('')}
                         </div>
                     </div>
+                    ` : ''}
                 </div>
-                ` : ''}
             `;
+
+            // Add year-wise data if available
+            if (currentCompany.overview.yearData && currentCompany.years && currentCompany.years.length > 0) {
+                overviewContent += `
+                    <div class="section">
+                        <h2><i class="fas fa-calendar-alt"></i> Year-Wise Summary</h2>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('overview', ${index})">${year}</div>
+                            `).join('')}
+                            <div class="year-tab" onclick="switchYear('overview', ${currentCompany.years.length})">Comparison</div>
+                        </div>
+                        
+                        ${currentCompany.years.map((year, index) => {
+                            const yearData = currentCompany.overview.yearData[year];
+                            if (!yearData) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="overview-year-${year}">
+                                    <div class="comparison-table">
+                                        <div class="comparison-col">
+                                            <h4>Audit Report</h4>
+                                            <div class="comparison-item">
+                                                <div class="label">Opinion Type</div>
+                                                <div class="value">${yearData.auditOpinion || 'Not available'}</div>
+                                            </div>
+                                            <div class="comparison-item">
+                                                <div class="label">Revenue</div>
+                                                <div class="value">${yearData.revenue || 'Not available'}</div>
+                                            </div>
+                                            <div class="comparison-item">
+                                                <div class="label">Net Profit/(Loss)</div>
+                                                <div class="value">${yearData.netProfit || yearData.netLoss || 'Not available'}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="comparison-col">
+                                            <h4>Financial Position</h4>
+                                            <div class="comparison-item">
+                                                <div class="label">Total Liabilities</div>
+                                                <div class="value">${yearData.totalLiabilities || 'Not available'}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                        
+                        <div class="year-content" id="overview-year-comparison">
+                            <div class="subsection">
+                                <h3><i class="fas fa-chart-bar"></i> Year Trend Analysis</h3>
+                                ${currentCompany.financialAnalysis && currentCompany.financialAnalysis.ratios ? `
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Metric</th>
+                                            ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                            <th>Trend</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Current Ratio</td>
+                                            ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.currentRatio || 'N/A'}</td>`).join('')}
+                                            <td><i class="fas fa-${getTrendIcon('currentRatio')}" style="color:${getTrendColor('currentRatio')}"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Debt to Equity Ratio</td>
+                                            ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.debtToEquity || 'N/A'}</td>`).join('')}
+                                            <td><i class="fas fa-${getTrendIcon('debtToEquity')}" style="color:${getTrendColor('debtToEquity')}"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                ` : '<p>No trend data available.</p>'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
             overviewTab.insertAdjacentHTML('beforeend', overviewContent);
         }
@@ -1060,72 +1168,74 @@
         function loadAuditAnalysisData() {
             const auditTab = document.getElementById('tab-audit');
             
-            // Check if audit analysis data exists
             if (!currentCompany.auditAnalysis) {
-                auditTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Audit Analysis Data Available</h3><p>This company does not have audit analysis data in the JSON file.</p></div>';
+                auditTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Audit Analysis Data</h2><p>This company does not have audit analysis data available.</p></div>';
                 return;
             }
 
-            const auditContent = `
+            let auditContent = `
                 <div class="section">
-                    <h2><i class="fas fa-search"></i> Year-Wise Audit Report Analysis</h2>
+                    <h2><i class="fas fa-search"></i> Audit Analysis</h2>
+                    <p><strong>Auditor:</strong> ${currentCompany.auditAnalysis.auditor || 'Not specified'}</p>
+                    <p><strong>Opinion Type:</strong> ${currentCompany.auditAnalysis.opinionType || 'Not specified'}</p>
                     
-                    <div class="year-tabs">
-                        ${currentCompany.auditAnalysis.years.map((year, index) => `
-                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('audit', ${index})">${year}</div>
-                        `).join('')}
-                        <div class="year-tab" onclick="switchYear('audit', ${currentCompany.auditAnalysis.years.length})">Cross-Year Issues</div>
-                    </div>
-                    
-                    ${currentCompany.auditAnalysis.years.map((year, index) => {
-                        const yearData = currentCompany.auditAnalysis.yearDetails?.[year];
-                        if (!yearData) return '';
+                    ${currentCompany.auditAnalysis.yearDetails ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-file-contract"></i> Year-Wise Analysis</h3>
                         
-                        return `
-                            <div class="year-content ${index === 0 ? 'active' : ''}" id="audit-year-${year}">
-                                <div class="subsection">
-                                    <h3><i class="fas fa-file-contract"></i> ${year} Audit Opinion</h3>
-                                    <p><strong>Type:</strong> ${currentCompany.auditAnalysis.opinionType || 'Not specified'}</p>
-                                    <p><strong>Auditor:</strong> ${currentCompany.auditAnalysis.auditor || 'Not specified'}</p>
-                                    ${yearData.issues ? `
-                                    <p><strong>Key Issues:</strong></p>
-                                    <ul style="padding-left: 20px; margin-bottom: 15px;">
-                                        ${yearData.issues.map(issue => `<li>${issue}</li>`).join('')}
-                                    </ul>
-                                    ` : '<p>No audit issues documented.</p>'}
-                                    <div class="source-ref">Source: ${year} Auditor's Report</div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                    
-                    <div class="year-content" id="audit-year-cross">
-                        <div class="subsection">
-                            <h3><i class="fas fa-exclamation-triangle"></i> Recurring Audit Issues Across Years</h3>
-                            ${currentCompany.auditAnalysis.recurringIssues ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Issue</th>
-                                        ${currentCompany.auditAnalysis.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.auditAnalysis.recurringIssues.map(issue => `
-                                        <tr>
-                                            <td>${issue.issue || 'Unknown issue'}</td>
-                                            ${currentCompany.auditAnalysis.years.map(year => `
-                                                <td>${issue[year] ? '<i class="fas fa-times" style="color:red"></i>' : '<i class="fas fa-check" style="color:green"></i>'}</td>
-                                            `).join('')}
-                                            <td><span class="risk-${issue.risk || 'moderate'}">${issue.status || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No recurring issues data available.</p>'}
+                        <div class="year-tabs">
+                            ${currentCompany.auditAnalysis.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('audit', ${index})">${year}</div>
+                            `).join('')}
                         </div>
+                        
+                        ${currentCompany.auditAnalysis.years.map((year, index) => {
+                            const yearData = currentCompany.auditAnalysis.yearDetails[year];
+                            if (!yearData) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="audit-year-${year}">
+                                    <div class="subsection">
+                                        <h4>${year} Audit Issues</h4>
+                                        ${yearData.issues && yearData.issues.length > 0 ? `
+                                        <ul style="padding-left: 20px;">
+                                            ${yearData.issues.map(issue => `<li>${issue}</li>`).join('')}
+                                        </ul>
+                                        ` : '<p>No audit issues documented.</p>'}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
+                    ` : ''}
+                    
+                    ${currentCompany.auditAnalysis.recurringIssues ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Recurring Audit Issues</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Issue</th>
+                                    ${currentCompany.auditAnalysis.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Status</th>
+                                    <th>Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.auditAnalysis.recurringIssues.map(issue => `
+                                    <tr>
+                                        <td>${issue.issue || 'Unknown'}</td>
+                                        ${currentCompany.auditAnalysis.years.map(year => `
+                                            <td>${issue[year] ? '<i class="fas fa-check" style="color:red"></i>' : '<i class="fas fa-times" style="color:green"></i>'}</td>
+                                        `).join('')}
+                                        <td>${issue.status || 'Unknown'}</td>
+                                        <td><span class="risk-${issue.risk || 'moderate'}">${issue.risk || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
                 </div>
             `;
 
@@ -1136,89 +1246,60 @@
         function loadComplianceData() {
             const complianceTab = document.getElementById('tab-compliance');
             
-            // Check if compliance data exists
             if (!currentCompany.ifrsCompliance) {
-                complianceTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No IFRS Compliance Data Available</h3><p>This company does not have IFRS compliance data in the JSON file.</p></div>';
+                complianceTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No IFRS Compliance Data</h2><p>This company does not have IFRS compliance data available.</p></div>';
                 return;
             }
 
-            const complianceContent = `
+            let complianceContent = `
                 <div class="section">
-                    <h2><i class="fas fa-chart-line"></i> IFRS/IAS Compliance Dashboard</h2>
+                    <h2><i class="fas fa-chart-line"></i> IFRS/IAS Compliance</h2>
                     
-                    <div class="year-tabs">
-                        ${currentCompany.years.map((year, index) => `
-                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('compliance', ${index})">${year}</div>
-                        `).join('')}
-                        <div class="year-tab" onclick="switchYear('compliance', ${currentCompany.years.length})">Standards Summary</div>
+                    ${currentCompany.ifrsCompliance.standards ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-check"></i> Compliance Status by Standard</h3>
+                        
+                        <div class="standard-compliance-grid">
+                            ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                <div class="standard-card ${data[currentCompany.years[currentCompany.years.length - 1]] || 'non-compliant'}">
+                                    <h4>${standard}: ${data.name || 'Unknown Standard'}</h4>
+                                    <p><strong>Status (${currentCompany.years[currentCompany.years.length - 1]}):</strong> 
+                                        <span class="compliance-badge ${data[currentCompany.years[currentCompany.years.length - 1]] || 'non-compliant'}">
+                                            ${data[currentCompany.years[currentCompany.years.length - 1]] === 'partial' ? 'Partial' : 
+                                              data[currentCompany.years[currentCompany.years.length - 1]] === 'non-compliant' ? 'Non-compliant' : 
+                                              data[currentCompany.years[currentCompany.years.length - 1]] === 'compliant' ? 'Compliant' : 'Unknown'}
+                                        </span>
+                                    </p>
+                                    <p>${data.issues || 'No issues documented'}</p>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                     
-                    ${currentCompany.years.map((year, index) => `
-                        <div class="year-content ${index === 0 ? 'active' : ''}" id="compliance-year-${year}">
-                            <div class="subsection">
-                                <h3><i class="fas fa-file-contract"></i> ${year} IFRS Compliance Status</h3>
-                                ${currentCompany.ifrsCompliance.standards ? `
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Standard</th>
-                                            <th>Requirement</th>
-                                            <th>Compliance Status</th>
-                                            <th>Evidence / Issue</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
-                                            <tr>
-                                                <td>${standard}</td>
-                                                <td>${data.name || 'Unknown'}</td>
-                                                <td><span class="compliance-badge ${data[year] || 'unknown'}">${data[year] === 'partial' ? 'Partial' : data[year] === 'non-compliant' ? 'Non-compliant' : data[year] === 'compliant' ? 'Compliant' : 'Not Mentioned'}</span></td>
-                                                <td>${data.issues || 'No issues documented'}</td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                                ` : '<p>No compliance standards data available.</p>'}
-                                <div class="source-ref">Source: ${year} Auditor's Report & Financial Statement Notes</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                    
-                    <div class="year-content" id="compliance-year-summary">
-                        <div class="subsection">
-                            <h3><i class="fas fa-chart-bar"></i> Compliance Trend Analysis</h3>
-                            ${currentCompany.ifrsCompliance.standards ? `
-                            <table>
-                                <thead>
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-bar"></i> Compliance Trend Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Standard</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
                                     <tr>
-                                        <th>Standard</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Trend</th>
+                                        <td>${standard}</td>
+                                        ${currentCompany.years.map(year => `
+                                            <td><span class="compliance-badge ${data[year] || 'non-compliant'}">${data[year] === 'partial' ? 'P' : data[year] === 'non-compliant' ? 'N' : data[year] === 'compliant' ? 'C' : 'N/A'}</span></td>
+                                        `).join('')}
+                                        <td>${getComplianceTrend(data)}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
-                                        <tr>
-                                            <td>${standard}</td>
-                                            ${currentCompany.years.map(year => `
-                                                <td><span class="compliance-badge ${data[year] || 'unknown'}">${data[year] === 'partial' ? 'Partial' : data[year] === 'non-compliant' ? 'Non' : data[year] === 'compliant' ? 'Yes' : 'N/A'}</span></td>
-                                            `).join('')}
-                                            <td>
-                                                ${(() => {
-                                                    const statuses = currentCompany.years.map(year => data[year] || 'unknown');
-                                                    if (statuses.every(s => s === 'non-compliant')) return '<i class="fas fa-minus" style="color:red"></i> No Improvement';
-                                                    if (statuses[statuses.length - 1] === 'non-compliant' && statuses[0] !== 'non-compliant') return '<i class="fas fa-arrow-down" style="color:red"></i> Deteriorating';
-                                                    if (statuses[statuses.length - 1] === 'compliant' && statuses[0] !== 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
-                                                    return '<i class="fas fa-minus" style="color:orange"></i> Stable';
-                                                })()}
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No compliance standards data available for trend analysis.</p>'}
-                        </div>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
+                    ` : '<p>No compliance standards data available.</p>'}
                 </div>
             `;
 
@@ -1229,51 +1310,47 @@
         function loadFinancialAnalysisData() {
             const financialTab = document.getElementById('tab-financial');
             
-            // Check if financial analysis data exists
             if (!currentCompany.financialAnalysis) {
-                financialTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Financial Analysis Data Available</h3><p>This company does not have financial analysis data in the JSON file.</p></div>';
+                financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Analysis Data</h2><p>This company does not have financial analysis data available.</p></div>';
                 return;
             }
 
-            const financialContent = `
+            let financialContent = `
                 <div class="section">
-                    <h2><i class="fas fa-file-invoice-dollar"></i> Financial Statement Analysis</h2>
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Financial Analysis</h2>
                     
                     <div class="year-tabs">
                         <div class="year-tab active" onclick="switchYear('financial', 0)">Profit & Loss</div>
                         <div class="year-tab" onclick="switchYear('financial', 1)">Balance Sheet</div>
                         <div class="year-tab" onclick="switchYear('financial', 2)">Cash Flow</div>
-                        <div class="year-tab" onclick="switchYear('financial', 3)">Ratios & Trends</div>
+                        <div class="year-tab" onclick="switchYear('financial', 3)">Ratios</div>
+                        <div class="year-tab" onclick="switchYear('financial', 4)">Accrual Analysis</div>
                     </div>
                     
                     <!-- Profit & Loss -->
                     <div class="year-content active" id="financial-pl">
                         <div class="subsection">
-                            <h3><i class="fas fa-chart-line"></i> Profit & Loss Statement (Taka in thousands)</h3>
+                            <h3><i class="fas fa-chart-line"></i> Profit & Loss Statement</h3>
                             ${currentCompany.financialAnalysis.profitLoss ? `
                             <table>
                                 <thead>
                                     <tr>
                                         <th>Particulars</th>
                                         ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>3-Year Trend</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Revenue</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss[year]?.revenue || 'N/A'}</td>`).join('')}
-                                        <td><i class="fas fa-arrow-up" style="color:green"></i> Increasing</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.revenue || 'N/A'}</td>`).join('')}
                                     </tr>
                                     <tr>
-                                        <td>Gross Profit/(Loss)</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss[year]?.grossProfit || 'N/A'}</td>`).join('')}
-                                        <td><i class="fas fa-minus" style="color:red"></i> Persistent Loss</td>
+                                        <td>Gross Profit</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.grossProfit || 'N/A'}</td>`).join('')}
                                     </tr>
                                     <tr>
-                                        <td>Net Profit/(Loss) After Tax</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss[year]?.netProfit || 'N/A'}</td>`).join('')}
-                                        <td><i class="fas fa-arrow-down" style="color:green"></i> Improving</td>
+                                        <td>Net Profit/(Loss)</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.netProfit || 'N/A'}</td>`).join('')}
                                     </tr>
                                 </tbody>
                             </table>
@@ -1284,31 +1361,27 @@
                     <!-- Balance Sheet -->
                     <div class="year-content" id="financial-bs">
                         <div class="subsection">
-                            <h3><i class="fas fa-balance-scale"></i> Balance Sheet Highlights (Taka in thousands)</h3>
+                            <h3><i class="fas fa-balance-scale"></i> Balance Sheet</h3>
                             ${currentCompany.financialAnalysis.balanceSheet ? `
                             <table>
                                 <thead>
                                     <tr>
                                         <th>Particulars</th>
                                         ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Change</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Property, Plant & Equipment</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet[year]?.ppe || 'N/A'}</td>`).join('')}
-                                        <td>-5.0%</td>
-                                    </tr>
-                                    <tr>
                                         <td>Total Assets</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet[year]?.totalAssets || 'N/A'}</td>`).join('')}
-                                        <td>-3.8%</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.totalAssets || 'N/A'}</td>`).join('')}
                                     </tr>
                                     <tr>
                                         <td>Total Liabilities</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
-                                        <td>+0.1%</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
+                                    </tr>
+                                    <tr>
+                                        <td>Share Capital</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.shareCapital || 'N/A'}</td>`).join('')}
                                     </tr>
                                 </tbody>
                             </table>
@@ -1319,27 +1392,27 @@
                     <!-- Cash Flow -->
                     <div class="year-content" id="financial-cf">
                         <div class="subsection">
-                            <h3><i class="fas fa-money-bill-wave"></i> Cash Flow Analysis (Taka in thousands)</h3>
+                            <h3><i class="fas fa-money-bill-wave"></i> Cash Flow Statement</h3>
                             ${currentCompany.financialAnalysis.cashFlow ? `
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Cash Flow Category</th>
+                                        <th>Particulars</th>
                                         ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Net Cash from Operating Activities</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.cashFlow[year]?.operating || 'N/A'}</td>`).join('')}
+                                        <td>Operating Activities</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.cashFlow[year]?.operating || 'N/A'}</td>`).join('')}
                                     </tr>
                                     <tr>
-                                        <td>Net Cash Used in Investing Activities</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.cashFlow[year]?.investing || 'N/A'}</td>`).join('')}
+                                        <td>Investing Activities</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.cashFlow[year]?.investing || 'N/A'}</td>`).join('')}
                                     </tr>
                                     <tr>
-                                        <td>Net Increase/(Decrease) in Cash</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.cashFlow[year]?.netChange || 'N/A'}</td>`).join('')}
+                                        <td>Financing Activities</td>
+                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.cashFlow[year]?.financing || 'N/A'}</td>`).join('')}
                                     </tr>
                                 </tbody>
                             </table>
@@ -1350,39 +1423,61 @@
                     <!-- Ratios -->
                     <div class="year-content" id="financial-ratios">
                         <div class="subsection">
-                            <h3><i class="fas fa-calculator"></i> Financial Ratios & Trends</h3>
+                            <h3><i class="fas fa-calculator"></i> Financial Ratios</h3>
                             ${currentCompany.financialAnalysis.ratios ? `
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Ratio / Metric</th>
+                                        <th>Ratio</th>
                                         ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Industry Benchmark</th>
                                         <th>Assessment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Current Ratio</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.currentRatio || 'N/A'}</td>`).join('')}
-                                        <td>>1.5</td>
-                                        <td><span class="risk-high">Critical</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Debt to Equity Ratio</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.debtToEquity || 'N/A'}</td>`).join('')}
-                                        <td>< 1.0</td>
-                                        <td><span class="risk-high">Critical</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gross Profit Margin (%)</td>
-                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.grossMargin || 'N/A'}</td>`).join('')}
-                                        <td>>25%</td>
-                                        <td><span class="risk-high">Critical</span></td>
-                                    </tr>
+                                    ${Object.keys(currentCompany.financialAnalysis.ratios[currentCompany.years[0]] || {}).map(ratio => `
+                                        <tr>
+                                            <td>${formatRatioName(ratio)}</td>
+                                            ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.[ratio] || 'N/A'}</td>`).join('')}
+                                            <td><span class="risk-${getRiskLevelForRatio(ratio)}">${getRiskLevelForRatio(ratio)}</span></td>
+                                        </tr>
+                                    `).join('')}
                                 </tbody>
                             </table>
                             ` : '<p>No financial ratios data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Accrual Analysis -->
+                    <div class="year-content" id="financial-accrual">
+                        <div class="subsection">
+                            <h3><i class="fas fa-chart-area"></i> Accrual Analysis</h3>
+                            ${currentCompany.financialAnalysis.accrualAnalysis ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Total Accruals</th>
+                                        <th>Accrual Quality</th>
+                                        <th>Pattern</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.years.map(year => `
+                                        <tr>
+                                            <td>${year}</td>
+                                            <td>${currentCompany.financialAnalysis.accrualAnalysis[year]?.totalAccruals || 'N/A'}</td>
+                                            <td>${currentCompany.financialAnalysis.accrualAnalysis[year]?.accrualQuality || 'N/A'}</td>
+                                            <td>${currentCompany.financialAnalysis.accrualAnalysis[year]?.pattern || 'N/A'}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ${currentCompany.financialAnalysis.accrualAnalysis.trendAnalysis ? `
+                            <div style="margin-top: 15px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                                <strong>Trend Analysis:</strong> ${currentCompany.financialAnalysis.accrualAnalysis.trendAnalysis}
+                            </div>
+                            ` : ''}
+                            ` : '<p>No accrual analysis data available.</p>'}
                         </div>
                     </div>
                 </div>
@@ -1395,82 +1490,84 @@
         function loadRiskIndicatorsData() {
             const riskTab = document.getElementById('tab-risk');
             
-            // Check if risk indicators data exists
             if (!currentCompany.riskIndicators) {
-                riskTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Risk Indicators Data Available</h3><p>This company does not have risk indicators data in the JSON file.</p></div>';
+                riskTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Risk Indicators Data</h2><p>This company does not have risk indicators data available.</p></div>';
                 return;
             }
 
-            const riskContent = `
+            let riskContent = `
                 <div class="section materiality-high">
-                    <h2><i class="fas fa-exclamation-circle"></i> Fraud & Manipulation Risk Indicators</h2>
+                    <h2><i class="fas fa-exclamation-circle"></i> Risk Indicators</h2>
                     
-                    <div class="year-tabs">
-                        ${currentCompany.years.map((year, index) => `
-                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('risk', ${index})">${year}</div>
-                        `).join('')}
-                        <div class="year-tab" onclick="switchYear('risk', ${currentCompany.years.length})">Aggregate Risk</div>
-                    </div>
-                    
-                    ${currentCompany.years.map((year, index) => `
-                        <div class="year-content ${index === 0 ? 'active' : ''}" id="risk-year-${year}">
-                            <div class="subsection">
-                                <h3><i class="fas fa-search"></i> ${year} Risk Assessment</h3>
-                                ${currentCompany.riskIndicators.yearData?.[year] ? `
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Risk Indicator</th>
-                                            <th>Evidence</th>
-                                            <th>Risk Level</th>
-                                            <th>Source Reference</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${currentCompany.riskIndicators.yearData[year].map(indicator => `
+                    ${currentCompany.riskIndicators.yearData ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-search"></i> Year-Wise Risk Assessment</h3>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('risk', ${index})">${year}</div>
+                            `).join('')}
+                        </div>
+                        
+                        ${currentCompany.years.map((year, index) => {
+                            const yearData = currentCompany.riskIndicators.yearData[year];
+                            if (!yearData || !Array.isArray(yearData)) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="risk-year-${year}">
+                                    <table>
+                                        <thead>
                                             <tr>
-                                                <td>${indicator.indicator || 'Unknown indicator'}</td>
-                                                <td>${indicator.evidence || 'No evidence'}</td>
-                                                <td><span class="risk-${indicator.risk || 'moderate'}">${indicator.risk === 'high' ? 'High' : 'Moderate'}</span></td>
-                                                <td>${indicator.reference || 'No reference'}</td>
+                                                <th>Risk Indicator</th>
+                                                <th>Evidence</th>
+                                                <th>Risk Level</th>
+                                                <th>Reference</th>
                                             </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                                ` : '<p>No risk indicators data available for this year.</p>'}
-                            </div>
-                        </div>
-                    `).join('')}
-                    
-                    <div class="year-content" id="risk-year-aggregate">
-                        <div class="subsection">
-                            <h3><i class="fas fa-chart-bar"></i> Year Risk Escalation Analysis</h3>
-                            ${currentCompany.riskIndicators.aggregateRisks ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Risk Category</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Trend</th>
-                                        <th>Aggregate Risk</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.riskIndicators.aggregateRisks.map(risk => `
-                                        <tr>
-                                            <td>${risk.category || 'Unknown category'}</td>
-                                            ${currentCompany.years.map(year => `
-                                                <td><span class="risk-${risk[year] || 'moderate'}">${risk[year] === 'high' ? 'High' : 'Moderate'}</span></td>
+                                        </thead>
+                                        <tbody>
+                                            ${yearData.map(indicator => `
+                                                <tr>
+                                                    <td>${indicator.indicator || 'Unknown'}</td>
+                                                    <td>${indicator.evidence || 'No evidence'}</td>
+                                                    <td><span class="risk-${indicator.risk || 'moderate'}">${indicator.risk || 'Moderate'}</span></td>
+                                                    <td>${indicator.reference || 'No reference'}</td>
+                                                </tr>
                                             `).join('')}
-                                            <td><i class="fas fa-arrow-up" style="color:red"></i> ${risk.trend || 'Unknown'}</td>
-                                            <td><span class="risk-${risk.aggregate?.toLowerCase() || 'moderate'}">${risk.aggregate || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No aggregate risk data available.</p>'}
-                        </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
+                    ` : ''}
+                    
+                    ${currentCompany.riskIndicators.aggregateRisks ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-bar"></i> Aggregate Risk Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Risk Category</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                    <th>Aggregate Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.riskIndicators.aggregateRisks.map(risk => `
+                                    <tr>
+                                        <td>${risk.category || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `
+                                            <td><span class="risk-${risk[year] || 'moderate'}">${risk[year] || 'N/A'}</span></td>
+                                        `).join('')}
+                                        <td>${risk.trend || 'Unknown'}</td>
+                                        <td><span class="risk-${risk.aggregate?.toLowerCase() || 'moderate'}">${risk.aggregate || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
                 </div>
             `;
 
@@ -1481,118 +1578,99 @@
         function loadGovernanceData() {
             const governanceTab = document.getElementById('tab-governance');
             
-            // Check if governance data exists
             if (!currentCompany.governance) {
-                governanceTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Governance Data Available</h3><p>This company does not have governance data in the JSON file.</p></div>';
+                governanceTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Governance Data</h2><p>This company does not have governance data available.</p></div>';
                 return;
             }
 
-            const governanceContent = `
+            let governanceContent = `
                 <div class="section">
-                    <h2><i class="fas fa-user-tie"></i> Governance & Audit Quality Assessment</h2>
+                    <h2><i class="fas fa-user-tie"></i> Governance Assessment</h2>
                     
-                    <div class="year-tabs">
-                        <div class="year-tab active" onclick="switchYear('governance', 0)">Board & Management</div>
-                        <div class="year-tab" onclick="switchYear('governance', 1)">Audit Quality</div>
-                        <div class="year-tab" onclick="switchYear('governance', 2)">Internal Controls</div>
-                        <div class="year-tab" onclick="switchYear('governance', 3)">Three-Year Trend</div>
-                    </div>
-                    
-                    <!-- Board & Management -->
-                    <div class="year-content active" id="governance-board">
-                        <div class="subsection">
-                            <h3><i class="fas fa-users"></i> Board & Management Governance</h3>
-                            ${currentCompany.governance.board ? `
-                            <table>
-                                <thead>
+                    ${currentCompany.governance.board ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-users"></i> Board Governance</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Status</th>
+                                    <th>Evidence</th>
+                                    <th>Assessment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.board.map(item => `
                                     <tr>
-                                        <th>Governance Aspect</th>
-                                        <th>Status</th>
-                                        <th>Evidence</th>
-                                        <th>Assessment</th>
+                                        <td>${item.aspect || 'Unknown'}</td>
+                                        <td>${item.status || 'Unknown'}</td>
+                                        <td>${item.evidence || 'No evidence'}</td>
+                                        <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.governance.board.map(item => `
-                                        <tr>
-                                            <td>${item.aspect || 'Unknown aspect'}</td>
-                                            <td>${item.status || 'Unknown'}</td>
-                                            <td>${item.evidence || 'No evidence'}</td>
-                                            <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No board governance data available.</p>'}
-                        </div>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
+                    ` : ''}
                     
-                    <!-- Audit Quality -->
-                    <div class="year-content" id="governance-audit">
-                        <div class="subsection">
-                            <h3><i class="fas fa-clipboard-check"></i> Audit Quality Assessment</h3>
-                            ${currentCompany.governance.auditQuality ? `
-                            <table>
-                                <thead>
+                    ${currentCompany.governance.auditQuality ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-check"></i> Audit Quality</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Factor</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Assessment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.auditQuality.map(item => `
                                     <tr>
-                                        <th>Audit Quality Factor</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Assessment</th>
+                                        <td>${item.factor || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `<td>${item[year] || 'N/A'}</td>`).join('')}
+                                        <td>${item.assessment || 'Unknown'}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.governance.auditQuality.map(item => `
-                                        <tr>
-                                            <td>${item.factor || 'Unknown factor'}</td>
-                                            ${currentCompany.years.map(year => `<td>${item[year] || 'Not available'}</td>`).join('')}
-                                            <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No audit quality data available.</p>'}
-                        </div>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
+                    ` : ''}
                     
-                    <!-- Internal Controls -->
-                    <div class="year-content" id="governance-controls">
-                        <div class="subsection">
-                            <h3><i class="fas fa-cogs"></i> Internal Control Environment</h3>
-                            ${currentCompany.governance.internalControls ? `
-                            <table>
-                                <thead>
+                    ${currentCompany.governance.internalControls ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-cogs"></i> Internal Controls</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Control Area</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Effectiveness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.internalControls.map(item => `
                                     <tr>
-                                        <th>Control Area</th>
-                                        ${currentCompany.years.map(year => `<th>${year} Evidence</th>`).join('')}
-                                        <th>Control Effectiveness</th>
+                                        <td>${item.area || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `<td>${item[year] || 'N/A'}</td>`).join('')}
+                                        <td><span class="risk-${item.effectiveness?.toLowerCase() || 'moderate'}">${item.effectiveness || 'Unknown'}</span></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.governance.internalControls.map(item => `
-                                        <tr>
-                                            <td>${item.area || 'Unknown area'}</td>
-                                            ${currentCompany.years.map(year => `<td>${item[year] || 'No evidence'}</td>`).join('')}
-                                            <td><span class="risk-high">${item.effectiveness || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No internal controls data available.</p>'}
-                        </div>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
+                    ` : ''}
                     
-                    <!-- Three-Year Trend -->
-                    <div class="year-content" id="governance-trend">
-                        <div class="subsection">
-                            <h3><i class="fas fa-chart-line"></i> Governance Assessment Summary</h3>
-                            <p>The entity's governance framework has systematically failed across all three years with no evidence of functioning audit committee or board oversight, persistent deterioration in financial reporting quality, and complete failure of internal controls across all material areas.</p>
-                            <div class="finding-card high">
-                                <h4><i class="fas fa-gavel"></i> Overall Governance Assessment: FAILED</h4>
-                                <p>Requires immediate board-level intervention and potential director disqualification proceedings.</p>
-                                <div class="action">Board Enforcement Notice Required</div>
-                            </div>
+                    ${currentCompany.governance.auditCommittee ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-list"></i> Audit Committee</h3>
+                        <div style="background-color: #f0f5ff; padding: 15px; border-radius: 8px;">
+                            <p><strong>Existence:</strong> ${currentCompany.governance.auditCommittee.existence || 'Unknown'}</p>
+                            <p><strong>Composition:</strong> ${currentCompany.governance.auditCommittee.composition || 'Unknown'}</p>
+                            <p><strong>Assessment:</strong> <span class="risk-${currentCompany.governance.auditCommittee.assessment?.toLowerCase() || 'moderate'}">${currentCompany.governance.auditCommittee.assessment || 'Unknown'}</span></p>
                         </div>
                     </div>
+                    ` : ''}
                 </div>
             `;
 
@@ -1603,102 +1681,90 @@
         function loadEnforcementData() {
             const enforcementTab = document.getElementById('tab-enforcement');
             
-            // Check if enforcement data exists
             if (!currentCompany.enforcement) {
-                enforcementTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Enforcement Data Available</h3><p>This company does not have enforcement data in the JSON file.</p></div>';
+                enforcementTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Enforcement Data</h2><p>This company does not have enforcement data available.</p></div>';
                 return;
             }
 
-            const enforcementContent = `
+            let enforcementContent = `
                 <div class="section materiality-high">
-                    <h2><i class="fas fa-gavel"></i> Regulatory Summary & Enforcement Actions</h2>
+                    <h2><i class="fas fa-gavel"></i> Enforcement Actions</h2>
                     
-                    <div class="year-tabs">
-                        <div class="year-tab active" onclick="switchYear('enforcement', 0)">Key Findings</div>
-                        <div class="year-tab" onclick="switchYear('enforcement', 1)">Materiality Assessment</div>
-                        <div class="year-tab" onclick="switchYear('enforcement', 2)">Recommended Actions</div>
-                    </div>
-                    
-                    <!-- Key Findings -->
-                    <div class="year-content active" id="enforcement-findings">
-                        ${currentCompany.enforcement.findings ? `
+                    ${currentCompany.enforcement.findings ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Key Findings</h3>
                         <div class="key-findings">
                             ${currentCompany.enforcement.findings.map(finding => `
                                 <div class="finding-card ${finding.severity || 'moderate'}">
                                     <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled finding'}</h4>
                                     <p>${finding.description || 'No description'}</p>
                                     <div class="action">${finding.action || 'Action required'}</div>
+                                    ${finding.legalReference ? `<div style="font-size: 12px; color: #666; margin-top: 5px;"><strong>Legal Reference:</strong> ${finding.legalReference}</div>` : ''}
                                 </div>
                             `).join('')}
                         </div>
-                        ` : '<p>No enforcement findings available.</p>'}
                     </div>
+                    ` : ''}
                     
-                    <!-- Materiality Assessment -->
-                    <div class="year-content" id="enforcement-materiality">
-                        <div class="subsection">
-                            <h3><i class="fas fa-weight"></i> Materiality Assessment</h3>
-                            ${currentCompany.enforcement.materiality ? `
-                            <table>
-                                <thead>
+                    ${currentCompany.enforcement.materiality ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-weight"></i> Materiality Assessment</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Impact</th>
+                                    <th>Quantitative</th>
+                                    <th>Qualitative</th>
+                                    <th>Overall</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.enforcement.materiality.map(item => `
                                     <tr>
-                                        <th>Finding Category</th>
-                                        <th>Financial Impact</th>
-                                        <th>Quantitative Materiality</th>
-                                        <th>Qualitative Materiality</th>
-                                        <th>Overall Materiality</th>
+                                        <td>${item.category || 'Unknown'}</td>
+                                        <td>${item.impact || 'Unknown'}</td>
+                                        <td>${item.quantitative || 'Unknown'}</td>
+                                        <td>${item.qualitative || 'Unknown'}</td>
+                                        <td><span class="risk-high">${item.overall || 'Unknown'}</span></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.enforcement.materiality.map(item => `
-                                        <tr>
-                                            <td>${item.category || 'Unknown category'}</td>
-                                            <td>${item.impact || 'Unknown'}</td>
-                                            <td>${item.quantitative || 'Unknown'}</td>
-                                            <td>${item.qualitative || 'Unknown'}</td>
-                                            <td><span class="risk-high">${item.overall || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No materiality assessment data available.</p>'}
-                        </div>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
+                    ` : ''}
                     
-                    <!-- Recommended Actions -->
-                    <div class="year-content" id="enforcement-actions">
-                        <div class="subsection">
-                            <h3><i class="fas fa-tasks"></i> Recommended Regulatory Actions</h3>
-                            ${currentCompany.enforcement.actions ? `
-                            <table>
-                                <thead>
+                    ${currentCompany.enforcement.actions ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-tasks"></i> Recommended Actions</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Action Type</th>
+                                    <th>Specific Action</th>
+                                    <th>Responsible Party</th>
+                                    <th>Timeframe</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.enforcement.actions.map(action => `
                                     <tr>
-                                        <th>Action Type</th>
-                                        <th>Specific Action</th>
-                                        <th>Responsible Party</th>
-                                        <th>Timeframe</th>
-                                        <th>Priority</th>
+                                        <td>${action.type || 'Unknown'}</td>
+                                        <td>${action.action || 'Unknown'}</td>
+                                        <td>${action.responsible || 'Unknown'}</td>
+                                        <td>${action.timeframe || 'Unknown'}</td>
+                                        <td><span class="risk-${action.priority?.toLowerCase() || 'moderate'}">${action.priority || 'Unknown'}</span></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.enforcement.actions.map(action => `
-                                        <tr>
-                                            <td>${action.type || 'Unknown type'}</td>
-                                            <td>${action.action || 'Unknown action'}</td>
-                                            <td>${action.responsible || 'Unknown'}</td>
-                                            <td>${action.timeframe || 'Unknown'}</td>
-                                            <td><span class="risk-${action.priority?.toLowerCase() || 'moderate'}">${action.priority || 'Unknown'}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No recommended actions data available.</p>'}
-                        </div>
-                        
-                        <button class="btn-export" onclick="alert('PDF generation would be implemented here with actual data')">
-                            <i class="fas fa-download"></i> Generate Comprehensive Inspection Report (PDF)
-                        </button>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
+                    ` : ''}
+                    
+                    <button class="btn-export" onclick="generatePDFReport()">
+                        <i class="fas fa-download"></i> Generate Comprehensive Inspection Report (PDF)
+                    </button>
                 </div>
             `;
 
@@ -1710,22 +1776,88 @@
             currentCompany = null;
 
             // Reset header
-            document.querySelector('.header p').textContent = 'Regulatory Inspection Portal - Select a company to begin analysis';
+            document.getElementById('header-subtitle').textContent = 'Regulatory Inspection Portal - Select a company to begin analysis';
 
             // Hide file navigation and notes
             document.getElementById('fileNavigation').style.display = 'none';
             document.getElementById('inspectorNotes').style.display = 'none';
 
-            // Show blank states and hide all loaded content
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(tab => {
-                const blankState = tab.querySelector('.blank-state');
-                if (blankState) blankState.style.display = 'flex';
-
-                // Clear all loaded content
-                const sections = tab.querySelectorAll('.section');
-                sections.forEach(section => section.remove());
+            // Show blank states
+            document.querySelectorAll('.blank-state').forEach(state => {
+                state.style.display = 'flex';
             });
+
+            // Clear all loaded content
+            document.querySelectorAll('.section').forEach(section => {
+                section.remove();
+            });
+        }
+
+        // Helper functions
+        function getTrendIcon(ratioName) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'minus';
+            
+            const years = currentCompany.years;
+            if (years.length < 2) return 'minus';
+            
+            const firstValue = parseFloat(currentCompany.financialAnalysis.ratios[years[0]]?.[ratioName]) || 0;
+            const lastValue = parseFloat(currentCompany.financialAnalysis.ratios[years[years.length - 1]]?.[ratioName]) || 0;
+            
+            if (ratioName.includes('Ratio') || ratioName.includes('Margin')) {
+                // For ratios, higher is generally better
+                return lastValue > firstValue ? 'arrow-up' : lastValue < firstValue ? 'arrow-down' : 'minus';
+            } else {
+                return lastValue > firstValue ? 'arrow-up' : lastValue < firstValue ? 'arrow-down' : 'minus';
+            }
+        }
+
+        function getTrendColor(ratioName) {
+            const icon = getTrendIcon(ratioName);
+            if (icon === 'arrow-up') {
+                if (ratioName.includes('Debt') || ratioName.includes('Loss')) return 'red';
+                return 'green';
+            } else if (icon === 'arrow-down') {
+                if (ratioName.includes('Debt') || ratioName.includes('Loss')) return 'green';
+                return 'red';
+            }
+            return 'orange';
+        }
+
+        function getComplianceTrend(data) {
+            const years = currentCompany.years;
+            if (years.length < 2) return 'N/A';
+            
+            const firstStatus = data[years[0]];
+            const lastStatus = data[years[years.length - 1]];
+            
+            if (firstStatus === 'non-compliant' && lastStatus === 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+            if (firstStatus === 'compliant' && lastStatus === 'non-compliant') return '<i class="fas fa-arrow-down" style="color:red"></i> Deteriorating';
+            if (firstStatus === 'partial' && lastStatus === 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+            if (firstStatus === 'compliant' && lastStatus === 'partial') return '<i class="fas fa-arrow-down" style="color:orange"></i> Declining';
+            return '<i class="fas fa-minus" style="color:orange"></i> Stable';
+        }
+
+        function formatRatioName(ratio) {
+            return ratio.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        }
+
+        function getRiskLevelForRatio(ratio) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'moderate';
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const value = parseFloat(currentCompany.financialAnalysis.ratios[lastYear]?.[ratio]) || 0;
+            
+            if (ratio.includes('currentRatio')) {
+                return value < 1 ? 'high' : value < 1.5 ? 'moderate' : 'low';
+            } else if (ratio.includes('debtToEquity')) {
+                return value > 1 ? 'high' : value > 0.7 ? 'moderate' : 'low';
+            } else if (ratio.includes('grossMargin')) {
+                return value < 10 ? 'high' : value < 20 ? 'moderate' : 'low';
+            } else if (ratio.includes('returnOnAssets')) {
+                return value < 0 ? 'high' : value < 5 ? 'moderate' : 'low';
+            }
+            
+            return 'moderate';
         }
 
         // Tab management
@@ -1745,7 +1877,7 @@
 
         // Year tab management for different tabs
         function switchYear(tabPrefix, yearIndex) {
-            const tabContent = document.getElementById(`tab-${tabPrefix}`);
+            const tabContent = document.querySelector(`#tab-${tabPrefix}`);
             if (!tabContent) return;
             
             const yearTabs = tabContent.querySelectorAll('.year-tab');
@@ -1761,57 +1893,28 @@
             yearContents.forEach(content => content.classList.remove('active'));
 
             // Show the corresponding content
-            if (tabPrefix === 'overview') {
-                if (yearIndex < (currentCompany?.years?.length || 0)) {
-                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.years[yearIndex]}`);
-                    if (yearContent) yearContent.classList.add('active');
-                } else {
-                    const comparisonContent = document.getElementById(`${tabPrefix}-year-comparison`);
-                    if (comparisonContent) comparisonContent.classList.add('active');
-                }
-            } else if (tabPrefix === 'audit') {
-                if (yearIndex < (currentCompany?.auditAnalysis?.years?.length || 0)) {
-                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.auditAnalysis.years[yearIndex]}`);
-                    if (yearContent) yearContent.classList.add('active');
-                } else {
-                    const crossContent = document.getElementById(`${tabPrefix}-year-cross`);
-                    if (crossContent) crossContent.classList.add('active');
-                }
-            } else if (tabPrefix === 'compliance') {
-                if (yearIndex < (currentCompany?.years?.length || 0)) {
-                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.years[yearIndex]}`);
-                    if (yearContent) yearContent.classList.add('active');
-                } else {
-                    const summaryContent = document.getElementById(`${tabPrefix}-year-summary`);
-                    if (summaryContent) summaryContent.classList.add('active');
-                }
-            } else if (tabPrefix === 'financial') {
-                const financialContents = ['pl', 'bs', 'cf', 'ratios'];
-                if (financialContents[yearIndex]) {
-                    const content = document.getElementById(`financial-${financialContents[yearIndex]}`);
-                    if (content) content.classList.add('active');
-                }
-            } else if (tabPrefix === 'risk') {
-                if (yearIndex < (currentCompany?.years?.length || 0)) {
-                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.years[yearIndex]}`);
-                    if (yearContent) yearContent.classList.add('active');
-                } else {
-                    const aggregateContent = document.getElementById(`${tabPrefix}-year-aggregate`);
-                    if (aggregateContent) aggregateContent.classList.add('active');
-                }
-            } else if (tabPrefix === 'governance') {
-                const governanceContents = ['board', 'audit', 'controls', 'trend'];
-                if (governanceContents[yearIndex]) {
-                    const content = document.getElementById(`governance-${governanceContents[yearIndex]}`);
-                    if (content) content.classList.add('active');
-                }
-            } else if (tabPrefix === 'enforcement') {
-                const enforcementContents = ['findings', 'materiality', 'actions'];
-                if (enforcementContents[yearIndex]) {
-                    const content = document.getElementById(`enforcement-${enforcementContents[yearIndex]}`);
-                    if (content) content.classList.add('active');
-                }
+            const contentIds = {
+                'financial': ['pl', 'bs', 'cf', 'ratios', 'accrual'],
+                'risk': currentCompany.years.map(year => `year-${year}`),
+                'overview': currentCompany.years.map(year => `year-${year}`).concat(['comparison']),
+                'audit': currentCompany.years.map(year => `year-${year}`)
+            };
+
+            if (contentIds[tabPrefix] && contentIds[tabPrefix][yearIndex]) {
+                const content = document.getElementById(`${tabPrefix}-${contentIds[tabPrefix][yearIndex]}`);
+                if (content) content.classList.add('active');
             }
+        }
+
+        // PDF Generation Function
+        function generatePDFReport() {
+            if (!currentCompany) {
+                alert('Please select a company first');
+                return;
+            }
+            
+            alert('PDF generation would create a comprehensive report for ' + currentCompany.name + '. This feature requires server-side implementation.');
+            // In a real implementation, this would generate a PDF with all analysis data
         }
     </script>
 </body>
