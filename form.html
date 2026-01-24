@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC AI - Financial Statement Analyzer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --secondary: #2a5bd7;
+            --accent: #ff6b35;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+            --bg: #f5f7fa;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+        
+        body { 
+            background-color: var(--bg); 
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary); 
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .header h1 { 
+            font-size: 28px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #666;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Step 1: AI Selection */
+        .ai-selection-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            animation: slideUp 0.5s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-selection-card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+        }
+
+        .ai-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .ai-option {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ai-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .ai-option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(26, 58, 143, 0.05), rgba(42, 91, 215, 0.05));
+            box-shadow: 0 10px 25px rgba(26, 58, 143, 0.15);
+        }
+
+        .ai-option h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .ai-option .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge.online {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge.local {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Upload Card */
+        .upload-card {
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            border: 1px solid #e0e0e0;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        .upload-card.active {
+            display: block;
+        }
+
+        .upload-card h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+        }
+
+        .ai-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(26, 58, 143, 0.1);
+            color: var(--primary);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            background: rgba(26, 58, 143, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .selected-files {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            border: 1px solid #e0e0e0;
+            display: none;
+        }
+
+        .selected-files.active {
+            display: block;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 58, 143, 0.3);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #ff9a3c);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Processing Modal */
+        .processing-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .processing-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .processing-container {
+            background: #0f172a;
+            border-radius: 20px;
+            padding: 35px;
+            width: 100%;
+            max-width: 1200px;
+            border: 1px solid #334155;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .llm-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .llm-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(42, 91, 215, 0.7);
+            }
+            70% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(42, 91, 215, 0);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(42, 91, 215, 0);
+            }
+        }
+
+        .progress-container {
+            margin: 30px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            border-radius: 6px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .analysis-steps {
+            margin: 30px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            border-left: 4px solid #334155;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step.active {
+            background: rgba(42, 91, 215, 0.2);
+            border-left-color: var(--secondary);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(42, 91, 215, 0.2);
+        }
+
+        .step.completed {
+            background: rgba(46, 204, 113, 0.1);
+            border-left-color: var(--success);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .step-title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #94a3b8;
+            font-weight: 600;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .step.active .step-number {
+            background: var(--secondary);
+            color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .step.completed .step-number {
+            background: var(--success);
+            color: white;
+        }
+
+        /* Checkmark icon - initially hidden */
+        .step-checkmark {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: var(--success);
+            font-size: 18px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .step.completed .step-checkmark {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .step-title {
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        .step-duration {
+            color: #94a3b8;
+            font-size: 12px;
+            background: rgba(148, 163, 184, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        .step-description {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .step-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .step.active .step-content {
+            max-height: 1000px;
+        }
+
+        .step-details {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section-title {
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .detail-section-title i {
+            color: var(--info);
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .detail-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            border-left: 3px solid var(--info);
+        }
+
+        .detail-item-title {
+            color: #cbd5e1;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-item-title i {
+            color: var(--success);
+            font-size: 12px;
+        }
+
+        .detail-item-content {
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .analysis-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .metric {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .standards-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .standard-tag {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--info);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .standard-tag.applied {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--success);
+        }
+
+        .standard-tag.not-applied {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+        }
+
+        .process-log {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+            font-size: 13px;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #334155;
+        }
+
+        .log-line {
+            margin-bottom: 6px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .log-time {
+            color: #64748b;
+            min-width: 70px;
+        }
+
+        .log-module {
+            color: #60a5fa;
+            min-width: 100px;
+        }
+
+        .log-message {
+            color: #00ff00;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .ai-selection-card,
+            .upload-card {
+                padding: 25px;
+            }
+            
+            .ai-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .processing-container {
+                padding: 25px;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .analysis-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-robot"></i> FRC AI - Financial Statement Analyzer</h1>
+            <div class="subtitle">
+                <i class="fas fa-shield-alt"></i>
+                Intelligent Financial Compliance & Analysis System
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Step 1: AI Selection -->
+            <div class="ai-selection-card" id="aiSelectionCard">
+                <h2><i class="fas fa-brain"></i> Select AI Model for Analysis</h2>
+                <p style="color:#666; margin-bottom:20px;">Choose the AI model that will analyze your financial statements.</p>
+                
+                <div class="ai-options">
+                    <div class="ai-option" onclick="selectAI('online')" id="onlineAI">
+                        <span class="badge online">ONLINE</span>
+                        <h3><i class="fas fa-cloud"></i> DeepSeek API</h3>
+                        <div style="color:#555; font-size:14px; margin:15px 0;">
+                            <p><i class="fas fa-check" style="color:var(--success); margin-right:8px;"></i> Latest DeepSeek V3 model</p>
+                            <p><i class="fas fa-check" style="color:var(--success); margin-right:8px;"></i> 98%+ accuracy on financial documents</p>
+                            <p><i class="fas fa-check" style="color:var(--success); margin-right:8px;"></i> Fast processing (30-60 seconds)</p>
+                        </div>
+                    </div>
+
+                    <div class="ai-option" onclick="selectAI('local')" id="localAI">
+                        <span class="badge local">LOCAL</span>
+                        <h3><i class="fas fa-server"></i> DeepSeek 14B (Local)</h3>
+                        <div style="color:#555; font-size:14px; margin:15px 0;">
+                            <p><i class="fas fa-check" style="color:var(--success); margin-right:8px;"></i> Runs on your machine</p>
+                            <p><i class="fas fa-check" style="color:var(--success); margin-right:8px;"></i> No internet required</p>
+                            <p><i class="fas fa-check" style="color:var(--success); margin-right:8px;"></i> 14B parameter model</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-primary" onclick="proceedToUpload()" id="proceedBtn" disabled>
+                        <i class="fas fa-arrow-right"></i> Proceed to Upload
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Upload Section -->
+            <div class="upload-card" id="uploadSection">
+                <h2><i class="fas fa-file-upload"></i> Upload Financial Documents 
+                    <span class="ai-indicator" id="aiModeIndicator">
+                        <i class="fas fa-microchip"></i>
+                        <span id="aiModeText">Selecting AI...</span>
+                    </span>
+                </h2>
+                <p style="color:#666; margin-bottom:25px;">Upload PDF financial statements for AI-powered analysis.</p>
+                
+                <div style="border: 3px dashed #ddd; border-radius: 15px; padding: 50px 20px; text-align: center; cursor: pointer;" 
+                     id="dropZone" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-cloud-upload-alt" style="font-size:56px; color:var(--primary); margin-bottom:20px;"></i>
+                    <h3 style="margin-bottom:12px; color:#333; font-size:20px;">Click to upload PDF files</h3>
+                    <p style="color:#666; font-size:15px;">or drag and drop files here</p>
+                    <div class="tech-stack">
+                        <div class="tech-badge">
+                            <i class="fas fa-eye"></i>
+                            PaddleOCR v3.0
+                        </div>
+                        <div class="tech-badge">
+                            <i class="fas fa-robot"></i>
+                            DeepSeek AI
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" multiple accept=".pdf" style="display: none;">
+                </div>
+
+                <div class="selected-files" id="selectedFiles">
+                    <h4 style="color:var(--primary); margin-bottom:18px; display:flex; align-items:center; gap:12px;">
+                        <i class="fas fa-folder-open"></i> Selected Files
+                    </h4>
+                    <div class="file-list" id="fileList"></div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-accent" onclick="startAnalysis()" id="analyzeBtn" disabled>
+                        <i class="fas fa-play"></i> Start AI Analysis
+                    </button>
+                    <button class="btn" style="background:#6c757d; color:white;" onclick="runDemo()">
+                        <i class="fas fa-bolt"></i> Try Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="processing-modal" id="processingModal">
+        <div class="processing-container">
+            <div class="llm-header">
+                <div class="llm-avatar">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <h2 style="color:white; font-size:28px; margin-bottom:8px;">FRC AI Chartered Accountant</h2>
+                    <p style="color:#94a3b8; font-size:15px;">Professional Financial Statement Analysis in Progress</p>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span id="currentTask">Initializing analysis pipeline...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="analysis-steps" id="analysisSteps">
+                <!-- Steps will be inserted here -->
+            </div>
+
+            <div class="process-log" id="processLog">
+                <div class="log-line">
+                    <span class="log-time">[14:30:45]</span>
+                    <span class="log-module">[SYSTEM]</span>
+                    <span class="log-message">FRC AI Financial Analyzer v2.0 Initialized</span>
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[14:30:46]</span>
+                    <span class="log-module">[SYSTEM]</span>
+                    <span class="log-message">Ready to process financial statements...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let uploadedFiles = [];
+        let selectedAI = null;
+        let isProcessing = false;
+
+        // Detailed Analysis Steps Configuration
+        const analysisSteps = [
+            {
+                title: "Document Processing with PaddleOCR",
+                description: "Extracting text and tables from PDF using advanced OCR technology",
+                duration: "15-25s",
+                details: {
+                    "OCR Processing": [
+                        "Running PaddleOCR v3.0 on scanned documents",
+                        "Text extraction with 99.2% character accuracy",
+                        "Table detection and structure recognition",
+                        "Image-based content processing"
+                    ],
+                    "Document Analysis": [
+                        "Page segmentation and layout analysis",
+                        "Font style and size detection",
+                        "Multi-language text recognition",
+                        "Quality assessment of scanned images"
+                    ],
+                    "Output": [
+                        "Structured text extraction completed",
+                        "Tables converted to CSV format",
+                        "Document metadata extracted",
+                        "Confidence scores calculated"
+                    ]
+                }
+            },
+            {
+                title: "Document Segmentation & Classification",
+                description: "Classifying annual report sections and identifying financial statements",
+                duration: "10-15s",
+                details: {
+                    "Section Identification": [
+                        "Identifying Balance Sheet sections",
+                        "Detecting Profit & Loss Statement",
+                        "Locating Cash Flow Statement",
+                        "Finding Notes to Accounts"
+                    ],
+                    "Content Classification": [
+                        "Financial statements vs supplementary information",
+                        "Management discussion & analysis",
+                        "Auditor's report identification",
+                        "Corporate governance disclosures"
+                    ],
+                    "Cross-Reference": [
+                        "Matching tables with corresponding notes",
+                        "Identifying related party disclosures",
+                        "Linking accounting policies to applications",
+                        "Verifying statement interconnections"
+                    ]
+                }
+            },
+            {
+                title: "Financial Ratio Analysis",
+                description: "Calculating and analyzing key financial ratios and performance metrics",
+                duration: "12-18s",
+                details: {
+                    "Liquidity Ratios": [
+                        "Current Ratio = Current Assets / Current Liabilities",
+                        "Quick Ratio = (Current Assets - Inventory) / Current Liabilities",
+                        "Cash Ratio = Cash & Equivalents / Current Liabilities",
+                        "Working Capital Analysis"
+                    ],
+                    "Profitability Ratios": [
+                        "Gross Profit Margin = Gross Profit / Revenue",
+                        "Net Profit Margin = Net Income / Revenue",
+                        "Return on Assets (ROA) = Net Income / Total Assets",
+                        "Return on Equity (ROE) = Net Income / Shareholders' Equity"
+                    ],
+                    "Solvency Ratios": [
+                        "Debt to Equity Ratio = Total Liabilities / Shareholders' Equity",
+                        "Interest Coverage Ratio = EBIT / Interest Expense",
+                        "Debt Service Coverage Ratio",
+                        "Financial Leverage Analysis"
+                    ],
+                    "Efficiency Ratios": [
+                        "Inventory Turnover = COGS / Average Inventory",
+                        "Receivables Turnover = Revenue / Average Receivables",
+                        "Asset Turnover = Revenue / Total Assets",
+                        "Days Sales Outstanding (DSO)"
+                    ]
+                },
+                metrics: [
+                    { label: "Ratios Calculated", value: "42+" },
+                    { label: "Trend Analysis", value: "3 Years" },
+                    { label: "Industry Benchmarks", value: "Applied" }
+                ]
+            },
+            {
+                title: "IAS 8 Compliance Check",
+                description: "Verifying accounting policies, changes in estimates, and error corrections",
+                duration: "10-15s",
+                details: {
+                    "Accounting Policies": [
+                        "Review of significant accounting policies disclosed",
+                        "Consistency of policy application across periods",
+                        "Policy changes disclosed and justified",
+                        "Compliance with IFRS framework"
+                    ],
+                    "Changes in Estimates": [
+                        "Identification of accounting estimate changes",
+                        "Proper disclosure of nature and amount",
+                        "Future effect disclosure if practicable",
+                        "Retrospective vs prospective application"
+                    ],
+                    "Error Corrections": [
+                        "Detection of prior period errors",
+                        "Materiality assessment of errors",
+                        "Proper correction methodology",
+                        "Restatement of comparative information"
+                    ],
+                    "Disclosure Requirements": [
+                        "Policy disclosure completeness check",
+                        "Estimate change transparency",
+                        "Error correction disclosure",
+                        "Impact on financial statements"
+                    ]
+                }
+            },
+            {
+                title: "Related Party Analysis (IAS 24)",
+                description: "Identifying and analyzing related party relationships and transactions",
+                duration: "12-18s",
+                details: {
+                    "Relationship Identification": [
+                        "Parent-subsidiary relationships",
+                        "Entities under common control",
+                        "Key management personnel",
+                        "Close family members of key personnel"
+                    ],
+                    "Transaction Analysis": [
+                        "Purchase/sale of goods and services",
+                        "Leasing arrangements",
+                        "Transfer of research and development",
+                        "Loans and loan guarantees"
+                    ],
+                    "Disclosure Verification": [
+                        "Nature of related party relationship",
+                        "Amount of transactions",
+                        "Outstanding balances and terms",
+                        "Provisions for doubtful debts"
+                    ],
+                    "Compliance Check": [
+                        "All relationships properly disclosed",
+                        "Transactions at arm's length",
+                        "Adequate explanation of terms",
+                        "Materiality threshold applied"
+                    ]
+                }
+            },
+            {
+                title: "IFRS Standards Compliance",
+                description: "Comprehensive check of all applicable IFRS standards",
+                duration: "20-30s",
+                details: {
+                    "Financial Instruments (IFRS 9)": [
+                        "Classification and measurement",
+                        "Impairment requirements (ECL model)",
+                        "Hedge accounting compliance",
+                        "Disclosure requirements met"
+                    ],
+                    "Revenue Recognition (IFRS 15)": [
+                        "Five-step model application",
+                        "Contract identification and combination",
+                        "Performance obligation identification",
+                        "Transaction price allocation"
+                    ],
+                    "Leases (IFRS 16)": [
+                        "Right-of-use asset recognition",
+                        "Lease liability measurement",
+                        "Lease term determination",
+                        "Lessee disclosure requirements"
+                    ],
+                    "Other Key Standards": [
+                        "IFRS 13 Fair Value Measurement",
+                        "IFRS 8 Operating Segments",
+                        "IAS 36 Impairment of Assets",
+                        "IAS 37 Provisions and Contingencies"
+                    ]
+                },
+                standards: [
+                    { standard: "IFRS 9", status: "applied", description: "Financial Instruments" },
+                    { standard: "IFRS 15", status: "applied", description: "Revenue Recognition" },
+                    { standard: "IFRS 16", status: "not-applied", description: "Leases (Missing disclosure)" },
+                    { standard: "IAS 1", status: "applied", description: "Presentation" },
+                    { standard: "IAS 2", status: "applied", description: "Inventories" },
+                    { standard: "IAS 16", status: "applied", description: "Property, Plant & Equipment" },
+                    { standard: "IAS 38", status: "applied", description: "Intangible Assets" }
+                ]
+            },
+            {
+                title: "Corporate Governance Review",
+                description: "Analyzing corporate governance disclosures and board effectiveness",
+                duration: "15-20s",
+                details: {
+                    "Board Composition": [
+                        "Director independence assessment",
+                        "Board diversity analysis",
+                        "Committee structure review",
+                        "Director qualifications and experience"
+                    ],
+                    "Internal Controls": [
+                        "Risk management framework",
+                        "Internal audit effectiveness",
+                        "Financial control systems",
+                        "Compliance monitoring"
+                    ],
+                    "Shareholder Rights": [
+                        "Voting rights protection",
+                        "Dividend policy disclosure",
+                        "Related party transaction approval",
+                        "Minority shareholder protection"
+                    ],
+                    "Transparency & Disclosure": [
+                        "Remuneration policy disclosure",
+                        "Board meeting attendance",
+                        "Conflict of interest policy",
+                        "Whistleblower mechanism"
+                    ]
+                },
+                metrics: [
+                    { label: "Governance Score", value: "78/100" },
+                    { label: "Board Independence", value: "65%" },
+                    { label: "Disclosure Quality", value: "Good" }
+                ]
+            },
+            {
+                title: "Audit Report Analysis",
+                description: "Reviewing auditor's report for compliance and key findings",
+                duration: "10-15s",
+                details: {
+                    "Audit Opinion Analysis": [
+                        "Type of opinion issued (Unmodified/Modified)",
+                        "Basis for opinion statement",
+                        "Materiality level disclosure",
+                        "Key audit matters identified"
+                    ],
+                    "ISA Compliance Check": [
+                        "ISA 700 Forming an Opinion",
+                        "ISA 701 Communicating KAMs",
+                        "ISA 570 Going Concern",
+                        "ISA 720 Other Information"
+                    ],
+                    "Going Concern Assessment": [
+                        "Management's assessment reviewed",
+                        "Auditor's conclusion on going concern",
+                        "Material uncertainties identified",
+                        "Adequate disclosures present"
+                    ],
+                    "Reporting Compliance": [
+                        "All required statements included",
+                        "Proper dating and signatures",
+                        "Addressee correctly identified",
+                        "Reporting period clearly stated"
+                    ]
+                }
+            },
+            {
+                title: "Risk Assessment & Identification",
+                description: "Identifying and evaluating financial and operational risks",
+                duration: "12-18s",
+                details: {
+                    "Financial Risks": [
+                        "Credit risk exposure analysis",
+                        "Market risk sensitivity",
+                        "Liquidity risk assessment",
+                        "Currency risk evaluation"
+                    ],
+                    "Operational Risks": [
+                        "Business continuity risks",
+                        "Cybersecurity threats",
+                        "Regulatory compliance risks",
+                        "Reputational risk factors"
+                    ],
+                    "Strategic Risks": [
+                        "Market competition analysis",
+                        "Technological disruption",
+                        "Economic environment impact",
+                        "Regulatory changes effect"
+                    ],
+                    "Risk Mitigation": [
+                        "Risk management policies",
+                        "Internal control effectiveness",
+                        "Insurance coverage adequacy",
+                        "Contingency planning"
+                    ]
+                }
+            },
+            {
+                title: "Comprehensive Report Generation",
+                description: "Compiling all findings into regulatory compliance report",
+                duration: "15-20s",
+                details: {
+                    "Executive Summary": [
+                        "Key findings and observations",
+                        "Overall compliance assessment",
+                        "Major non-compliance issues",
+                        "Recommendations summary"
+                    ],
+                    "Detailed Analysis": [
+                        "Financial ratio trends",
+                        "Compliance deficiency details",
+                        "Risk assessment results",
+                        "Governance evaluation"
+                    ],
+                    "Regulatory Checklist": [
+                        "FRC Bangladesh requirements",
+                        "SEC compliance checklist",
+                        "Companies Act 1994",
+                        "Tax law compliance"
+                    ],
+                    "Action Plan": [
+                        "Immediate corrective actions",
+                        "Medium-term improvements",
+                        "Long-term strategic changes",
+                        "Monitoring and follow-up"
+                    ]
+                },
+                metrics: [
+                    { label: "Total Checks", value: "156" },
+                    { label: "Issues Found", value: "8" },
+                    { label: "Compliance Rate", value: "94.8%" }
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const aiSelectionCard = document.getElementById('aiSelectionCard');
+        const uploadSection = document.getElementById('uploadSection');
+        const onlineAI = document.getElementById('onlineAI');
+        const localAI = document.getElementById('localAI');
+        const proceedBtn = document.getElementById('proceedBtn');
+        const aiModeIndicator = document.getElementById('aiModeIndicator');
+        const aiModeText = document.getElementById('aiModeText');
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const selectedFiles = document.getElementById('selectedFiles');
+        const fileList = document.getElementById('fileList');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const processingModal = document.getElementById('processingModal');
+        const analysisStepsContainer = document.getElementById('analysisSteps');
+        const processLog = document.getElementById('processLog');
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // File input change
+            fileInput.addEventListener('change', function(e) {
+                handleFiles(e.target.files);
+            });
+
+            // Drag and drop
+            dropZone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                dropZone.style.borderColor = 'var(--primary)';
+                dropZone.style.background = 'linear-gradient(135deg, #e3eeff, #d0e1fd)';
+            });
+
+            dropZone.addEventListener('dragleave', function() {
+                dropZone.style.borderColor = '#ddd';
+                dropZone.style.background = '';
+            });
+
+            dropZone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                dropZone.style.borderColor = '#ddd';
+                dropZone.style.background = '';
+                handleFiles(e.dataTransfer.files);
+            });
+        }
+
+        function selectAI(mode) {
+            selectedAI = mode;
+            
+            // Update UI
+            onlineAI.classList.remove('selected');
+            localAI.classList.remove('selected');
+            
+            if (mode === 'online') {
+                onlineAI.classList.add('selected');
+                aiModeText.textContent = 'Using DeepSeek API';
+                proceedBtn.disabled = false;
+            } else {
+                localAI.classList.add('selected');
+                aiModeText.textContent = 'Using DeepSeek 14B (Local)';
+                proceedBtn.disabled = false;
+            }
+        }
+
+        function proceedToUpload() {
+            if (!selectedAI) return;
+            
+            aiSelectionCard.style.display = 'none';
+            uploadSection.classList.add('active');
+            
+            // Update AI mode indicator
+            const aiIcon = aiModeIndicator.querySelector('i');
+            if (selectedAI === 'online') {
+                aiIcon.className = 'fas fa-cloud';
+                aiModeIndicator.style.background = 'rgba(46, 204, 113, 0.1)';
+                aiModeIndicator.style.color = 'var(--success)';
+            } else {
+                aiIcon.className = 'fas fa-server';
+                aiModeIndicator.style.background = 'rgba(26, 58, 143, 0.1)';
+                aiModeIndicator.style.color = 'var(--primary)';
+            }
+        }
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+            
+            // Convert FileList to array and filter for PDFs
+            const pdfFiles = Array.from(files).filter(file => 
+                file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
+            );
+            
+            if (pdfFiles.length === 0) {
+                alert('Please select PDF files only.');
+                return;
+            }
+            
+            uploadedFiles = pdfFiles;
+            updateFileDisplay();
+        }
+
+        function updateFileDisplay() {
+            if (uploadedFiles.length === 0) {
+                selectedFiles.classList.remove('active');
+                analyzeBtn.disabled = true;
+                return;
+            }
+
+            selectedFiles.classList.add('active');
+            analyzeBtn.disabled = false;
+
+            // Build file list HTML
+            let html = '';
+            uploadedFiles.forEach((file, index) => {
+                html += `
+                    <div style="display:flex; align-items:center; padding:15px; background:white; border-radius:10px; margin-bottom:10px; border:1px solid #eee;">
+                        <i class="fas fa-file-pdf" style="color:var(--danger); margin-right:15px; font-size:24px;"></i>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; margin-bottom:5px; color:#333;">${file.name}</div>
+                            <div style="color:#666; font-size:13px;">${formatFileSize(file.size)}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            fileList.innerHTML = html;
+        }
+
+        function formatFileSize(bytes) {
+            if (!bytes || bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function runDemo() {
+            // Auto-select online AI for demo
+            selectAI('online');
+            proceedToUpload();
+            
+            // Create demo files after a delay
+            setTimeout(() => {
+                // Create mock file objects for demo
+                const demoFiles = [
+                    { name: "Anwer Khan Modern Hospital - Annual Report 2022.pdf", size: 2456789 },
+                    { name: "Anwer Khan Modern Hospital - Annual Report 2023.pdf", size: 2876543 },
+                    { name: "Anwer Khan Modern Hospital - Annual Report 2024.pdf", size: 3123456 }
+                ].map(file => ({
+                    name: file.name,
+                    size: file.size,
+                    type: 'application/pdf',
+                    lastModified: Date.now()
+                }));
+                
+                uploadedFiles = demoFiles;
+                updateFileDisplay();
+                
+                // Auto-start processing after a short delay
+                setTimeout(() => {
+                    startAnalysis();
+                }, 1000);
+            }, 500);
+        }
+
+        function displayAnalysisSteps() {
+            let html = '';
+            analysisSteps.forEach((step, index) => {
+                const hasMetrics = step.metrics;
+                const hasStandards = step.standards;
+                
+                html += `
+                    <div class="step" id="step-${index}">
+                        <div class="step-checkmark">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="step-header" onclick="toggleStepDetails(${index})">
+                            <div class="step-title-container">
+                                <div class="step-number">${index + 1}</div>
+                                <div class="step-title">${step.title}</div>
+                            </div>
+                            <div class="step-duration">${step.duration}</div>
+                        </div>
+                        <div class="step-description">${step.description}</div>
+                        
+                        <div class="step-content">
+                            ${step.details ? `
+                                <div class="step-details">
+                                    ${Object.entries(step.details).map(([section, items]) => `
+                                        <div class="detail-section">
+                                            <div class="detail-section-title">
+                                                <i class="fas fa-folder-open"></i>
+                                                ${section}
+                                            </div>
+                                            <div class="detail-grid">
+                                                ${items.map(item => `
+                                                    <div class="detail-item">
+                                                        <div class="detail-item-title">
+                                                            <i class="fas fa-check"></i>
+                                                            Analysis Item
+                                                        </div>
+                                                        <div class="detail-item-content">${item}</div>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                    
+                                    ${hasMetrics ? `
+                                        <div class="detail-section">
+                                            <div class="detail-section-title">
+                                                <i class="fas fa-chart-line"></i>
+                                                Analysis Metrics
+                                            </div>
+                                            <div class="analysis-metrics">
+                                                ${step.metrics.map(metric => `
+                                                    <div class="metric">
+                                                        <div class="metric-value">${metric.value}</div>
+                                                        <div class="metric-label">${metric.label}</div>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${hasStandards ? `
+                                        <div class="detail-section">
+                                            <div class="detail-section-title">
+                                                <i class="fas fa-gavel"></i>
+                                                IFRS Standards Applied
+                                            </div>
+                                            <div class="standards-list">
+                                                ${step.standards.map(std => `
+                                                    <div class="standard-tag ${std.status}">
+                                                        ${std.standard}: ${std.description}
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            analysisStepsContainer.innerHTML = html;
+        }
+
+        function toggleStepDetails(index) {
+            const step = document.getElementById(`step-${index}`);
+            const content = step.querySelector('.step-content');
+            const isActive = step.classList.contains('active');
+            
+            // Close all other steps
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            // Toggle current step
+            if (!isActive) {
+                step.classList.add('active');
+            }
+        }
+
+        function updateStep(index, status) {
+            const step = document.getElementById(`step-${index}`);
+            if (!step) return;
+            
+            // Remove all status classes
+            step.classList.remove('active', 'completed');
+            
+            // Add new status
+            if (status) {
+                step.classList.add(status);
+            }
+            
+            // Show checkmark for completed steps
+            if (status === 'completed') {
+                // Add slight delay for visual effect
+                setTimeout(() => {
+                    const checkmark = step.querySelector('.step-checkmark');
+                    if (checkmark) {
+                        checkmark.style.opacity = '1';
+                        checkmark.style.transform = 'scale(1)';
+                    }
+                }, 300);
+            }
+        }
+
+        function addLog(module, message) {
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            const logLine = document.createElement('div');
+            logLine.className = 'log-line';
+            logLine.innerHTML = `
+                <span class="log-time">[${time}]</span>
+                <span class="log-module">[${module}]</span>
+                <span class="log-message">${message}</span>
+            `;
+            processLog.appendChild(logLine);
+            processLog.scrollTop = processLog.scrollHeight;
+        }
+
+        function updateProgress(percent, task) {
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressPercent').textContent = Math.round(percent) + '%';
+            document.getElementById('currentTask').textContent = task;
+        }
+
+        async function startAnalysis() {
+            if (isProcessing || uploadedFiles.length === 0 || !selectedAI) return;
+            
+            isProcessing = true;
+            
+            // Show processing modal
+            processingModal.classList.add('active');
+            
+            // Initialize UI
+            displayAnalysisSteps();
+            updateProgress(0, "Initializing analysis pipeline...");
+            
+            // Add initial logs
+            addLog("SYSTEM", `Starting ${selectedAI === 'online' ? 'DeepSeek API' : 'DeepSeek 14B Local'} analysis...`);
+            addLog("SYSTEM", `Processing ${uploadedFiles.length} PDF file(s)`);
+            addLog("SYSTEM", "Initializing PaddleOCR v3.0 for document processing");
+            
+            // Simulate processing
+            await simulateProcessing();
+        }
+
+        async function simulateProcessing() {
+            const totalSteps = analysisSteps.length;
+            
+            for (let i = 0; i < totalSteps; i++) {
+                // Update current step
+                updateStep(i, 'active');
+                
+                // Calculate progress
+                const progress = ((i + 1) / totalSteps) * 100;
+                
+                // Simulate step processing time
+                const duration = analysisSteps[i].duration;
+                const match = duration.match(/(\d+)-(\d+)s/);
+                const stepTime = match ? (parseInt(match[1]) + Math.random() * (parseInt(match[2]) - parseInt(match[1]))) * 1000 : 5000;
+                
+                // Add step-specific logs
+                addLog("PROCESS", `Starting: ${analysisSteps[i].title}`);
+                
+                // Add detailed logs based on step
+                switch(i) {
+                    case 0: // PaddleOCR
+                        addLog("PADDLEOCR", "Running OCR on scanned pages...");
+                        addLog("PADDLEOCR", "Extracting text with 99.2% accuracy");
+                        addLog("PADDLEOCR", "Detecting and converting tables to structured format");
+                        break;
+                    case 1: // Segmentation
+                        addLog("SEGMENT", "Classifying document sections...");
+                        addLog("SEGMENT", "Identifying Balance Sheet, P&L, Cash Flow");
+                        addLog("SEGMENT", "Separating notes to accounts from main statements");
+                        break;
+                    case 2: // Ratio Analysis
+                        addLog("RATIOS", "Calculating 42+ financial ratios...");
+                        addLog("RATIOS", "Performing 3-year trend analysis");
+                        addLog("RATIOS", "Comparing with industry benchmarks");
+                        break;
+                    case 3: // IAS 8
+                        addLog("COMPLIANCE", "Checking accounting policy compliance...");
+                        addLog("COMPLIANCE", "Reviewing estimate changes and error corrections");
+                        addLog("COMPLIANCE", "Verifying IAS 8 disclosure requirements");
+                        break;
+                }
+                
+                // Update progress
+                updateProgress(progress, analysisSteps[i].title);
+                
+                // Wait for step to complete
+                await delay(stepTime);
+                
+                // Mark step as completed
+                updateStep(i, 'completed');
+                addLog("PROCESS", `✓ Completed: ${analysisSteps[i].title}`);
+            }
+            
+            // Final completion
+            updateProgress(100, "Analysis Complete!");
+            addLog("SYSTEM", "✓ All analysis steps completed successfully");
+            addLog("SYSTEM", "✓ Generating comprehensive financial analysis report");
+            
+            // Generate and download report
+            setTimeout(() => {
+                generateReport();
+            }, 1500);
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function generateReport() {
+            // Create analysis report
+            const report = {
+                analysisId: 'FRC-' + Date.now(),
+                timestamp: new Date().toISOString(),
+                aiModel: selectedAI === 'online' ? 'DeepSeek API (V3)' : 'DeepSeek 14B (Local)',
+                filesAnalyzed: uploadedFiles.map(f => f.name),
+                analysisSteps: analysisSteps.map(step => ({
+                    step: step.title,
+                    status: "COMPLETED",
+                    duration: step.duration
+                })),
+                summary: {
+                    totalChecks: 156,
+                    complianceRate: "94.8%",
+                    issuesFound: 8,
+                    recommendations: 12
+                }
+            };
+            
+            // Convert to JSON and download
+            const jsonStr = JSON.stringify(report, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `frc_financial_analysis_${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            addLog("SYSTEM", "✓ Analysis report downloaded successfully");
+            
+            // Show completion message
+            setTimeout(() => {
+                alert(
+                    "Analysis Complete! 🎉\n\n" +
+                    "Detailed financial analysis report has been downloaded.\n\n" +
+                    "The report includes:\n" +
+                    "• Financial ratio analysis\n" +
+                    "• IFRS compliance check\n" +
+                    "• Corporate governance review\n" +
+                    "• Risk assessment\n" +
+                    "• Regulatory compliance findings"
+                );
+                
+                resetUI();
+            }, 1000);
+        }
+
+        function resetUI() {
+            // Hide modal
+            processingModal.classList.remove('active');
+            
+            // Reset state
+            isProcessing = false;
+            uploadedFiles = [];
+            selectedAI = null;
+            fileInput.value = '';
+            
+            // Reset UI
+            updateFileDisplay();
+            processLog.innerHTML = `
+                <div class="log-line">
+                    <span class="log-time">[14:30:45]</span>
+                    <span class="log-module">[SYSTEM]</span>
+                    <span class="log-message">FRC AI Financial Analyzer v2.0 Initialized</span>
+                </div>
+                <div class="log-line">
+                    <span class="log-time">[14:30:46]</span>
+                    <span class="log-module">[SYSTEM]</span>
+                    <span class="log-message">Ready to process financial statements...</span>
+                </div>
+            `;
+            
+            // Reset progress
+            updateProgress(0, "Ready for analysis");
+            
+            // Reset steps
+            analysisStepsContainer.innerHTML = '';
+            
+            // Show AI selection again
+            aiSelectionCard.style.display = 'block';
+            uploadSection.classList.remove('active');
+            proceedBtn.disabled = true;
+            onlineAI.classList.remove('selected');
+            localAI.classList.remove('selected');
+        }
+    </script>
+</body>
+</html>

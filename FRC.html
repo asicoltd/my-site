@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC Bangladesh - Regulatory Inspection Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* All your existing CSS styles remain exactly the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a3a8f 0%, #2a5bd7 100%);
+            color: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+
+        .left-panel {
+            flex: 3;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-panel {
+            flex: 1;
+            background-color: #fff;
+            border-left: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            margin-bottom: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab:hover {
+            background-color: #f8f9fa;
+            color: #2a5bd7;
+        }
+
+        .tab.active {
+            color: #1a3a8f;
+            border-bottom: 3px solid #1a3a8f;
+            background-color: #f0f5ff;
+        }
+
+        .tab-content {
+            display: none;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5bd7;
+        }
+
+        .section h2 {
+            color: #1a3a8f;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+
+        .section h2 i {
+            color: #2a5bd7;
+        }
+
+        .subsection {
+            margin-bottom: 20px;
+        }
+
+        .subsection h3 {
+            color: #444;
+            margin-bottom: 12px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection h3 i {
+            color: #2a5bd7;
+            font-size: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        table th {
+            background-color: #f0f5ff;
+            color: #1a3a8f;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+            white-space: nowrap;
+        }
+
+        table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f0f5ff;
+        }
+
+        .risk-high {
+            color: #d32f2f;
+            font-weight: 600;
+            background-color: #ffebee;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .risk-moderate {
+            color: #f57c00;
+            font-weight: 600;
+            background-color: #fff3e0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .risk-low {
+            color: #388e3c;
+            font-weight: 600;
+            background-color: #e8f5e9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .file-list {
+            list-style-type: none;
+        }
+
+        .file-item {
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #2a5bd7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-item:hover {
+            background-color: #f0f5ff;
+            transform: translateX(5px);
+        }
+
+        .file-item.active {
+            background-color: #e3eeff;
+            border-left-color: #1a3a8f;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #1a3a8f;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-type {
+            font-size: 11px;
+            color: #666;
+            background-color: #eee;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .file-year {
+            font-size: 11px;
+            color: #fff;
+            background-color: #2a5bd7;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .pdf-viewer-container {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .pdf-viewer-container h3 {
+            background-color: #f0f5ff;
+            padding: 12px;
+            margin: 0;
+            color: #1a3a8f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        #pdf-viewer {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        .btn-export {
+            background: linear-gradient(to right, #1a3a8f, #2a5bd7);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 58, 143, 0.3);
+        }
+
+        .compliance-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .compliant {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .partial {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .non-compliant {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+
+        .source-ref {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .tag-audit {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .tag-fs {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .tag-note {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .materiality-high {
+            border-left: 4px solid #d32f2f;
+        }
+
+        .materiality-moderate {
+            border-left: 4px solid #f57c00;
+        }
+
+        .year-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .year-tab {
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .year-tab:hover {
+            color: #2a5bd7;
+        }
+
+        .year-tab.active {
+            color: #1a3a8f;
+            border-bottom: 3px solid #1a3a8f;
+        }
+
+        .year-content {
+            display: none;
+        }
+
+        .year-content.active {
+            display: block;
+        }
+
+        .comparison-table {
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .comparison-col {
+            min-width: 250px;
+            margin-right: 20px;
+        }
+
+        .comparison-col h4 {
+            background-color: #1a3a8f;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .comparison-item {
+            background-color: white;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+
+        .comparison-item:last-child {
+            border-radius: 0 0 5px 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-item .label {
+            font-weight: 600;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .comparison-item .value {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .finding-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid;
+        }
+
+        .finding-card.high {
+            border-top-color: #d32f2f;
+        }
+
+        .finding-card.moderate {
+            border-top-color: #f57c00;
+        }
+
+        .finding-card.low {
+            border-top-color: #388e3c;
+        }
+
+        .finding-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .finding-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .finding-card .action {
+            font-size: 13px;
+            color: #1a3a8f;
+            font-weight: 600;
+        }
+
+        /* New styles for blank state */
+        .blank-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: #666;
+            padding: 40px 20px;
+        }
+
+        .blank-state i {
+            font-size: 64px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .blank-state h3 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .blank-state p {
+            max-width: 500px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-load-company {
+            background: linear-gradient(to right, #1a3a8f, #2a5bd7);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .btn-load-company:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 58, 143, 0.3);
+        }
+
+        .company-selector {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f0f5ff;
+            border-radius: 8px;
+        }
+
+        .company-selector h4 {
+            color: #1a3a8f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .company-selector select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .company-selector select:focus {
+            outline: none;
+            border-color: #2a5bd7;
+            box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .right-panel {
+                border-left: none;
+                border-top: 1px solid #ddd;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .tab {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1><i class="fas fa-gavel"></i> Financial Reporting Council (FRC), Bangladesh</h1>
+        <p>Regulatory Inspection Portal - Select a company to begin analysis</p>
+    </div>
+
+    <div class="container">
+        <!-- Left Panel - Analysis Content with Tabs -->
+        <div class="left-panel">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab(0)">
+                    <i class="fas fa-home"></i> Overview
+                </div>
+                <div class="tab" onclick="switchTab(1)">
+                    <i class="fas fa-search"></i> Audit Analysis
+                </div>
+                <div class="tab" onclick="switchTab(2)">
+                    <i class="fas fa-chart-line"></i> IFRS Compliance
+                </div>
+                <div class="tab" onclick="switchTab(3)">
+                    <i class="fas fa-file-invoice-dollar"></i> Financial Analysis
+                </div>
+                <div class="tab" onclick="switchTab(4)">
+                    <i class="fas fa-exclamation-circle"></i> Risk Indicators
+                </div>
+                <div class="tab" onclick="switchTab(5)">
+                    <i class="fas fa-user-tie"></i> Governance
+                </div>
+                <div class="tab" onclick="switchTab(6)">
+                    <i class="fas fa-gavel"></i> Enforcement
+                </div>
+            </div>
+
+            <!-- All Tab Contents - Initially empty -->
+            <div class="tab-content active" id="tab-overview">
+                <div class="blank-state">
+                    <i class="fas fa-building"></i>
+                    <h3>No Company Selected</h3>
+                    <p>Select a company from the right panel to load its regulatory inspection data. The analysis
+                        includes financial statements, audit reports, IFRS compliance, and risk assessment for multiple
+                        years.</p>
+                    <button class="btn-load-company"
+                        onclick="document.querySelector('.company-selector select').focus()">
+                        <i class="fas fa-folder-open"></i> Select a Company
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-audit">
+                <div class="blank-state">
+                    <i class="fas fa-search"></i>
+                    <h3>Audit Analysis</h3>
+                    <p>Select a company to view detailed audit analysis including auditor opinions, emphasis of matter
+                        paragraphs, and scope limitations across multiple years.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-compliance">
+                <div class="blank-state">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>IFRS Compliance</h3>
+                    <p>Select a company to view IFRS/IAS compliance assessment with year-wise comparison and compliance
+                        trend analysis.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-financial">
+                <div class="blank-state">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3>Financial Analysis</h3>
+                    <p>Select a company to view comprehensive financial statement analysis including profit & loss,
+                        balance sheet, cash flow, and key financial ratios.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-risk">
+                <div class="blank-state">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Risk Indicators</h3>
+                    <p>Select a company to view fraud and manipulation risk indicators with materiality assessment
+                        across multiple years.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-governance">
+                <div class="blank-state">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Governance</h3>
+                    <p>Select a company to view governance assessment including board effectiveness, audit quality, and
+                        internal control environment.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-enforcement">
+                <div class="blank-state">
+                    <i class="fas fa-gavel"></i>
+                    <h3>Enforcement</h3>
+                    <p>Select a company to view regulatory findings, materiality assessment, and recommended enforcement
+                        actions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - File Navigation & Company Selection -->
+        <div class="right-panel">
+            <h2 style="color: #1a3a8f; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-folder-open"></i> Company Selection
+            </h2>
+
+            <div class="company-selector">
+                <h4><i class="fas fa-building"></i> Select Company</h4>
+                <select id="companySelect" onchange="loadCompanyData()">
+                    <option value="">-- Select a company --</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            <div class="company-upload" style="margin-bottom: 25px;">
+    <a href="form.html" style="text-decoration: none;">
+        <button class="btn-upload"
+            style="background: linear-gradient(to right, #1a3a8f, #2a5bd7); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+            <i class="fas fa-upload"></i> Upload Company Data
+        </button>
+    </a>
+</div>
+
+            <div id="fileNavigation" style="display: none;">
+                <h3 style="color: #1a3a8f; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-file-pdf"></i> Processed Files
+                </h3>
+
+                <p style="margin-bottom: 20px; color: #666;">Select a file to view in the PDF viewer:</p>
+
+                <div class="file-list" id="fileList">
+                    <!-- Files will be loaded here -->
+                </div>
+            </div>
+            <div class="pdf-viewer-container">
+                <h3><i class="fas fa-eye"></i> Document Viewer</h3>
+                <iframe id="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file="></iframe>
+            </div>
+            <div id="inspectorNotes"
+                style="margin-top: 25px; padding: 15px; background-color: #f0f5ff; border-radius: 8px; display: none;">
+                <h4 style="color: #1a3a8f; margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Inspector Notes</h4>
+                <p id="notesContent" style="font-size: 14px; color: #555;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>FRC Bangladesh - Regulatory Inspection Portal | Generated on <span id="current-date"></span></p>
+        <p><i class="fas fa-info-circle"></i> Select a company from the dropdown to load its inspection data. All
+            findings are linked to source documents for traceability.</p>
+    </div>
+
+    <script>
+        // Global variable to store company data loaded from JSON
+        let companyData = {};
+        let currentCompany = null;
+
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        // Load JSON data on page load
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                // Load the JSON file
+                const response = await fetch('companyData.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                companyData = await response.json();
+                
+                // Populate the company dropdown
+                populateCompanyDropdown();
+                
+                // Initialize with blank state
+                resetToBlankState();
+                
+                console.log('Company data loaded successfully:', Object.keys(companyData).length, 'companies');
+            } catch (error) {
+                console.error('Error loading company data:', error);
+                alert('Failed to load company data. Please check if companyData.json exists and is accessible.');
+            }
+        });
+
+        // Populate company dropdown from JSON data
+        function populateCompanyDropdown() {
+            const companySelect = document.getElementById('companySelect');
+            
+            // Clear existing options except the first one
+            companySelect.innerHTML = '<option value="">-- Select a company --</option>';
+            
+            // Add options from the loaded JSON data
+            Object.entries(companyData).forEach(([id, company]) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = company.name;
+                companySelect.appendChild(option);
+            });
+        }
+
+        // Load company data when selected
+        function loadCompanyData() {
+            const select = document.getElementById('companySelect');
+            const companyId = select.value;
+
+            if (!companyId) {
+                // Reset to blank state
+                resetToBlankState();
+                return;
+            }
+
+            currentCompany = companyData[companyId];
+
+            if (!currentCompany) {
+                alert("Company data not found!");
+                return;
+            }
+
+            // Update header
+            document.querySelector('.header p').textContent = `Regulatory Inspection Portal - ${currentCompany.name}`;
+
+            // Show file navigation
+            document.getElementById('fileNavigation').style.display = 'block';
+            document.getElementById('inspectorNotes').style.display = 'block';
+            document.getElementById('notesContent').textContent = currentCompany.inspectorNotes || 'No inspector notes available.';
+
+            // Load PDF files
+            loadPDFFiles();
+
+            // Load all analysis data
+            loadAllTabData();
+
+            // Select first file if available
+            if (currentCompany.pdfFiles && currentCompany.pdfFiles.length > 0) {
+                selectFile(0);
+            }
+        }
+
+        // Load PDF files into the file list
+        function loadPDFFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            if (!currentCompany.pdfFiles || currentCompany.pdfFiles.length === 0) {
+                fileList.innerHTML = '<p style="color: #666; font-style: italic;">No PDF files available for this company.</p>';
+                return;
+            }
+
+            currentCompany.pdfFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item' + (index === 0 ? ' active' : '');
+                fileItem.onclick = () => selectFile(index);
+
+                fileItem.innerHTML = `
+                    <div class="file-name"><i class="fas fa-file-pdf"></i> ${file.name}</div>
+                    <div><span class="file-type">PDF</span> <span class="file-year">${file.year}</span></div>
+                    <div style="margin-top: 8px; font-size: 14px; color: #555;">${file.type}</div>
+                `;
+
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // Select a file to view
+        function selectFile(index) {
+            // Update active file in list
+            const fileItems = document.querySelectorAll('.file-item');
+            fileItems.forEach(item => item.classList.remove('active'));
+            if (fileItems[index]) {
+                fileItems[index].classList.add('active');
+            }
+
+            // Update PDF viewer if it exists
+            const pdfViewer = document.getElementById('pdf-viewer');
+            if (pdfViewer && currentCompany.pdfFiles && currentCompany.pdfFiles[index]) {
+                const file = currentCompany.pdfFiles[index];
+                pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(file.url)}`;
+            }
+        }
+
+        // Load all tab data
+        function loadAllTabData() {
+            // Remove blank states and clear existing content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                const blankState = tab.querySelector('.blank-state');
+                if (blankState) blankState.style.display = 'none';
+
+                // Clear any previously loaded content
+                const existingContent = tab.querySelectorAll('.section');
+                existingContent.forEach(content => content.remove());
+            });
+
+            // Check if company has the required data structure
+            if (!currentCompany.overview) {
+                console.warn('Company data is missing required sections');
+                return;
+            }
+
+            // Load data for each tab
+            loadOverviewData();
+            loadAuditAnalysisData();
+            loadComplianceData();
+            loadFinancialAnalysisData();
+            loadRiskIndicatorsData();
+            loadGovernanceData();
+            loadEnforcementData();
+        }
+
+        // Load overview data
+        function loadOverviewData() {
+            const overviewTab = document.getElementById('tab-overview');
+            
+            // Check if overview data exists
+            if (!currentCompany.overview) {
+                overviewTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Overview Data Available</h3><p>This company does not have overview data in the JSON file.</p></div>';
+                return;
+            }
+
+            const overviewContent = `
+                <div class="section">
+                    <h2><i class="fas fa-info-circle"></i> Inspection Overview</h2>
+                    <p>${currentCompany.overview.description || 'No description available.'}</p>
+                    
+                    ${currentCompany.overview.keyFindings ? `
+                    <div class="key-findings">
+                        ${currentCompany.overview.keyFindings.map(finding => `
+                            <div class="finding-card ${finding.severity || 'moderate'}">
+                                <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled Finding'}</h4>
+                                <p>${finding.description || 'No description'}</p>
+                                <div class="action">${finding.action || 'Action required'}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : '<p>No key findings available.</p>'}
+                </div>
+
+                ${currentCompany.overview.yearData ? `
+                <div class="section">
+                    <h2><i class="fas fa-calendar-alt"></i> Year-Wise Summary</h2>
+                    
+                    <div class="year-tabs">
+                        ${currentCompany.years.map((year, index) => `
+                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('overview', ${index})">${year}</div>
+                        `).join('')}
+                        <div class="year-tab" onclick="switchYear('overview', ${currentCompany.years.length})">Comparison</div>
+                    </div>
+                    
+                    ${currentCompany.years.map((year, index) => {
+                        const yearData = currentCompany.overview.yearData[year];
+                        if (!yearData) return '';
+                        
+                        return `
+                            <div class="year-content ${index === 0 ? 'active' : ''}" id="overview-year-${year}">
+                                <div class="comparison-table">
+                                    <div class="comparison-col">
+                                        <h4>Audit Report</h4>
+                                        <div class="comparison-item">
+                                            <div class="label">Opinion Type</div>
+                                            <div class="value">${yearData.auditOpinion || 'Not available'}</div>
+                                        </div>
+                                        <div class="comparison-item">
+                                            <div class="label">Revenue (Tk. thousands)</div>
+                                            <div class="value">${yearData.revenue || 'Not available'}</div>
+                                        </div>
+                                        <div class="comparison-item">
+                                            <div class="label">Net Loss (Tk. thousands)</div>
+                                            <div class="value">${yearData.netLoss || 'Not available'}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="comparison-col">
+                                        <h4>Financial Position</h4>
+                                        <div class="comparison-item">
+                                            <div class="label">Total Liabilities (Tk. thousands)</div>
+                                            <div class="value">${yearData.totalLiabilities || 'Not available'}</div>
+                                        </div>
+                                        <div class="comparison-item">
+                                            <div class="label">Going Concern</div>
+                                            <div class="value">${year === 2024 && currentCompany.name.includes('Hospital') ? '<span class="risk-high">Material Uncertainty</span>' : 'Not mentioned'}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    ${yearData.compliance ? `
+                                    <div class="comparison-col">
+                                        <h4>Compliance Status</h4>
+                                        ${Object.entries(yearData.compliance).map(([standard, status]) => `
+                                            <div class="comparison-item">
+                                                <div class="label">${standard.toUpperCase()}</div>
+                                                <div class="value"><span class="compliance-badge ${status}">${status === 'partial' ? 'Partial' : status === 'non-compliant' ? 'Non-compliant' : 'Compliant'}</span></div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    ` : ''}
+                                </div>
+                                <div class="source-ref">Source: ${year} Auditor's Report & Financial Statements</div>
+                            </div>
+                        `;
+                    }).join('')}
+                    
+                    <div class="year-content" id="overview-year-comparison">
+                        <div class="subsection">
+                            <h3><i class="fas fa-chart-bar"></i> Year Trend Analysis</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Revenue (Tk. thousands)</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.overview.yearData[year]?.revenue || 'N/A'}</td>`).join('')}
+                                        <td><i class="fas fa-arrow-up" style="color:green"></i> Increasing</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net Loss (Tk. thousands)</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.overview.yearData[year]?.netLoss || 'N/A'}</td>`).join('')}
+                                        <td><i class="fas fa-arrow-down" style="color:green"></i> Improving</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Liabilities (Tk. thousands)</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.overview.yearData[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
+                                        <td><i class="fas fa-minus" style="color:orange"></i> Stable High</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            overviewTab.insertAdjacentHTML('beforeend', overviewContent);
+        }
+
+        // Load audit analysis data
+        function loadAuditAnalysisData() {
+            const auditTab = document.getElementById('tab-audit');
+            
+            // Check if audit analysis data exists
+            if (!currentCompany.auditAnalysis) {
+                auditTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Audit Analysis Data Available</h3><p>This company does not have audit analysis data in the JSON file.</p></div>';
+                return;
+            }
+
+            const auditContent = `
+                <div class="section">
+                    <h2><i class="fas fa-search"></i> Year-Wise Audit Report Analysis</h2>
+                    
+                    <div class="year-tabs">
+                        ${currentCompany.auditAnalysis.years.map((year, index) => `
+                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('audit', ${index})">${year}</div>
+                        `).join('')}
+                        <div class="year-tab" onclick="switchYear('audit', ${currentCompany.auditAnalysis.years.length})">Cross-Year Issues</div>
+                    </div>
+                    
+                    ${currentCompany.auditAnalysis.years.map((year, index) => {
+                        const yearData = currentCompany.auditAnalysis.yearDetails?.[year];
+                        if (!yearData) return '';
+                        
+                        return `
+                            <div class="year-content ${index === 0 ? 'active' : ''}" id="audit-year-${year}">
+                                <div class="subsection">
+                                    <h3><i class="fas fa-file-contract"></i> ${year} Audit Opinion</h3>
+                                    <p><strong>Type:</strong> ${currentCompany.auditAnalysis.opinionType || 'Not specified'}</p>
+                                    <p><strong>Auditor:</strong> ${currentCompany.auditAnalysis.auditor || 'Not specified'}</p>
+                                    ${yearData.issues ? `
+                                    <p><strong>Key Issues:</strong></p>
+                                    <ul style="padding-left: 20px; margin-bottom: 15px;">
+                                        ${yearData.issues.map(issue => `<li>${issue}</li>`).join('')}
+                                    </ul>
+                                    ` : '<p>No audit issues documented.</p>'}
+                                    <div class="source-ref">Source: ${year} Auditor's Report</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                    
+                    <div class="year-content" id="audit-year-cross">
+                        <div class="subsection">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Recurring Audit Issues Across Years</h3>
+                            ${currentCompany.auditAnalysis.recurringIssues ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Issue</th>
+                                        ${currentCompany.auditAnalysis.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.auditAnalysis.recurringIssues.map(issue => `
+                                        <tr>
+                                            <td>${issue.issue || 'Unknown issue'}</td>
+                                            ${currentCompany.auditAnalysis.years.map(year => `
+                                                <td>${issue[year] ? '<i class="fas fa-times" style="color:red"></i>' : '<i class="fas fa-check" style="color:green"></i>'}</td>
+                                            `).join('')}
+                                            <td><span class="risk-${issue.risk || 'moderate'}">${issue.status || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No recurring issues data available.</p>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            auditTab.insertAdjacentHTML('beforeend', auditContent);
+        }
+
+        // Load compliance data
+        function loadComplianceData() {
+            const complianceTab = document.getElementById('tab-compliance');
+            
+            // Check if compliance data exists
+            if (!currentCompany.ifrsCompliance) {
+                complianceTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No IFRS Compliance Data Available</h3><p>This company does not have IFRS compliance data in the JSON file.</p></div>';
+                return;
+            }
+
+            const complianceContent = `
+                <div class="section">
+                    <h2><i class="fas fa-chart-line"></i> IFRS/IAS Compliance Dashboard</h2>
+                    
+                    <div class="year-tabs">
+                        ${currentCompany.years.map((year, index) => `
+                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('compliance', ${index})">${year}</div>
+                        `).join('')}
+                        <div class="year-tab" onclick="switchYear('compliance', ${currentCompany.years.length})">Standards Summary</div>
+                    </div>
+                    
+                    ${currentCompany.years.map((year, index) => `
+                        <div class="year-content ${index === 0 ? 'active' : ''}" id="compliance-year-${year}">
+                            <div class="subsection">
+                                <h3><i class="fas fa-file-contract"></i> ${year} IFRS Compliance Status</h3>
+                                ${currentCompany.ifrsCompliance.standards ? `
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Standard</th>
+                                            <th>Requirement</th>
+                                            <th>Compliance Status</th>
+                                            <th>Evidence / Issue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                            <tr>
+                                                <td>${standard}</td>
+                                                <td>${data.name || 'Unknown'}</td>
+                                                <td><span class="compliance-badge ${data[year] || 'unknown'}">${data[year] === 'partial' ? 'Partial' : data[year] === 'non-compliant' ? 'Non-compliant' : data[year] === 'compliant' ? 'Compliant' : 'Not Mentioned'}</span></td>
+                                                <td>${data.issues || 'No issues documented'}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                                ` : '<p>No compliance standards data available.</p>'}
+                                <div class="source-ref">Source: ${year} Auditor's Report & Financial Statement Notes</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                    
+                    <div class="year-content" id="compliance-year-summary">
+                        <div class="subsection">
+                            <h3><i class="fas fa-chart-bar"></i> Compliance Trend Analysis</h3>
+                            ${currentCompany.ifrsCompliance.standards ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Standard</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                        <tr>
+                                            <td>${standard}</td>
+                                            ${currentCompany.years.map(year => `
+                                                <td><span class="compliance-badge ${data[year] || 'unknown'}">${data[year] === 'partial' ? 'Partial' : data[year] === 'non-compliant' ? 'Non' : data[year] === 'compliant' ? 'Yes' : 'N/A'}</span></td>
+                                            `).join('')}
+                                            <td>
+                                                ${(() => {
+                                                    const statuses = currentCompany.years.map(year => data[year] || 'unknown');
+                                                    if (statuses.every(s => s === 'non-compliant')) return '<i class="fas fa-minus" style="color:red"></i> No Improvement';
+                                                    if (statuses[statuses.length - 1] === 'non-compliant' && statuses[0] !== 'non-compliant') return '<i class="fas fa-arrow-down" style="color:red"></i> Deteriorating';
+                                                    if (statuses[statuses.length - 1] === 'compliant' && statuses[0] !== 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+                                                    return '<i class="fas fa-minus" style="color:orange"></i> Stable';
+                                                })()}
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No compliance standards data available for trend analysis.</p>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            complianceTab.insertAdjacentHTML('beforeend', complianceContent);
+        }
+
+        // Load financial analysis data
+        function loadFinancialAnalysisData() {
+            const financialTab = document.getElementById('tab-financial');
+            
+            // Check if financial analysis data exists
+            if (!currentCompany.financialAnalysis) {
+                financialTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Financial Analysis Data Available</h3><p>This company does not have financial analysis data in the JSON file.</p></div>';
+                return;
+            }
+
+            const financialContent = `
+                <div class="section">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Financial Statement Analysis</h2>
+                    
+                    <div class="year-tabs">
+                        <div class="year-tab active" onclick="switchYear('financial', 0)">Profit & Loss</div>
+                        <div class="year-tab" onclick="switchYear('financial', 1)">Balance Sheet</div>
+                        <div class="year-tab" onclick="switchYear('financial', 2)">Cash Flow</div>
+                        <div class="year-tab" onclick="switchYear('financial', 3)">Ratios & Trends</div>
+                    </div>
+                    
+                    <!-- Profit & Loss -->
+                    <div class="year-content active" id="financial-pl">
+                        <div class="subsection">
+                            <h3><i class="fas fa-chart-line"></i> Profit & Loss Statement (Taka in thousands)</h3>
+                            ${currentCompany.financialAnalysis.profitLoss ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Particulars</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>3-Year Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Revenue</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss[year]?.revenue || 'N/A'}</td>`).join('')}
+                                        <td><i class="fas fa-arrow-up" style="color:green"></i> Increasing</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gross Profit/(Loss)</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss[year]?.grossProfit || 'N/A'}</td>`).join('')}
+                                        <td><i class="fas fa-minus" style="color:red"></i> Persistent Loss</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net Profit/(Loss) After Tax</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss[year]?.netProfit || 'N/A'}</td>`).join('')}
+                                        <td><i class="fas fa-arrow-down" style="color:green"></i> Improving</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            ` : '<p>No profit and loss data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Balance Sheet -->
+                    <div class="year-content" id="financial-bs">
+                        <div class="subsection">
+                            <h3><i class="fas fa-balance-scale"></i> Balance Sheet Highlights (Taka in thousands)</h3>
+                            ${currentCompany.financialAnalysis.balanceSheet ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Particulars</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Property, Plant & Equipment</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet[year]?.ppe || 'N/A'}</td>`).join('')}
+                                        <td>-5.0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Assets</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet[year]?.totalAssets || 'N/A'}</td>`).join('')}
+                                        <td>-3.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Liabilities</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
+                                        <td>+0.1%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            ` : '<p>No balance sheet data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Cash Flow -->
+                    <div class="year-content" id="financial-cf">
+                        <div class="subsection">
+                            <h3><i class="fas fa-money-bill-wave"></i> Cash Flow Analysis (Taka in thousands)</h3>
+                            ${currentCompany.financialAnalysis.cashFlow ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Cash Flow Category</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Net Cash from Operating Activities</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.cashFlow[year]?.operating || 'N/A'}</td>`).join('')}
+                                    </tr>
+                                    <tr>
+                                        <td>Net Cash Used in Investing Activities</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.cashFlow[year]?.investing || 'N/A'}</td>`).join('')}
+                                    </tr>
+                                    <tr>
+                                        <td>Net Increase/(Decrease) in Cash</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.cashFlow[year]?.netChange || 'N/A'}</td>`).join('')}
+                                    </tr>
+                                </tbody>
+                            </table>
+                            ` : '<p>No cash flow data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Ratios -->
+                    <div class="year-content" id="financial-ratios">
+                        <div class="subsection">
+                            <h3><i class="fas fa-calculator"></i> Financial Ratios & Trends</h3>
+                            ${currentCompany.financialAnalysis.ratios ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Ratio / Metric</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Industry Benchmark</th>
+                                        <th>Assessment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Current Ratio</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.currentRatio || 'N/A'}</td>`).join('')}
+                                        <td>>1.5</td>
+                                        <td><span class="risk-high">Critical</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debt to Equity Ratio</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.debtToEquity || 'N/A'}</td>`).join('')}
+                                        <td>< 1.0</td>
+                                        <td><span class="risk-high">Critical</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gross Profit Margin (%)</td>
+                                        ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.grossMargin || 'N/A'}</td>`).join('')}
+                                        <td>>25%</td>
+                                        <td><span class="risk-high">Critical</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            ` : '<p>No financial ratios data available.</p>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            financialTab.insertAdjacentHTML('beforeend', financialContent);
+        }
+
+        // Load risk indicators data
+        function loadRiskIndicatorsData() {
+            const riskTab = document.getElementById('tab-risk');
+            
+            // Check if risk indicators data exists
+            if (!currentCompany.riskIndicators) {
+                riskTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Risk Indicators Data Available</h3><p>This company does not have risk indicators data in the JSON file.</p></div>';
+                return;
+            }
+
+            const riskContent = `
+                <div class="section materiality-high">
+                    <h2><i class="fas fa-exclamation-circle"></i> Fraud & Manipulation Risk Indicators</h2>
+                    
+                    <div class="year-tabs">
+                        ${currentCompany.years.map((year, index) => `
+                            <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('risk', ${index})">${year}</div>
+                        `).join('')}
+                        <div class="year-tab" onclick="switchYear('risk', ${currentCompany.years.length})">Aggregate Risk</div>
+                    </div>
+                    
+                    ${currentCompany.years.map((year, index) => `
+                        <div class="year-content ${index === 0 ? 'active' : ''}" id="risk-year-${year}">
+                            <div class="subsection">
+                                <h3><i class="fas fa-search"></i> ${year} Risk Assessment</h3>
+                                ${currentCompany.riskIndicators.yearData?.[year] ? `
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Risk Indicator</th>
+                                            <th>Evidence</th>
+                                            <th>Risk Level</th>
+                                            <th>Source Reference</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${currentCompany.riskIndicators.yearData[year].map(indicator => `
+                                            <tr>
+                                                <td>${indicator.indicator || 'Unknown indicator'}</td>
+                                                <td>${indicator.evidence || 'No evidence'}</td>
+                                                <td><span class="risk-${indicator.risk || 'moderate'}">${indicator.risk === 'high' ? 'High' : 'Moderate'}</span></td>
+                                                <td>${indicator.reference || 'No reference'}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                                ` : '<p>No risk indicators data available for this year.</p>'}
+                            </div>
+                        </div>
+                    `).join('')}
+                    
+                    <div class="year-content" id="risk-year-aggregate">
+                        <div class="subsection">
+                            <h3><i class="fas fa-chart-bar"></i> Year Risk Escalation Analysis</h3>
+                            ${currentCompany.riskIndicators.aggregateRisks ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Risk Category</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Trend</th>
+                                        <th>Aggregate Risk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.riskIndicators.aggregateRisks.map(risk => `
+                                        <tr>
+                                            <td>${risk.category || 'Unknown category'}</td>
+                                            ${currentCompany.years.map(year => `
+                                                <td><span class="risk-${risk[year] || 'moderate'}">${risk[year] === 'high' ? 'High' : 'Moderate'}</span></td>
+                                            `).join('')}
+                                            <td><i class="fas fa-arrow-up" style="color:red"></i> ${risk.trend || 'Unknown'}</td>
+                                            <td><span class="risk-${risk.aggregate?.toLowerCase() || 'moderate'}">${risk.aggregate || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No aggregate risk data available.</p>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            riskTab.insertAdjacentHTML('beforeend', riskContent);
+        }
+
+        // Load governance data
+        function loadGovernanceData() {
+            const governanceTab = document.getElementById('tab-governance');
+            
+            // Check if governance data exists
+            if (!currentCompany.governance) {
+                governanceTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Governance Data Available</h3><p>This company does not have governance data in the JSON file.</p></div>';
+                return;
+            }
+
+            const governanceContent = `
+                <div class="section">
+                    <h2><i class="fas fa-user-tie"></i> Governance & Audit Quality Assessment</h2>
+                    
+                    <div class="year-tabs">
+                        <div class="year-tab active" onclick="switchYear('governance', 0)">Board & Management</div>
+                        <div class="year-tab" onclick="switchYear('governance', 1)">Audit Quality</div>
+                        <div class="year-tab" onclick="switchYear('governance', 2)">Internal Controls</div>
+                        <div class="year-tab" onclick="switchYear('governance', 3)">Three-Year Trend</div>
+                    </div>
+                    
+                    <!-- Board & Management -->
+                    <div class="year-content active" id="governance-board">
+                        <div class="subsection">
+                            <h3><i class="fas fa-users"></i> Board & Management Governance</h3>
+                            ${currentCompany.governance.board ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Governance Aspect</th>
+                                        <th>Status</th>
+                                        <th>Evidence</th>
+                                        <th>Assessment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.governance.board.map(item => `
+                                        <tr>
+                                            <td>${item.aspect || 'Unknown aspect'}</td>
+                                            <td>${item.status || 'Unknown'}</td>
+                                            <td>${item.evidence || 'No evidence'}</td>
+                                            <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No board governance data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Audit Quality -->
+                    <div class="year-content" id="governance-audit">
+                        <div class="subsection">
+                            <h3><i class="fas fa-clipboard-check"></i> Audit Quality Assessment</h3>
+                            ${currentCompany.governance.auditQuality ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Audit Quality Factor</th>
+                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                        <th>Assessment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.governance.auditQuality.map(item => `
+                                        <tr>
+                                            <td>${item.factor || 'Unknown factor'}</td>
+                                            ${currentCompany.years.map(year => `<td>${item[year] || 'Not available'}</td>`).join('')}
+                                            <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No audit quality data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Internal Controls -->
+                    <div class="year-content" id="governance-controls">
+                        <div class="subsection">
+                            <h3><i class="fas fa-cogs"></i> Internal Control Environment</h3>
+                            ${currentCompany.governance.internalControls ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Control Area</th>
+                                        ${currentCompany.years.map(year => `<th>${year} Evidence</th>`).join('')}
+                                        <th>Control Effectiveness</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.governance.internalControls.map(item => `
+                                        <tr>
+                                            <td>${item.area || 'Unknown area'}</td>
+                                            ${currentCompany.years.map(year => `<td>${item[year] || 'No evidence'}</td>`).join('')}
+                                            <td><span class="risk-high">${item.effectiveness || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No internal controls data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Three-Year Trend -->
+                    <div class="year-content" id="governance-trend">
+                        <div class="subsection">
+                            <h3><i class="fas fa-chart-line"></i> Governance Assessment Summary</h3>
+                            <p>The entity's governance framework has systematically failed across all three years with no evidence of functioning audit committee or board oversight, persistent deterioration in financial reporting quality, and complete failure of internal controls across all material areas.</p>
+                            <div class="finding-card high">
+                                <h4><i class="fas fa-gavel"></i> Overall Governance Assessment: FAILED</h4>
+                                <p>Requires immediate board-level intervention and potential director disqualification proceedings.</p>
+                                <div class="action">Board Enforcement Notice Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            governanceTab.insertAdjacentHTML('beforeend', governanceContent);
+        }
+
+        // Load enforcement data
+        function loadEnforcementData() {
+            const enforcementTab = document.getElementById('tab-enforcement');
+            
+            // Check if enforcement data exists
+            if (!currentCompany.enforcement) {
+                enforcementTab.innerHTML = '<div class="blank-state"><i class="fas fa-exclamation-triangle"></i><h3>No Enforcement Data Available</h3><p>This company does not have enforcement data in the JSON file.</p></div>';
+                return;
+            }
+
+            const enforcementContent = `
+                <div class="section materiality-high">
+                    <h2><i class="fas fa-gavel"></i> Regulatory Summary & Enforcement Actions</h2>
+                    
+                    <div class="year-tabs">
+                        <div class="year-tab active" onclick="switchYear('enforcement', 0)">Key Findings</div>
+                        <div class="year-tab" onclick="switchYear('enforcement', 1)">Materiality Assessment</div>
+                        <div class="year-tab" onclick="switchYear('enforcement', 2)">Recommended Actions</div>
+                    </div>
+                    
+                    <!-- Key Findings -->
+                    <div class="year-content active" id="enforcement-findings">
+                        ${currentCompany.enforcement.findings ? `
+                        <div class="key-findings">
+                            ${currentCompany.enforcement.findings.map(finding => `
+                                <div class="finding-card ${finding.severity || 'moderate'}">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled finding'}</h4>
+                                    <p>${finding.description || 'No description'}</p>
+                                    <div class="action">${finding.action || 'Action required'}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : '<p>No enforcement findings available.</p>'}
+                    </div>
+                    
+                    <!-- Materiality Assessment -->
+                    <div class="year-content" id="enforcement-materiality">
+                        <div class="subsection">
+                            <h3><i class="fas fa-weight"></i> Materiality Assessment</h3>
+                            ${currentCompany.enforcement.materiality ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Finding Category</th>
+                                        <th>Financial Impact</th>
+                                        <th>Quantitative Materiality</th>
+                                        <th>Qualitative Materiality</th>
+                                        <th>Overall Materiality</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.enforcement.materiality.map(item => `
+                                        <tr>
+                                            <td>${item.category || 'Unknown category'}</td>
+                                            <td>${item.impact || 'Unknown'}</td>
+                                            <td>${item.quantitative || 'Unknown'}</td>
+                                            <td>${item.qualitative || 'Unknown'}</td>
+                                            <td><span class="risk-high">${item.overall || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No materiality assessment data available.</p>'}
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended Actions -->
+                    <div class="year-content" id="enforcement-actions">
+                        <div class="subsection">
+                            <h3><i class="fas fa-tasks"></i> Recommended Regulatory Actions</h3>
+                            ${currentCompany.enforcement.actions ? `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Action Type</th>
+                                        <th>Specific Action</th>
+                                        <th>Responsible Party</th>
+                                        <th>Timeframe</th>
+                                        <th>Priority</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${currentCompany.enforcement.actions.map(action => `
+                                        <tr>
+                                            <td>${action.type || 'Unknown type'}</td>
+                                            <td>${action.action || 'Unknown action'}</td>
+                                            <td>${action.responsible || 'Unknown'}</td>
+                                            <td>${action.timeframe || 'Unknown'}</td>
+                                            <td><span class="risk-${action.priority?.toLowerCase() || 'moderate'}">${action.priority || 'Unknown'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                            ` : '<p>No recommended actions data available.</p>'}
+                        </div>
+                        
+                        <button class="btn-export" onclick="alert('PDF generation would be implemented here with actual data')">
+                            <i class="fas fa-download"></i> Generate Comprehensive Inspection Report (PDF)
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            enforcementTab.insertAdjacentHTML('beforeend', enforcementContent);
+        }
+
+        // Reset to blank state
+        function resetToBlankState() {
+            currentCompany = null;
+
+            // Reset header
+            document.querySelector('.header p').textContent = 'Regulatory Inspection Portal - Select a company to begin analysis';
+
+            // Hide file navigation and notes
+            document.getElementById('fileNavigation').style.display = 'none';
+            document.getElementById('inspectorNotes').style.display = 'none';
+
+            // Show blank states and hide all loaded content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                const blankState = tab.querySelector('.blank-state');
+                if (blankState) blankState.style.display = 'flex';
+
+                // Clear all loaded content
+                const sections = tab.querySelectorAll('.section');
+                sections.forEach(section => section.remove());
+            });
+        }
+
+        // Tab management
+        function switchTab(tabIndex) {
+            // Update tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[tabIndex].classList.add('active');
+
+            // Update tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const tabIds = ['tab-overview', 'tab-audit', 'tab-compliance', 'tab-financial', 'tab-risk', 'tab-governance', 'tab-enforcement'];
+            document.getElementById(tabIds[tabIndex]).classList.add('active');
+        }
+
+        // Year tab management for different tabs
+        function switchYear(tabPrefix, yearIndex) {
+            const tabContent = document.getElementById(`tab-${tabPrefix}`);
+            if (!tabContent) return;
+            
+            const yearTabs = tabContent.querySelectorAll('.year-tab');
+            const yearContents = tabContent.querySelectorAll('.year-content');
+
+            // Update tabs
+            yearTabs.forEach(tab => tab.classList.remove('active'));
+            if (yearTabs[yearIndex]) {
+                yearTabs[yearIndex].classList.add('active');
+            }
+
+            // Update contents
+            yearContents.forEach(content => content.classList.remove('active'));
+
+            // Show the corresponding content
+            if (tabPrefix === 'overview') {
+                if (yearIndex < (currentCompany?.years?.length || 0)) {
+                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.years[yearIndex]}`);
+                    if (yearContent) yearContent.classList.add('active');
+                } else {
+                    const comparisonContent = document.getElementById(`${tabPrefix}-year-comparison`);
+                    if (comparisonContent) comparisonContent.classList.add('active');
+                }
+            } else if (tabPrefix === 'audit') {
+                if (yearIndex < (currentCompany?.auditAnalysis?.years?.length || 0)) {
+                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.auditAnalysis.years[yearIndex]}`);
+                    if (yearContent) yearContent.classList.add('active');
+                } else {
+                    const crossContent = document.getElementById(`${tabPrefix}-year-cross`);
+                    if (crossContent) crossContent.classList.add('active');
+                }
+            } else if (tabPrefix === 'compliance') {
+                if (yearIndex < (currentCompany?.years?.length || 0)) {
+                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.years[yearIndex]}`);
+                    if (yearContent) yearContent.classList.add('active');
+                } else {
+                    const summaryContent = document.getElementById(`${tabPrefix}-year-summary`);
+                    if (summaryContent) summaryContent.classList.add('active');
+                }
+            } else if (tabPrefix === 'financial') {
+                const financialContents = ['pl', 'bs', 'cf', 'ratios'];
+                if (financialContents[yearIndex]) {
+                    const content = document.getElementById(`financial-${financialContents[yearIndex]}`);
+                    if (content) content.classList.add('active');
+                }
+            } else if (tabPrefix === 'risk') {
+                if (yearIndex < (currentCompany?.years?.length || 0)) {
+                    const yearContent = document.getElementById(`${tabPrefix}-year-${currentCompany.years[yearIndex]}`);
+                    if (yearContent) yearContent.classList.add('active');
+                } else {
+                    const aggregateContent = document.getElementById(`${tabPrefix}-year-aggregate`);
+                    if (aggregateContent) aggregateContent.classList.add('active');
+                }
+            } else if (tabPrefix === 'governance') {
+                const governanceContents = ['board', 'audit', 'controls', 'trend'];
+                if (governanceContents[yearIndex]) {
+                    const content = document.getElementById(`governance-${governanceContents[yearIndex]}`);
+                    if (content) content.classList.add('active');
+                }
+            } else if (tabPrefix === 'enforcement') {
+                const enforcementContents = ['findings', 'materiality', 'actions'];
+                if (enforcementContents[yearIndex]) {
+                    const content = document.getElementById(`enforcement-${enforcementContents[yearIndex]}`);
+                    if (content) content.classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

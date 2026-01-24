@@ -1,0 +1,1154 @@
+{
+  "anwer-khan": {
+    "name": "Anwer Khan Modern Hospital Ltd.",
+    "years": [2022, 2023, 2024],
+    "pdfFiles": [
+      {
+        "name": "Anwer Khan Modern Hospital Audited FSs-1.pdf",
+        "year": 2022,
+        "url": "https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf",
+        "type": "Audited Financial Statements"
+      },
+      {
+        "name": "Anwer Khan Modern Hospital Audited FSs-2.pdf",
+        "year": 2023,
+        "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "type": "Audited Financial Statements"
+      },
+      {
+        "name": "Anwer Khan Modern Hospital Audited FSs-3.pdf",
+        "year": 2024,
+        "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "type": "Audited Financial Statements"
+      }
+    ],
+    "inspectorNotes": "This case exhibits systematic financial reporting failures across three years, requiring immediate regulatory intervention. The escalating nature of audit issues suggests deteriorating internal controls and potential management override.",
+    "overview": {
+      "description": "This regulatory inspection covers three consecutive financial years (2022, 2023, 2024) of Anwer Khan Modern Hospital Ltd. The analysis identifies significant non-compliance issues, audit deficiencies, and governance weaknesses requiring regulatory intervention.",
+      "keyFindings": [
+        {
+          "title": "Critical Audit Issues",
+          "description": "Persistent lack of supporting documentation for assets, investments, and transactions across all three years.",
+          "severity": "high",
+          "action": "Requires Formal Investigation"
+        },
+        {
+          "title": "IFRS Non-Compliance",
+          "description": "Multiple violations of IAS 16, IAS 2, IAS 38, and IAS 1 regarding asset verification and going concern disclosure.",
+          "severity": "high",
+          "action": "Restatement Required"
+        },
+        {
+          "title": "Financial Distress",
+          "description": "Persistent operating losses, massive accumulated deficit, and high leverage position across all years.",
+          "severity": "moderate",
+          "action": "Going Concern Assessment Needed"
+        },
+        {
+          "title": "Governance Failure",
+          "description": "Weak internal controls, no audit committee disclosure, and management override indicators.",
+          "severity": "high",
+          "action": "Board Enforcement Notice"
+        }
+      ],
+      "yearData": {
+        "2022": {
+          "auditOpinion": "Unmodified with Emphasis of Matter",
+          "revenue": "2,342,172",
+          "netLoss": "(851,193)",
+          "totalLiabilities": "21,794,314",
+          "compliance": {
+            "ias16": "partial",
+            "ias2": "non-compliant",
+            "ias38": "non-compliant"
+          }
+        },
+        "2023": {
+          "auditOpinion": "Unmodified with Emphasis of Matter",
+          "revenue": "3,113,743",
+          "netLoss": "(18,883)",
+          "totalLiabilities": "21,294,314",
+          "compliance": {
+            "ias16": "partial",
+            "ias2": "non-compliant",
+            "ias38": "non-compliant"
+          }
+        },
+        "2024": {
+          "auditOpinion": "Unmodified with Emphasis of Matter",
+          "revenue": "3,491,969",
+          "netLoss": "(6,998)",
+          "totalLiabilities": "21,818,228",
+          "compliance": {
+            "ias16": "non-compliant",
+            "ias2": "non-compliant",
+            "ias1": "partial"
+          }
+        }
+      }
+    },
+    "auditAnalysis": {
+      "years": [2022, 2023, 2024],
+      "auditor": "Ramiz & Co., Chartered Accountants",
+      "opinionType": "Unmodified with Emphasis of Matter",
+      "yearDetails": {
+        "2022": {
+          "issues": [
+            "Cash balance of Tk. 362,138 not physically verified",
+            "Inventory balance of Tk. 123,927,395 not physically verified",
+            "Intercompany loan of Tk. 1,103,724,807 not verified with audited accounts of inter-companies",
+            "Minutes of Annual General Meeting not available",
+            "Preliminary expenses not written off (deviation from IAS-38)"
+          ]
+        },
+        "2023": {
+          "issues": [
+            "Fixed assets addition of Tk. 51,743,999 without item-wise details",
+            "Preliminary expenses not amortized (deviation from IAS-38)",
+            "FDR original receipts not provided for verification",
+            "Inventory information and ledger not provided",
+            "Advances, deposits & prepayments not verified",
+            "Investments in Modern Group Ltd, Bengal Meat, etc. not verified",
+            "Cash book ledger and supporting documents not available"
+          ]
+        },
+        "2024": {
+          "issues": [
+            "Fixed assets: No item-wise list, quantity, price, date of purchase provided",
+            "Inventory: No information, ledger or supporting documents provided",
+            "Advance, Deposit & Prepayment: No ledger or supporting documents provided",
+            "Investments: Form 117, board resolution, vouchers not shared",
+            "Cash and Cash equivalents: Cash book ledger not available",
+            "Intercompany loan: Board resolution, agreement, ledger not provided",
+            "Revenue: Only a few invoices without sales ledger",
+            "Direct expenses: Salary sheet not acknowledged by staff",
+            "AGM for 2024 pending with RJSC",
+            "Material uncertainty regarding going concern"
+          ]
+        }
+      },
+      "recurringIssues": [
+        {
+          "issue": "Fixed Assets Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Inventory Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Cash Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Intercompany Loans Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Preliminary Expenses Amortization",
+          "2022": true,
+          "2023": true,
+          "2024": false,
+          "status": "Partially Resolved",
+          "risk": "high"
+        }
+      ]
+    },
+    "ifrsCompliance": {
+      "standards": {
+        "IAS 1": {
+          "name": "Presentation of Financial Statements",
+          "requirements": [
+            "Going concern assessment",
+            "Fair presentation",
+            "Comparative information"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "partial",
+          "issues": "Going concern not properly assessed/disclosed in 2022-2023"
+        },
+        "IAS 2": {
+          "name": "Inventories",
+          "requirements": [
+            "Measurement at lower of cost and NRV",
+            "Cost formulas",
+            "Recognition as expense"
+          ],
+          "2022": "non-compliant",
+          "2023": "non-compliant",
+          "2024": "non-compliant",
+          "issues": "Inventory not physically verified across all years"
+        },
+        "IAS 16": {
+          "name": "Property, Plant & Equipment",
+          "requirements": [
+            "Recognition criteria",
+            "Measurement at cost",
+            "Depreciation"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "non-compliant",
+          "issues": "Fixed assets not properly documented/verified"
+        },
+        "IAS 38": {
+          "name": "Intangible Assets",
+          "requirements": [
+            "Recognition criteria",
+            "Amortization",
+            "Impairment testing"
+          ],
+          "2022": "non-compliant",
+          "2023": "non-compliant",
+          "2024": "not mentioned",
+          "issues": "Preliminary expenses not amortized in 2022-2023"
+        },
+        "IAS 24": {
+          "name": "Related Party Disclosures",
+          "requirements": [
+            "Disclosure of relationships",
+            "Disclosure of transactions",
+            "Amounts outstanding"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "partial",
+          "issues": "Intercompany loans listed but not verified"
+        }
+      }
+    },
+    "financialAnalysis": {
+      "profitLoss": {
+        "2022": {
+          "revenue": "2,342,172",
+          "directExpenses": "(3,341,167)",
+          "grossProfit": "(998,995)",
+          "adminExpenses": "(1,343,177)",
+          "operatingIncome": "(158,224)",
+          "nonOperatingIncome": "1,184,953",
+          "financialExpenses": "(1,221,477)",
+          "profitBeforeTax": "(2,058,398)",
+          "netProfit": "(851,193)"
+        },
+        "2023": {
+          "revenue": "3,113,743",
+          "directExpenses": "(4,048,310)",
+          "grossProfit": "(934,567)",
+          "adminExpenses": "(2,179,177)",
+          "operatingIncome": "(150,623)",
+          "nonOperatingIncome": "2,028,553",
+          "financialExpenses": "(2,061,952)",
+          "profitBeforeTax": "(2,037,267)",
+          "netProfit": "(18,883)"
+        },
+        "2024": {
+          "revenue": "3,491,969",
+          "directExpenses": "(4,457,476)",
+          "grossProfit": "(965,507)",
+          "adminExpenses": "(2,526,463)",
+          "operatingIncome": "(153,375)",
+          "nonOperatingIncome": "2,373,088",
+          "financialExpenses": "(2,397,564)",
+          "profitBeforeTax": "(2,425,830)",
+          "netProfit": "(6,998)"
+        }
+      },
+      "balanceSheet": {
+        "2022": {
+          "ppe": "6,126,751",
+          "investments": "236,728",
+          "inventory": "123,927",
+          "totalAssets": "7,013,399",
+          "shareCapital": "90,000",
+          "retainedEarnings": "(15,769,132)",
+          "longTermLoans": "17,424,742",
+          "shortTermLoans": "4,139,579",
+          "totalLiabilities": "21,794,314"
+        },
+        "2023": {
+          "ppe": "5,947,022",
+          "investments": "236,728",
+          "inventory": "184,441",
+          "totalAssets": "6,748,753",
+          "shareCapital": "90,000",
+          "retainedEarnings": "(15,763,330)",
+          "longTermLoans": "17,500,621",
+          "shortTermLoans": "4,921,462",
+          "totalLiabilities": "21,294,314"
+        },
+        "2024": {
+          "ppe": "5,820,977",
+          "investments": "236,728",
+          "inventory": "184,441",
+          "totalAssets": "6,748,753",
+          "shareCapital": "90,000",
+          "retainedEarnings": "(15,756,332)",
+          "longTermLoans": "17,500,621",
+          "shortTermLoans": "4,921,462",
+          "totalLiabilities": "21,818,228"
+        }
+      },
+      "cashFlow": {
+        "2022": {
+          "operating": "787,935",
+          "investing": "(52,405)",
+          "financing": "1,190,881",
+          "netChange": "1,926,411"
+        },
+        "2023": {
+          "operating": "2,734,300",
+          "investing": "(675,984)",
+          "financing": "(1,482,705)",
+          "netChange": "575,611"
+        },
+        "2024": {
+          "operating": "2,487,667",
+          "investing": "(259,391)",
+          "financing": "(2,231,482)",
+          "netChange": "(3,206)"
+        }
+      },
+      "ratios": {
+        "2022": {
+          "currentRatio": "0.16",
+          "debtToEquity": "-1.38",
+          "returnOnAssets": "-12.15%",
+          "grossMargin": "-42.7%",
+          "cashFlowToIncome": "-0.93"
+        },
+        "2023": {
+          "currentRatio": "0.15",
+          "debtToEquity": "-1.35",
+          "returnOnAssets": "-0.27%",
+          "grossMargin": "-30.0%",
+          "cashFlowToIncome": "-144.8"
+        },
+        "2024": {
+          "currentRatio": "0.14",
+          "debtToEquity": "-1.38",
+          "returnOnAssets": "-0.10%",
+          "grossMargin": "-27.6%",
+          "cashFlowToIncome": "-355.4"
+        }
+      }
+    },
+    "riskIndicators": {
+      "yearData": {
+        "2022": [
+          {
+            "indicator": "Lack of Asset Verification",
+            "evidence": "Cash & inventory not physically verified",
+            "risk": "high",
+            "reference": "2022 Audit Report p. 2"
+          },
+          {
+            "indicator": "Unverified Related Party Transactions",
+            "evidence": "Intercompany loans of Tk. 1.1B not verified",
+            "risk": "high",
+            "reference": "2022 Audit Report p. 2"
+          },
+          {
+            "indicator": "Non-compliance with IAS 38",
+            "evidence": "Preliminary expenses not amortized",
+            "risk": "moderate",
+            "reference": "2022 Audit Report p. 2"
+          }
+        ],
+        "2023": [
+          {
+            "indicator": "Expanded Asset Verification Issues",
+            "evidence": "Fixed assets, FDRs, inventory, advances not verified",
+            "risk": "high",
+            "reference": "2023 Audit Report p. 2"
+          },
+          {
+            "indicator": "Investment Verification Failure",
+            "evidence": "Investments in Modern Group Ltd, Bengal Meat not verified",
+            "risk": "high",
+            "reference": "2023 Audit Report p. 2"
+          },
+          {
+            "indicator": "Cash Verification Issues",
+            "evidence": "Cash book ledger not available",
+            "risk": "high",
+            "reference": "2023 Audit Report p. 2"
+          }
+        ],
+        "2024": [
+          {
+            "indicator": "Comprehensive Verification Failure",
+            "evidence": "Fixed assets, inventory, advances, revenue, expenses not verified",
+            "risk": "high",
+            "reference": "2024 Audit Report p. 2-3"
+          },
+          {
+            "indicator": "Revenue Recognition Risk",
+            "evidence": "Revenue recognized without proper sales ledger",
+            "risk": "high",
+            "reference": "2024 Audit Report p. 3"
+          },
+          {
+            "indicator": "Going Concern Uncertainty",
+            "evidence": "Material uncertainty regarding operational continuity",
+            "risk": "high",
+            "reference": "2024 Audit Report p. 3"
+          }
+        ]
+      },
+      "aggregateRisks": [
+        {
+          "category": "Asset Verification Risk",
+          "2022": "high",
+          "2023": "high",
+          "2024": "high",
+          "trend": "Escalating",
+          "aggregate": "Critical"
+        },
+        {
+          "category": "Related Party Risk",
+          "2022": "high",
+          "2023": "high",
+          "2024": "high",
+          "trend": "Persistent",
+          "aggregate": "Critical"
+        },
+        {
+          "category": "Going Concern Risk",
+          "2022": "moderate",
+          "2023": "moderate",
+          "2024": "high",
+          "trend": "Escalating",
+          "aggregate": "High"
+        }
+      ]
+    },
+    "governance": {
+      "board": [
+        {
+          "aspect": "Board Composition Disclosure",
+          "status": "Not Disclosed",
+          "evidence": "No board details in financial statements",
+          "assessment": "Deficient"
+        },
+        {
+          "aspect": "Audit Committee Existence",
+          "status": "Not Disclosed",
+          "evidence": "No mention of audit committee in reports",
+          "assessment": "Critical"
+        },
+        {
+          "aspect": "Related Party Transaction Oversight",
+          "status": "Weak",
+          "evidence": "Intercompany loans not properly documented/verified",
+          "assessment": "Critical"
+        }
+      ],
+      "auditQuality": [
+        {
+          "factor": "Auditor Independence",
+          "2022": "Not Assessable",
+          "2023": "Not Assessable",
+          "2024": "Not Assessable",
+          "assessment": "Unclear"
+        },
+        {
+          "factor": "Audit Scope Limitations",
+          "2022": "Significant",
+          "2023": "Severe",
+          "2024": "Critical",
+          "assessment": "Deteriorating"
+        },
+        {
+          "factor": "Professional Skepticism",
+          "2022": "Adequate",
+          "2023": "Adequate",
+          "2024": "Adequate",
+          "assessment": "Acceptable"
+        }
+      ],
+      "internalControls": [
+        {
+          "area": "Asset Safeguarding",
+          "2022": "Cash & inventory not verified",
+          "2023": "Multiple assets not verified",
+          "2024": "Comprehensive asset verification failure",
+          "effectiveness": "Failed"
+        },
+        {
+          "area": "Transaction Authorization",
+          "2022": "Intercompany loans not documented",
+          "2023": "Investments not properly authorized",
+          "2024": "Revenue & expenses not properly supported",
+          "effectiveness": "Failed"
+        },
+        {
+          "area": "Record Keeping",
+          "2022": "Ledgers not available",
+          "2023": "Multiple ledgers not available",
+          "2024": "Comprehensive record keeping failure",
+          "effectiveness": "Failed"
+        }
+      ]
+    },
+    "enforcement": {
+      "findings": [
+        {
+          "title": "Audit Report Failures",
+          "description": "Persistent and escalating audit scope limitations across all three years, with material uncertainty regarding going concern in 2024.",
+          "action": "Auditor Explanation Required",
+          "severity": "high"
+        },
+        {
+          "title": "IFRS Non-Compliance",
+          "description": "Multiple violations of IAS 1, IAS 2, IAS 16, IAS 38 across all years with deteriorating compliance trend.",
+          "action": "Restatement Directive",
+          "severity": "high"
+        },
+        {
+          "title": "Financial Statement Integrity",
+          "description": "Material assets, liabilities, revenues and expenses not verified, casting doubt on financial statement reliability.",
+          "action": "Independent Verification Required",
+          "severity": "high"
+        },
+        {
+          "title": "Governance Failure",
+          "description": "No evidence of functioning audit committee, weak internal controls, management override indicators.",
+          "action": "Board Enforcement Notice",
+          "severity": "high"
+        }
+      ],
+      "materiality": [
+        {
+          "category": "Unverified Assets",
+          "impact": "Tk. 6.7B+",
+          "quantitative": "95% of total assets",
+          "qualitative": "Fundamental to financial statements",
+          "overall": "Clearly Material"
+        },
+        {
+          "category": "Unverified Liabilities",
+          "impact": "Tk. 21.8B+",
+          "quantitative": "100% of reported liabilities",
+          "qualitative": "Essential for solvency assessment",
+          "overall": "Clearly Material"
+        },
+        {
+          "category": "Going Concern Uncertainty",
+          "impact": "Entity Continuity",
+          "quantitative": "Not quantifiable",
+          "qualitative": "Fundamental accounting assumption",
+          "overall": "Pervasively Material"
+        }
+      ],
+      "actions": [
+        {
+          "type": "Immediate Directive",
+          "action": "Issue show-cause notice to management and board",
+          "responsible": "FRC Enforcement Division",
+          "timeframe": "7 days",
+          "priority": "Critical"
+        },
+        {
+          "type": "Financial Restatement",
+          "action": "Direct restatement of 2022, 2023, 2024 financials",
+          "responsible": "Company Management",
+          "timeframe": "90 days",
+          "priority": "Critical"
+        },
+        {
+          "type": "Independent Verification",
+          "action": "Appoint independent expert to verify assets, liabilities",
+          "responsible": "FRC Appointed Firm",
+          "timeframe": "60 days",
+          "priority": "Critical"
+        }
+      ]
+    }
+  },
+  "golden-harvest-agro-industries-limited": {
+    "name": "Golden Harvest Agro Industries Limited",
+    "years": [
+      2022,
+      2023
+    ],
+    "pdfFiles": [
+      {
+        "name": "2022.pdf",
+        "year": 2022,
+        "url": "",
+        "type": "Annual Report including Audited Financial Statements"
+      },
+      {
+        "name": "2023.pdf",
+        "year": 2023,
+        "url": "",
+        "type": "Annual Report including Audited Financial Statements"
+      }
+    ],
+    "inspectorNotes": "This analysis of Golden Harvest Agro Industries Limited (GHAIL) for the years ended 30 June 2022 and 2023, based on the provided annual reports, reveals several areas of significant concern requiring regulatory attention. The 2022 audit opinion was qualified due to two main issues: 1) Non-distribution of Workers Profit Participation Fund (WPPF) of Taka 27,885,580 as per Labor Act 2006, and 2) Failure to convert share money deposit of Taka 48,355,038 into share capital within the required 6-month period as per FRC Circular. Additionally, the company had no policy or procedures for conducting impairment reviews of PPE, representing non-compliance with IAS 36. The 2023 audit opinion was also qualified due to continued WPPF non-compliance. Significant emphasis of matter was raised concerning the company's high reliance on short-term debt, constituting 72.44% of equity, and the consequent high finance costs which form 42% of total expenses. Financial performance shows a marginal net profit of BDT 3.99 million in 2023 compared to a substantial loss of BDT 101.16 million in 2022, though this improvement is largely attributed to a tax credit and profit share from associates. Liquidity and solvency ratios indicate heightened risk, with a deteriorating current ratio. The company's subsidiary, Golden Harvest Dairy Limited, is assessed as a going concern with material uncertainty. Key audit matters appropriately highlighted revenue recognition, PPE valuation, inventory, deferred tax, and consolidation. However, recurring issues in WPPF compliance and persistent high leverage warrant enhanced scrutiny. Corporate governance appears functional but is under pressure from financial stress. Overall, while the financial statements purport compliance with IFRS, the qualified audit opinions, significant financial risks, and identified non-compliances necessitate regulatory follow-up to ensure corrective actions are taken and future reporting integrity is maintained.",
+    "overview": {
+      "description": "Regulatory inspection of the Consolidated and Separate Financial Statements of Golden Harvest Agro Industries Ltd. and its subsidiaries for the years ended 30 June 2022 and 2023, prepared under International Financial Reporting Standards (IFRS). The 2022 financial statements were audited by MABS & J Partners, Chartered Accountants, while the 2023 financial statements were audited by S. F. Ahmed & Co., Chartered Accountants. The inspection focuses on compliance with IFRS, ISA, the Companies Act 1994, SEC Rules, and assesses financial health, audit quality, and corporate governance.",
+      "keyFindings": [
+        {
+          "title": "Qualified Audit Opinion Due to Regulatory Non-Compliance (2022)",
+          "description": "Auditors issued a qualified opinion for 2022 because: 1) The company provided for Workers Profit Participation Fund (WPPF) of Taka 27,885,580 but had not distributed it among Employees Welfare Fund, Bangladesh Workers Welfare Fund, and WPPF in the mandated 80:10:10 ratio as per the Labor Act 2006; 2) The company provided Taka 48,355,038 as Share Money Deposit to Golden Harvest QSR Ltd., which was not converted into share capital within the required 6-month period as per FRC Circular No. 146/FRC/Admin/Circular/2020/01 dated 11 February 2020.",
+          "severity": "high",
+          "action": "Issue directive to the company to immediately distribute the WPPF provision as per law and convert the share money deposit into share capital. Require restatement of the liability in the financial statements and verification by the auditor."
+        },
+        {
+          "title": "Qualified Audit Opinion Due to Regulatory Non-Compliance (2023)",
+          "description": "Auditors issued a qualified opinion for 2023 because the company provided for BDT 34,774,853 towards Workers Profit Participation Fund (WPPF) but had not distributed it among Employees Welfare Fund, Bangladesh Workers Welfare Fund, and WPPF in the mandated 80:10:10 ratio as per the Labor Act 2006 (amended 2015).",
+          "severity": "high",
+          "action": "Issue directive to the company to immediately distribute the WPPF provision as per law and restate the liability in the financial statements. Require the auditor to verify and report on compliance."
+        },
+        {
+          "title": "Non-Compliance with IAS 36 - Impairment of Assets (2022)",
+          "description": "The company had no policy and procedures for conducting impairment review of Property, Plant and Equipment as required by IAS 36. No impairment test had been exercised by the company since inception of business or operation.",
+          "severity": "high",
+          "action": "Require the company to establish proper impairment testing policies and procedures in accordance with IAS 36, and conduct retrospective impairment assessments where necessary."
+        },
+        {
+          "title": "Material Uncertainty Regarding Going Concern of Subsidiary",
+          "description": "Management's note discloses that the financial statements of subsidiary Golden Harvest Dairy Ltd. are prepared on a going concern basis despite 'significant financial challenges that create a material uncertainty regarding its continuity.' These include sustained losses, high liabilities, and dependence on external financing.",
+          "severity": "high",
+          "action": "Require the Board of GHAIL to submit a detailed turnaround plan and ongoing viability assessment for Golden Harvest Dairy Ltd. to the FRC for monitoring."
+        },
+        {
+          "title": "Excessive Reliance on Debt and High Financial Risk",
+          "description": "The company's working capital is mainly financed by short-term loans. Total loans (BDT 1,951,570,716 in 2022) were 66.87% of shareholders' equity. Finance costs (BDT 112,002,129 in 2022) constituted 36% of total expenses (Administrative, Selling and Finance Expenses), indicating severe interest rate and refinancing risk.",
+          "severity": "high",
+          "action": "Require the company to submit a formal debt restructuring and capital management plan. The Board should provide quarterly updates on covenant compliance and refinancing efforts to the FRC."
+        },
+        {
+          "title": "Weak Liquidity Position",
+          "description": "The consolidated current ratio deteriorated from approximately 1.51 in 2022 to 1.54 in 2023. The acid-test ratio is approximately 1.13 (2023) and 1.09 (2022), indicating limited liquidity buffer after excluding inventory. Significant current liabilities against current assets pose a short-term solvency risk.",
+          "severity": "moderate",
+          "action": "Direct the company's audit committee to oversee enhanced working capital management and cash flow forecasting. Review the terms and renewal status of short-term credit facilities."
+        }
+      ],
+      "yearData": {
+        "2022": {
+          "auditOpinion": "Qualified",
+          "revenue": "BDT 845,055,756",
+          "netLoss": "BDT (101,162,595)",
+          "totalLiabilities": "BDT 2,239,586,439",
+          "compliance": {
+            "ias16": "compliant",
+            "ias2": "compliant",
+            "ias36": "non-compliant",
+            "laborAct": "non-compliant",
+            "frcCircular": "non-compliant"
+          }
+        },
+        "2023": {
+          "auditOpinion": "Qualified",
+          "revenue": "BDT 968,131,772",
+          "netProfit": "BDT 3,992,271",
+          "totalLiabilities": "BDT 2,365,092,100",
+          "compliance": {
+            "ias16": "compliant",
+            "ias2": "compliant",
+            "ias36": "N/A",
+            "laborAct": "non-compliant",
+            "frcCircular": "N/A"
+          }
+        }
+      }
+    },
+    "auditAnalysis": {
+      "years": [
+        2022,
+        2023
+      ],
+      "auditor": "MABS & J Partners, Chartered Accountants (2022); S. F. Ahmed & Co., Chartered Accountants (2023)",
+      "opinionType": "Qualified (both years)",
+      "yearDetails": {
+        "2022": {
+          "issues": [
+            "Basis for Qualified Opinion: 1) Non-distribution of Workers Profit Participation Fund (WPPF) provision of Taka 27,885,580 as per the Labor Act 2006; 2) Failure to convert share money deposit of Taka 48,355,038 into share capital within 6-month period as per FRC Circular (Page 3).",
+            "Non-compliance with IAS 36: Company had no policy and procedures for conducting impairment review of Property, Plant and Equipment (Page 4).",
+            "Emphasis of Matter: High reliance on short-term borrowings for working capital, with total loans at 66.87% of equity and finance costs constituting 36% of total expenses (Page 4)."
+          ]
+        },
+        "2023": {
+          "issues": [
+            "Basis for Qualified Opinion: Non-distribution of Workers Profit Participation Fund (WPPF) provision of BDT 34,774,853 as per the Labor Act 2006 (Page 3).",
+            "Emphasis of Matter: High reliance on short-term borrowings for working capital, with total loans at 72.44% of equity and finance costs constituting 42% of total expenses, posing significant loan servicing risk (Page 4)."
+          ]
+        }
+      },
+      "recurringIssues": [
+        {
+          "issue": "Workers Profit Participation Fund (WPPF) Compliance",
+          "2022": true,
+          "2023": true,
+          "2024": null,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "High Financial Leverage and Interest Burden",
+          "2022": true,
+          "2023": true,
+          "2024": null,
+          "status": "Persistent",
+          "risk": "high"
+        },
+        {
+          "issue": "Material Uncertainty Related to Going Concern (Subsidiary)",
+          "2022": true,
+          "2023": true,
+          "2024": null,
+          "status": "Unresolved",
+          "risk": "high"
+        }
+      ]
+    },
+    "ifrsCompliance": {
+      "standards": {
+        "IAS 1": {
+          "name": "Presentation of Financial Statements",
+          "requirements": [
+            "Fair presentation",
+            "Going concern",
+            "Accrual basis",
+            "Comparative information"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "N/A",
+          "issues": "Qualified audit opinion in both years affects fair presentation. Going concern basis used for subsidiary despite material uncertainty. Comparative information is presented."
+        },
+        "IAS 2": {
+          "name": "Inventories",
+          "requirements": [
+            "Measurement at lower of cost and NRV",
+            "Use of FIFO/Weighted Average cost formula",
+            "Recognition as expense"
+          ],
+          "2022": "compliant",
+          "2023": "compliant",
+          "2024": "N/A",
+          "issues": "Inventories stated at lower of cost (FIFO) and net realizable value. Adequate disclosure in notes 3.9 and 11."
+        },
+        "IAS 16": {
+          "name": "Property, Plant and Equipment",
+          "requirements": [
+            "Recognition at cost/fair value",
+            "Depreciation over useful life",
+            "Disclosure of carrying amounts"
+          ],
+          "2022": "compliant",
+          "2023": "compliant",
+          "2024": "N/A",
+          "issues": "PPE initially at cost, with land, buildings & plant revalued in 2009, 2011, 2013. Depreciated on reducing balance method. Disclosed in notes 3.2, 5, 5A."
+        },
+        "IAS 24": {
+          "name": "Related Party Disclosures",
+          "requirements": [
+            "Identification of relationships",
+            "Disclosure of transactions and balances"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "N/A",
+          "issues": "Transactions with related parties disclosed in Note 40.2. However, the note references IAS 24 but the structure and completeness of disclosures should be verified for full compliance."
+        },
+        "IAS 36": {
+          "name": "Impairment of Assets",
+          "requirements": [
+            "Impairment testing when indicators exist",
+            "Recognition of impairment losses",
+            "Disclosure of assumptions"
+          ],
+          "2022": "non-compliant",
+          "2023": "N/A",
+          "2024": "N/A",
+          "issues": "Company had no policy and procedures for conducting impairment review of PPE. No impairment test had been exercised since inception (Page 4)."
+        },
+        "IFRS 15": {
+          "name": "Revenue from Contracts with Customers",
+          "requirements": [
+            "Five-step model application",
+            "Disclosure of accounting policies"
+          ],
+          "2022": "compliant",
+          "2023": "compliant",
+          "2024": "N/A",
+          "issues": "Revenue recognized when control transfers, measured net of taxes/discounts. Policy disclosed in note 3.18. Revenue recognition was a key audit matter."
+        },
+        "IFRS 16": {
+          "name": "Leases",
+          "requirements": [
+            "Recognition of right-of-use assets and lease liabilities",
+            "Depreciation and interest expense"
+          ],
+          "2022": "non-compliant",
+          "2023": "compliant",
+          "2024": "N/A",
+          "issues": "IFRS 16 applied from 2023, with right-of-use assets and lease liabilities recognized. No such assets/liabilities in 2022, suggesting correct adoption in 2023."
+        }
+      }
+    },
+    "financialAnalysis": {
+      "profitLoss": {
+        "2022": {
+          "revenue": "845,055,756",
+          "directExpenses": "518,975,143",
+          "grossProfit": "326,080,613",
+          "adminExpenses": "50,421,445",
+          "operatingIncome": "143,986,444",
+          "nonOperatingIncome": "1,412,741",
+          "financialExpenses": "112,002,129",
+          "profitBeforeTax": "(37,662,102)",
+          "netProfit": "(101,162,595)"
+        },
+        "2023": {
+          "revenue": "968,131,772",
+          "directExpenses": "569,684,720",
+          "grossProfit": "398,447,052",
+          "adminExpenses": "45,868,726",
+          "operatingIncome": "219,090,970",
+          "nonOperatingIncome": "750,531",
+          "financialExpenses": "145,421,439",
+          "profitBeforeTax": "6,767,660",
+          "netProfit": "3,992,271"
+        }
+      },
+      "balanceSheet": {
+        "2022": {
+          "ppe": "1,864,297,271",
+          "investments": "596,615,210",
+          "inventory": "500,495,296",
+          "totalAssets": "5,152,061,032",
+          "shareCapital": "2,158,376,210",
+          "retainedEarnings": "547,730,352",
+          "longTermLoans": "945,622,259",
+          "shortTermLoans": "696,339,024",
+          "totalLiabilities": "2,239,586,439"
+        },
+        "2023": {
+          "ppe": "1,963,321,652",
+          "investments": "533,760,662",
+          "inventory": "507,641,366",
+          "totalAssets": "5,245,851,735",
+          "shareCapital": "2,158,376,210",
+          "retainedEarnings": "516,628,846",
+          "longTermLoans": "1,047,778,573",
+          "shortTermLoans": "688,151,612",
+          "totalLiabilities": "2,365,092,100"
+        }
+      },
+      "cashFlow": {
+        "2022": {
+          "operating": "134,131,576",
+          "investing": "(247,439,955)",
+          "financing": "105,306,286",
+          "netChange": "(8,002,094)"
+        },
+        "2023": {
+          "operating": "149,697,969",
+          "investing": "(146,917,443)",
+          "financing": "(62,406,138)",
+          "netChange": "(59,625,609)"
+        }
+      },
+      "ratios": {
+        "2022": {
+          "currentRatio": "1.51",
+          "debtToEquity": "0.77",
+          "returnOnAssets": "-1.96%",
+          "grossMargin": "38.59%",
+          "cashFlowToIncome": "N/A (Negative Net Income)",
+          "acidTestRatio": "1.09",
+          "returnOnEquity": "-3.47%",
+          "interestCoverageRatio": "1.29"
+        },
+        "2023": {
+          "currentRatio": "1.54",
+          "debtToEquity": "0.82",
+          "returnOnAssets": "0.08%",
+          "grossMargin": "41.16%",
+          "cashFlowToIncome": "37.49",
+          "acidTestRatio": "1.13",
+          "returnOnEquity": "0.14%",
+          "interestCoverageRatio": "1.51"
+        }
+      }
+    },
+    "riskIndicators": {
+      "yearData": {
+        "2022": [
+          {
+            "indicator": "Qualified Audit Opinion",
+            "evidence": "Audit report contains a qualified opinion due to WPPF non-compliance and share money deposit issue (Page 3).",
+            "risk": "high",
+            "reference": "Page 3, Independent Auditor's Report"
+          },
+          {
+            "indicator": "Negative Profitability",
+            "evidence": "Net loss after tax of BDT 101.16 million (Page 13).",
+            "risk": "high",
+            "reference": "Page 13, Consolidated Statement of Profit or Loss"
+          },
+          {
+            "indicator": "High Debt Burden",
+            "evidence": "Total loans of BDT 1,951.57 million (LT+ST) representing 66.87% of shareholders' equity. Finance expenses BDT 112.00 million (Page 4, 13).",
+            "risk": "high",
+            "reference": "Page 4, 13"
+          },
+          {
+            "indicator": "Non-Compliance with IAS 36",
+            "evidence": "Company had no policy and procedures for conducting impairment review of PPE (Page 4).",
+            "risk": "high",
+            "reference": "Page 4, Basis for Qualified Opinion"
+          }
+        ],
+        "2023": [
+          {
+            "indicator": "Qualified Audit Opinion",
+            "evidence": "Audit report contains a qualified opinion due to WPPF non-compliance (Page 3).",
+            "risk": "high",
+            "reference": "Page 3, Independent Auditor's Report"
+          },
+          {
+            "indicator": "Emphasis of Matter on Liquidity & Solvency",
+            "evidence": "Working capital sourced from short-term loans; total loans are 72.44% of equity; finance cost is 42% of total expenses (Page 4).",
+            "risk": "high",
+            "reference": "Page 4, Emphasis of Matters"
+          },
+          {
+            "indicator": "Material Uncertainty on Going Concern (Subsidiary)",
+            "evidence": "Note states Golden Harvest Dairy Ltd. faces significant financial challenges creating material uncertainty (Page 21).",
+            "risk": "high",
+            "reference": "Page 21, Note 2.5"
+          },
+          {
+            "indicator": "Declining Cash Balance",
+            "evidence": "Cash and cash equivalents decreased by BDT 59.63 million (Page 17).",
+            "risk": "moderate",
+            "reference": "Page 17, Consolidated Statement of Cash Flows"
+          }
+        ]
+      },
+      "aggregateRisks": [
+        {
+          "category": "Financial Risk (Liquidity & Solvency)",
+          "2022": "high",
+          "2023": "high",
+          "2024": "N/A",
+          "trend": "Persistent",
+          "aggregate": "Critical"
+        },
+        {
+          "category": "Compliance Risk",
+          "2022": "high",
+          "2023": "high",
+          "2024": "N/A",
+          "trend": "Persistent",
+          "aggregate": "High"
+        },
+        {
+          "category": "Going Concern Risk (Group/Subsidiary)",
+          "2022": "moderate",
+          "2023": "high",
+          "2024": "N/A",
+          "trend": "Escalating",
+          "aggregate": "High"
+        }
+      ]
+    },
+    "governance": {
+      "board": [
+        {
+          "aspect": "Financial Reporting Oversight",
+          "status": "Financial statements authorized for issue by Board of Directors on 30 October 2022 (2022) and 28 October 2023 (2023).",
+          "evidence": "Note 1.3, Page 17 (2022); Note 1.3, Page 19 (2023).",
+          "assessment": "Acceptable"
+        },
+        {
+          "aspect": "Related Party Transaction Oversight",
+          "status": "Transactions with related parties disclosed, including those with common directors.",
+          "evidence": "Note 40.2, Page 50 (2022); Note 42.2, Page 54 (2023).",
+          "assessment": "Acceptable"
+        },
+        {
+          "aspect": "Addressing Material Uncertainties",
+          "status": "Management disclosed going concern uncertainties for a subsidiary and outlined mitigating measures.",
+          "evidence": "Note 2.5, Page 18 (2022); Note 2.5, Page 21 (2023).",
+          "assessment": "Deficient"
+        },
+        {
+          "aspect": "Regulatory Compliance Oversight",
+          "status": "Failed to ensure compliance with Labor Act 2006 regarding WPPF distribution and FRC Circular regarding share money deposit conversion.",
+          "evidence": "Auditor's Report Page 3 (2022).",
+          "assessment": "Deficient"
+        }
+      ],
+      "auditQuality": [
+        {
+          "factor": "Auditor Independence & Rotation",
+          "2022": "MABS & J Partners, Chartered Accountants",
+          "2023": "S. F. Ahmed & Co. (New auditor)",
+          "2024": "N/A",
+          "assessment": "Auditor changed in 2023. Both auditors assert independence per IESBA Code."
+        },
+        {
+          "factor": "Communication of Key Audit Matters (KAMs)",
+          "2022": "Two KAMs identified and addressed (Revenue Recognition, Property Plant and Equipment) (Pages 4-5).",
+          "2023": "Five KAMs identified and addressed (Revenue, PPE, Inventory, Deferred Tax, Consolidation) (Pages 4-8).",
+          "2024": "N/A",
+          "assessment": "Compliant with ISA 701. Appropriate matters selected and procedures described."
+        },
+        {
+          "factor": "Response to Identified Misstatements",
+          "2022": "Issued qualified opinion for specific non-compliances and included emphasis of matter on liquidity risk.",
+          "2023": "Issued qualified opinion for a specific non-compliance but did not modify for emphasis of matter on liquidity risk.",
+          "2024": "N/A",
+          "assessment": "Appropriate professional judgment applied in forming the opinions."
+        }
+      ],
+      "internalControls": [
+        {
+          "area": "Revenue Recognition",
+          "2022": "Key audit matter addressed by auditor through testing controls and substantive procedures.",
+          "2023": "Continued as a key audit matter; auditor tested controls over revenue recognition process.",
+          "2024": "N/A",
+          "effectiveness": "Partially Effective"
+        },
+        {
+          "area": "Inventory Management",
+          "2022": "Not identified as key audit matter.",
+          "2023": "Key audit matter; auditor attended physical counts and tested costing procedures.",
+          "2024": "N/A",
+          "effectiveness": "Partially Effective"
+        },
+        {
+          "area": "Compliance with Labor Laws",
+          "2022": "Failed, as evidenced by the qualified opinion regarding WPPF non-distribution.",
+          "2023": "Failed, as evidenced by the qualified opinion regarding WPPF non-distribution.",
+          "2024": "N/A",
+          "effectiveness": "Failed"
+        },
+        {
+          "area": "Impairment Testing",
+          "2022": "Failed, company had no policy or procedures for conducting impairment reviews.",
+          "2023": "N/A",
+          "2024": "N/A",
+          "effectiveness": "Failed"
+        }
+      ]
+    },
+    "enforcement": {
+      "findings": [
+        {
+          "title": "Non-Compliance with Bangladesh Labor Act, 2006 (Amended 2015)",
+          "description": "Company accrued BDT 27,885,580 (2022) and BDT 34,774,853 (2023) for Workers Profit Participation Fund (WPPF) but failed to distribute it into the three mandated funds (Employees Welfare, Bangladesh Workers Welfare, WPPF) in the 80:10:10 ratio, as required by law.",
+          "action": "Issue a directive under the Financial Reporting Act, 2015, requiring the company to: 1. Immediately distribute the accrued WPPF amounts as per law. 2. Submit proof of distribution to the FRC and the auditor. 3. Restate the relevant liability line items in its next financial statements with a note explaining the correction. 4. Review and strengthen its internal controls over statutory compliance.",
+          "severity": "high"
+        },
+        {
+          "title": "Non-Compliance with FRC Circular No. 146/FRC/Admin/Circular/2020/01",
+          "description": "Company provided Taka 48,355,038 as Share Money Deposit to Golden Harvest QSR Ltd. which was not converted into share capital within the required 6-month period as per the FRC Circular.",
+          "action": "Require the company to immediately convert the share money deposit into share capital and submit evidence of conversion to the FRC. Impose penalty for non-compliance with FRC directive.",
+          "severity": "high"
+        },
+        {
+          "title": "Non-Compliance with IAS 36 - Impairment of Assets",
+          "description": "Company had no policy and procedures for conducting impairment review of Property, Plant and Equipment. No impairment test had been exercised since inception of business, representing material non-compliance with IFRS.",
+          "action": "Require the company to: 1. Establish proper impairment testing policies and procedures in accordance with IAS 36. 2. Conduct retrospective impairment assessments for relevant periods. 3. Engage an independent expert to validate the impairment testing methodology. 4. Restate financial statements if material impairments are identified.",
+          "severity": "high"
+        },
+        {
+          "title": "Inadequate Disclosure and Plan for Subsidiary's Going Concern",
+          "description": "While management acknowledges material uncertainty regarding the going concern of Golden Harvest Dairy Ltd., the disclosures and the outlined mitigating measures are generic. A detailed, credible, and monitored turnaround plan is absent from the public report.",
+          "action": "Require the Board of GHAIL to prepare and submit to the FRC, within 30 days, a comprehensive, board-approved viability plan for Golden Harvest Dairy Ltd., including detailed cash flow projections, debt restructuring negotiations, capital injection plans, and monthly monitoring milestones. The FRC will review this plan quarterly.",
+          "severity": "high"
+        },
+        {
+          "title": "Unchecked Escalation of Financial Leverage",
+          "description": "The company's debt-to-equity ratio increased from 0.77 to 0.82, with total loans at 66.87% (2022) and 72.44% (2023) of equity. The 'Emphasis of Matter' by the auditor highlights an unsustainable capital structure heavily reliant on short-term debt, exposing the company to severe refinancing and interest rate risk.",
+          "action": "1. Require the company's audit committee to commission an independent review of its capital structure and long-term financing strategy. 2. Direct the company to engage with its lenders to formalize a medium-term debt restructuring plan and submit a copy to the FRC within 60 days. 3. Impose a condition that any further significant borrowing requires prior notification to the FRC.",
+          "severity": "high"
+        }
+      ],
+      "materiality": [
+        {
+          "category": "WPPF Non-Compliance",
+          "impact": "Qualified audit opinion, non-compliance with law, potential employee dissatisfaction.",
+          "quantitative": "BDT 27.89 million provision (2022) and BDT 34.77 million (2023) (0.54% and 0.66% of total assets respectively).",
+          "qualitative": "High - Relates to legal compliance and social obligation. Affects the true and fair view of liabilities.",
+          "overall": "Clearly Material"
+        },
+        {
+          "category": "Share Money Deposit Non-Compliance",
+          "impact": "Qualified audit opinion, non-compliance with FRC directive, misrepresentation of equity.",
+          "quantitative": "BDT 48.36 million (0.94% of total assets).",
+          "qualitative": "High - Regulatory non-compliance affecting the classification between liabilities and equity.",
+          "overall": "Clearly Material"
+        },
+        {
+          "category": "IAS 36 Non-Compliance",
+          "impact": "Potential overstatement of asset values, inaccurate financial position representation.",
+          "quantitative": "PPE carrying value BDT 1,864.30 million (36.19% of total assets).",
+          "qualitative": "High - Fundamental accounting standard non-compliance affecting asset valuation.",
+          "overall": "Pervasively Material"
+        },
+        {
+          "category": "High Financial Leverage & Liquidity Risk",
+          "impact": "Threatens continuity of operations, increases cost of capital, limits strategic flexibility.",
+          "quantitative": "Total loans BDT 1,951.57 million (2022) and BDT 2,086.73 million (2023). Finance cost BDT 112.00 million (2022) and BDT 145.42 million (2023).",
+          "qualitative": "Pervasively Material - Impacts the entity's ability to continue as a going concern, a fundamental assumption in financial reporting.",
+          "overall": "Pervasively Material"
+        }
+      ],
+      "actions": [
+        {
+          "type": "Corrective Directive",
+          "action": "Formal letter to the Board of Directors detailing the findings and requiring specific corrective actions on WPPF distribution, share money deposit conversion, IAS 36 compliance, debt management, and subsidiary viability.",
+          "responsible": "FRC Bangladesh Enforcement Division",
+          "timeframe": "7 days",
+          "priority": "Critical"
+        },
+        {
+          "type": "Information Request",
+          "action": "Request detailed board minutes, cash flow forecasts, lender correspondence, impairment testing documentation, and the subsidiary's latest management accounts.",
+          "responsible": "FRC Bangladesh Inspection Team",
+          "timeframe": "15 days",
+          "priority": "High"
+        },
+        {
+          "type": "Follow-up Review",
+          "action": "Schedule a follow-up inspection in Q4 2024 to assess implementation of corrective actions, financial restructuring progress, IAS 36 compliance, and the subsidiary's status.",
+          "responsible": "FRC Bangladesh",
+          "timeframe": "6 months",
+          "priority": "High"
+        },
+        {
+          "type": "Penalty Consideration",
+          "action": "Initiate proceedings for imposing penalties under the Financial Reporting Act, 2015 for repeated non-compliance with regulatory requirements.",
+          "responsible": "FRC Bangladesh Legal Division",
+          "timeframe": "30 days",
+          "priority": "Medium"
+        }
+      ]
+    }
+  }
+}
