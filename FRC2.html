@@ -1,0 +1,2828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC Bangladesh - Regulatory Inspection Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* All existing CSS remains the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a3a8f 0%, #2a5bd7 100%);
+            color: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+
+        .left-panel {
+            flex: 3;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-panel {
+            flex: 1;
+            background-color: #fff;
+            border-left: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            margin-bottom: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab:hover {
+            background-color: #f8f9fa;
+            color: #2a5bd7;
+        }
+
+        .tab.active {
+            color: #1a3a8f;
+            border-bottom: 3px solid #1a3a8f;
+            background-color: #f0f5ff;
+        }
+
+        .tab-content {
+            display: none;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5bd7;
+        }
+
+        .section h2 {
+            color: #1a3a8f;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+
+        .section h2 i {
+            color: #2a5bd7;
+        }
+
+        .subsection {
+            margin-bottom: 20px;
+        }
+
+        .subsection h3 {
+            color: #444;
+            margin-bottom: 12px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection h3 i {
+            color: #2a5bd7;
+            font-size: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        table th {
+            background-color: #f0f5ff;
+            color: #1a3a8f;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+            white-space: nowrap;
+        }
+
+        table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f0f5ff;
+        }
+
+        .risk-high {
+            color: #d32f2f;
+            font-weight: 600;
+            background-color: #ffebee;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .risk-moderate {
+            color: #f57c00;
+            font-weight: 600;
+            background-color: #fff3e0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .risk-low {
+            color: #388e3c;
+            font-weight: 600;
+            background-color: #e8f5e9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .file-list {
+            list-style-type: none;
+        }
+
+        .file-item {
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #2a5bd7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-item:hover {
+            background-color: #f0f5ff;
+            transform: translateX(5px);
+        }
+
+        .file-item.active {
+            background-color: #e3eeff;
+            border-left-color: #1a3a8f;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #1a3a8f;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-type {
+            font-size: 11px;
+            color: #666;
+            background-color: #eee;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .file-year {
+            font-size: 11px;
+            color: #fff;
+            background-color: #2a5bd7;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .pdf-viewer-container {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .pdf-viewer-container h3 {
+            background-color: #f0f5ff;
+            padding: 12px;
+            margin: 0;
+            color: #1a3a8f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        #pdf-viewer {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        .btn-export {
+            background: linear-gradient(to right, #1a3a8f, #2a5bd7);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 58, 143, 0.3);
+        }
+
+        .compliance-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .compliant {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .partial {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .non-compliant {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+
+        .source-ref {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .tag-audit {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .tag-fs {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .tag-note {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .materiality-high {
+            border-left: 4px solid #d32f2f;
+        }
+
+        .materiality-moderate {
+            border-left: 4px solid #f57c00;
+        }
+
+        .year-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .year-tab {
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .year-tab:hover {
+            color: #2a5bd7;
+        }
+
+        .year-tab.active {
+            color: #1a3a8f;
+            border-bottom: 3px solid #1a3a8f;
+        }
+
+        .year-content {
+            display: none;
+        }
+
+        .year-content.active {
+            display: block;
+        }
+
+        .comparison-table {
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .comparison-col {
+            min-width: 250px;
+            margin-right: 20px;
+        }
+
+        .comparison-col h4 {
+            background-color: #1a3a8f;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .comparison-item {
+            background-color: white;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+
+        .comparison-item:last-child {
+            border-radius: 0 0 5px 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-item .label {
+            font-weight: 600;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .comparison-item .value {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .finding-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid;
+        }
+
+        .finding-card.high {
+            border-top-color: #d32f2f;
+        }
+
+        .finding-card.moderate {
+            border-top-color: #f57c00;
+        }
+
+        .finding-card.low {
+            border-top-color: #388e3c;
+        }
+
+        .finding-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .finding-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .finding-card .action {
+            font-size: 13px;
+            color: #1a3a8f;
+            font-weight: 600;
+        }
+
+        /* New styles for blank state */
+        .blank-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: #666;
+            padding: 40px 20px;
+        }
+
+        .blank-state i {
+            font-size: 64px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .blank-state h3 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .blank-state p {
+            max-width: 500px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-load-company {
+            background: linear-gradient(to right, #1a3a8f, #2a5bd7);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .btn-load-company:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 58, 143, 0.3);
+        }
+
+        .company-selector {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f0f5ff;
+            border-radius: 8px;
+        }
+
+        .company-selector h4 {
+            color: #1a3a8f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .company-selector select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .company-selector select:focus {
+            outline: none;
+            border-color: #2a5bd7;
+            box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
+        }
+
+        /* New styles for data display */
+        .data-table {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .data-table table {
+            min-width: 800px;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #1a3a8f;
+        }
+
+        .metric-trend-up {
+            color: #2e7d32;
+        }
+
+        .metric-trend-down {
+            color: #d32f2f;
+        }
+
+        .metric-trend-stable {
+            color: #f57c00;
+        }
+
+        .standard-compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .standard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid;
+        }
+
+        .standard-card.compliant {
+            border-left-color: #2e7d32;
+        }
+
+        .standard-card.partial {
+            border-left-color: #f57c00;
+        }
+
+        .standard-card.non-compliant {
+            border-left-color: #d32f2f;
+        }
+
+        .standard-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .standard-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .standard-card .status {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .company-upload {
+            margin-bottom: 25px;
+        }
+
+        .btn-upload {
+            background: linear-gradient(to right, #1a3a8f, #2a5bd7);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 58, 143, 0.3);
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #2a5bd7;
+        }
+
+        .chart-card h4 {
+            color: #1a3a8f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .chart-tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .chart-tab:hover {
+            color: #2a5bd7;
+        }
+
+        .chart-tab.active {
+            color: #1a3a8f;
+            border-bottom: 2px solid #1a3a8f;
+            background-color: #f0f5ff;
+        }
+
+        .chart-section {
+            display: none;
+        }
+
+        .chart-section.active {
+            display: block;
+        }
+
+        .trend-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .trend-indicator.up {
+            color: #2e7d32;
+        }
+
+        .trend-indicator.down {
+            color: #d32f2f;
+        }
+
+        .trend-indicator.stable {
+            color: #f57c00;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .right-panel {
+                border-left: none;
+                border-top: 1px solid #ddd;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .tab {
+                white-space: nowrap;
+            }
+
+            .key-findings,
+            .standard-compliance-grid,
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 200px;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1><i class="fas fa-gavel"></i> Financial Reporting Council (FRC), Bangladesh</h1>
+        <p id="header-subtitle">Regulatory Inspection Portal - Select a company to begin analysis</p>
+    </div>
+
+    <div class="tabs-container" style="position: sticky; top: 0; z-index: 100; background: white; border-radius: 10px 10px 0 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <div class="tabs">
+            <div class="tab" onclick="switchTab(0)">
+                <i class="fas fa-home"></i> Overview
+            </div>
+            <div class="tab" onclick="switchTab(1)">
+                <i class="fas fa-search"></i> Audit Analysis
+            </div>
+            <div class="tab" onclick="switchTab(2)">
+                <i class="fas fa-chart-line"></i> IFRS Compliance
+            </div>
+            <div class="tab active" onclick="switchTab(3)">
+                <i class="fas fa-file-invoice-dollar"></i> Financial Analysis
+            </div>
+            <div class="tab" onclick="switchTab(4)">
+                <i class="fas fa-exclamation-circle"></i> Risk Indicators
+            </div>
+            <div class="tab" onclick="switchTab(5)">
+                <i class="fas fa-user-tie"></i> Governance
+            </div>
+            <div class="tab" onclick="switchTab(6)">
+                <i class="fas fa-gavel"></i> Enforcement
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            <!-- All Tab Contents - Initially empty -->
+            <div class="tab-content active" id="tab-overview">
+                <div class="blank-state" id="overview-blank">
+                    <i class="fas fa-building"></i>
+                    <h3>No Company Selected</h3>
+                    <p>Select a company from the right panel to load its regulatory inspection data. The analysis
+                        includes financial statements, audit reports, IFRS compliance, and risk assessment for multiple
+                        years.</p>
+                    <button class="btn-load-company" onclick="document.querySelector('.company-selector select').focus()">
+                        <i class="fas fa-folder-open"></i> Select a Company
+                    </button>
+                </div>
+                <!-- Overview content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-audit">
+                <div class="blank-state" id="audit-blank">
+                    <i class="fas fa-search"></i>
+                    <h3>Audit Analysis</h3>
+                    <p>Select a company to view detailed audit analysis including auditor opinions, emphasis of matter
+                        paragraphs, and scope limitations across multiple years.</p>
+                </div>
+                <!-- Audit content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-compliance">
+                <div class="blank-state" id="compliance-blank">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>IFRS Compliance</h3>
+                    <p>Select a company to view IFRS/IAS compliance assessment with year-wise comparison and compliance
+                        trend analysis.</p>
+                </div>
+                <!-- Compliance content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-financial">
+                <div class="blank-state" id="financial-blank">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3>Financial Analysis</h3>
+                    <p>Select a company to view comprehensive financial statement analysis including profit & loss,
+                        balance sheet, cash flow, and key financial ratios.</p>
+                </div>
+                <!-- Financial content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-risk">
+                <div class="blank-state" id="risk-blank">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Risk Indicators</h3>
+                    <p>Select a company to view fraud and manipulation risk indicators with materiality assessment
+                        across multiple years.</p>
+                </div>
+                <!-- Risk content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-governance">
+                <div class="blank-state" id="governance-blank">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Governance</h3>
+                    <p>Select a company to view governance assessment including board effectiveness, audit quality, and
+                        internal control environment.</p>
+                </div>
+                <!-- Governance content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-enforcement">
+                <div class="blank-state" id="enforcement-blank">
+                    <i class="fas fa-gavel"></i>
+                    <h3>Enforcement</h3>
+                    <p>Select a company to view regulatory findings, materiality assessment, and recommended enforcement
+                        actions.</p>
+                </div>
+                <!-- Enforcement content will be loaded here dynamically -->
+            </div>
+        </div>
+
+        <!-- Right Panel - File Navigation & Company Selection -->
+        <div class="right-panel">
+            <h2 style="color: #1a3a8f; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-folder-open"></i> Company Selection
+            </h2>
+
+            <div class="company-selector">
+                <h4><i class="fas fa-building"></i> Select Company</h4>
+                <select id="companySelect" onchange="loadCompanyData()">
+                    <option value="">-- Select a company --</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            
+            <div class="company-upload">
+                <a href="form.html" style="text-decoration: none;">
+                    <button class="btn-upload">
+                        <i class="fas fa-upload"></i> Upload Company Data
+                    </button>
+                </a>
+            </div>
+
+            <div id="fileNavigation" style="display: none;">
+                <h3 style="color: #1a3a8f; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-file-pdf"></i> Processed Files
+                </h3>
+
+                <p style="margin-bottom: 20px; color: #666;">Select a file to view in the PDF viewer:</p>
+
+                <div class="file-list" id="fileList">
+                    <!-- Files will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="pdf-viewer-container">
+                <h3><i class="fas fa-eye"></i> Document Viewer</h3>
+                <iframe id="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file="></iframe>
+            </div>
+            
+            <div id="inspectorNotes"
+                style="margin-top: 25px; padding: 15px; background-color: #f0f5ff; border-radius: 8px; display: none;">
+                <h4 style="color: #1a3a8f; margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Inspector Notes</h4>
+                <p id="notesContent" style="font-size: 14px; color: #555;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>FRC Bangladesh - Regulatory Inspection Portal | Generated on <span id="current-date"></span></p>
+        <p><i class="fas fa-info-circle"></i> Select a company from the dropdown to load its inspection data. All
+            findings are linked to source documents for traceability.</p>
+    </div>
+
+    <script>
+        // Global variable to store company data loaded from JSON
+        let companyData = {};
+        let currentCompany = null;
+        let charts = {}; // Store chart instances
+
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        // Load JSON data on page load
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                // Load the JSON file
+                const response = await fetch('companyData.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                companyData = await response.json();
+                
+                // Populate the company dropdown
+                populateCompanyDropdown();
+                
+                // Initialize with blank state
+                resetToBlankState();
+                
+                console.log('Company data loaded successfully:', Object.keys(companyData).length, 'companies');
+            } catch (error) {
+                console.error('Error loading company data:', error);
+                alert('Failed to load company data. Please check if companyData.json exists and is accessible.');
+            }
+        });
+
+        // Populate company dropdown from JSON data
+        function populateCompanyDropdown() {
+            const companySelect = document.getElementById('companySelect');
+            
+            // Clear existing options except the first one
+            companySelect.innerHTML = '<option value="">-- Select a company --</option>';
+            
+            // Add options from the loaded JSON data
+            Object.entries(companyData).forEach(([id, company]) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = company.name;
+                companySelect.appendChild(option);
+            });
+        }
+
+        // Load company data when selected
+        function loadCompanyData() {
+            const select = document.getElementById('companySelect');
+            const companyId = select.value;
+
+            if (!companyId) {
+                // Reset to blank state
+                resetToBlankState();
+                return;
+            }
+
+            currentCompany = companyData[companyId];
+
+            if (!currentCompany) {
+                alert("Company data not found!");
+                return;
+            }
+
+            // Update header
+            document.getElementById('header-subtitle').textContent = `Regulatory Inspection Portal - ${currentCompany.name}`;
+
+            // Show file navigation
+            document.getElementById('fileNavigation').style.display = 'block';
+            document.getElementById('inspectorNotes').style.display = 'block';
+            
+            // Display inspector notes
+            const notesContent = document.getElementById('notesContent');
+            if (currentCompany.inspectorNotes) {
+                notesContent.textContent = currentCompany.inspectorNotes;
+            } else {
+                notesContent.textContent = 'No inspector notes available.';
+            }
+
+            // Load PDF files
+            loadPDFFiles();
+
+            // Destroy existing charts
+            destroyAllCharts();
+
+            // Load all analysis data
+            loadAllTabData();
+
+            // Select first file if available
+            if (currentCompany.pdfFiles && currentCompany.pdfFiles.length > 0) {
+                selectFile(0);
+            }
+        }
+
+        // Destroy all existing charts
+        function destroyAllCharts() {
+            Object.keys(charts).forEach(chartId => {
+                if (charts[chartId]) {
+                    charts[chartId].destroy();
+                }
+            });
+            charts = {};
+        }
+
+        // Load PDF files into the file list
+        function loadPDFFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            if (!currentCompany.pdfFiles || currentCompany.pdfFiles.length === 0) {
+                fileList.innerHTML = '<p style="color: #666; font-style: italic;">No PDF files available for this company.</p>';
+                return;
+            }
+
+            currentCompany.pdfFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item' + (index === 0 ? ' active' : '');
+                fileItem.onclick = () => selectFile(index);
+
+                fileItem.innerHTML = `
+                    <div class="file-name"><i class="fas fa-file-pdf"></i> ${file.name || 'Unnamed File'}</div>
+                    <div><span class="file-type">PDF</span> <span class="file-year">${file.year || 'N/A'}</span></div>
+                    <div style="margin-top: 8px; font-size: 14px; color: #555;">${file.type || 'Unknown Type'}</div>
+                `;
+
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // Select a file to view
+        function selectFile(index) {
+            // Update active file in list
+            const fileItems = document.querySelectorAll('.file-item');
+            fileItems.forEach(item => item.classList.remove('active'));
+            if (fileItems[index]) {
+                fileItems[index].classList.add('active');
+            }
+
+            // Update PDF viewer if it exists
+            const pdfViewer = document.getElementById('pdf-viewer');
+            if (pdfViewer && currentCompany.pdfFiles && currentCompany.pdfFiles[index]) {
+                const file = currentCompany.pdfFiles[index];
+                // Use a placeholder if no URL is provided
+                const fileUrl = file.url || `placeholder_${file.name || 'document'}.pdf`;
+                pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(fileUrl)}`;
+            }
+        }
+
+        // Load all tab data
+        function loadAllTabData() {
+            // Hide blank states
+            document.querySelectorAll('.blank-state').forEach(state => {
+                state.style.display = 'none';
+            });
+
+            // Clear any previously loaded content
+            document.querySelectorAll('.section').forEach(section => {
+                section.remove();
+            });
+
+            // Check if company has the required data structure
+            if (!currentCompany) {
+                console.warn('No company data available');
+                return;
+            }
+
+            // Load data for each tab
+            loadOverviewData();
+            loadAuditAnalysisData();
+            loadComplianceData();
+            loadFinancialAnalysisData();
+            loadRiskIndicatorsData();
+            loadGovernanceData();
+            loadEnforcementData();
+        }
+
+        // Load overview data
+        function loadOverviewData() {
+            const overviewTab = document.getElementById('tab-overview');
+            
+            if (!currentCompany.overview) {
+                overviewTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Overview Data</h2><p>This company does not have overview data available.</p></div>';
+                return;
+            }
+
+            let overviewContent = `
+                <div class="section">
+                    <h2><i class="fas fa-info-circle"></i> Inspection Overview</h2>
+                    <p>${currentCompany.overview.description || 'No description available.'}</p>
+                    
+                    ${currentCompany.overview.keyFindings && currentCompany.overview.keyFindings.length > 0 ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Key Findings</h3>
+                        <div class="key-findings">
+                            ${currentCompany.overview.keyFindings.map(finding => `
+                                <div class="finding-card ${finding.severity || 'moderate'}">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled Finding'}</h4>
+                                    <p>${finding.description || 'No description'}</p>
+                                    <div class="action">${finding.action || 'Action required'}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            // Add year-wise data if available
+            if (currentCompany.overview.yearData && currentCompany.years && currentCompany.years.length > 0) {
+                overviewContent += `
+                    <div class="section">
+                        <h2><i class="fas fa-chart-line"></i> Trend Visualization</h2>
+                        
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-bar"></i> Revenue Trend</h4>
+                                <div class="chart-container">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-balance-scale"></i> Profit/Loss Trend</h4>
+                                <div class="chart-container">
+                                    <canvas id="profitChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-tabs">
+                            <div class="chart-tab active" onclick="switchChartTab('overview', 0)">Financial Metrics</div>
+                            <div class="chart-tab" onclick="switchChartTab('overview', 1)">Ratios Trend</div>
+                            <div class="chart-tab" onclick="switchChartTab('overview', 2)">Compliance</div>
+                        </div>
+                        
+                        <div class="chart-section active" id="overview-chart-0">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-area"></i> Key Financial Metrics</h4>
+                                <div class="chart-container">
+                                    <canvas id="financialMetricsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-section" id="overview-chart-1">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-percentage"></i> Financial Ratios Trend</h4>
+                                <div class="chart-container">
+                                    <canvas id="ratiosTrendChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-section" id="overview-chart-2">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-clipboard-check"></i> Compliance Score Trend</h4>
+                                <div class="chart-container">
+                                    <canvas id="complianceTrendChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            overviewTab.insertAdjacentHTML('beforeend', overviewContent);
+            
+            // Create charts after content is added
+            if (currentCompany.years && currentCompany.years.length > 0) {
+                createOverviewCharts();
+            }
+        }
+
+        // Create overview charts
+        function createOverviewCharts() {
+            const years = currentCompany.years;
+            
+            // Revenue Chart
+            const revenueData = years.map(year => {
+                if (currentCompany.overview.yearData && currentCompany.overview.yearData[year]) {
+                    const revenue = currentCompany.overview.yearData[year].revenue;
+                    return revenue ? parseFloat(revenue.replace(/[^0-9.-]+/g, "")) : 0;
+                }
+                return 0;
+            });
+            
+            createLineChart('revenueChart', years, revenueData, 'Revenue Trend', '#2a5bd7', 'Revenue (in BDT)');
+            
+            // Profit Chart
+            const profitData = years.map(year => {
+                if (currentCompany.overview.yearData && currentCompany.overview.yearData[year]) {
+                    const netProfit = currentCompany.overview.yearData[year].netProfit;
+                    const netLoss = currentCompany.overview.yearData[year].netLoss;
+                    const value = netProfit || netLoss;
+                    return value ? parseFloat(value.replace(/[^0-9.-]+/g, "")) : 0;
+                }
+                return 0;
+            });
+            
+            createLineChart('profitChart', years, profitData, 'Net Profit/Loss Trend', profitData[profitData.length - 1] >= 0 ? '#2e7d32' : '#d32f2f', 'Profit/Loss (in BDT)');
+            
+            // Financial Metrics Chart
+            if (currentCompany.financialAnalysis) {
+                const assetsData = years.map(year => {
+                    if (currentCompany.financialAnalysis.balanceSheet && currentCompany.financialAnalysis.balanceSheet[year]) {
+                        const assets = currentCompany.financialAnalysis.balanceSheet[year].totalAssets;
+                        return assets ? parseFloat(assets.replace(/[^0-9.-]+/g, "")) : 0;
+                    }
+                    return 0;
+                });
+                
+                const liabilitiesData = years.map(year => {
+                    if (currentCompany.financialAnalysis.balanceSheet && currentCompany.financialAnalysis.balanceSheet[year]) {
+                        const liabilities = currentCompany.financialAnalysis.balanceSheet[year].totalLiabilities;
+                        return liabilities ? parseFloat(liabilities.replace(/[^0-9.-]+/g, "")) : 0;
+                    }
+                    return 0;
+                });
+                
+                createMultiLineChart('financialMetricsChart', years, [
+                    { label: 'Total Assets', data: assetsData, color: '#2a5bd7' },
+                    { label: 'Total Liabilities', data: liabilitiesData, color: '#d32f2f' }
+                ], 'Assets vs Liabilities Trend');
+            }
+            
+            // Ratios Trend Chart
+            if (currentCompany.financialAnalysis && currentCompany.financialAnalysis.ratios) {
+                const currentRatioData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.currentRatio;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                const debtToEquityData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.debtToEquity;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                createMultiLineChart('ratiosTrendChart', years, [
+                    { label: 'Current Ratio', data: currentRatioData, color: '#2e7d32' },
+                    { label: 'Debt to Equity', data: debtToEquityData, color: '#f57c00' }
+                ], 'Key Ratios Trend');
+            }
+            
+            // Compliance Trend Chart
+            if (currentCompany.ifrsCompliance && currentCompany.ifrsCompliance.standards) {
+                const standards = Object.keys(currentCompany.ifrsCompliance.standards);
+                const complianceScoreData = years.map(year => {
+                    let compliantCount = 0;
+                    standards.forEach(standard => {
+                        const status = currentCompany.ifrsCompliance.standards[standard][year];
+                        if (status === 'compliant') compliantCount += 1;
+                        else if (status === 'partial') compliantCount += 0.5;
+                    });
+                    return standards.length > 0 ? (compliantCount / standards.length) * 100 : 0;
+                });
+                
+                createLineChart('complianceTrendChart', years, complianceScoreData, 'Compliance Score Trend', '#7b1fa2', 'Compliance Score (%)');
+            }
+        }
+
+        // Load audit analysis data
+        function loadAuditAnalysisData() {
+            const auditTab = document.getElementById('tab-audit');
+            
+            if (!currentCompany.auditAnalysis) {
+                auditTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Audit Analysis Data</h2><p>This company does not have audit analysis data available.</p></div>';
+                return;
+            }
+
+            let auditContent = `
+                <div class="section">
+                    <h2><i class="fas fa-search"></i> Audit Analysis</h2>
+                    <p><strong>Auditor:</strong> ${currentCompany.auditAnalysis.auditor || 'Not specified'}</p>
+                    <p><strong>Opinion Type:</strong> ${currentCompany.auditAnalysis.opinionType || 'Not specified'}</p>
+                    
+                    ${currentCompany.auditAnalysis.yearDetails ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-line"></i> Audit Issue Trend</h3>
+                        
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Audit Issues by Year</h4>
+                                <div class="chart-container">
+                                    <canvas id="auditIssuesChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-bar"></i> Issue Severity Distribution</h4>
+                                <div class="chart-container">
+                                    <canvas id="issueSeverityChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3><i class="fas fa-file-contract"></i> Year-Wise Analysis</h3>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.auditAnalysis.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('audit', ${index})">${year}</div>
+                            `).join('')}
+                        </div>
+                        
+                        ${currentCompany.auditAnalysis.years.map((year, index) => {
+                            const yearData = currentCompany.auditAnalysis.yearDetails[year];
+                            if (!yearData) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="audit-year-${year}">
+                                    <div class="subsection">
+                                        <h4>${year} Audit Issues</h4>
+                                        ${yearData.issues && yearData.issues.length > 0 ? `
+                                        <ul style="padding-left: 20px;">
+                                            ${yearData.issues.map(issue => `<li>${issue}</li>`).join('')}
+                                        </ul>
+                                        ` : '<p>No audit issues documented.</p>'}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.auditAnalysis.recurringIssues ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Recurring Audit Issues</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Issue</th>
+                                    ${currentCompany.auditAnalysis.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Status</th>
+                                    <th>Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.auditAnalysis.recurringIssues.map(issue => `
+                                    <tr>
+                                        <td>${issue.issue || 'Unknown'}</td>
+                                        ${currentCompany.auditAnalysis.years.map(year => `
+                                            <td>${issue[year] ? '<i class="fas fa-check" style="color:red"></i>' : '<i class="fas fa-times" style="color:green"></i>'}</td>
+                                        `).join('')}
+                                        <td>${issue.status || 'Unknown'}</td>
+                                        <td><span class="risk-${issue.risk || 'moderate'}">${issue.risk || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            auditTab.insertAdjacentHTML('beforeend', auditContent);
+            
+            // Create audit charts
+            createAuditCharts();
+        }
+
+        // Create audit charts
+        function createAuditCharts() {
+            if (!currentCompany.auditAnalysis || !currentCompany.auditAnalysis.yearDetails) return;
+            
+            const years = currentCompany.auditAnalysis.years || currentCompany.years;
+            
+            // Audit Issues Chart
+            const issuesData = years.map(year => {
+                const yearData = currentCompany.auditAnalysis.yearDetails[year];
+                return yearData && yearData.issues ? yearData.issues.length : 0;
+            });
+            
+            createBarChart('auditIssuesChart', years, issuesData, 'Number of Audit Issues', '#d32f2f', 'Issues Count');
+            
+            // Issue Severity Chart (if severity data is available)
+            if (currentCompany.auditAnalysis.recurringIssues) {
+                const highCount = currentCompany.auditAnalysis.recurringIssues.filter(issue => issue.risk === 'high').length;
+                const moderateCount = currentCompany.auditAnalysis.recurringIssues.filter(issue => issue.risk === 'moderate').length;
+                const lowCount = currentCompany.auditAnalysis.recurringIssues.filter(issue => issue.risk === 'low').length;
+                
+                createPieChart('issueSeverityChart', 
+                    ['High Risk', 'Moderate Risk', 'Low Risk'], 
+                    [highCount, moderateCount, lowCount], 
+                    ['#d32f2f', '#f57c00', '#388e3c'],
+                    'Issue Severity Distribution'
+                );
+            }
+        }
+
+        // Load compliance data
+        function loadComplianceData() {
+            const complianceTab = document.getElementById('tab-compliance');
+            
+            if (!currentCompany.ifrsCompliance) {
+                complianceTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No IFRS Compliance Data</h2><p>This company does not have IFRS compliance data available.</p></div>';
+                return;
+            }
+
+            let complianceContent = `
+                <div class="section">
+                    <h2><i class="fas fa-chart-line"></i> IFRS/IAS Compliance</h2>
+                    
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-pie"></i> Compliance Status Overview</h4>
+                            <div class="chart-container">
+                                <canvas id="complianceOverviewChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-bar"></i> Year-wise Compliance Score</h4>
+                            <div class="chart-container">
+                                <canvas id="complianceYearChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${currentCompany.ifrsCompliance.standards ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-check"></i> Compliance Status by Standard</h3>
+                        
+                        <div class="standard-compliance-grid">
+                            ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                <div class="standard-card ${data[currentCompany.years[currentCompany.years.length - 1]] || 'non-compliant'}">
+                                    <h4>${standard}: ${data.name || 'Unknown Standard'}</h4>
+                                    <p><strong>Status (${currentCompany.years[currentCompany.years.length - 1]}):</strong> 
+                                        <span class="compliance-badge ${data[currentCompany.years[currentCompany.years.length - 1]] || 'non-compliant'}">
+                                            ${data[currentCompany.years[currentCompany.years.length - 1]] === 'partial' ? 'Partial' : 
+                                              data[currentCompany.years[currentCompany.years.length - 1]] === 'non-compliant' ? 'Non-compliant' : 
+                                              data[currentCompany.years[currentCompany.years.length - 1]] === 'compliant' ? 'Compliant' : 'Unknown'}
+                                        </span>
+                                    </p>
+                                    <p>${data.issues || 'No issues documented'}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-bar"></i> Compliance Trend Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Standard</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                    <tr>
+                                        <td>${standard}</td>
+                                        ${currentCompany.years.map(year => `
+                                            <td><span class="compliance-badge ${data[year] || 'non-compliant'}">${data[year] === 'partial' ? 'P' : data[year] === 'non-compliant' ? 'N' : data[year] === 'compliant' ? 'C' : 'N/A'}</span></td>
+                                        `).join('')}
+                                        <td>${getComplianceTrend(data)}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No compliance standards data available.</p>'}
+                </div>
+            `;
+
+            complianceTab.insertAdjacentHTML('beforeend', complianceContent);
+            
+            // Create compliance charts
+            createComplianceCharts();
+        }
+
+        // Create compliance charts
+        function createComplianceCharts() {
+            if (!currentCompany.ifrsCompliance || !currentCompany.ifrsCompliance.standards) return;
+            
+            const years = currentCompany.years;
+            const standards = Object.keys(currentCompany.ifrsCompliance.standards);
+            
+            // Compliance Overview Pie Chart
+            let compliantCount = 0, partialCount = 0, nonCompliantCount = 0;
+            
+            standards.forEach(standard => {
+                const lastYear = years[years.length - 1];
+                const status = currentCompany.ifrsCompliance.standards[standard][lastYear];
+                if (status === 'compliant') compliantCount++;
+                else if (status === 'partial') partialCount++;
+                else nonCompliantCount++;
+            });
+            
+            createPieChart('complianceOverviewChart', 
+                ['Compliant', 'Partially Compliant', 'Non-Compliant'], 
+                [compliantCount, partialCount, nonCompliantCount], 
+                ['#2e7d32', '#f57c00', '#d32f2f'],
+                'Compliance Status Overview'
+            );
+            
+            // Year-wise Compliance Score Chart
+            const complianceScores = years.map(year => {
+                let compliantCount = 0;
+                standards.forEach(standard => {
+                    const status = currentCompany.ifrsCompliance.standards[standard][year];
+                    if (status === 'compliant') compliantCount += 1;
+                    else if (status === 'partial') compliantCount += 0.5;
+                });
+                return standards.length > 0 ? (compliantCount / standards.length) * 100 : 0;
+            });
+            
+            createLineChart('complianceYearChart', years, complianceScores, 'Compliance Score by Year', '#7b1fa2', 'Compliance Score (%)');
+        }
+
+        // Load financial analysis data
+        function loadFinancialAnalysisData() {
+            const financialTab = document.getElementById('tab-financial');
+            
+            if (!currentCompany.financialAnalysis) {
+                financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Analysis Data</h2><p>This company does not have financial analysis data available.</p></div>';
+                return;
+            }
+
+            let financialContent = `
+                <div class="section">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Financial Analysis</h2>
+                    
+                    <div class="chart-tabs">
+                        <div class="chart-tab active" onclick="switchChartTab('financial', 0)">Profit & Loss</div>
+                        <div class="chart-tab" onclick="switchChartTab('financial', 1)">Balance Sheet</div>
+                        <div class="chart-tab" onclick="switchChartTab('financial', 2)">Cash Flow</div>
+                        <div class="chart-tab" onclick="switchChartTab('financial', 3)">Ratios</div>
+                        <div class="chart-tab" onclick="switchChartTab('financial', 4)">Accrual Analysis</div>
+                    </div>
+                    
+                    <!-- Profit & Loss Charts -->
+                    <div class="chart-section active" id="financial-chart-0">
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-line"></i> Revenue Trend</h4>
+                                <div class="chart-container">
+                                    <canvas id="revenueTrendChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-bar"></i> Profitability Analysis</h4>
+                                <div class="chart-container">
+                                    <canvas id="profitabilityChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Balance Sheet Charts -->
+                    <div class="chart-section" id="financial-chart-1">
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-balance-scale"></i> Assets vs Liabilities</h4>
+                                <div class="chart-container">
+                                    <canvas id="assetsLiabilitiesChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-area"></i> Capital Structure</h4>
+                                <div class="chart-container">
+                                    <canvas id="capitalStructureChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cash Flow Charts -->
+                    <div class="chart-section" id="financial-chart-2">
+                        <div class="chart-card">
+                            <h4><i class="fas fa-money-bill-wave"></i> Cash Flow Trend</h4>
+                            <div class="chart-container">
+                                <canvas id="cashFlowChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ratios Charts -->
+                    <div class="chart-section" id="financial-chart-3">
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h4><i class="fas fa-percentage"></i> Liquidity Ratios</h4>
+                                <div class="chart-container">
+                                    <canvas id="liquidityChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-line"></i> Solvency Ratios</h4>
+                                <div class="chart-container">
+                                    <canvas id="solvencyChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-tachometer-alt"></i> Profitability Ratios</h4>
+                                <div class="chart-container">
+                                    <canvas id="profitabilityRatioChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <h4><i class="fas fa-chart-bar"></i> Efficiency Ratios</h4>
+                                <div class="chart-container">
+                                    <canvas id="efficiencyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accrual Analysis Charts -->
+                    <div class="chart-section" id="financial-chart-4">
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-area"></i> Accrual Trend Analysis</h4>
+                            <div class="chart-container">
+                                <canvas id="accrualTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            financialTab.insertAdjacentHTML('beforeend', financialContent);
+            
+            // Create financial charts
+            createFinancialCharts();
+        }
+
+        // Create financial charts
+        function createFinancialCharts() {
+            const years = currentCompany.years;
+            
+            // Revenue Trend Chart
+            if (currentCompany.financialAnalysis.profitLoss) {
+                const revenueData = years.map(year => {
+                    const revenue = currentCompany.financialAnalysis.profitLoss[year]?.revenue;
+                    return revenue ? parseFloat(revenue.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                const profitData = years.map(year => {
+                    const profit = currentCompany.financialAnalysis.profitLoss[year]?.netProfit;
+                    return profit ? parseFloat(profit.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                createLineChart('revenueTrendChart', years, revenueData, 'Revenue Trend', '#2a5bd7', 'Revenue (BDT)');
+                
+                createBarChart('profitabilityChart', years, profitData, 'Net Profit Trend', profitData[profitData.length - 1] >= 0 ? '#2e7d32' : '#d32f2f', 'Net Profit (BDT)');
+            }
+            
+            // Balance Sheet Charts
+            if (currentCompany.financialAnalysis.balanceSheet) {
+                const assetsData = years.map(year => {
+                    const assets = currentCompany.financialAnalysis.balanceSheet[year]?.totalAssets;
+                    return assets ? parseFloat(assets.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                const liabilitiesData = years.map(year => {
+                    const liabilities = currentCompany.financialAnalysis.balanceSheet[year]?.totalLiabilities;
+                    return liabilities ? parseFloat(liabilities.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                const equityData = years.map(year => {
+                    const assets = assetsData[years.indexOf(year)];
+                    const liabilities = liabilitiesData[years.indexOf(year)];
+                    return assets - liabilities;
+                });
+                
+                createMultiLineChart('assetsLiabilitiesChart', years, [
+                    { label: 'Total Assets', data: assetsData, color: '#2a5bd7' },
+                    { label: 'Total Liabilities', data: liabilitiesData, color: '#d32f2f' }
+                ], 'Assets vs Liabilities');
+                
+                createStackedBarChart('capitalStructureChart', years, 
+                    liabilitiesData, equityData, 
+                    'Liabilities', 'Equity', 
+                    '#d32f2f', '#2e7d32', 
+                    'Capital Structure (BDT)'
+                );
+            }
+            
+            // Cash Flow Chart
+            if (currentCompany.financialAnalysis.cashFlow) {
+                const operatingData = years.map(year => {
+                    const operating = currentCompany.financialAnalysis.cashFlow[year]?.operating;
+                    return operating ? parseFloat(operating.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                const investingData = years.map(year => {
+                    const investing = currentCompany.financialAnalysis.cashFlow[year]?.investing;
+                    return investing ? parseFloat(investing.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                const financingData = years.map(year => {
+                    const financing = currentCompany.financialAnalysis.cashFlow[year]?.financing;
+                    return financing ? parseFloat(financing.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                createMultiLineChart('cashFlowChart', years, [
+                    { label: 'Operating Activities', data: operatingData, color: '#2e7d32' },
+                    { label: 'Investing Activities', data: investingData, color: '#2a5bd7' },
+                    { label: 'Financing Activities', data: financingData, color: '#7b1fa2' }
+                ], 'Cash Flow Activities (BDT)');
+            }
+            
+            // Ratios Charts
+            if (currentCompany.financialAnalysis.ratios) {
+                const currentRatioData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.currentRatio;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                const quickRatioData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.quickRatio;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                createMultiLineChart('liquidityChart', years, [
+                    { label: 'Current Ratio', data: currentRatioData, color: '#2a5bd7' },
+                    { label: 'Quick Ratio', data: quickRatioData, color: '#7b1fa2' }
+                ], 'Liquidity Ratios');
+                
+                const debtToEquityData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.debtToEquity;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                const debtRatioData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.debtRatio;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                createMultiLineChart('solvencyChart', years, [
+                    { label: 'Debt to Equity', data: debtToEquityData, color: '#d32f2f' },
+                    { label: 'Debt Ratio', data: debtRatioData, color: '#f57c00' }
+                ], 'Solvency Ratios');
+                
+                const roaData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.returnOnAssets;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                const roeData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.returnOnEquity;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                createMultiLineChart('profitabilityRatioChart', years, [
+                    { label: 'Return on Assets (ROA)', data: roaData, color: '#2e7d32' },
+                    { label: 'Return on Equity (ROE)', data: roeData, color: '#388e3c' }
+                ], 'Profitability Ratios (%)');
+                
+                const assetTurnoverData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.assetTurnover;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                const inventoryTurnoverData = years.map(year => {
+                    const ratio = currentCompany.financialAnalysis.ratios[year]?.inventoryTurnover;
+                    return ratio ? parseFloat(ratio) : 0;
+                });
+                
+                createMultiLineChart('efficiencyChart', years, [
+                    { label: 'Asset Turnover', data: assetTurnoverData, color: '#7b1fa2' },
+                    { label: 'Inventory Turnover', data: inventoryTurnoverData, color: '#f57c00' }
+                ], 'Efficiency Ratios');
+            }
+            
+            // Accrual Analysis Chart
+            if (currentCompany.financialAnalysis.accrualAnalysis) {
+                const accrualData = years.map(year => {
+                    const accruals = currentCompany.financialAnalysis.accrualAnalysis[year]?.totalAccruals;
+                    return accruals ? parseFloat(accruals.replace(/[^0-9.-]+/g, "")) : 0;
+                });
+                
+                createLineChart('accrualTrendChart', years, accrualData, 'Total Accruals Trend', 
+                    accrualData[accrualData.length - 1] >= 0 ? '#2a5bd7' : '#d32f2f', 
+                    'Accruals (BDT)'
+                );
+            }
+        }
+
+        // Load risk indicators data
+        function loadRiskIndicatorsData() {
+            const riskTab = document.getElementById('tab-risk');
+            
+            if (!currentCompany.riskIndicators) {
+                riskTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Risk Indicators Data</h2><p>This company does not have risk indicators data available.</p></div>';
+                return;
+            }
+
+            let riskContent = `
+                <div class="section materiality-high">
+                    <h2><i class="fas fa-exclamation-circle"></i> Risk Indicators</h2>
+                    
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-line"></i> Risk Level Trend</h4>
+                            <div class="chart-container">
+                                <canvas id="riskTrendChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-pie"></i> Risk Category Distribution</h4>
+                            <div class="chart-container">
+                                <canvas id="riskCategoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${currentCompany.riskIndicators.yearData ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-search"></i> Year-Wise Risk Assessment</h3>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('risk', ${index})">${year}</div>
+                            `).join('')}
+                        </div>
+                        
+                        ${currentCompany.years.map((year, index) => {
+                            const yearData = currentCompany.riskIndicators.yearData[year];
+                            if (!yearData || !Array.isArray(yearData)) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="risk-year-${year}">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Risk Indicator</th>
+                                                <th>Evidence</th>
+                                                <th>Risk Level</th>
+                                                <th>Reference</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${yearData.map(indicator => `
+                                                <tr>
+                                                    <td>${indicator.indicator || 'Unknown'}</td>
+                                                    <td>${indicator.evidence || 'No evidence'}</td>
+                                                    <td><span class="risk-${indicator.risk || 'moderate'}">${indicator.risk || 'Moderate'}</span></td>
+                                                    <td>${indicator.reference || 'No reference'}</td>
+                                                </tr>
+                                            `).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.riskIndicators.aggregateRisks ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-bar"></i> Aggregate Risk Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Risk Category</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                    <th>Aggregate Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.riskIndicators.aggregateRisks.map(risk => `
+                                    <tr>
+                                        <td>${risk.category || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `
+                                            <td><span class="risk-${risk[year] || 'moderate'}">${risk[year] || 'N/A'}</span></td>
+                                        `).join('')}
+                                        <td>${risk.trend || 'Unknown'}</td>
+                                        <td><span class="risk-${risk.aggregate?.toLowerCase() || 'moderate'}">${risk.aggregate || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            riskTab.insertAdjacentHTML('beforeend', riskContent);
+            
+            // Create risk charts
+            createRiskCharts();
+        }
+
+        // Create risk charts
+        function createRiskCharts() {
+            const years = currentCompany.years;
+            
+            // Risk Level Trend Chart
+            if (currentCompany.riskIndicators.aggregateRisks) {
+                const riskData = years.map(year => {
+                    // Calculate average risk score (High=3, Moderate=2, Low=1)
+                    let totalScore = 0;
+                    let count = 0;
+                    
+                    currentCompany.riskIndicators.aggregateRisks.forEach(risk => {
+                        const riskLevel = risk[year];
+                        if (riskLevel) {
+                            if (riskLevel === 'high') totalScore += 3;
+                            else if (riskLevel === 'moderate') totalScore += 2;
+                            else if (riskLevel === 'low') totalScore += 1;
+                            count++;
+                        }
+                    });
+                    
+                    return count > 0 ? totalScore / count : 0;
+                });
+                
+                createLineChart('riskTrendChart', years, riskData, 'Risk Level Trend', '#d32f2f', 'Risk Score');
+            }
+            
+            // Risk Category Distribution Chart
+            if (currentCompany.riskIndicators.aggregateRisks) {
+                const categories = {};
+                
+                currentCompany.riskIndicators.aggregateRisks.forEach(risk => {
+                    const category = risk.category || 'Other';
+                    const aggregateRisk = risk.aggregate || 'moderate';
+                    
+                    if (!categories[category]) {
+                        categories[category] = { high: 0, moderate: 0, low: 0 };
+                    }
+                    
+                    if (aggregateRisk === 'high') categories[category].high++;
+                    else if (aggregateRisk === 'moderate') categories[category].moderate++;
+                    else categories[category].low++;
+                });
+                
+                const categoryNames = Object.keys(categories);
+                const highCounts = categoryNames.map(cat => categories[cat].high);
+                const moderateCounts = categoryNames.map(cat => categories[cat].moderate);
+                const lowCounts = categoryNames.map(cat => categories[cat].low);
+                
+                createStackedBarChart('riskCategoryChart', categoryNames, 
+                    highCounts, moderateCounts, lowCounts,
+                    'High Risk', 'Moderate Risk', 'Low Risk',
+                    '#d32f2f', '#f57c00', '#388e3c',
+                    'Risk Category Distribution'
+                );
+            }
+        }
+
+        // Load governance data
+        function loadGovernanceData() {
+            const governanceTab = document.getElementById('tab-governance');
+            
+            if (!currentCompany.governance) {
+                governanceTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Governance Data</h2><p>This company does not have governance data available.</p></div>';
+                return;
+            }
+
+            let governanceContent = `
+                <div class="section">
+                    <h2><i class="fas fa-user-tie"></i> Governance Assessment</h2>
+                    
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-bar"></i> Governance Score Trend</h4>
+                            <div class="chart-container">
+                                <canvas id="governanceScoreChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-pie"></i> Board Effectiveness</h4>
+                            <div class="chart-container">
+                                <canvas id="boardEffectivenessChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${currentCompany.governance.board ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-users"></i> Board Governance</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Status</th>
+                                    <th>Evidence</th>
+                                    <th>Assessment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.board.map(item => `
+                                    <tr>
+                                        <td>${item.aspect || 'Unknown'}</td>
+                                        <td>${item.status || 'Unknown'}</td>
+                                        <td>${item.evidence || 'No evidence'}</td>
+                                        <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.governance.auditQuality ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-check"></i> Audit Quality</h3>
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-line"></i> Audit Quality Trend</h4>
+                            <div class="chart-container">
+                                <canvas id="auditQualityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.governance.internalControls ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-cogs"></i> Internal Controls</h3>
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-bar"></i> Control Effectiveness</h4>
+                            <div class="chart-container">
+                                <canvas id="controlEffectivenessChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.governance.auditCommittee ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-list"></i> Audit Committee</h3>
+                        <div style="background-color: #f0f5ff; padding: 15px; border-radius: 8px;">
+                            <p><strong>Existence:</strong> ${currentCompany.governance.auditCommittee.existence || 'Unknown'}</p>
+                            <p><strong>Composition:</strong> ${currentCompany.governance.auditCommittee.composition || 'Unknown'}</p>
+                            <p><strong>Assessment:</strong> <span class="risk-${currentCompany.governance.auditCommittee.assessment?.toLowerCase() || 'moderate'}">${currentCompany.governance.auditCommittee.assessment || 'Unknown'}</span></p>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            governanceTab.insertAdjacentHTML('beforeend', governanceContent);
+            
+            // Create governance charts
+            createGovernanceCharts();
+        }
+
+        // Create governance charts
+        function createGovernanceCharts() {
+            const years = currentCompany.years;
+            
+            // Governance Score Trend Chart
+            if (currentCompany.governance.auditQuality) {
+                // Calculate governance score based on various factors
+                const governanceScores = years.map(year => {
+                    let score = 50; // Base score
+                    
+                    // Board effectiveness
+                    if (currentCompany.governance.board) {
+                        const effectiveBoardItems = currentCompany.governance.board.filter(item => 
+                            item.assessment === 'good' || item.assessment === 'effective'
+                        ).length;
+                        score += (effectiveBoardItems / currentCompany.governance.board.length) * 25;
+                    }
+                    
+                    // Audit quality
+                    if (currentCompany.governance.auditQuality) {
+                        currentCompany.governance.auditQuality.forEach(item => {
+                            const yearValue = item[year];
+                            if (yearValue && (yearValue.includes('good') || yearValue.includes('effective'))) {
+                                score += 5;
+                            }
+                        });
+                    }
+                    
+                    // Internal controls
+                    if (currentCompany.governance.internalControls) {
+                        const effectiveControls = currentCompany.governance.internalControls.filter(item => 
+                            item.effectiveness === 'effective' || item.effectiveness === 'good'
+                        ).length;
+                        score += (effectiveControls / currentCompany.governance.internalControls.length) * 20;
+                    }
+                    
+                    return Math.min(100, Math.max(0, score));
+                });
+                
+                createLineChart('governanceScoreChart', years, governanceScores, 'Governance Score Trend', '#2a5bd7', 'Score');
+            }
+            
+            // Board Effectiveness Chart
+            if (currentCompany.governance.board) {
+                const effectiveCount = currentCompany.governance.board.filter(item => 
+                    item.assessment === 'good' || item.assessment === 'effective'
+                ).length;
+                
+                const moderateCount = currentCompany.governance.board.filter(item => 
+                    item.assessment === 'moderate' || item.assessment === 'satisfactory'
+                ).length;
+                
+                const poorCount = currentCompany.governance.board.filter(item => 
+                    item.assessment === 'poor' || item.assessment === 'ineffective'
+                ).length;
+                
+                createPieChart('boardEffectivenessChart', 
+                    ['Effective', 'Moderate', 'Poor'], 
+                    [effectiveCount, moderateCount, poorCount], 
+                    ['#2e7d32', '#f57c00', '#d32f2f'],
+                    'Board Effectiveness'
+                );
+            }
+            
+            // Audit Quality Chart
+            if (currentCompany.governance.auditQuality) {
+                const auditScores = years.map(year => {
+                    let score = 0;
+                    let count = 0;
+                    
+                    currentCompany.governance.auditQuality.forEach(item => {
+                        const yearValue = item[year];
+                        if (yearValue) {
+                            if (yearValue.includes('good') || yearValue.includes('excellent')) score += 3;
+                            else if (yearValue.includes('satisfactory') || yearValue.includes('adequate')) score += 2;
+                            else if (yearValue.includes('poor') || yearValue.includes('inadequate')) score += 1;
+                            count++;
+                        }
+                    });
+                    
+                    return count > 0 ? (score / (count * 3)) * 100 : 0;
+                });
+                
+                createLineChart('auditQualityChart', years, auditScores, 'Audit Quality Trend', '#7b1fa2', 'Quality Score');
+            }
+            
+            // Control Effectiveness Chart
+            if (currentCompany.governance.internalControls) {
+                const controlScores = years.map(year => {
+                    let score = 0;
+                    let count = 0;
+                    
+                    currentCompany.governance.internalControls.forEach(item => {
+                        const effectiveness = item.effectiveness;
+                        if (effectiveness) {
+                            if (effectiveness === 'effective') score += 3;
+                            else if (effectiveness === 'moderate') score += 2;
+                            else if (effectiveness === 'ineffective') score += 1;
+                            count++;
+                        }
+                    });
+                    
+                    return count > 0 ? (score / (count * 3)) * 100 : 0;
+                });
+                
+                createLineChart('controlEffectivenessChart', years, controlScores, 'Control Effectiveness Trend', '#388e3c', 'Effectiveness Score');
+            }
+        }
+
+        // Load enforcement data
+        function loadEnforcementData() {
+            const enforcementTab = document.getElementById('tab-enforcement');
+            
+            if (!currentCompany.enforcement) {
+                enforcementTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Enforcement Data</h2><p>This company does not have enforcement data available.</p></div>';
+                return;
+            }
+
+            let enforcementContent = `
+                <div class="section materiality-high">
+                    <h2><i class="fas fa-gavel"></i> Enforcement Actions</h2>
+                    
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-bar"></i> Findings Severity</h4>
+                            <div class="chart-container">
+                                <canvas id="findingsSeverityChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <h4><i class="fas fa-chart-pie"></i> Action Priority Distribution</h4>
+                            <div class="chart-container">
+                                <canvas id="actionPriorityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${currentCompany.enforcement.findings ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Key Findings</h3>
+                        <div class="key-findings">
+                            ${currentCompany.enforcement.findings.map(finding => `
+                                <div class="finding-card ${finding.severity || 'moderate'}">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled finding'}</h4>
+                                    <p>${finding.description || 'No description'}</p>
+                                    <div class="action">${finding.action || 'Action required'}</div>
+                                    ${finding.legalReference ? `<div style="font-size: 12px; color: #666; margin-top: 5px;"><strong>Legal Reference:</strong> ${finding.legalReference}</div>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.enforcement.materiality ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-weight"></i> Materiality Assessment</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Impact</th>
+                                    <th>Quantitative</th>
+                                    <th>Qualitative</th>
+                                    <th>Overall</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.enforcement.materiality.map(item => `
+                                    <tr>
+                                        <td>${item.category || 'Unknown'}</td>
+                                        <td>${item.impact || 'Unknown'}</td>
+                                        <td>${item.quantitative || 'Unknown'}</td>
+                                        <td>${item.qualitative || 'Unknown'}</td>
+                                        <td><span class="risk-high">${item.overall || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.enforcement.actions ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-tasks"></i> Recommended Actions</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Action Type</th>
+                                    <th>Specific Action</th>
+                                    <th>Responsible Party</th>
+                                    <th>Timeframe</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.enforcement.actions.map(action => `
+                                    <tr>
+                                        <td>${action.type || 'Unknown'}</td>
+                                        <td>${action.action || 'Unknown'}</td>
+                                        <td>${action.responsible || 'Unknown'}</td>
+                                        <td>${action.timeframe || 'Unknown'}</td>
+                                        <td><span class="risk-${action.priority?.toLowerCase() || 'moderate'}">${action.priority || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    <button class="btn-export" onclick="generatePDFReport()">
+                        <i class="fas fa-download"></i> Generate Comprehensive Inspection Report (PDF)
+                    </button>
+                </div>
+            `;
+
+            enforcementTab.insertAdjacentHTML('beforeend', enforcementContent);
+            
+            // Create enforcement charts
+            createEnforcementCharts();
+        }
+
+        // Create enforcement charts
+        function createEnforcementCharts() {
+            // Findings Severity Chart
+            if (currentCompany.enforcement.findings) {
+                const highCount = currentCompany.enforcement.findings.filter(f => f.severity === 'high').length;
+                const moderateCount = currentCompany.enforcement.findings.filter(f => f.severity === 'moderate').length;
+                const lowCount = currentCompany.enforcement.findings.filter(f => f.severity === 'low').length;
+                
+                createBarChart('findingsSeverityChart', 
+                    ['High', 'Moderate', 'Low'], 
+                    [highCount, moderateCount, lowCount], 
+                    'Findings by Severity', 
+                    ['#d32f2f', '#f57c00', '#388e3c'], 
+                    'Number of Findings'
+                );
+            }
+            
+            // Action Priority Distribution Chart
+            if (currentCompany.enforcement.actions) {
+                const highPriority = currentCompany.enforcement.actions.filter(a => a.priority === 'high').length;
+                const mediumPriority = currentCompany.enforcement.actions.filter(a => a.priority === 'medium').length;
+                const lowPriority = currentCompany.enforcement.actions.filter(a => a.priority === 'low').length;
+                
+                createPieChart('actionPriorityChart', 
+                    ['High Priority', 'Medium Priority', 'Low Priority'], 
+                    [highPriority, mediumPriority, lowPriority], 
+                    ['#d32f2f', '#f57c00', '#388e3c'],
+                    'Action Priority Distribution'
+                );
+            }
+        }
+
+        // Reset to blank state
+        function resetToBlankState() {
+            currentCompany = null;
+
+            // Reset header
+            document.getElementById('header-subtitle').textContent = 'Regulatory Inspection Portal - Select a company to begin analysis';
+
+            // Hide file navigation and notes
+            document.getElementById('fileNavigation').style.display = 'none';
+            document.getElementById('inspectorNotes').style.display = 'none';
+
+            // Destroy existing charts
+            destroyAllCharts();
+
+            // Show blank states
+            document.querySelectorAll('.blank-state').forEach(state => {
+                state.style.display = 'flex';
+            });
+
+            // Clear all loaded content
+            document.querySelectorAll('.section').forEach(section => {
+                section.remove();
+            });
+        }
+
+        // Chart creation helper functions
+        function createLineChart(canvasId, labels, data, title, color, yLabel) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            
+            charts[canvasId] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: color + '20',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: yLabel
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createBarChart(canvasId, labels, data, title, color, yLabel) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            
+            // Check if color is an array or single value
+            const backgroundColor = Array.isArray(color) ? color : color;
+            const borderColor = Array.isArray(color) ? color.map(c => c.replace('0.2', '1')) : color;
+            
+            charts[canvasId] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: backgroundColor,
+                        borderColor: borderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: yLabel
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createMultiLineChart(canvasId, labels, datasets, title) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            
+            const chartDatasets = datasets.map((dataset, index) => ({
+                label: dataset.label,
+                data: dataset.data,
+                borderColor: dataset.color,
+                backgroundColor: dataset.color + '20',
+                borderWidth: 2,
+                fill: index === 0, // Only fill the first dataset for better visibility
+                tension: 0.1
+            }));
+            
+            charts[canvasId] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: chartDatasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                size: 16
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPieChart(canvasId, labels, data, colors, title) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            
+            charts[canvasId] = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors,
+                        borderColor: colors.map(c => c.replace('0.8', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        },
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createStackedBarChart(canvasId, labels, data1, data2, label1, label2, color1, color2, yLabel) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            
+            charts[canvasId] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: label1,
+                            data: data1,
+                            backgroundColor: color1,
+                            borderColor: color1.replace('0.8', '1'),
+                            borderWidth: 1
+                        },
+                        {
+                            label: label2,
+                            data: data2,
+                            backgroundColor: color2,
+                            borderColor: color2.replace('0.8', '1'),
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: 'Year'
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: yLabel
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Helper functions
+        function getTrendIcon(ratioName) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'minus';
+            
+            const years = currentCompany.years;
+            if (years.length < 2) return 'minus';
+            
+            const firstValue = parseFloat(currentCompany.financialAnalysis.ratios[years[0]]?.[ratioName]) || 0;
+            const lastValue = parseFloat(currentCompany.financialAnalysis.ratios[years[years.length - 1]]?.[ratioName]) || 0;
+            
+            if (ratioName.includes('Ratio') || ratioName.includes('Margin')) {
+                // For ratios, higher is generally better
+                return lastValue > firstValue ? 'arrow-up' : lastValue < firstValue ? 'arrow-down' : 'minus';
+            } else {
+                return lastValue > firstValue ? 'arrow-up' : lastValue < firstValue ? 'arrow-down' : 'minus';
+            }
+        }
+
+        function getTrendColor(ratioName) {
+            const icon = getTrendIcon(ratioName);
+            if (icon === 'arrow-up') {
+                if (ratioName.includes('Debt') || ratioName.includes('Loss')) return 'red';
+                return 'green';
+            } else if (icon === 'arrow-down') {
+                if (ratioName.includes('Debt') || ratioName.includes('Loss')) return 'green';
+                return 'red';
+            }
+            return 'orange';
+        }
+
+        function getComplianceTrend(data) {
+            const years = currentCompany.years;
+            if (years.length < 2) return 'N/A';
+            
+            const firstStatus = data[years[0]];
+            const lastStatus = data[years[years.length - 1]];
+            
+            if (firstStatus === 'non-compliant' && lastStatus === 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+            if (firstStatus === 'compliant' && lastStatus === 'non-compliant') return '<i class="fas fa-arrow-down" style="color:red"></i> Deteriorating';
+            if (firstStatus === 'partial' && lastStatus === 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+            if (firstStatus === 'compliant' && lastStatus === 'partial') return '<i class="fas fa-arrow-down" style="color:orange"></i> Declining';
+            return '<i class="fas fa-minus" style="color:orange"></i> Stable';
+        }
+
+        function formatRatioName(ratio) {
+            return ratio.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        }
+
+        function getRiskLevelForRatio(ratio) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'moderate';
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const value = parseFloat(currentCompany.financialAnalysis.ratios[lastYear]?.[ratio]) || 0;
+            
+            if (ratio.includes('currentRatio')) {
+                return value < 1 ? 'high' : value < 1.5 ? 'moderate' : 'low';
+            } else if (ratio.includes('debtToEquity')) {
+                return value > 1 ? 'high' : value > 0.7 ? 'moderate' : 'low';
+            } else if (ratio.includes('grossMargin')) {
+                return value < 10 ? 'high' : value < 20 ? 'moderate' : 'low';
+            } else if (ratio.includes('returnOnAssets')) {
+                return value < 0 ? 'high' : value < 5 ? 'moderate' : 'low';
+            }
+            
+            return 'moderate';
+        }
+
+        // Tab management
+        function switchTab(tabIndex) {
+            // Update tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[tabIndex].classList.add('active');
+
+            // Update tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const tabIds = ['tab-overview', 'tab-audit', 'tab-compliance', 'tab-financial', 'tab-risk', 'tab-governance', 'tab-enforcement'];
+            document.getElementById(tabIds[tabIndex]).classList.add('active');
+        }
+
+        // Chart tab management
+        function switchChartTab(tabPrefix, chartIndex) {
+            const tabContent = document.querySelector(`#tab-${tabPrefix}`);
+            if (!tabContent) return;
+            
+            const chartTabs = tabContent.querySelectorAll('.chart-tab');
+            const chartSections = tabContent.querySelectorAll('.chart-section');
+
+            // Update tabs
+            chartTabs.forEach(tab => tab.classList.remove('active'));
+            if (chartTabs[chartIndex]) {
+                chartTabs[chartIndex].classList.add('active');
+            }
+
+            // Update sections
+            chartSections.forEach(section => section.classList.remove('active'));
+            
+            // Show the corresponding section
+            const section = document.getElementById(`${tabPrefix}-chart-${chartIndex}`);
+            if (section) {
+                section.classList.add('active');
+            }
+        }
+
+        // Year tab management for different tabs
+        function switchYear(tabPrefix, yearIndex) {
+            const tabContent = document.querySelector(`#tab-${tabPrefix}`);
+            if (!tabContent) return;
+            
+            const yearTabs = tabContent.querySelectorAll('.year-tab');
+            const yearContents = tabContent.querySelectorAll('.year-content');
+
+            // Update tabs
+            yearTabs.forEach(tab => tab.classList.remove('active'));
+            if (yearTabs[yearIndex]) {
+                yearTabs[yearIndex].classList.add('active');
+            }
+
+            // Update contents
+            yearContents.forEach(content => content.classList.remove('active'));
+
+            // Show the corresponding content
+            const contentIds = {
+                'financial': ['pl', 'bs', 'cf', 'ratios', 'accrual'],
+                'risk': currentCompany.years.map(year => `year-${year}`),
+                'overview': currentCompany.years.map(year => `year-${year}`).concat(['comparison']),
+                'audit': currentCompany.years.map(year => `year-${year}`)
+            };
+
+            if (contentIds[tabPrefix] && contentIds[tabPrefix][yearIndex]) {
+                const content = document.getElementById(`${tabPrefix}-${contentIds[tabPrefix][yearIndex]}`);
+                if (content) content.classList.add('active');
+            }
+        }
+
+        // PDF Generation Function
+        function generatePDFReport() {
+            if (!currentCompany) {
+                alert('Please select a company first');
+                return;
+            }
+            
+            alert('PDF generation would create a comprehensive report for ' + currentCompany.name + '. This feature requires server-side implementation.');
+            // In a real implementation, this would generate a PDF with all analysis data
+        }
+    </script>
+</body>
+</html>
