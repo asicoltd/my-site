@@ -1524,7 +1524,7 @@
                 // Simulate step processing time
                 const duration = analysisSteps[i].duration;
                 const match = duration.match(/(\d+)-(\d+)s/);
-                const SPEED_MULTIPLIER = 50;
+                const SPEED_MULTIPLIER = 0;
                 const stepTime = match ? (parseInt(match[1]) + Math.random() * (parseInt(match[2]) - parseInt(match[1]))) * 1000*SPEED_MULTIPLIER : 5000*SPEED_MULTIPLIER;
                 
                 // Add step-specific logs
