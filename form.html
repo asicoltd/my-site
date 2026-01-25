@@ -859,7 +859,7 @@
             {
                 title: "Document Processing with PaddleOCR",
                 description: "Extracting text and tables from PDF using advanced OCR technology",
-                duration: "15-25s",
+                duration: "15-25m",
                 details: {
                     "OCR Processing": [
                         "Running PaddleOCR v3.0 on scanned documents",
@@ -884,7 +884,7 @@
             {
                 title: "Document Segmentation & Classification",
                 description: "Classifying annual report sections and identifying financial statements",
-                duration: "10-15s",
+                duration: "10-15m",
                 details: {
                     "Section Identification": [
                         "Identifying Balance Sheet sections",
@@ -909,7 +909,7 @@
             {
                 title: "Financial Ratio Analysis",
                 description: "Calculating and analyzing key financial ratios and performance metrics",
-                duration: "12-18s",
+                duration: "12-18m",
                 details: {
                     "Liquidity Ratios": [
                         "Current Ratio = Current Assets / Current Liabilities",
@@ -937,7 +937,7 @@
                     ]
                 },
                 metrics: [
-                    { label: "Ratios Calculated", value: "42+" },
+                    { label: "Ratios Calculated", value: "0" },
                     { label: "Trend Analysis", value: "3 Years" },
                     { label: "Industry Benchmarks", value: "Applied" }
                 ]
@@ -945,7 +945,7 @@
             {
                 title: "IAS 8 Compliance Check",
                 description: "Verifying accounting policies, changes in estimates, and error corrections",
-                duration: "10-15s",
+                duration: "10-15m",
                 details: {
                     "Accounting Policies": [
                         "Review of significant accounting policies disclosed",
@@ -976,7 +976,7 @@
             {
                 title: "Related Party Analysis (IAS 24)",
                 description: "Identifying and analyzing related party relationships and transactions",
-                duration: "12-18s",
+                duration: "12-18m",
                 details: {
                     "Relationship Identification": [
                         "Parent-subsidiary relationships",
@@ -1007,7 +1007,7 @@
             {
                 title: "IFRS Standards Compliance",
                 description: "Comprehensive check of all applicable IFRS standards",
-                duration: "20-30s",
+                duration: "20-30m",
                 details: {
                     "Financial Instruments (IFRS 9)": [
                         "Classification and measurement",
@@ -1047,7 +1047,7 @@
             {
                 title: "Corporate Governance Review",
                 description: "Analyzing corporate governance disclosures and board effectiveness",
-                duration: "15-20s",
+                duration: "15-20m",
                 details: {
                     "Board Composition": [
                         "Director independence assessment",
@@ -1083,7 +1083,7 @@
             {
                 title: "Audit Report Analysis",
                 description: "Reviewing auditor's report for compliance and key findings",
-                duration: "10-15s",
+                duration: "10-15m",
                 details: {
                     "Audit Opinion Analysis": [
                         "Type of opinion issued (Unmodified/Modified)",
@@ -1114,7 +1114,7 @@
             {
                 title: "Risk Assessment & Identification",
                 description: "Identifying and evaluating financial and operational risks",
-                duration: "12-18s",
+                duration: "12-18m",
                 details: {
                     "Financial Risks": [
                         "Credit risk exposure analysis",
@@ -1145,7 +1145,7 @@
             {
                 title: "Comprehensive Report Generation",
                 description: "Compiling all findings into regulatory compliance report",
-                duration: "15-20s",
+                duration: "15-20m",
                 details: {
                     "Executive Summary": [
                         "Key findings and observations",
@@ -1523,7 +1523,7 @@
                 
                 // Simulate step processing time
                 const duration = analysisSteps[i].duration;
-                const match = duration.match(/(\d+)-(\d+)s/);
+                const match = duration.match(/(\d+)-(\d+)m/);
                 const stepTime = match ? (parseInt(match[1]) + Math.random() * (parseInt(match[2]) - parseInt(match[1]))) * 1000*100 : 5000*100;
                 
                 // Add step-specific logs
