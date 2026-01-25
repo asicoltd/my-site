@@ -1307,185 +1307,955 @@
         }
 
         // Load financial analysis data
-        function loadFinancialAnalysisData() {
-            const financialTab = document.getElementById('tab-financial');
-            
-            if (!currentCompany.financialAnalysis) {
-                financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Analysis Data</h2><p>This company does not have financial analysis data available.</p></div>';
-                return;
-            }
+        // Load financial analysis data
+function loadFinancialAnalysisData() {
+    const financialTab = document.getElementById('tab-financial');
+    
+    // Clear any existing content first
+    financialTab.querySelectorAll('.section').forEach(section => section.remove());
+    
+    if (!currentCompany.financialAnalysis) {
+        financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Analysis Data</h2><p>This company does not have financial analysis data available.</p></div>';
+        return;
+    }
 
-            let financialContent = `
-                <div class="section">
-                    <h2><i class="fas fa-file-invoice-dollar"></i> Financial Analysis</h2>
-                    
-                    <div class="year-tabs">
-                        <div class="year-tab active" onclick="switchYear('financial', 0)">Profit & Loss</div>
-                        <div class="year-tab" onclick="switchYear('financial', 1)">Balance Sheet</div>
-                        <div class="year-tab" onclick="switchYear('financial', 2)">Cash Flow</div>
-                        <div class="year-tab" onclick="switchYear('financial', 3)">Ratios</div>
-                        <div class="year-tab" onclick="switchYear('financial', 4)">Accrual Analysis</div>
+    let financialContent = `
+        <div class="section">
+            <h2><i class="fas fa-file-invoice-dollar"></i> Financial Analysis</h2>
+            
+            <div class="year-tabs">
+                <div class="year-tab active" onclick="switchYear('financial', 0)">Profit & Loss</div>
+                <div class="year-tab" onclick="switchYear('financial', 1)">Balance Sheet</div>
+                <div class="year-tab" onclick="switchYear('financial', 2)">Cash Flow</div>
+                <div class="year-tab" onclick="switchYear('financial', 3)">Ratios</div>
+                <div class="year-tab" onclick="switchYear('financial', 4)">Accrual Analysis</div>
+            </div>
+            
+            <!-- Profit & Loss -->
+            <div class="year-content active" id="financial-pl">
+                <div class="subsection">
+                    <h3><i class="fas fa-chart-line"></i> Profit & Loss Statement</h3>
+                    ${currentCompany.financialAnalysis.profitLoss ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Particulars</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Revenue -->
+                                <tr>
+                                    <td><strong>Revenue</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.revenue || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('revenue', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Direct Expenses -->
+                                <tr>
+                                    <td>Direct Expenses</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss[year]?.directExpenses) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('directExpenses', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Gross Profit -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>Gross Profit/(Loss)</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.profitLoss[year]?.grossProfit || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss[year]?.grossProfit) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('grossProfit', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Administrative Expenses -->
+                                <tr>
+                                    <td>Administrative Expenses</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss[year]?.adminExpenses) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('adminExpenses', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Operating Income -->
+                                <tr>
+                                    <td>Operating Income</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.profitLoss[year]?.operatingIncome || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss[year]?.operatingIncome) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('operatingIncome', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Non-Operating Income -->
+                                <tr>
+                                    <td>Non-Operating Income</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.nonOperatingIncome || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('nonOperatingIncome', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Financial Expenses -->
+                                <tr>
+                                    <td>Financial Expenses</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss[year]?.financialExpenses) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('financialExpenses', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Profit Before Tax -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>Profit/(Loss) Before Tax</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.profitLoss[year]?.profitBeforeTax || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss[year]?.profitBeforeTax) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('profitBeforeTax', 'profitLoss')}</td>
+                                </tr>
+                                
+                                <!-- Net Profit/(Loss) -->
+                                <tr style="background-color: #f0f5ff;">
+                                    <td><strong>NET PROFIT/(LOSS)</strong></td>
+                                    ${currentCompany.years.map(year => {
+                                        const netProfit = currentCompany.financialAnalysis.profitLoss[year]?.netProfit;
+                                        const isNegative = netProfit && (netProfit.startsWith('(') || parseFloat(netProfit.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(netProfit) || 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('netProfit', 'profitLoss')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    ` : '<p>No profit and loss data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Balance Sheet -->
+            <div class="year-content" id="financial-bs">
+                <div class="subsection">
+                    <h3><i class="fas fa-balance-scale"></i> Balance Sheet</h3>
+                    ${currentCompany.financialAnalysis.balanceSheet ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Particulars</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Growth</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ASSETS -->
+                                <tr>
+                                    <td colspan="${currentCompany.years.length + 2}" style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">ASSETS</td>
+                                </tr>
+                                
+                                <!-- Property, Plant & Equipment -->
+                                <tr>
+                                    <td>Property, Plant & Equipment</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.ppe || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('ppe', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Investments -->
+                                <tr>
+                                    <td>Investments</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.investments || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('investments', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Inventory -->
+                                <tr>
+                                    <td>Inventory</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.inventory || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('inventory', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Total Assets -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>TOTAL ASSETS</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.totalAssets || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('totalAssets', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- EQUITY & LIABILITIES -->
+                                <tr>
+                                    <td colspan="${currentCompany.years.length + 2}" style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">EQUITY & LIABILITIES</td>
+                                </tr>
+                                
+                                <!-- Share Capital -->
+                                <tr>
+                                    <td>Share Capital</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.shareCapital || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('shareCapital', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Retained Earnings -->
+                                <tr>
+                                    <td>Retained Earnings</td>
+                                    ${currentCompany.years.map(year => {
+                                        const retainedEarnings = currentCompany.financialAnalysis.balanceSheet[year]?.retainedEarnings;
+                                        const isNegative = retainedEarnings && (retainedEarnings.startsWith('(') || parseFloat(retainedEarnings.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(retainedEarnings) || 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('retainedEarnings', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Long Term Loans -->
+                                <tr>
+                                    <td>Long Term Loans</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.longTermLoans || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('longTermLoans', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Short Term Loans -->
+                                <tr>
+                                    <td>Short Term Loans</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.shortTermLoans || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('shortTermLoans', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Total Liabilities -->
+                                <tr style="background-color: #f0f5ff;">
+                                    <td><strong>TOTAL LIABILITIES</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('totalLiabilities', 'balanceSheet')}</td>
+                                </tr>
+                                
+                                <!-- Financial Position Analysis -->
+                                <tr style="border-top: 2px solid #ddd;">
+                                    <td colspan="${currentCompany.years.length + 2}" style="background-color: #f9f9f9; padding: 10px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div>
+                                                <strong>Debt to Equity Ratio:</strong><br>
+                                                ${currentCompany.years.map(year => `${year}: ${currentCompany.financialAnalysis.ratios?.[year]?.debtToEquity || 'N/A'}`).join(' | ')}
+                                            </div>
+                                            <div>
+                                                <strong>Current Ratio:</strong><br>
+                                                ${currentCompany.years.map(year => `${year}: ${currentCompany.financialAnalysis.ratios?.[year]?.currentRatio || 'N/A'}`).join(' | ')}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No balance sheet data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Cash Flow -->
+            <div class="year-content" id="financial-cf">
+                <div class="subsection">
+                    <h3><i class="fas fa-money-bill-wave"></i> Cash Flow Statement</h3>
+                    ${currentCompany.financialAnalysis.cashFlow ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Particulars</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Operating Activities -->
+                                <tr>
+                                    <td><strong>Cash Flow from Operating Activities</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.operating || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.cashFlow[year]?.operating) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('operating', 'cashFlow')}</td>
+                                </tr>
+                                
+                                <!-- Investing Activities -->
+                                <tr>
+                                    <td>Cash Flow from Investing Activities</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.investing || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.cashFlow[year]?.investing) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('investing', 'cashFlow')}</td>
+                                </tr>
+                                
+                                <!-- Financing Activities -->
+                                <tr>
+                                    <td>Cash Flow from Financing Activities</td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.financing || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.cashFlow[year]?.financing) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('financing', 'cashFlow')}</td>
+                                </tr>
+                                
+                                <!-- Net Change in Cash -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>Net Increase/(Decrease) in Cash</strong></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value ${parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.netChange || 0) < 0 ? 'metric-trend-down' : 'metric-trend-up'}">${formatNegativeNumber(currentCompany.financialAnalysis.cashFlow[year]?.netChange) || 'N/A'}</td>`).join('')}
+                                    <td>${getFinancialTrendIcon('netChange', 'cashFlow')}</td>
+                                </tr>
+                                
+                                <!-- Cash Flow Analysis -->
+                                <tr>
+                                    <td colspan="${currentCompany.years.length + 2}" style="background-color: #f9f9f9; padding: 10px;">
+                                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                            <div style="margin-bottom: 10px;">
+                                                <strong>Cash Flow Patterns:</strong><br>
+                                                ${analyzeCashFlowPatterns()}
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <strong>Cash Flow to Income Ratio:</strong><br>
+                                                ${currentCompany.years.map(year => `${year}: ${currentCompany.financialAnalysis.ratios?.[year]?.cashFlowToIncome || 'N/A'}`).join(' | ')}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No cash flow data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Ratios -->
+            <div class="year-content" id="financial-ratios">
+                <div class="subsection">
+                    <h3><i class="fas fa-calculator"></i> Financial Ratios</h3>
+                    ${currentCompany.financialAnalysis.ratios ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ratio</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Assessment</th>
+                                    <th>Industry Benchmark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Current Ratio -->
+                                <tr>
+                                    <td><strong>Current Ratio</strong><br><span style="font-size: 12px; color: #666;">(Current Assets / Current Liabilities)</span></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.ratios[year]?.currentRatio || 'N/A'}</td>`).join('')}
+                                    <td>${getRatioAssessment('currentRatio')}</td>
+                                    <td>≥ 1.5</td>
+                                </tr>
+                                
+                                <!-- Debt to Equity Ratio -->
+                                <tr>
+                                    <td><strong>Debt to Equity Ratio</strong><br><span style="font-size: 12px; color: #666;">(Total Debt / Shareholders' Equity)</span></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.ratios[year]?.debtToEquity || 'N/A'}</td>`).join('')}
+                                    <td>${getRatioAssessment('debtToEquity')}</td>
+                                    <td>≤ 0.7</td>
+                                </tr>
+                                
+                                <!-- Return on Assets -->
+                                <tr>
+                                    <td><strong>Return on Assets (ROA)</strong><br><span style="font-size: 12px; color: #666;">(Net Income / Total Assets)</span></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.ratios[year]?.returnOnAssets || 'N/A'}</td>`).join('')}
+                                    <td>${getRatioAssessment('returnOnAssets')}</td>
+                                    <td>≥ 5%</td>
+                                </tr>
+                                
+                                <!-- Gross Margin -->
+                                <tr>
+                                    <td><strong>Gross Margin</strong><br><span style="font-size: 12px; color: #666;">(Gross Profit / Revenue)</span></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.ratios[year]?.grossMargin || 'N/A'}</td>`).join('')}
+                                    <td>${getRatioAssessment('grossMargin')}</td>
+                                    <td>≥ 30%</td>
+                                </tr>
+                                
+                                <!-- Cash Flow to Income -->
+                                <tr>
+                                    <td><strong>Cash Flow to Income</strong><br><span style="font-size: 12px; color: #666;">(Operating Cash Flow / Net Income)</span></td>
+                                    ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.ratios[year]?.cashFlowToIncome || 'N/A'}</td>`).join('')}
+                                    <td>${getRatioAssessment('cashFlowToIncome')}</td>
+                                    <td>≥ 1.0</td>
+                                </tr>
+                                
+                                <!-- Additional Ratios (if available) -->
+                                ${currentCompany.financialAnalysis.ratios[currentCompany.years[0]] ? 
+                                    Object.keys(currentCompany.financialAnalysis.ratios[currentCompany.years[0]])
+                                        .filter(ratio => !['currentRatio', 'debtToEquity', 'returnOnAssets', 'grossMargin', 'cashFlowToIncome'].includes(ratio))
+                                        .map(ratio => `
+                                            <tr>
+                                                <td><strong>${formatRatioName(ratio)}</strong></td>
+                                                ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.[ratio] || 'N/A'}</td>`).join('')}
+                                                <td>${getRatioAssessment(ratio)}</td>
+                                                <td>-</td>
+                                            </tr>
+                                        `).join('')
+                                    : ''
+                                }
+                                
+                                <!-- Ratio Summary -->
+                                <tr style="background-color: #f0f5ff;">
+                                    <td colspan="${currentCompany.years.length + 3}" style="padding: 15px;">
+                                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                                            <div style="margin-bottom: 10px;">
+                                                <strong>Overall Financial Health:</strong> ${getOverallFinancialHealth()}
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <strong>Risk Level:</strong> ${getOverallRiskLevel()}
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <strong>Trend:</strong> ${getRatioTrendAnalysis()}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No financial ratios data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Accrual Analysis -->
+            <div class="year-content" id="financial-accrual">
+                <div class="subsection">
+                    <h3><i class="fas fa-chart-area"></i> Financial Statement Analysis</h3>
                     
-                    <!-- Profit & Loss -->
-                    <div class="year-content active" id="financial-pl">
-                        <div class="subsection">
-                            <h3><i class="fas fa-chart-line"></i> Profit & Loss Statement</h3>
-                            ${currentCompany.financialAnalysis.profitLoss ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Particulars</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Revenue</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.revenue || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                    <tr>
-                                        <td>Gross Profit</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.grossProfit || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                    <tr>
-                                        <td>Net Profit/(Loss)</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.profitLoss[year]?.netProfit || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                </tbody>
-                            </table>
-                            ` : '<p>No profit and loss data available.</p>'}
+                    <div class="key-findings">
+                        <!-- Profitability Analysis -->
+                        <div class="finding-card ${getProfitabilityRiskLevel()}">
+                            <h4><i class="fas fa-chart-line"></i> Profitability Analysis</h4>
+                            <p><strong>Trend:</strong> ${analyzeProfitabilityTrend()}</p>
+                            <p><strong>Key Metrics:</strong> 
+                                ${currentCompany.years.map(year => `
+                                    ${year}: Gross Margin ${currentCompany.financialAnalysis.ratios?.[year]?.grossMargin || 'N/A'}, 
+                                    ROA ${currentCompany.financialAnalysis.ratios?.[year]?.returnOnAssets || 'N/A'}
+                                `).join('<br>')}
+                            </p>
+                            <div class="action">${getProfitabilityRecommendation()}</div>
+                        </div>
+                        
+                        <!-- Liquidity Analysis -->
+                        <div class="finding-card ${getLiquidityRiskLevel()}">
+                            <h4><i class="fas fa-tint"></i> Liquidity Analysis</h4>
+                            <p><strong>Current Ratio Trend:</strong> ${analyzeLiquidityTrend()}</p>
+                            <p><strong>Cash Position:</strong> 
+                                ${currentCompany.years.map(year => `
+                                    ${year}: Net Cash Flow ${formatNegativeNumber(currentCompany.financialAnalysis.cashFlow?.[year]?.netChange) || 'N/A'}
+                                `).join('<br>')}
+                            </p>
+                            <div class="action">${getLiquidityRecommendation()}</div>
+                        </div>
+                        
+                        <!-- Solvency Analysis -->
+                        <div class="finding-card ${getSolvencyRiskLevel()}">
+                            <h4><i class="fas fa-balance-scale"></i> Solvency Analysis</h4>
+                            <p><strong>Debt Position:</strong> ${analyzeDebtTrend()}</p>
+                            <p><strong>Leverage:</strong> 
+                                ${currentCompany.years.map(year => `
+                                    ${year}: Debt to Equity ${currentCompany.financialAnalysis.ratios?.[year]?.debtToEquity || 'N/A'}
+                                `).join('<br>')}
+                            </p>
+                            <div class="action">${getSolvencyRecommendation()}</div>
+                        </div>
+                        
+                        <!-- Cash Flow Analysis -->
+                        <div class="finding-card ${getCashFlowRiskLevel()}">
+                            <h4><i class="fas fa-money-bill-wave"></i> Cash Flow Analysis</h4>
+                            <p><strong>Operating Cash Flow:</strong> ${analyzeOperatingCashFlow()}</p>
+                            <p><strong>Pattern:</strong> ${analyzeCashFlowPatterns()}</p>
+                            <div class="action">${getCashFlowRecommendation()}</div>
                         </div>
                     </div>
                     
-                    <!-- Balance Sheet -->
-                    <div class="year-content" id="financial-bs">
-                        <div class="subsection">
-                            <h3><i class="fas fa-balance-scale"></i> Balance Sheet</h3>
-                            ${currentCompany.financialAnalysis.balanceSheet ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Particulars</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Total Assets</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.totalAssets || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                    <tr>
-                                        <td>Total Liabilities</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.totalLiabilities || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                    <tr>
-                                        <td>Share Capital</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.balanceSheet[year]?.shareCapital || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                </tbody>
-                            </table>
-                            ` : '<p>No balance sheet data available.</p>'}
-                        </div>
+                    <!-- Comparative Analysis Table -->
+                    <div class="subsection" style="margin-top: 20px;">
+                        <h3><i class="fas fa-chart-bar"></i> Year-over-Year Growth Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Growth Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Revenue Growth</td>
+                                    ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.profitLoss?.[year]?.revenue || 'N/A'}</td>`).join('')}
+                                    <td>${calculateGrowthRate('revenue', 'profitLoss')}</td>
+                                </tr>
+                                <tr>
+                                    <td>Net Profit Growth</td>
+                                    ${currentCompany.years.map(year => `<td>${formatNegativeNumber(currentCompany.financialAnalysis.profitLoss?.[year]?.netProfit) || 'N/A'}</td>`).join('')}
+                                    <td>${calculateGrowthRate('netProfit', 'profitLoss')}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Assets Growth</td>
+                                    ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.balanceSheet?.[year]?.totalAssets || 'N/A'}</td>`).join('')}
+                                    <td>${calculateGrowthRate('totalAssets', 'balanceSheet')}</td>
+                                </tr>
+                                <tr>
+                                    <td>Operating Cash Flow Growth</td>
+                                    ${currentCompany.years.map(year => `<td>${formatNegativeNumber(currentCompany.financialAnalysis.cashFlow?.[year]?.operating) || 'N/A'}</td>`).join('')}
+                                    <td>${calculateGrowthRate('operating', 'cashFlow')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     
-                    <!-- Cash Flow -->
-                    <div class="year-content" id="financial-cf">
-                        <div class="subsection">
-                            <h3><i class="fas fa-money-bill-wave"></i> Cash Flow Statement</h3>
-                            ${currentCompany.financialAnalysis.cashFlow ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Particulars</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Operating Activities</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.cashFlow[year]?.operating || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                    <tr>
-                                        <td>Investing Activities</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.cashFlow[year]?.investing || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                    <tr>
-                                        <td>Financing Activities</td>
-                                        ${currentCompany.years.map(year => `<td class="metric-value">${currentCompany.financialAnalysis.cashFlow[year]?.financing || 'N/A'}</td>`).join('')}
-                                    </tr>
-                                </tbody>
-                            </table>
-                            ` : '<p>No cash flow data available.</p>'}
-                        </div>
-                    </div>
-                    
-                    <!-- Ratios -->
-                    <div class="year-content" id="financial-ratios">
-                        <div class="subsection">
-                            <h3><i class="fas fa-calculator"></i> Financial Ratios</h3>
-                            ${currentCompany.financialAnalysis.ratios ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Ratio</th>
-                                        ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
-                                        <th>Assessment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${Object.keys(currentCompany.financialAnalysis.ratios[currentCompany.years[0]] || {}).map(ratio => `
-                                        <tr>
-                                            <td>${formatRatioName(ratio)}</td>
-                                            ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.[ratio] || 'N/A'}</td>`).join('')}
-                                            <td><span class="risk-${getRiskLevelForRatio(ratio)}">${getRiskLevelForRatio(ratio)}</span></td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ` : '<p>No financial ratios data available.</p>'}
-                        </div>
-                    </div>
-                    
-                    <!-- Accrual Analysis -->
-                    <div class="year-content" id="financial-accrual">
-                        <div class="subsection">
-                            <h3><i class="fas fa-chart-area"></i> Accrual Analysis</h3>
-                            ${currentCompany.financialAnalysis.accrualAnalysis ? `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Year</th>
-                                        <th>Total Accruals</th>
-                                        <th>Accrual Quality</th>
-                                        <th>Pattern</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${currentCompany.years.map(year => `
-                                        <tr>
-                                            <td>${year}</td>
-                                            <td>${currentCompany.financialAnalysis.accrualAnalysis[year]?.totalAccruals || 'N/A'}</td>
-                                            <td>${currentCompany.financialAnalysis.accrualAnalysis[year]?.accrualQuality || 'N/A'}</td>
-                                            <td>${currentCompany.financialAnalysis.accrualAnalysis[year]?.pattern || 'N/A'}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                            ${currentCompany.financialAnalysis.accrualAnalysis.trendAnalysis ? `
-                            <div style="margin-top: 15px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
-                                <strong>Trend Analysis:</strong> ${currentCompany.financialAnalysis.accrualAnalysis.trendAnalysis}
-                            </div>
-                            ` : ''}
-                            ` : '<p>No accrual analysis data available.</p>'}
+                    <!-- Red Flag Analysis -->
+                    <div class="subsection" style="margin-top: 20px; border-left: 4px solid #d32f2f;">
+                        <h3><i class="fas fa-flag"></i> Financial Red Flags</h3>
+                        <div style="background-color: #ffebee; padding: 15px; border-radius: 8px;">
+                            ${analyzeFinancialRedFlags()}
                         </div>
                     </div>
                 </div>
-            `;
+            </div>
+        </div>
+    `;
 
-            financialTab.insertAdjacentHTML('beforeend', financialContent);
+    financialTab.insertAdjacentHTML('beforeend', financialContent);
+}
+
+// Helper functions for financial analysis
+
+function formatNegativeNumber(value) {
+    if (!value) return 'N/A';
+    // Check if value is already formatted as negative
+    if (value.startsWith('(') && value.endsWith(')')) {
+        return value;
+    }
+    // Convert to number and check if negative
+    const num = parseFloat(value.replace(/[^0-9.-]+/g, ''));
+    if (num < 0) {
+        return `(${Math.abs(num).toLocaleString()})`;
+    }
+    return value;
+}
+
+function getFinancialTrendIcon(field, section) {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis[section] || currentCompany.years.length < 2) {
+        return '<i class="fas fa-minus" style="color: #666;"></i>';
+    }
+    
+    const years = currentCompany.years;
+    const firstYear = years[0];
+    const lastYear = years[years.length - 1];
+    
+    const firstValue = currentCompany.financialAnalysis[section][firstYear]?.[field];
+    const lastValue = currentCompany.financialAnalysis[section][lastYear]?.[field];
+    
+    if (!firstValue || !lastValue) {
+        return '<i class="fas fa-minus" style="color: #666;"></i>';
+    }
+    
+    // Parse values, handling negative numbers in parentheses
+    const parseValue = (val) => {
+        if (typeof val === 'string') {
+            if (val.startsWith('(') && val.endsWith(')')) {
+                return -parseFloat(val.replace(/[(),]/g, ''));
+            }
+            return parseFloat(val.replace(/[^0-9.-]+/g, ''));
         }
+        return val;
+    };
+    
+    const firstNum = parseValue(firstValue);
+    const lastNum = parseValue(lastValue);
+    
+    // For expenses (cost items), decreasing is better
+    const isExpense = ['directExpenses', 'adminExpenses', 'financialExpenses', 'investing'].includes(field);
+    
+    if (lastNum > firstNum) {
+        return isExpense ? 
+            '<i class="fas fa-arrow-up" style="color: #d32f2f;"></i>' : 
+            '<i class="fas fa-arrow-up" style="color: #388e3c;"></i>';
+    } else if (lastNum < firstNum) {
+        return isExpense ? 
+            '<i class="fas fa-arrow-down" style="color: #388e3c;"></i>' : 
+            '<i class="fas fa-arrow-down" style="color: #d32f2f;"></i>';
+    } else {
+        return '<i class="fas fa-minus" style="color: #f57c00;"></i>';
+    }
+}
 
+function getRatioAssessment(ratioName) {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) {
+        return '<span class="risk-moderate">Not Available</span>';
+    }
+    
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const value = currentCompany.financialAnalysis.ratios[lastYear]?.[ratioName];
+    
+    if (!value) return '<span class="risk-moderate">N/A</span>';
+    
+    // Parse the value (remove % sign if present)
+    const numValue = parseFloat(value.replace('%', ''));
+    
+    switch(ratioName) {
+        case 'currentRatio':
+            if (numValue < 1) return '<span class="risk-high">Critical</span>';
+            if (numValue < 1.5) return '<span class="risk-moderate">Weak</span>';
+            return '<span class="risk-low">Strong</span>';
+            
+        case 'debtToEquity':
+            if (numValue > 1) return '<span class="risk-high">Critical</span>';
+            if (numValue > 0.7) return '<span class="risk-moderate">High</span>';
+            return '<span class="risk-low">Acceptable</span>';
+            
+        case 'returnOnAssets':
+            if (numValue < 0) return '<span class="risk-high">Negative</span>';
+            if (numValue < 5) return '<span class="risk-moderate">Low</span>';
+            return '<span class="risk-low">Good</span>';
+            
+        case 'grossMargin':
+            if (numValue < 0) return '<span class="risk-high">Negative</span>';
+            if (numValue < 20) return '<span class="risk-moderate">Low</span>';
+            if (numValue < 30) return '<span class="risk-low">Moderate</span>';
+            return '<span class="risk-low">Strong</span>';
+            
+        case 'cashFlowToIncome':
+            if (numValue < 0) return '<span class="risk-high">Negative</span>';
+            if (numValue < 1) return '<span class="risk-moderate">Weak</span>';
+            return '<span class="risk-low">Strong</span>';
+            
+        default:
+            return '<span class="risk-moderate">Review</span>';
+    }
+}
+
+function analyzeCashFlowPatterns() {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.cashFlow) {
+        return 'No cash flow data available';
+    }
+    
+    const years = currentCompany.years;
+    const patterns = years.map(year => {
+        const op = parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.operating || 0);
+        const inv = parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.investing || 0);
+        const fin = parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.financing || 0);
+        
+        if (op > 0 && inv < 0 && fin > 0) return `${year}: Healthy`;
+        if (op > 0 && inv < 0 && fin < 0) return `${year}: Repaying debt`;
+        if (op < 0 && inv < 0 && fin > 0) return `${year}: High risk`;
+        if (op > 0 && inv > 0 && fin < 0) return `${year}: Liquidating`;
+        return `${year}: Unusual`;
+    });
+    
+    return patterns.join(' | ');
+}
+
+function getOverallFinancialHealth() {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) {
+        return 'Cannot assess';
+    }
+    
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const ratios = currentCompany.financialAnalysis.ratios[lastYear];
+    
+    if (!ratios) return 'No data';
+    
+    let score = 0;
+    let total = 0;
+    
+    // Current Ratio
+    const cr = parseFloat(ratios.currentRatio || 0);
+    if (cr >= 1.5) score += 2;
+    else if (cr >= 1) score += 1;
+    total += 2;
+    
+    // Debt to Equity
+    const de = parseFloat(ratios.debtToEquity || 0);
+    if (de <= 0.5) score += 2;
+    else if (de <= 0.7) score += 1;
+    total += 2;
+    
+    // Return on Assets
+    const roa = parseFloat(ratios.returnOnAssets || 0);
+    if (roa >= 5) score += 2;
+    else if (roa >= 0) score += 1;
+    total += 2;
+    
+    // Gross Margin
+    const gm = parseFloat(ratios.grossMargin || 0);
+    if (gm >= 30) score += 2;
+    else if (gm >= 20) score += 1;
+    total += 2;
+    
+    const percentage = (score / total) * 100;
+    
+    if (percentage >= 75) return '<span style="color: #388e3c;">Strong</span>';
+    if (percentage >= 50) return '<span style="color: #f57c00;">Moderate</span>';
+    return '<span style="color: #d32f2f;">Weak</span>';
+}
+
+function getOverallRiskLevel() {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) {
+        return 'Cannot assess';
+    }
+    
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const ratios = currentCompany.financialAnalysis.ratios[lastYear];
+    
+    if (!ratios) return 'No data';
+    
+    let riskScore = 0;
+    
+    // Current Ratio risk
+    const cr = parseFloat(ratios.currentRatio || 0);
+    if (cr < 1) riskScore += 3;
+    else if (cr < 1.5) riskScore += 1;
+    
+    // Debt to Equity risk
+    const de = parseFloat(ratios.debtToEquity || 0);
+    if (de > 1) riskScore += 3;
+    else if (de > 0.7) riskScore += 2;
+    else if (de > 0.5) riskScore += 1;
+    
+    // Return on Assets risk
+    const roa = parseFloat(ratios.returnOnAssets || 0);
+    if (roa < 0) riskScore += 3;
+    else if (roa < 2) riskScore += 2;
+    else if (roa < 5) riskScore += 1;
+    
+    if (riskScore >= 6) return '<span class="risk-high">High</span>';
+    if (riskScore >= 3) return '<span class="risk-moderate">Moderate</span>';
+    return '<span class="risk-low">Low</span>';
+}
+
+function getRatioTrendAnalysis() {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios || currentCompany.years.length < 2) {
+        return 'Insufficient data';
+    }
+    
+    const years = currentCompany.years;
+    const improving = [];
+    const deteriorating = [];
+    const stable = [];
+    
+    // Check each ratio
+    const ratioNames = Object.keys(currentCompany.financialAnalysis.ratios[years[0]] || {});
+    
+    ratioNames.forEach(ratio => {
+        const firstValue = parseFloat(currentCompany.financialAnalysis.ratios[years[0]]?.[ratio] || 0);
+        const lastValue = parseFloat(currentCompany.financialAnalysis.ratios[years[years.length - 1]]?.[ratio] || 0);
+        
+        // Determine if improvement or deterioration based on ratio type
+        const isImprovement = (ratio === 'currentRatio' && lastValue > firstValue) ||
+                             (ratio === 'returnOnAssets' && lastValue > firstValue) ||
+                             (ratio === 'grossMargin' && lastValue > firstValue) ||
+                             (ratio === 'debtToEquity' && lastValue < firstValue);
+        
+        if (Math.abs(lastValue - firstValue) < 0.1) {
+            stable.push(ratio);
+        } else if (isImprovement) {
+            improving.push(ratio);
+        } else {
+            deteriorating.push(ratio);
+        }
+    });
+    
+    if (improving.length > deteriorating.length) return '<span style="color: #388e3c;">Improving</span>';
+    if (deteriorating.length > improving.length) return '<span style="color: #d32f2f;">Deteriorating</span>';
+    return '<span style="color: #f57c00;">Stable</span>';
+}
+
+// Additional helper functions for the accrual analysis tab
+
+function getProfitabilityRiskLevel() {
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const netProfit = currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit;
+    
+    if (netProfit && (netProfit.startsWith('(') || parseFloat(netProfit.replace(/[(),]/g, '')) < 0)) {
+        return 'high';
+    }
+    
+    const roa = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.returnOnAssets || 0);
+    if (roa < 0) return 'high';
+    if (roa < 2) return 'moderate';
+    return 'low';
+}
+
+function analyzeProfitabilityTrend() {
+    if (currentCompany.years.length < 2) return 'Single year data';
+    
+    const firstYear = currentCompany.years[0];
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    
+    const firstProfit = currentCompany.financialAnalysis.profitLoss?.[firstYear]?.netProfit;
+    const lastProfit = currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit;
+    
+    if (!firstProfit || !lastProfit) return 'Insufficient data';
+    
+    const firstNum = parseFloat(firstProfit.replace(/[(),]/g, ''));
+    const lastNum = parseFloat(lastProfit.replace(/[(),]/g, ''));
+    
+    if (firstNum < 0 && lastNum < 0) return 'Consistent losses';
+    if (firstNum < 0 && lastNum >= 0) return 'Turned profitable';
+    if (firstNum >= 0 && lastNum < 0) return 'Became unprofitable';
+    if (lastNum > firstNum) return 'Improving profitability';
+    if (lastNum < firstNum) return 'Declining profitability';
+    return 'Stable profitability';
+}
+
+function getProfitabilityRecommendation() {
+    const riskLevel = getProfitabilityRiskLevel();
+    if (riskLevel === 'high') return 'Immediate cost optimization and revenue enhancement needed';
+    if (riskLevel === 'moderate') return 'Monitor margins and implement efficiency measures';
+    return 'Maintain current profitability strategies';
+}
+
+function getLiquidityRiskLevel() {
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const currentRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.currentRatio || 0);
+    
+    if (currentRatio < 1) return 'high';
+    if (currentRatio < 1.2) return 'moderate';
+    return 'low';
+}
+
+function analyzeLiquidityTrend() {
+    if (currentCompany.years.length < 2) return 'Single year data';
+    
+    const firstYear = currentCompany.years[0];
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    
+    const firstRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[firstYear]?.currentRatio || 0);
+    const lastRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.currentRatio || 0);
+    
+    if (lastRatio > firstRatio + 0.1) return 'Improving';
+    if (lastRatio < firstRatio - 0.1) return 'Deteriorating';
+    return 'Stable';
+}
+
+function getLiquidityRecommendation() {
+    const riskLevel = getLiquidityRiskLevel();
+    if (riskLevel === 'high') return 'Urgent working capital management required';
+    if (riskLevel === 'moderate') return 'Improve cash conversion cycle';
+    return 'Maintain adequate liquidity buffers';
+}
+
+function getSolvencyRiskLevel() {
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const debtToEquity = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.debtToEquity || 0);
+    
+    if (debtToEquity > 1) return 'high';
+    if (debtToEquity > 0.7) return 'moderate';
+    return 'low';
+}
+
+function analyzeDebtTrend() {
+    if (currentCompany.years.length < 2) return 'Single year data';
+    
+    const firstYear = currentCompany.years[0];
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    
+    const firstDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[firstYear]?.debtToEquity || 0);
+    const lastDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.debtToEquity || 0);
+    
+    if (lastDebt > firstDebt + 0.1) return 'Increasing leverage';
+    if (lastDebt < firstDebt - 0.1) return 'Reducing leverage';
+    return 'Stable leverage';
+}
+
+function getSolvencyRecommendation() {
+    const riskLevel = getSolvencyRiskLevel();
+    if (riskLevel === 'high') return 'Debt restructuring and equity infusion needed';
+    if (riskLevel === 'moderate') return 'Focus on debt reduction';
+    return 'Maintain conservative capital structure';
+}
+
+function getCashFlowRiskLevel() {
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const operatingCash = parseFloat(currentCompany.financialAnalysis.cashFlow?.[lastYear]?.operating || 0);
+    const netProfit = parseFloat(currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit?.replace(/[(),]/g, '') || 0);
+    
+    if (operatingCash < 0 && netProfit < 0) return 'high';
+    if (operatingCash < 0 || operatingCash < netProfit) return 'moderate';
+    return 'low';
+}
+
+function analyzeOperatingCashFlow() {
+    const lastYear = currentCompany.years[currentCompany.years.length - 1];
+    const operatingCash = parseFloat(currentCompany.financialAnalysis.cashFlow?.[lastYear]?.operating || 0);
+    const netProfit = parseFloat(currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit?.replace(/[(),]/g, '') || 0);
+    
+    if (operatingCash > 0 && netProfit > 0 && operatingCash > netProfit) return 'Strong cash generation';
+    if (operatingCash > 0 && netProfit > 0) return 'Adequate cash generation';
+    if (operatingCash > 0 && netProfit < 0) return 'Cash positive despite losses';
+    if (operatingCash < 0 && netProfit > 0) return 'Profit not converting to cash';
+    return 'Cash flow challenges';
+}
+
+function getCashFlowRecommendation() {
+    const riskLevel = getCashFlowRiskLevel();
+    if (riskLevel === 'high') return 'Immediate cash flow improvement actions required';
+    if (riskLevel === 'moderate') return 'Focus on working capital efficiency';
+    return 'Continue effective cash management';
+}
+
+function calculateGrowthRate(field, section) {
+    if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis[section] || currentCompany.years.length < 2) {
+        return 'N/A';
+    }
+    
+    const years = currentCompany.years;
+    const firstYear = years[0];
+    const lastYear = years[years.length - 1];
+    
+    const firstValue = currentCompany.financialAnalysis[section][firstYear]?.[field];
+    const lastValue = currentCompany.financialAnalysis[section][lastYear]?.[field];
+    
+    if (!firstValue || !lastValue) return 'N/A';
+    
+    const parseValue = (val) => {
+        if (typeof val === 'string') {
+            if (val.startsWith('(') && val.endsWith(')')) {
+                return -parseFloat(val.replace(/[(),]/g, ''));
+            }
+            return parseFloat(val.replace(/[^0-9.-]+/g, ''));
+        }
+        return val;
+    };
+    
+    const firstNum = parseValue(firstValue);
+    const lastNum = parseValue(lastValue);
+    
+    if (firstNum === 0) return '∞';
+    
+    const growthRate = ((lastNum - firstNum) / Math.abs(firstNum)) * 100;
+    
+    if (growthRate > 20) return `<span style="color: #388e3c;">+${growthRate.toFixed(1)}%</span>`;
+    if (growthRate < -20) return `<span style="color: #d32f2f;">${growthRate.toFixed(1)}%</span>`;
+    return `<span style="color: #f57c00;">${growthRate.toFixed(1)}%</span>`;
+}
+
+function analyzeFinancialRedFlags() {
+    const redFlags = [];
+    
+    // Check for consecutive losses
+    let consecutiveLosses = 0;
+    currentCompany.years.forEach(year => {
+        const netProfit = currentCompany.financialAnalysis.profitLoss?.[year]?.netProfit;
+        if (netProfit && (netProfit.startsWith('(') || parseFloat(netProfit.replace(/[(),]/g, '')) < 0)) {
+            consecutiveLosses++;
+        }
+    });
+    if (consecutiveLosses >= 2) {
+        redFlags.push(`Consecutive losses for ${consecutiveLosses} years`);
+    }
+    
+    // Check current ratio below 1
+    currentCompany.years.forEach(year => {
+        const currentRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[year]?.currentRatio || 0);
+        if (currentRatio < 1) {
+            redFlags.push(`Current ratio below 1 in ${year} (${currentRatio})`);
+        }
+    });
+    
+    // Check negative operating cash flow
+    currentCompany.years.forEach(year => {
+        const operatingCash = parseFloat(currentCompany.financialAnalysis.cashFlow?.[year]?.operating || 0);
+        if (operatingCash < 0) {
+            redFlags.push(`Negative operating cash flow in ${year}`);
+        }
+    });
+    
+    // Check increasing debt
+    if (currentCompany.years.length >= 2) {
+        const firstYear = currentCompany.years[0];
+        const lastYear = currentCompany.years[currentCompany.years.length - 1];
+        const firstDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[firstYear]?.debtToEquity || 0);
+        const lastDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.debtToEquity || 0);
+        if (lastDebt > firstDebt + 0.2) {
+            redFlags.push(`Significant increase in debt-to-equity ratio (${firstDebt.toFixed(2)} to ${lastDebt.toFixed(2)})`);
+        }
+    }
+    
+    if (redFlags.length === 0) {
+        return '<p style="color: #388e3c;">No significant red flags identified in financial statements.</p>';
+    }
+    
+    return redFlags.map(flag => `<p style="color: #d32f2f;"><i class="fas fa-exclamation-triangle"></i> ${flag}</p>`).join('');
+}
         // Load risk indicators data
         function loadRiskIndicatorsData() {
             const riskTab = document.getElementById('tab-risk');
