@@ -3077,15 +3077,6 @@ function analyzeFinancialRedFlags() {
                     // Footer line
                     doc.setDrawColor(200, 200, 200);
                     doc.line(20, pageHeight - 20, pageWidth - 20, pageHeight - 20);
-                    
-                    // Page number
-                    doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, pageHeight - 15, null, null, 'center');
-                    
-                    // Confidential notice
-                    doc.text('CONFIDENTIAL - For FRC Internal Use Only', pageWidth - 20, pageHeight - 15, null, null, 'right');
-                    
-                    // Report timestamp
-                    doc.text(`Generated: ${new Date().toLocaleString()}`, 20, pageHeight - 15);
                 }
                 
                 // ===== SAVE THE PDF =====
