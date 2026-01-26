@@ -1,0 +1,1128 @@
+{
+  "anwer-khan": {
+    "name": "Anwer Khan Modern Hospital Ltd",
+    "years": [2022, 2023, 2024],
+    "pdfFiles": [
+      {
+        "name": "Anwer Khan Modern Hospital Audited FSs-1.pdf",
+        "year": 2022,
+        "url": "https://raw.githubusercontent.com/asicoltd/my-site/460b3868cdf6cc5c3f8df23e821f7bcc59ca8ba8/Anwer Khan Modern Hospital Audited FSs-1_compressed.pdf",
+        "type": "Audited Financial Statements"
+      },
+      {
+        "name": "Anwer Khan Modern Hospital Audited FSs-2.pdf",
+        "year": 2023,
+        "url": "https://raw.githubusercontent.com/asicoltd/my-site/460b3868cdf6cc5c3f8df23e821f7bcc59ca8ba8/Anwer Khan Modern Hospital Audited FSs-2_compressed.pdf",
+        "type": "Audited Financial Statements"
+      },
+      {
+        "name": "Anwer Khan Modern Hospital Audited FSs-3.pdf",
+        "year": 2024,
+        "url": "https://raw.githubusercontent.com/asicoltd/my-site/460b3868cdf6cc5c3f8df23e821f7bcc59ca8ba8/Anwer Khan Modern Hospital Audited FSs-3_compressed.pdf",
+        "type": "Audited Financial Statements"
+      }
+    ],
+    "inspectorNotes": "This case exhibits systematic financial reporting failures across three years, requiring immediate regulatory intervention. The escalating nature of audit issues suggests deteriorating internal controls and potential management override.",
+    "overview": {
+      "description": "This regulatory inspection covers three consecutive financial years (2022, 2023, 2024) of Anwer Khan Modern Hospital Ltd. The analysis identifies significant non-compliance issues, audit deficiencies, and governance weaknesses requiring regulatory intervention.",
+      "keyFindings": [
+        {
+          "title": "Critical Audit Issues",
+          "description": "Persistent lack of supporting documentation for assets, investments, and transactions across all three years.",
+          "severity": "high",
+          "action": "Requires Formal Investigation"
+        },
+        {
+          "title": "IFRS Non-Compliance",
+          "description": "Multiple violations of IAS 16, IAS 2, IAS 38, and IAS 1 regarding asset verification and going concern disclosure.",
+          "severity": "high",
+          "action": "Restatement Required"
+        },
+        {
+          "title": "Financial Distress",
+          "description": "Persistent operating losses, massive accumulated deficit, and high leverage position across all years.",
+          "severity": "moderate",
+          "action": "Going Concern Assessment Needed"
+        },
+        {
+          "title": "Governance Failure",
+          "description": "Weak internal controls, no audit committee disclosure, and management override indicators.",
+          "severity": "high",
+          "action": "Board Enforcement Notice"
+        }
+      ],
+      "yearData": {
+        "2022": {
+          "auditOpinion": "Unmodified with Emphasis of Matter",
+          "revenue": "2,342,171,667",
+          "netLoss": "(851,192,528)",
+          "totalLiabilities": "22,668,046,343",
+          "compliance": {
+            "ias16": "partial",
+            "ias2": "non-compliant",
+            "ias38": "non-compliant"
+          }
+        },
+        "2023": {
+          "auditOpinion": "Unmodified with Emphasis of Matter",
+          "revenue": "3,113,743,215",
+          "netLoss": "(18,882,849)",
+          "totalLiabilities": "22,174,653,373",
+          "compliance": {
+            "ias16": "partial",
+            "ias2": "non-compliant",
+            "ias38": "non-compliant"
+          }
+        },
+        "2024": {
+          "auditOpinion": "Unmodified with Emphasis of Matter",
+          "revenue": "3,491,969,249",
+          "netLoss": "(21,268,270)",
+          "totalLiabilities": "22,417,295,547",
+          "compliance": {
+            "ias16": "non-compliant",
+            "ias2": "non-compliant",
+            "ias1": "partial"
+          }
+        }
+      }
+    },
+    "auditAnalysis": {
+      "years": [2022, 2023, 2024],
+      "auditor": "Ramiz & Co., Chartered Accountants",
+      "opinionType": "Unmodified with Emphasis of Matter",
+      "yearDetails": {
+        "2022": {
+          "issues": [
+            "Cash balance of Tk. 362,138 not physically verified",
+            "Inventory balance of Tk. 123,927,395 not physically verified",
+            "Intercompany loan of Tk. 1,103,724,807 not verified with audited accounts of inter-companies",
+            "Minutes of Annual General Meeting not available",
+            "Preliminary expenses not written off (deviation from IAS-38)"
+          ]
+        },
+        "2023": {
+          "issues": [
+            "Fixed assets addition of Tk. 51,743,999 without item-wise details",
+            "Preliminary expenses not amortized (deviation from IAS-38)",
+            "FDR original receipts not provided for verification",
+            "Inventory information and ledger not provided",
+            "Advances, deposits & prepayments not verified",
+            "Investments in Modern Group Ltd, Bengal Meat, etc. not verified",
+            "Cash book ledger and supporting documents not available"
+          ]
+        },
+        "2024": {
+          "issues": [
+            "Fixed assets: No item-wise list, quantity, price, date of purchase provided",
+            "Inventory: No information, ledger or supporting documents provided",
+            "Advance, Deposit & Prepayment: No ledger or supporting documents provided",
+            "Investments: Form 117, board resolution, vouchers not shared",
+            "Cash and Cash equivalents: Cash book ledger not available",
+            "Intercompany loan: Board resolution, agreement, ledger not provided",
+            "Revenue: Only a few invoices without sales ledger",
+            "Direct expenses: Salary sheet not acknowledged by staff",
+            "AGM for 2024 pending with RJSC",
+            "Material uncertainty regarding going concern"
+          ]
+        }
+      },
+      "recurringIssues": [
+        {
+          "issue": "Fixed Assets Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Inventory Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Cash Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Intercompany Loans Verification",
+          "2022": true,
+          "2023": true,
+          "2024": true,
+          "status": "Unresolved",
+          "risk": "high"
+        },
+        {
+          "issue": "Preliminary Expenses Amortization",
+          "2022": true,
+          "2023": true,
+          "2024": false,
+          "status": "Partially Resolved",
+          "risk": "high"
+        }
+      ]
+    },
+    "ifrsCompliance": {
+      "standards": {
+        "IAS 1": {
+          "name": "Presentation of Financial Statements",
+          "requirements": [
+            "Going concern assessment",
+            "Fair presentation",
+            "Comparative information"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "partial",
+          "issues": "Going concern not properly assessed/disclosed in 2022-2023"
+        },
+        "IAS 2": {
+          "name": "Inventories",
+          "requirements": [
+            "Measurement at lower of cost and NRV",
+            "Cost formulas",
+            "Recognition as expense"
+          ],
+          "2022": "non-compliant",
+          "2023": "non-compliant",
+          "2024": "non-compliant",
+          "issues": "Inventory not physically verified across all years"
+        },
+        "IAS 16": {
+          "name": "Property, Plant & Equipment",
+          "requirements": [
+            "Recognition criteria",
+            "Measurement at cost",
+            "Depreciation"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "non-compliant",
+          "issues": "Fixed assets not properly documented/verified"
+        },
+        "IAS 38": {
+          "name": "Intangible Assets",
+          "requirements": [
+            "Recognition criteria",
+            "Amortization",
+            "Impairment testing"
+          ],
+          "2022": "non-compliant",
+          "2023": "non-compliant",
+          "2024": "not mentioned",
+          "issues": "Preliminary expenses not amortized in 2022-2023"
+        },
+        "IAS 24": {
+          "name": "Related Party Disclosures",
+          "requirements": [
+            "Disclosure of relationships",
+            "Disclosure of transactions",
+            "Amounts outstanding"
+          ],
+          "2022": "partial",
+          "2023": "partial",
+          "2024": "partial",
+          "issues": "Intercompany loans listed but not verified"
+        }
+      }
+    },
+    "financialDataTables": {
+      "statementOfFinancialPosition": {
+        "noteReference": "Notes to Financial Statements",
+        "data": [
+          {
+            "item": "Non-Current Assets",
+            "note": {
+              "2022": "3.00, 4.00, 20.2",
+              "2023": "3.00, 4.00, 20.2",
+              "2024": "3.00, 4.00, 20.2"
+            },
+            "2022": "6,486,482,077",
+            "2023": "6,282,901,962",
+            "2024": "6,287,949,036"
+          },
+          {
+            "item": "Property, Plant & Equipment",
+            "note": {
+              "2022": "3.00",
+              "2023": "3.00",
+              "2024": "3.00"
+            },
+            "2022": "6,126,751,417",
+            "2023": "5,947,021,530",
+            "2024": "5,947,021,530"
+          },
+          {
+            "item": "Investments",
+            "note": {
+              "2022": "4.00",
+              "2023": "4.00",
+              "2024": "4.00"
+            },
+            "2022": "236,727,536",
+            "2023": "236,727,536",
+            "2024": "236,727,536"
+          },
+          {
+            "item": "Current Assets",
+            "note": {
+              "2022": "5.00, 6.00, 7.00, 8.00, 22.00",
+              "2023": "5.00, 6.00, 7.00, 8.00, 22.00",
+              "2024": "5.00, 6.00, 7.00, 8.00, 22.00"
+            },
+            "2022": "526,917,321",
+            "2023": "465,851,225",
+            "2024": "462,830,572"
+          },
+          {
+            "item": "Inventories",
+            "note": {
+              "2022": "5.00",
+              "2023": "5.00",
+              "2024": "5.00"
+            },
+            "2022": "123,927,395",
+            "2023": "184,441,400",
+            "2024": "184,441,400"
+          },
+          {
+            "item": "Cash & Cash Equivalents",
+            "note": {
+              "2022": "8.00",
+              "2023": "8.00",
+              "2024": "8.00"
+            },
+            "2022": "56,836,420",
+            "2023": "9,770,123",
+            "2024": "6,563,555"
+          },
+          {
+            "item": "Total Assets",
+            "note": "",
+            "2022": "7,013,399,398",
+            "2023": "6,748,753,187",
+            "2024": "6,750,779,608"
+          },
+          {
+            "item": "Share Capital - Paid up",
+            "note": {
+              "2022": "9.00",
+              "2023": "9.00",
+              "2024": "9.00"
+            },
+            "2022": "90,000,000",
+            "2023": "90,000,000",
+            "2024": "90,000,000"
+          },
+          {
+            "item": "Retained Earnings",
+            "note": {
+              "2022": "10.00",
+              "2023": "10.00",
+              "2024": "10.00"
+            },
+            "2022": "(15,769,131,945)",
+            "2023": "(15,763,330,186)",
+            "2024": "(15,756,332,228)"
+          },
+          {
+            "item": "Total Shareholders' Equity",
+            "note": "",
+            "2022": "(15,679,131,945)",
+            "2023": "(15,673,330,186)",
+            "2024": "(15,666,332,228)"
+          },
+          {
+            "item": "Long Term Loan",
+            "note": {
+              "2022": "11.00",
+              "2023": "11.00",
+              "2024": "11.00"
+            },
+            "2022": "17,424,742,309",
+            "2023": "17,500,620,952",
+            "2024": "17,724,588,858"
+          },
+          {
+            "item": "Short Term Loan",
+            "note": {
+              "2022": "12.00",
+              "2023": "12.00",
+              "2024": "12.00"
+            },
+            "2022": "4,139,579,234",
+            "2023": "3,568,933,879",
+            "2024": "3,417,607,208"
+          },
+          {
+            "item": "Intercompany Loan",
+            "note": {
+              "2022": "22.00",
+              "2023": "22.00",
+              "2024": "22.00"
+            },
+            "2022": "1,103,724,807",
+            "2023": "1,325,099,047",
+            "2024": "1,325,099,047"
+          },
+          {
+            "item": "Total Liabilities",
+            "note": "",
+            "2022": "22,668,046,343",
+            "2023": "22,174,653,373",
+            "2024": "22,417,295,547"
+          },
+          {
+            "item": "Total Liabilities & Shareholders' Equity",
+            "note": "",
+            "2022": "7,013,399,398",
+            "2023": "6,748,753,187",
+            "2024": "6,750,779,608"
+          }
+        ]
+      },
+      "statementOfComprehensiveIncome": {
+        "noteReference": "Notes to Financial Statements",
+        "data": [
+          {
+            "item": "Revenue",
+            "note": {
+              "2022": "16.00",
+              "2023": "16.00",
+              "2024": "16.00"
+            },
+            "2022": "2,342,171,667",
+            "2023": "3,113,743,215",
+            "2024": "3,491,969,249"
+          },
+          {
+            "item": "Less: Direct Expenses",
+            "note": {
+              "2022": "17.00",
+              "2023": "17.00",
+              "2024": "17.00"
+            },
+            "2022": "(998,995,038)",
+            "2023": "(934,566,601)",
+            "2024": "(965,506,304)"
+          },
+          {
+            "item": "Gross Profit",
+            "note": "",
+            "2022": "1,343,176,629",
+            "2023": "2,179,176,615",
+            "2024": "2,526,462,945"
+          },
+          {
+            "item": "Administrative & Marketing Expenses",
+            "note": {
+              "2022": "18.00",
+              "2023": "18.00",
+              "2024": "18.00"
+            },
+            "2022": "(158,224,068)",
+            "2023": "(150,623,122)",
+            "2024": "(153,375,082)"
+          },
+          {
+            "item": "Income from Operation",
+            "note": "",
+            "2022": "1,184,952,561",
+            "2023": "2,028,553,493",
+            "2024": "2,373,087,862"
+          },
+          {
+            "item": "Non Operating Income",
+            "note": {
+              "2022": "20.00",
+              "2023": "20.00",
+              "2024": "20.00"
+            },
+            "2022": "36,524,929",
+            "2023": "33,398,294",
+            "2024": "52,742,349"
+          },
+          {
+            "item": "Profit/(Loss) before Interest and Taxes",
+            "note": "",
+            "2022": "1,221,477,490",
+            "2023": "2,061,951,786",
+            "2024": "2,425,830,211"
+          },
+          {
+            "item": "Financial Expenses",
+            "note": {
+              "2022": "19.00",
+              "2023": "19.00",
+              "2024": "19.00"
+            },
+            "2022": "(2,058,397,838)",
+            "2023": "(2,037,267,178)",
+            "2024": "(2,397,563,983)"
+          },
+          {
+            "item": "Profit / (Loss) Before Tax",
+            "note": "",
+            "2022": "(836,920,348)",
+            "2023": "24,684,608",
+            "2024": "28,266,228"
+          },
+          {
+            "item": "Income Tax Expenses",
+            "note": {
+              "2022": "21.00",
+              "2023": "21.00",
+              "2024": "21.00"
+            },
+            "2022": "(14,272,180)",
+            "2023": "(18,882,849)",
+            "2024": "(21,268,270)"
+          },
+          {
+            "item": "Profit / (Loss) After Tax",
+            "note": "",
+            "2022": "(851,192,528)",
+            "2023": "5,801,759",
+            "2024": "6,997,958"
+          }
+        ]
+      },
+      "statementOfCashFlows": {
+        "noteReference": "Cash Flow Statements",
+        "data": [
+          {
+            "item": "Cash flows from operating activities",
+            "note": "",
+            "2022": "1,561,791,655",
+            "2023": "2,734,299,740",
+            "2024": "2,487,666,801"
+          },
+          {
+            "item": "Cash flows from Investing Activities",
+            "note": "",
+            "2022": "(675,984,050)",
+            "2023": "(27,957,906)",
+            "2024": "(259,390,989)"
+          },
+          {
+            "item": "Cash flows from Financing Activities",
+            "note": "",
+            "2022": "(1,482,704,930)",
+            "2023": "(2,753,408,131)",
+            "2024": "(2,231,482,381)"
+          },
+          {
+            "item": "Net Cash Increase/(Decrease)",
+            "note": "",
+            "2022": "(844,926,630)",
+            "2023": "(47,066,297)",
+            "2024": "(3,206,569)"
+          },
+          {
+            "item": "Cash and Cash Equivalents at Opening",
+            "note": "",
+            "2022": "15,955,446",
+            "2023": "56,836,420",
+            "2024": "9,770,123"
+          },
+          {
+            "item": "Cash and Cash Equivalents at Closing",
+            "note": "",
+            "2022": "56,836,420",
+            "2023": "9,770,123",
+            "2024": "6,563,555"
+          }
+        ]
+      },
+      "statementOfChangesInEquity": {
+        "noteReference": "Separate Statements",
+        "data": [
+          {
+            "year": "2022",
+            "balanceAsOnJuly01": {
+              "shareCapital": "90,000,000",
+              "retainedEarnings": "(14,917,939,417)",
+              "total": "(14,827,939,417)"
+            },
+            "netProfitLossAfterTax": "(851,192,528)",
+            "balanceAsOn30June": {
+              "shareCapital": "90,000,000",
+              "retainedEarnings": "(15,769,131,945)",
+              "total": "(15,679,131,945)"
+            }
+          },
+          {
+            "year": "2023",
+            "balanceAsOnJuly01": {
+              "shareCapital": "90,000,000",
+              "retainedEarnings": "(15,769,131,945)",
+              "total": "(15,679,131,945)"
+            },
+            "netProfitLossAfterTax": "5,801,759",
+            "balanceAsOn30June": {
+              "shareCapital": "90,000,000",
+              "retainedEarnings": "(15,763,330,186)",
+              "total": "(15,673,330,186)"
+            }
+          },
+          {
+            "year": "2024",
+            "balanceAsOnJuly01": {
+              "shareCapital": "90,000,000",
+              "retainedEarnings": "(15,763,330,186)",
+              "total": "(15,673,330,186)"
+            },
+            "netProfitLossAfterTax": "6,997,958",
+            "balanceAsOn30June": {
+              "shareCapital": "90,000,000",
+              "retainedEarnings": "(15,756,332,228)",
+              "total": "(15,666,332,228)"
+            }
+          }
+        ]
+      }
+    },
+    "financialAnalysis": {
+      "profitLoss": {
+        "2022": {
+          "revenue": "2,342,171,667",
+          "directExpenses": "(998,995,038)",
+          "grossProfit": "1,343,176,629",
+          "adminExpenses": "(158,224,068)",
+          "operatingIncome": "1,184,952,561",
+          "nonOperatingIncome": "36,524,929",
+          "financialExpenses": "(2,058,397,838)",
+          "profitBeforeTax": "(836,920,348)",
+          "netProfit": "(851,192,528)"
+        },
+        "2023": {
+          "revenue": "3,113,743,215",
+          "directExpenses": "(934,566,601)",
+          "grossProfit": "2,179,176,615",
+          "adminExpenses": "(150,623,122)",
+          "operatingIncome": "2,028,553,493",
+          "nonOperatingIncome": "33,398,294",
+          "financialExpenses": "(2,037,267,178)",
+          "profitBeforeTax": "24,684,608",
+          "netProfit": "5,801,759"
+        },
+        "2024": {
+          "revenue": "3,491,969,249",
+          "directExpenses": "(965,506,304)",
+          "grossProfit": "2,526,462,945",
+          "adminExpenses": "(153,375,082)",
+          "operatingIncome": "2,373,087,862",
+          "nonOperatingIncome": "52,742,349",
+          "financialExpenses": "(2,397,563,983)",
+          "profitBeforeTax": "28,266,228",
+          "netProfit": "6,997,958"
+        }
+      },
+      "balanceSheet": {
+        "2022": {
+          "ppe": "6,126,751,417",
+          "investments": "236,727,536",
+          "inventory": "123,927,395",
+          "totalAssets": "7,013,399,398",
+          "shareCapital": "90,000,000",
+          "retainedEarnings": "(15,769,131,945)",
+          "longTermLoans": "17,424,742,309",
+          "shortTermLoans": "4,139,579,234",
+          "totalLiabilities": "22,668,046,343"
+        },
+        "2023": {
+          "ppe": "5,947,021,530",
+          "investments": "236,727,536",
+          "inventory": "184,441,400",
+          "totalAssets": "6,748,753,187",
+          "shareCapital": "90,000,000",
+          "retainedEarnings": "(15,763,330,186)",
+          "longTermLoans": "17,500,620,952",
+          "shortTermLoans": "4,921,462,421",
+          "totalLiabilities": "22,174,653,373"
+        },
+        "2024": {
+          "ppe": "5,947,021,530",
+          "investments": "236,727,536",
+          "inventory": "184,441,400",
+          "totalAssets": "6,750,779,608",
+          "shareCapital": "90,000,000",
+          "retainedEarnings": "(15,756,332,228)",
+          "longTermLoans": "17,724,588,858",
+          "shortTermLoans": "4,921,462,421",
+          "totalLiabilities": "22,417,295,547"
+        }
+      },
+      "cashFlow": {
+        "2022": {
+          "operating": "1,561,791,655",
+          "investing": "(675,984,050)",
+          "financing": "(1,482,704,930)",
+          "netChange": "(844,926,630)"
+        },
+        "2023": {
+          "operating": "2,734,299,740",
+          "investing": "(27,957,906)",
+          "financing": "(2,753,408,131)",
+          "netChange": "(47,066,297)"
+        },
+        "2024": {
+          "operating": "2,487,666,801",
+          "investing": "(259,390,989)",
+          "financing": "(2,231,482,381)",
+          "netChange": "(3,206,569)"
+        }
+      },
+      "ratios": {
+        "2022": {
+          "currentRatio": "0.12",
+          "debtToEquity": "-1.45",
+          "returnOnAssets": "-12.14%",
+          "grossMargin": "57.35%",
+          "cashFlowToIncome": "0.67"
+        },
+        "2023": {
+          "currentRatio": "0.13",
+          "debtToEquity": "-1.41",
+          "returnOnAssets": "0.09%",
+          "grossMargin": "69.99%",
+          "cashFlowToIncome": "0.88"
+        },
+        "2024": {
+          "currentRatio": "0.13",
+          "debtToEquity": "-1.43",
+          "returnOnAssets": "0.10%",
+          "grossMargin": "72.35%",
+          "cashFlowToIncome": "0.71"
+        }
+      }
+    },
+    "financialAnalysisReport": {
+      "executiveSummary": "Anwer Khan Modern Hospital Ltd. has shown significant revenue growth over three years (2022-2024) but continues to face severe financial distress characterized by massive accumulated losses, negative equity, extremely high leverage, and persistent audit qualifications. Revenue increased from Tk. 2.34 billion in 2022 to Tk. 3.49 billion in 2024, yet the company remains technically insolvent with negative equity exceeding Tk. 15.6 billion each year.",
+      "keyFindings": [
+        {
+          "category": "Profitability",
+          "finding": "Revenue growth is overshadowed by massive accumulated losses and negative equity position.",
+          "trend": "Improving",
+          "riskLevel": "High"
+        },
+        {
+          "category": "Liquidity",
+          "finding": "Severe liquidity constraints with cash balances declining to Tk. 6.56 million in 2024.",
+          "trend": "Deteriorating",
+          "riskLevel": "Critical"
+        },
+        {
+          "category": "Solvency",
+          "finding": "Extremely high leverage with debt-to-equity ratios consistently negative due to accumulated losses.",
+          "trend": "Persistent",
+          "riskLevel": "Critical"
+        },
+        {
+          "category": "Asset Quality",
+          "finding": "Significant audit issues regarding verification of assets including PPE, inventories, and investments.",
+          "trend": "Deteriorating",
+          "riskLevel": "High"
+        },
+        {
+          "category": "Cash Flow",
+          "finding": "Operating cash flows positive but insufficient to cover massive financing outflows.",
+          "trend": "Volatile",
+          "riskLevel": "High"
+        }
+      ],
+      "ratioAnalysis": {
+        "liquidityRatios": [
+          {
+            "ratio": "Current Ratio",
+            "formula": "Current Assets / Current Liabilities",
+            "2022": "0.12",
+            "2023": "0.13",
+            "2024": "0.13",
+            "assessment": "Severely deficient - indicates inability to meet short-term obligations"
+          },
+          {
+            "ratio": "Quick Ratio",
+            "formula": "(Current Assets - Inventory) / Current Liabilities",
+            "2022": "0.09",
+            "2023": "0.08",
+            "2024": "0.08",
+            "assessment": "Critical liquidity position"
+          }
+        ],
+        "solvencyRatios": [
+          {
+            "ratio": "Debt-to-Equity",
+            "formula": "Total Liabilities / Shareholders' Equity",
+            "2022": "-1.45",
+            "2023": "-1.41",
+            "2024": "-1.43",
+            "assessment": "Negative equity position - technically insolvent"
+          },
+          {
+            "ratio": "Debt-to-Assets",
+            "formula": "Total Liabilities / Total Assets",
+            "2022": "3.23",
+            "2023": "3.29",
+            "2024": "3.32",
+            "assessment": "Extremely high leverage - liabilities exceed assets significantly"
+          }
+        ],
+        "profitabilityRatios": [
+          {
+            "ratio": "Return on Assets (ROA)",
+            "formula": "Net Income / Total Assets",
+            "2022": "-12.14%",
+            "2023": "0.09%",
+            "2024": "0.10%",
+            "assessment": "Minimal to negative returns on asset investment"
+          },
+          {
+            "ratio": "Gross Margin",
+            "formula": "Gross Profit / Revenue",
+            "2022": "57.35%",
+            "2023": "69.99%",
+            "2024": "72.35%",
+            "assessment": "Improving but offset by high operating and financial expenses"
+          }
+        ],
+        "efficiencyRatios": [
+          {
+            "ratio": "Asset Turnover",
+            "formula": "Revenue / Total Assets",
+            "2022": "0.33",
+            "2023": "0.46",
+            "2024": "0.52",
+            "assessment": "Improving asset utilization efficiency"
+          },
+          {
+            "ratio": "Cash Flow Adequacy",
+            "formula": "Operating Cash Flow / Total Liabilities",
+            "2022": "0.07",
+            "2023": "0.12",
+            "2024": "0.11",
+            "assessment": "Inadequate cash flow relative to liabilities"
+          }
+        ]
+      },
+      "trendAnalysis": {
+        "revenueTrend": {
+          "2022": "2,342,171,667",
+          "2023": "3,113,743,215",
+          "2024": "3,491,969,249",
+          "growthRate": "32.94% (2022-2023), 12.15% (2023-2024)",
+          "assessment": "Strong revenue growth but from unverified sources"
+        },
+        "profitabilityTrend": {
+          "netIncome": {
+            "2022": "(851,192,528)",
+            "2023": "5,801,759",
+            "2024": "6,997,958"
+          },
+          "assessment": "Turnaround in 2023-2024 but remains minimal relative to accumulated losses"
+        },
+        "assetQualityTrend": {
+          "ppe": {
+            "2022": "6,126,751,417",
+            "2023": "5,947,021,530",
+            "2024": "5,947,021,530"
+          },
+          "assessment": "Declining PPE base with significant audit verification issues"
+        },
+        "liquidityTrend": {
+          "cashBalance": {
+            "2022": "56,836,420",
+            "2023": "9,770,123",
+            "2024": "6,563,555"
+          },
+          "assessment": "Severe decline in cash reserves - liquidity crisis"
+        }
+      },
+      "goingConcernAssessment": {
+        "indicators": [
+          {
+            "indicator": "Negative Equity Position",
+            "status": "Present all three years",
+            "severity": "Critical"
+          },
+          {
+            "indicator": "Massive Accumulated Losses",
+            "status": "Exceeds Tk. 15.7 billion",
+            "severity": "Critical"
+          },
+          {
+            "indicator": "Severe Liquidity Constraints",
+            "status": "Cash < Tk. 10 million since 2023",
+            "severity": "Critical"
+          },
+          {
+            "indicator": "High Leverage",
+            "status": "Liabilities 3x assets",
+            "severity": "High"
+          },
+          {
+            "indicator": "Audit Qualifications",
+            "status": "Multiple material uncertainties",
+            "severity": "High"
+          }
+        ],
+        "overallAssessment": "Significant doubt exists regarding the entity's ability to continue as a going concern. The company is technically insolvent, faces severe liquidity constraints, and has persistent audit qualifications regarding asset verification and financial statement reliability.",
+        "recommendation": "Immediate financial restructuring required including debt rescheduling, equity injection, and operational turnaround strategy."
+      },
+      "auditImplications": {
+        "qualifications": [
+          "2022: Unmodified with Emphasis of Matter on cash, inventory, intercompany loans verification",
+          "2023: Unmodified with Emphasis of Matter on fixed assets, investments, inventory verification",
+          "2024: Unmodified with Emphasis of Matter on comprehensive verification failures and going concern uncertainty"
+        ],
+        "materiality": {
+          "unverifiedAssets": "Approximately Tk. 6.7+ billion (95% of total assets)",
+          "unverifiedLiabilities": "Approximately Tk. 21.8+ billion (100% of liabilities)",
+          "assessment": "Pervasively material audit scope limitations"
+        },
+        "recommendation": "Independent verification of all material assets, liabilities, and transactions required for reliable financial reporting."
+      },
+      "conclusion": "Anwer Khan Modern Hospital Ltd. exhibits severe financial distress with technical insolvency, liquidity crisis, and significant audit reliability issues. While revenue shows growth, the fundamental financial position remains unsustainable without immediate and substantial restructuring. Regulatory intervention is warranted to protect stakeholder interests and ensure financial reporting integrity."
+    },
+    "riskIndicators": {
+      "yearData": {
+        "2022": [
+          {
+            "indicator": "Lack of Asset Verification",
+            "evidence": "Cash & inventory not physically verified",
+            "risk": "high",
+            "reference": "2022 Audit Report p. 2"
+          },
+          {
+            "indicator": "Unverified Related Party Transactions",
+            "evidence": "Intercompany loans of Tk. 1,103,724,807 not verified",
+            "risk": "high",
+            "reference": "2022 Audit Report p. 2"
+          },
+          {
+            "indicator": "Non-compliance with IAS 38",
+            "evidence": "Preliminary expenses not amortized",
+            "risk": "moderate",
+            "reference": "2022 Audit Report p. 2"
+          }
+        ],
+        "2023": [
+          {
+            "indicator": "Expanded Asset Verification Issues",
+            "evidence": "Fixed assets, FDRs, inventory, advances not verified",
+            "risk": "high",
+            "reference": "2023 Audit Report p. 2"
+          },
+          {
+            "indicator": "Investment Verification Failure",
+            "evidence": "Investments in Modern Group Ltd, Bengal Meat not verified",
+            "risk": "high",
+            "reference": "2023 Audit Report p. 2"
+          },
+          {
+            "indicator": "Cash Verification Issues",
+            "evidence": "Cash book ledger not available",
+            "risk": "high",
+            "reference": "2023 Audit Report p. 2"
+          }
+        ],
+        "2024": [
+          {
+            "indicator": "Comprehensive Verification Failure",
+            "evidence": "Fixed assets, inventory, advances, revenue, expenses not verified",
+            "risk": "high",
+            "reference": "2024 Audit Report p. 2-3"
+          },
+          {
+            "indicator": "Revenue Recognition Risk",
+            "evidence": "Revenue recognized without proper sales ledger",
+            "risk": "high",
+            "reference": "2024 Audit Report p. 3"
+          },
+          {
+            "indicator": "Going Concern Uncertainty",
+            "evidence": "Material uncertainty regarding operational continuity",
+            "risk": "high",
+            "reference": "2024 Audit Report p. 3"
+          }
+        ]
+      },
+      "aggregateRisks": [
+        {
+          "category": "Asset Verification Risk",
+          "2022": "high",
+          "2023": "high",
+          "2024": "high",
+          "trend": "Escalating",
+          "aggregate": "Critical"
+        },
+        {
+          "category": "Related Party Risk",
+          "2022": "high",
+          "2023": "high",
+          "2024": "high",
+          "trend": "Persistent",
+          "aggregate": "Critical"
+        },
+        {
+          "category": "Going Concern Risk",
+          "2022": "moderate",
+          "2023": "moderate",
+          "2024": "high",
+          "trend": "Escalating",
+          "aggregate": "High"
+        }
+      ]
+    },
+    "governance": {
+      "board": [
+        {
+          "aspect": "Board Composition Disclosure",
+          "status": "Not Disclosed",
+          "evidence": "No board details in financial statements",
+          "assessment": "Deficient"
+        },
+        {
+          "aspect": "Audit Committee Existence",
+          "status": "Not Disclosed",
+          "evidence": "No mention of audit committee in reports",
+          "assessment": "Critical"
+        },
+        {
+          "aspect": "Related Party Transaction Oversight",
+          "status": "Weak",
+          "evidence": "Intercompany loans not properly documented/verified",
+          "assessment": "Critical"
+        }
+      ],
+      "auditQuality": [
+        {
+          "factor": "Auditor Independence",
+          "2022": "Not Assessable",
+          "2023": "Not Assessable",
+          "2024": "Not Assessable",
+          "assessment": "Unclear"
+        },
+        {
+          "factor": "Audit Scope Limitations",
+          "2022": "Significant",
+          "2023": "Severe",
+          "2024": "Critical",
+          "assessment": "Deteriorating"
+        },
+        {
+          "factor": "Professional Skepticism",
+          "2022": "Adequate",
+          "2023": "Adequate",
+          "2024": "Adequate",
+          "assessment": "Acceptable"
+        }
+      ],
+      "internalControls": [
+        {
+          "area": "Asset Safeguarding",
+          "2022": "Cash & inventory not verified",
+          "2023": "Multiple assets not verified",
+          "2024": "Comprehensive asset verification failure",
+          "effectiveness": "Failed"
+        },
+        {
+          "area": "Transaction Authorization",
+          "2022": "Intercompany loans not documented",
+          "2023": "Investments not properly authorized",
+          "2024": "Revenue & expenses not properly supported",
+          "effectiveness": "Failed"
+        },
+        {
+          "area": "Record Keeping",
+          "2022": "Ledgers not available",
+          "2023": "Multiple ledgers not available",
+          "2024": "Comprehensive record keeping failure",
+          "effectiveness": "Failed"
+        }
+      ]
+    },
+    "enforcement": {
+      "findings": [
+        {
+          "title": "Audit Report Failures",
+          "description": "Persistent and escalating audit scope limitations across all three years, with material uncertainty regarding going concern in 2024.",
+          "action": "Auditor Explanation Required",
+          "severity": "high"
+        },
+        {
+          "title": "IFRS Non-Compliance",
+          "description": "Multiple violations of IAS 1, IAS 2, IAS 16, IAS 38 across all years with deteriorating compliance trend.",
+          "action": "Restatement Directive",
+          "severity": "high"
+        },
+        {
+          "title": "Financial Statement Integrity",
+          "description": "Material assets, liabilities, revenues and expenses not verified, casting doubt on financial statement reliability.",
+          "action": "Independent Verification Required",
+          "severity": "high"
+        },
+        {
+          "title": "Governance Failure",
+          "description": "No evidence of functioning audit committee, weak internal controls, management override indicators.",
+          "action": "Board Enforcement Notice",
+          "severity": "high"
+        }
+      ],
+      "materiality": [
+        {
+          "category": "Unverified Assets",
+          "impact": "Tk. 6.7B+",
+          "quantitative": "95% of total assets",
+          "qualitative": "Fundamental to financial statements",
+          "overall": "Clearly Material"
+        },
+        {
+          "category": "Unverified Liabilities",
+          "impact": "Tk. 21.8B+",
+          "quantitative": "100% of reported liabilities",
+          "qualitative": "Essential for solvency assessment",
+          "overall": "Clearly Material"
+        },
+        {
+          "category": "Going Concern Uncertainty",
+          "impact": "Entity Continuity",
+          "quantitative": "Not quantifiable",
+          "qualitative": "Fundamental accounting assumption",
+          "overall": "Pervasively Material"
+        }
+      ],
+      "actions": [
+        {
+          "type": "Immediate Directive",
+          "action": "Issue show-cause notice to management and board",
+          "responsible": "FRC Enforcement Division",
+          "timeframe": "7 days",
+          "priority": "Critical"
+        },
+        {
+          "type": "Financial Restatement",
+          "action": "Direct restatement of 2022, 2023, 2024 financials",
+          "responsible": "Company Management",
+          "timeframe": "90 days",
+          "priority": "Critical"
+        },
+        {
+          "type": "Independent Verification",
+          "action": "Appoint independent expert to verify assets, liabilities",
+          "responsible": "FRC Appointed Firm",
+          "timeframe": "60 days",
+          "priority": "Critical"
+        }
+      ]
+    }
+  }
+}

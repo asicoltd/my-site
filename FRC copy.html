@@ -1,0 +1,3408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC Bangladesh - Regulatory Inspection Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<style>
+    /* All existing CSS remains the same except color changes */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    :root {
+        --bd-green: #006a4e;
+        --bd-red: #f42a41;
+        --bd-gold: #f9c74f;
+        --primary-dark: #004d38;
+        --light-bg: #f8faf9;
+    }
+    body {
+        background-color: #f5f7fa;
+        color: #333;
+        overflow-x: hidden;
+    }
+
+    .header {
+        background: linear-gradient(135deg, var(--bd-green) 0%, var(--primary-dark) 100%);
+        color: white;
+        padding: 20px 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .header h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header p {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .container {
+        display: flex;
+        min-height: calc(100vh - 140px);
+    }
+
+    .left-panel {
+        flex: 3;
+        padding: 20px;
+        overflow-y: auto;
+        max-height: calc(100vh - 140px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right-panel {
+        flex: 1;
+        background-color: #fff;
+        border-left: 1px solid #ddd;
+        padding: 20px;
+        overflow-y: auto;
+        max-height: calc(100vh - 140px);
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .tabs {
+        display: flex;
+        background-color: white;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        margin-bottom: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .tab {
+        padding: 15px 25px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #555;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .tab:hover {
+        background-color: #f8f9fa;
+        color: var(--bd-green);
+    }
+
+    .tab.active {
+        color: var(--primary-dark);
+        border-bottom: 3px solid var(--bd-green);
+        background-color: #f0f9f5;
+    }
+
+    .tab-content {
+        display: none;
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+        padding: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 25px;
+        flex-grow: 1;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .section {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid var(--bd-green);
+    }
+
+    .section h2 {
+        color: var(--primary-dark);
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px;
+    }
+
+    .section h2 i {
+        color: var(--bd-green);
+    }
+
+    .subsection {
+        margin-bottom: 20px;
+    }
+
+    .subsection h3 {
+        color: #444;
+        margin-bottom: 12px;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .subsection h3 i {
+        color: var(--bd-green);
+        font-size: 15px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    table th {
+        background-color: #f0f9f5;
+        color: var(--primary-dark);
+        font-weight: 600;
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 2px solid #ddd;
+        white-space: nowrap;
+    }
+
+    table td {
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+        vertical-align: top;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+        background-color: #f0f9f5;
+    }
+
+    .risk-high {
+        color: #d32f2f;
+        font-weight: 600;
+        background-color: #ffebee;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .risk-moderate {
+        color: #f57c00;
+        font-weight: 600;
+        background-color: #fff3e0;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .risk-low {
+        color: #388e3c;
+        font-weight: 600;
+        background-color: #e8f5e9;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .file-list {
+        list-style-type: none;
+    }
+
+    .file-item {
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border-left: 4px solid var(--bd-green);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .file-item:hover {
+        background-color: #f0f9f5;
+        transform: translateX(5px);
+    }
+
+    .file-item.active {
+        background-color: #e6f4ea;
+        border-left-color: var(--primary-dark);
+    }
+
+    .file-name {
+        font-weight: 600;
+        color: var(--primary-dark);
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .file-type {
+        font-size: 11px;
+        color: #666;
+        background-color: #eee;
+        padding: 2px 8px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .file-year {
+        font-size: 11px;
+        color: #fff;
+        background-color: var(--bd-green);
+        padding: 2px 8px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .pdf-viewer-container {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .pdf-viewer-container h3 {
+        background-color: #f0f9f5;
+        padding: 12px;
+        margin: 0;
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+    }
+
+    #pdf-viewer {
+        width: 100%;
+        height: 450px;
+        border: none;
+    }
+
+    .btn-export {
+        background: linear-gradient(to right, var(--primary-dark), var(--bd-green));
+        color: rgb(255, 255, 255);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0;
+        transition: all 0.3s ease;
+        width: 100%;
+        height: 90px;
+        justify-content: center;
+    }
+
+    .btn-export:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 106, 78, 0.3);
+    }
+
+    .compliance-badge {
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    .compliant {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .partial {
+        background-color: #fff3e0;
+        color: #ef6c00;
+    }
+
+    .non-compliant {
+        background-color: #ffebee;
+        color: #d32f2f;
+    }
+
+    .source-ref {
+        font-size: 12px;
+        color: #666;
+        font-style: italic;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px dashed #ddd;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .tag-audit {
+        background-color: #e3f2fd;
+        color: #1565c0;
+    }
+
+    .tag-fs {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+    }
+
+    .tag-note {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .materiality-high {
+        border-left: 4px solid #d32f2f;
+    }
+
+    .materiality-moderate {
+        border-left: 4px solid #f57c00;
+    }
+
+    .year-tabs {
+        display: flex;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        overflow-x: auto;
+    }
+
+    .year-tab {
+        padding: 8px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #555;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .year-tab:hover {
+        color: var(--bd-green);
+    }
+
+    .year-tab.active {
+        color: var(--primary-dark);
+        border-bottom: 3px solid var(--bd-green);
+    }
+
+    .year-content {
+        display: none;
+    }
+
+    .year-content.active {
+        display: block;
+    }
+
+    .comparison-table {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .comparison-col {
+        min-width: 250px;
+        margin-right: 20px;
+    }
+
+    .comparison-col h4 {
+        background-color: var(--primary-dark);
+        color: white;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .comparison-item {
+        background-color: white;
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+
+    .comparison-item:last-child {
+        border-radius: 0 0 5px 5px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .comparison-item .label {
+        font-weight: 600;
+        color: #555;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .comparison-item .value {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 14px;
+        border-top: 1px solid #ddd;
+        margin-top: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .key-findings {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .finding-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid;
+    }
+
+    .finding-card.high {
+        border-top-color: #d32f2f;
+    }
+
+    .finding-card.moderate {
+        border-top-color: #f57c00;
+    }
+
+    .finding-card.low {
+        border-top-color: #388e3c;
+    }
+
+    .finding-card h4 {
+        margin-bottom: 10px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .finding-card p {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .finding-card .action {
+        font-size: 13px;
+        color: var(--primary-dark);
+        font-weight: 600;
+    }
+
+    /* New styles for blank state */
+    .blank-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        text-align: center;
+        color: #666;
+        padding: 40px 20px;
+    }
+
+    .blank-state i {
+        font-size: 64px;
+        color: #ddd;
+        margin-bottom: 20px;
+    }
+
+    .blank-state h3 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    .blank-state p {
+        max-width: 500px;
+        margin-bottom: 25px;
+        line-height: 1.6;
+    }
+
+    .btn-load-company {
+        background: linear-gradient(to right, var(--primary-dark), var(--bd-green));
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        font-size: 16px;
+    }
+
+    .btn-load-company:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 106, 78, 0.3);
+    }
+
+    .company-selector {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f0f9f5;
+        border-radius: 8px;
+    }
+
+    .company-selector h4 {
+        color: var(--primary-dark);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .company-selector select {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #333;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .company-selector select:focus {
+        outline: none;
+        border-color: var(--bd-green);
+        box-shadow: 0 0 0 2px rgba(0, 106, 78, 0.2);
+    }
+
+    /* New styles for data display */
+    .data-table {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .data-table table {
+        min-width: 800px;
+    }
+
+    .metric-value {
+        font-weight: 600;
+        color: var(--primary-dark);
+    }
+
+    .metric-trend-up {
+        color: #2e7d32;
+    }
+
+    .metric-trend-down {
+        color: #d32f2f;
+    }
+
+    .metric-trend-stable {
+        color: #f57c00;
+    }
+
+    .standard-compliance-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .standard-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid;
+    }
+
+    .standard-card.compliant {
+        border-left-color: #2e7d32;
+    }
+
+    .standard-card.partial {
+        border-left-color: #f57c00;
+    }
+
+    .standard-card.non-compliant {
+        border-left-color: #d32f2f;
+    }
+
+    .standard-card h4 {
+        margin-bottom: 10px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .standard-card p {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .standard-card .status {
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .company-upload {
+        margin-bottom: 25px;
+    }
+
+    .btn-upload {
+        background: linear-gradient(to right, var(--primary-dark), var(--bd-green));
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        width: 100%;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+    .btn-upload:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 106, 78, 0.3);
+    }
+
+    @media (max-width: 1200px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .right-panel {
+            border-left: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .tabs {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+
+        .tab {
+            white-space: nowrap;
+        }
+
+        .key-findings,
+        .standard-compliance-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div class="header">
+        <h1><img style="width: 80px;" src="https://frc.teletalk.com.bd/images/frc_logo.jpg" alt=""> Financial Reporting Council (FRC), Bangladesh</h1>
+        <p id="header-subtitle">Regulatory Inspection Portal - Select a company to begin analysis</p>
+    </div>
+
+    <div class="tabs-container" style="position: sticky; top: 0; z-index: 100; background: white; border-radius: 10px 10px 0 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);">
+    <div class="tabs">
+        <div class="tab" onclick="switchTab(0)">
+            <i class="fas fa-home"></i> Overview
+        </div>
+        <div class="tab" onclick="switchTab(1)">
+            <i class="fas fa-search"></i> Audit Analysis
+        </div>
+        <div class="tab" onclick="switchTab(2)">
+            <i class="fas fa-chart-line"></i> IFRS Compliance
+        </div>
+        <div class="tab active" onclick="switchTab(3)">
+            <i class="fas fa-file-invoice-dollar"></i> Financial Analysis
+        </div>
+        <div class="tab" onclick="switchTab(4)">
+            <i class="fas fa-exclamation-circle"></i> Risk Indicators
+        </div>
+        <div class="tab" onclick="switchTab(5)">
+            <i class="fas fa-user-tie"></i> Governance
+        </div>
+        <div class="tab" onclick="switchTab(6)">
+            <i class="fas fa-gavel"></i> Enforcement
+        </div>
+    </div>
+</div>
+
+            <!-- All Tab Contents - Initially empty -->
+            <div class="tab-content active" id="tab-overview">
+                <div class="blank-state" id="overview-blank">
+                    <i class="fas fa-building"></i>
+                    <h3>No Company Selected</h3>
+                    <p>Select a company from the right panel to load its regulatory inspection data. The analysis
+                        includes financial statements, audit reports, IFRS compliance, and risk assessment for multiple
+                        years.</p>
+                    <button class="btn-load-company"
+                        onclick="document.querySelector('.company-selector select').focus()">
+                        <i class="fas fa-folder-open"></i> Select a Company
+                    </button>
+                </div>
+                <!-- Overview content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-audit">
+                <div class="blank-state" id="audit-blank">
+                    <i class="fas fa-search"></i>
+                    <h3>Audit Analysis</h3>
+                    <p>Select a company to view detailed audit analysis including auditor opinions, emphasis of matter
+                        paragraphs, and scope limitations across multiple years.</p>
+                </div>
+                <!-- Audit content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-compliance">
+                <div class="blank-state" id="compliance-blank">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>IFRS Compliance</h3>
+                    <p>Select a company to view IFRS/IAS compliance assessment with year-wise comparison and compliance
+                        trend analysis.</p>
+                </div>
+                <!-- Compliance content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-financial">
+                <div class="blank-state" id="financial-blank">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3>Financial Analysis</h3>
+                    <p>Select a company to view comprehensive financial statement analysis including profit & loss,
+                        balance sheet, cash flow, and key financial ratios.</p>
+                </div>
+                <!-- Financial content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-risk">
+                <div class="blank-state" id="risk-blank">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <h3>Risk Indicators</h3>
+                    <p>Select a company to view fraud and manipulation risk indicators with materiality assessment
+                        across multiple years.</p>
+                </div>
+                <!-- Risk content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-governance">
+                <div class="blank-state" id="governance-blank">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Governance</h3>
+                    <p>Select a company to view governance assessment including board effectiveness, audit quality, and
+                        internal control environment.</p>
+                </div>
+                <!-- Governance content will be loaded here dynamically -->
+            </div>
+
+            <div class="tab-content" id="tab-enforcement">
+                <div class="blank-state" id="enforcement-blank">
+                    <i class="fas fa-gavel"></i>
+                    <h3>Enforcement</h3>
+                    <p>Select a company to view regulatory findings, materiality assessment, and recommended enforcement
+                        actions.</p>
+                </div>
+                <!-- Enforcement content will be loaded here dynamically -->
+            </div>
+        </div>
+
+        <!-- Right Panel - File Navigation & Company Selection -->
+        <div class="right-panel">
+            <h2 style="color: #248f1a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-folder-open"></i> Company Selection
+            </h2>
+
+            <div class="company-selector">
+                <h4><i class="fas fa-building"></i> Select Company</h4>
+                <select id="companySelect" onchange="loadCompanyData()">
+                    <option value="">-- Select a company --</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            
+            <div class="company-upload">
+                <a href="form.html" style="text-decoration: none;">
+                    <button class="btn-upload">
+                        <i class="fas fa-upload"></i> Upload Company Data
+                    </button>
+                </a>
+            </div>
+
+            <div id="fileNavigation" style="display: none;">
+                <h3 style="color: #2e8f1a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-file-pdf"></i> Processed Files
+                </h3>
+
+                <p style="margin-bottom: 20px; color: #666;">Select a file to view in the PDF viewer:</p>
+
+                <div class="file-list" id="fileList">
+                    <!-- Files will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="pdf-viewer-container">
+                <h3><i class="fas fa-eye"></i> Document Viewer</h3>
+                <iframe id="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file="></iframe>
+            </div>
+            
+            <div id="inspectorNotes"
+                style="margin-top: 25px; padding: 15px; background-color: #f0f5ff; border-radius: 8px; display: none;">
+                <h4 style="color: #1a8f24; margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Inspector Notes</h4>
+                <p id="notesContent" style="font-size: 14px; color: #555;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>FRC Bangladesh - Regulatory Inspection Portal | Generated on <span id="current-date"></span></p>
+        <p><i class="fas fa-info-circle"></i> Select a company from the dropdown to load its inspection data. All
+            findings are linked to source documents for traceability.</p>
+    </div>
+
+    <script>
+        // Global variable to store company data loaded from JSON
+        let companyData = {};
+        let currentCompany = null;
+
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        // Load JSON data on page load
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                // Load the JSON file
+                const response = await fetch('companyDatacopy.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                companyData = await response.json();
+                
+                // Populate the company dropdown
+                populateCompanyDropdown();
+                
+                // Initialize with blank state
+                resetToBlankState();
+                
+                console.log('Company data loaded successfully:', Object.keys(companyData).length, 'companies');
+            } catch (error) {
+                console.error('Error loading company data:', error);
+                alert('Failed to load company data. Please check if companyData.json exists and is accessible.');
+            }
+        });
+
+        // Populate company dropdown from JSON data
+        function populateCompanyDropdown() {
+            const companySelect = document.getElementById('companySelect');
+            
+            // Clear existing options except the first one
+            companySelect.innerHTML = '<option value="">-- Select a company --</option>';
+            
+            // Add options from the loaded JSON data
+            Object.entries(companyData).forEach(([id, company]) => {
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = company.name;
+                companySelect.appendChild(option);
+            });
+        }
+
+        // Load company data when selected
+        function loadCompanyData() {
+            const select = document.getElementById('companySelect');
+            const companyId = select.value;
+
+            if (!companyId) {
+                // Reset to blank state
+                resetToBlankState();
+                return;
+            }
+
+            currentCompany = companyData[companyId];
+
+            if (!currentCompany) {
+                alert("Company data not found!");
+                return;
+            }
+
+            // Update header
+            document.getElementById('header-subtitle').textContent = `Regulatory Inspection Portal - ${currentCompany.name}`;
+
+            // Show file navigation
+            document.getElementById('fileNavigation').style.display = 'block';
+            document.getElementById('inspectorNotes').style.display = 'block';
+            
+            // Display inspector notes
+            const notesContent = document.getElementById('notesContent');
+            if (currentCompany.inspectorNotes) {
+                notesContent.textContent = currentCompany.inspectorNotes;
+            } else {
+                notesContent.textContent = 'No inspector notes available.';
+            }
+
+            // Load PDF files
+            loadPDFFiles();
+
+            // Load all analysis data
+            loadAllTabData();
+
+            // Select first file if available
+            if (currentCompany.pdfFiles && currentCompany.pdfFiles.length > 0) {
+                selectFile(0);
+            }
+        }
+
+        // Load PDF files into the file list
+        function loadPDFFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            if (!currentCompany.pdfFiles || currentCompany.pdfFiles.length === 0) {
+                fileList.innerHTML = '<p style="color: #666; font-style: italic;">No PDF files available for this company.</p>';
+                return;
+            }
+
+            currentCompany.pdfFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item' + (index === 0 ? ' active' : '');
+                fileItem.onclick = () => selectFile(index);
+
+                fileItem.innerHTML = `
+                    <div class="file-name"><i class="fas fa-file-pdf"></i> ${file.name || 'Unnamed File'}</div>
+                    <div><span class="file-type">PDF</span> <span class="file-year">${file.year || 'N/A'}</span></div>
+                    <div style="margin-top: 8px; font-size: 14px; color: #555;">${file.type || 'Unknown Type'}</div>
+                `;
+
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // Select a file to view
+        function selectFile(index) {
+            // Update active file in list
+            const fileItems = document.querySelectorAll('.file-item');
+            fileItems.forEach(item => item.classList.remove('active'));
+            if (fileItems[index]) {
+                fileItems[index].classList.add('active');
+            }
+
+            // Update PDF viewer if it exists
+            const pdfViewer = document.getElementById('pdf-viewer');
+            if (pdfViewer && currentCompany.pdfFiles && currentCompany.pdfFiles[index]) {
+                const file = currentCompany.pdfFiles[index];
+                // Use a placeholder if no URL is provided
+                const fileUrl = file.url || `placeholder_${file.name || 'document'}.pdf`;
+                pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(fileUrl)}`;
+            }
+        }
+
+        // Load all tab data
+        function loadAllTabData() {
+            // Hide blank states
+            document.querySelectorAll('.blank-state').forEach(state => {
+                state.style.display = 'none';
+            });
+
+            // Clear any previously loaded content
+            document.querySelectorAll('.section').forEach(section => {
+                section.remove();
+            });
+
+            // Check if company has the required data structure
+            if (!currentCompany) {
+                console.warn('No company data available');
+                return;
+            }
+
+            // Load data for each tab
+            loadOverviewData();
+            loadAuditAnalysisData();
+            loadComplianceData();
+            loadFinancialAnalysisData();
+            loadRiskIndicatorsData();
+            loadGovernanceData();
+            loadEnforcementData();
+        }
+
+        // Load overview data
+        function loadOverviewData() {
+            const overviewTab = document.getElementById('tab-overview');
+            
+            if (!currentCompany.overview) {
+                overviewTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Overview Data</h2><p>This company does not have overview data available.</p></div>';
+                return;
+            }
+
+            let overviewContent = `
+                <div class="section">
+                    <h2><i class="fas fa-info-circle"></i> Inspection Overview</h2>
+                                        <button class="btn-export" onclick="generatePDFReport()">
+                        <i class="fas fa-download"></i> Generate Comprehensive Inspection Report (PDF)
+                    </button>
+                    <p>${currentCompany.overview.description || 'No description available.'}</p>
+                    
+                    ${currentCompany.overview.keyFindings && currentCompany.overview.keyFindings.length > 0 ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Key Findings</h3>
+                        <div class="key-findings">
+                            ${currentCompany.overview.keyFindings.map(finding => `
+                                <div class="finding-card ${finding.severity || 'moderate'}">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled Finding'}</h4>
+                                    <p>${finding.description || 'No description'}</p>
+                                    <div class="action">${finding.action || 'Action required'}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            // Add year-wise data if available
+            if (currentCompany.overview.yearData && currentCompany.years && currentCompany.years.length > 0) {
+                overviewContent += `
+                    <div class="section">
+                        <h2><i class="fas fa-calendar-alt"></i> Year-Wise Summary</h2>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('overview', ${index})">${year}</div>
+                            `).join('')}
+                            <div class="year-tab" onclick="switchYear('overview', ${currentCompany.years.length})">Comparison</div>
+                        </div>
+                        
+                        ${currentCompany.years.map((year, index) => {
+                            const yearData = currentCompany.overview.yearData[year];
+                            if (!yearData) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="overview-year-${year}">
+                                    <div class="comparison-table">
+                                        <div class="comparison-col">
+                                            <h4>Audit Report</h4>
+                                            <div class="comparison-item">
+                                                <div class="label">Opinion Type</div>
+                                                <div class="value">${yearData.auditOpinion || 'Not available'}</div>
+                                            </div>
+                                            <div class="comparison-item">
+                                                <div class="label">Revenue</div>
+                                                <div class="value">${yearData.revenue || 'Not available'}</div>
+                                            </div>
+                                            <div class="comparison-item">
+                                                <div class="label">Net Profit/(Loss)</div>
+                                                <div class="value">${yearData.netProfit || yearData.netLoss || 'Not available'}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="comparison-col">
+                                            <h4>Financial Position</h4>
+                                            <div class="comparison-item">
+                                                <div class="label">Total Liabilities</div>
+                                                <div class="value">${yearData.totalLiabilities || 'Not available'}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                        
+                        <div class="year-content" id="overview-year-comparison">
+                            <div class="subsection">
+                                <h3><i class="fas fa-chart-bar"></i> Year Trend Analysis</h3>
+                                ${currentCompany.financialAnalysis && currentCompany.financialAnalysis.ratios ? `
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Metric</th>
+                                            ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                            <th>Trend</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Current Ratio</td>
+                                            ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.currentRatio || 'N/A'}</td>`).join('')}
+                                            <td><i class="fas fa-${getTrendIcon('currentRatio')}" style="color:${getTrendColor('currentRatio')}"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Debt to Equity Ratio</td>
+                                            ${currentCompany.years.map(year => `<td>${currentCompany.financialAnalysis.ratios[year]?.debtToEquity || 'N/A'}</td>`).join('')}
+                                            <td><i class="fas fa-${getTrendIcon('debtToEquity')}" style="color:${getTrendColor('debtToEquity')}"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                ` : '<p>No trend data available.</p>'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            overviewTab.insertAdjacentHTML('beforeend', overviewContent);
+        }
+
+        // Load audit analysis data
+        function loadAuditAnalysisData() {
+            const auditTab = document.getElementById('tab-audit');
+            
+            if (!currentCompany.auditAnalysis) {
+                auditTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Audit Analysis Data</h2><p>This company does not have audit analysis data available.</p></div>';
+                return;
+            }
+
+            let auditContent = `
+                <div class="section">
+                    <h2><i class="fas fa-search"></i> Audit Analysis</h2>
+                    <p><strong>Auditor:</strong> ${currentCompany.auditAnalysis.auditor || 'Not specified'}</p>
+                    <p><strong>Opinion Type:</strong> ${currentCompany.auditAnalysis.opinionType || 'Not specified'}</p>
+                    
+                    ${currentCompany.auditAnalysis.yearDetails ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-file-contract"></i> Year-Wise Analysis</h3>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.auditAnalysis.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('audit', ${index})">${year}</div>
+                            `).join('')}
+                        </div>
+                        
+                        ${currentCompany.auditAnalysis.years.map((year, index) => {
+                            const yearData = currentCompany.auditAnalysis.yearDetails[year];
+                            if (!yearData) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="audit-year-${year}">
+                                    <div class="subsection">
+                                        <h4>${year} Audit Issues</h4>
+                                        ${yearData.issues && yearData.issues.length > 0 ? `
+                                        <ul style="padding-left: 20px;">
+                                            ${yearData.issues.map(issue => `<li>${issue}</li>`).join('')}
+                                        </ul>
+                                        ` : '<p>No audit issues documented.</p>'}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.auditAnalysis.recurringIssues ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Recurring Audit Issues</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Issue</th>
+                                    ${currentCompany.auditAnalysis.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Status</th>
+                                    <th>Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.auditAnalysis.recurringIssues.map(issue => `
+                                    <tr>
+                                        <td>${issue.issue || 'Unknown'}</td>
+                                        ${currentCompany.auditAnalysis.years.map(year => `
+                                            <td>${issue[year] ? '<i class="fas fa-check" style="color:red"></i>' : '<i class="fas fa-times" style="color:green"></i>'}</td>
+                                        `).join('')}
+                                        <td>${issue.status || 'Unknown'}</td>
+                                        <td><span class="risk-${issue.risk || 'moderate'}">${issue.risk || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            auditTab.insertAdjacentHTML('beforeend', auditContent);
+        }
+
+        // Load compliance data
+        function loadComplianceData() {
+            const complianceTab = document.getElementById('tab-compliance');
+            
+            if (!currentCompany.ifrsCompliance) {
+                complianceTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No IFRS Compliance Data</h2><p>This company does not have IFRS compliance data available.</p></div>';
+                return;
+            }
+
+            let complianceContent = `
+                <div class="section">
+                    <h2><i class="fas fa-chart-line"></i> IFRS/IAS Compliance</h2>
+                    
+                    ${currentCompany.ifrsCompliance.standards ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-check"></i> Compliance Status by Standard</h3>
+                        
+                        <div class="standard-compliance-grid">
+                            ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                <div class="standard-card ${data[currentCompany.years[currentCompany.years.length - 1]] || 'non-compliant'}">
+                                    <h4>${standard}: ${data.name || 'Unknown Standard'}</h4>
+                                    <p><strong>Status (${currentCompany.years[currentCompany.years.length - 1]}):</strong> 
+                                        <span class="compliance-badge ${data[currentCompany.years[currentCompany.years.length - 1]] || 'non-compliant'}">
+                                            ${data[currentCompany.years[currentCompany.years.length - 1]] === 'partial' ? 'Partial' : 
+                                              data[currentCompany.years[currentCompany.years.length - 1]] === 'non-compliant' ? 'Non-compliant' : 
+                                              data[currentCompany.years[currentCompany.years.length - 1]] === 'compliant' ? 'Compliant' : 'Unknown'}
+                                        </span>
+                                    </p>
+                                    <p>${data.issues || 'No issues documented'}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-bar"></i> Compliance Trend Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Standard</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${Object.entries(currentCompany.ifrsCompliance.standards).map(([standard, data]) => `
+                                    <tr>
+                                        <td>${standard}</td>
+                                        ${currentCompany.years.map(year => `
+                                            <td><span class="compliance-badge ${data[year] || 'non-compliant'}">${data[year] === 'partial' ? 'P' : data[year] === 'non-compliant' ? 'N' : data[year] === 'compliant' ? 'C' : 'N/A'}</span></td>
+                                        `).join('')}
+                                        <td>${getComplianceTrend(data)}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No compliance standards data available.</p>'}
+                </div>
+            `;
+
+            complianceTab.insertAdjacentHTML('beforeend', complianceContent);
+        }
+
+        // Load financial analysis data
+function loadFinancialAnalysisData() {
+    const financialTab = document.getElementById('tab-financial');
+    
+    // Clear any existing content first
+    financialTab.querySelectorAll('.section').forEach(section => section.remove());
+    
+    if (!currentCompany || !currentCompany.financialDataTables) {
+        financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Analysis Data</h2><p>This company does not have financial analysis data available.</p></div>';
+        return;
+    }
+
+    // Get the financial data
+    const financialData = currentCompany.financialDataTables;
+    const financialAnalysis = currentCompany.financialAnalysisReport;
+    const years = ['2022', '2023', '2024'];
+
+    let financialContent = `
+        <div class="section">
+            <h2><i class="fas fa-file-invoice-dollar"></i> Financial Analysis</h2>
+            
+            <div class="year-tabs">
+                <div class="year-tab active" onclick="switchYear('financial', 0)">Profit & Loss</div>
+                <div class="year-tab" onclick="switchYear('financial', 1)">Balance Sheet</div>
+                <div class="year-tab" onclick="switchYear('financial', 2)">Cash Flow</div>
+                <div class="year-tab" onclick="switchYear('financial', 3)">Ratios</div>
+                <div class="year-tab" onclick="switchYear('financial', 4)">Financial Analysis</div>
+            </div>
+            
+            <!-- Profit & Loss -->
+            <div class="year-content active" id="financial-pl">
+                <div class="subsection">
+                    <h3><i class="fas fa-chart-line"></i> Statement of Comprehensive Income</h3>
+                    <p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${financialData.statementOfComprehensiveIncome.noteReference}</p>
+                    ${financialData.statementOfComprehensiveIncome ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Particulars</th>
+                                    <th>Note</th>
+                                    ${years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Revenue -->
+                                <tr>
+                                    <td><strong>Revenue</strong></td>
+                                    <td class="note-number">${getNoteNumber('Revenue', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Revenue");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('revenue', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Direct Expenses -->
+                                <tr>
+                                    <td>Less: Direct Expenses</td>
+                                    <td class="note-number">${getNoteNumber('Less: Direct Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Less: Direct Expenses");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('directExpenses', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Gross Profit -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>Gross Profit</strong></td>
+                                    <td class="note-number">${getNoteNumber('Gross Profit', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Gross Profit");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('grossProfit', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Administrative Expenses -->
+                                <tr>
+                                    <td>Administrative & Marketing Expenses</td>
+                                    <td class="note-number">${getNoteNumber('Administrative & Marketing Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Administrative & Marketing Expenses");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('adminExpenses', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Income from Operation -->
+                                <tr>
+                                    <td>Income from Operation</td>
+                                    <td class="note-number">${getNoteNumber('Income from Operation', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Income from Operation");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('operatingIncome', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Non-Operating Income -->
+                                <tr>
+                                    <td>Non Operating Income</td>
+                                    <td class="note-number">${getNoteNumber('Non Operating Income', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Non Operating Income");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('nonOperatingIncome', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Profit Before Interest and Taxes -->
+                                <tr>
+                                    <td>Profit/(Loss) before Interest and Taxes</td>
+                                    <td class="note-number">${getNoteNumber('Profit/(Loss) before Interest and Taxes', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit/(Loss) before Interest and Taxes");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('profitBeforeInterestTax', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Financial Expenses -->
+                                <tr>
+                                    <td>Financial Expenses</td>
+                                    <td class="note-number">${getNoteNumber('Financial Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Financial Expenses");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('financialExpenses', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Profit Before Tax -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>Profit/(Loss) Before Tax</strong></td>
+                                    <td class="note-number">${getNoteNumber('Profit / (Loss) Before Tax', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) Before Tax");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('profitBeforeTax', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Income Tax Expenses -->
+                                <tr>
+                                    <td>Income Tax Expenses</td>
+                                    <td class="note-number">${getNoteNumber('Income Tax Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Income Tax Expenses");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('incomeTaxExpenses', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                                
+                                <!-- Net Profit/(Loss) -->
+                                <tr style="background-color: #f0f5ff;">
+                                    <td><strong>NET PROFIT/(LOSS)</strong></td>
+                                    <td class="note-number">${getNoteNumber('Profit / (Loss) After Tax', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) After Tax");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('netProfit', 'statementOfComprehensiveIncome')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No profit and loss data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Balance Sheet -->
+            <div class="year-content" id="financial-bs">
+                <div class="subsection">
+                    <h3><i class="fas fa-balance-scale"></i> Statement of Financial Position</h3>
+                    <p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${financialData.statementOfFinancialPosition.noteReference}</p>
+                    ${financialData.statementOfFinancialPosition ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Particulars</th>
+                                    <th>Note</th>
+                                    ${years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Growth</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ASSETS -->
+                                <tr>
+                                    <td colspan="${years.length + 3}" style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">ASSETS</td>
+                                </tr>
+                                
+                                <!-- Property, Plant & Equipment -->
+                                <tr>
+                                    <td>Property, Plant & Equipment</td>
+                                    <td class="note-number">${getNoteNumber('Property, Plant & Equipment', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Property, Plant & Equipment");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('ppe', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Investments -->
+                                <tr>
+                                    <td>Investments</td>
+                                    <td class="note-number">${getNoteNumber('Investments', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Investments");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('investments', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Inventory -->
+                                <tr>
+                                    <td>Inventory</td>
+                                    <td class="note-number">${getNoteNumber('Inventories', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Inventories");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('inventory', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Total Assets -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>TOTAL ASSETS</strong></td>
+                                    <td class="note-number">${getNoteNumber('Total Assets', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Assets");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('totalAssets', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- EQUITY & LIABILITIES -->
+                                <tr>
+                                    <td colspan="${years.length + 3}" style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">EQUITY & LIABILITIES</td>
+                                </tr>
+                                
+                                <!-- Share Capital -->
+                                <tr>
+                                    <td>Share Capital - Paid up</td>
+                                    <td class="note-number">${getNoteNumber('Share Capital - Paid up', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Share Capital - Paid up");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('shareCapital', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Retained Earnings -->
+                                <tr>
+                                    <td>Retained Earnings</td>
+                                    <td class="note-number">${getNoteNumber('Retained Earnings', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Retained Earnings");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('retainedEarnings', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Total Shareholders' Equity -->
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td><strong>TOTAL SHAREHOLDERS' EQUITY</strong></td>
+                                    <td class="note-number">${getNoteNumber('Total Shareholders\' Equity', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Shareholders' Equity");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('totalEquity', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Long Term Loans -->
+                                <tr>
+                                    <td>Long Term Loans</td>
+                                    <td class="note-number">${getNoteNumber('Long Term Loan', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Long Term Loan");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('longTermLoans', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Short Term Loans -->
+                                <tr>
+                                    <td>Short Term Loans</td>
+                                    <td class="note-number">${getNoteNumber('Short Term Loan', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Short Term Loan");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('shortTermLoans', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Intercompany Loan -->
+                                <tr>
+                                    <td>Intercompany Loan</td>
+                                    <td class="note-number">${getNoteNumber('Intercompany Loan', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Intercompany Loan");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('intercompanyLoan', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Total Liabilities -->
+                                <tr style="background-color: #f0f5ff;">
+                                    <td><strong>TOTAL LIABILITIES</strong></td>
+                                    <td class="note-number">${getNoteNumber('Total Liabilities', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Liabilities");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('totalLiabilities', 'statementOfFinancialPosition')}</td>
+                                </tr>
+                                
+                                <!-- Financial Position Analysis -->
+                                <tr style="border-top: 2px solid #ddd;">
+                                    <td colspan="${years.length + 3}" style="background-color: #f9f9f9; padding: 10px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div>
+                                                <strong>Debt to Equity Ratio:</strong><br>
+                                                ${years.map(year => `${year}: ${financialAnalysis?.ratioAnalysis?.solvencyRatios?.find(r => r.ratio === "Debt-to-Equity")?.[year] || 'N/A'}`).join(' | ')}
+                                            </div>
+                                            <div>
+                                                <strong>Current Ratio:</strong><br>
+                                                ${years.map(year => `${year}: ${financialAnalysis?.ratioAnalysis?.liquidityRatios?.find(r => r.ratio === "Current Ratio")?.[year] || 'N/A'}`).join(' | ')}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No balance sheet data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Cash Flow -->
+            <div class="year-content" id="financial-cf">
+                <div class="subsection">
+                    <h3><i class="fas fa-money-bill-wave"></i> Statement of Cash Flows</h3>
+                    <p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${financialData.statementOfCashFlows.noteReference}</p>
+                    ${financialData.statementOfCashFlows ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Particulars</th>
+                                    ${years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Operating Activities -->
+                                <tr>
+                                    <td><strong>Cash Flow from Operating Activities</strong></td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from operating activities");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('operating', 'statementOfCashFlows')}</td>
+                                </tr>
+                                
+                                <!-- Investing Activities -->
+                                <tr>
+                                    <td>Cash Flow from Investing Activities</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from Investing Activities");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('investing', 'statementOfCashFlows')}</td>
+                                </tr>
+                                
+                                <!-- Financing Activities -->
+                                <tr>
+                                    <td>Cash Flow from Financing Activities</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from Financing Activities");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('financing', 'statementOfCashFlows')}</td>
+                                </tr>
+                                
+                                <!-- Net Change in Cash -->
+                                <tr style="border-bottom: 2px solid #ddd;">
+                                    <td><strong>Net Increase/(Decrease) in Cash</strong></td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Net Cash Increase/(Decrease)");
+                                        const value = data ? data[year] : "0";
+                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
+                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('netChange', 'statementOfCashFlows')}</td>
+                                </tr>
+                                
+                                <!-- Cash and Cash Equivalents at Opening -->
+                                <tr>
+                                    <td>Cash and Cash Equivalents at Opening</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash and Cash Equivalents at Opening");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('openingCash', 'statementOfCashFlows')}</td>
+                                </tr>
+                                
+                                <!-- Cash and Cash Equivalents at Closing -->
+                                <tr style="background-color: #f0f5ff;">
+                                    <td><strong>Cash and Cash Equivalents at Closing</strong></td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash and Cash Equivalents at Closing");
+                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getFinancialTrendIcon('closingCash', 'statementOfCashFlows')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No cash flow data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Ratios -->
+            <div class="year-content" id="financial-ratios">
+                <div class="subsection">
+                    <h3><i class="fas fa-calculator"></i> Financial Ratios Analysis</h3>
+                    ${financialAnalysis?.ratioAnalysis ? `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ratio</th>
+                                    <th>Formula</th>
+                                    ${years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Assessment</th>
+                                    <th>Benchmark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Current Ratio -->
+                                <tr>
+                                    <td><strong>Current Ratio</strong></td>
+                                    <td class="formula">Current Assets / Current Liabilities</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.liquidityRatios.find(r => r.ratio === "Current Ratio");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('currentRatio')}</td>
+                                    <td>≥ 1.5</td>
+                                </tr>
+                                
+                                <!-- Quick Ratio -->
+                                <tr>
+                                    <td><strong>Quick Ratio</strong></td>
+                                    <td class="formula">(Current Assets - Inventory) / Current Liabilities</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.liquidityRatios.find(r => r.ratio === "Quick Ratio");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('quickRatio')}</td>
+                                    <td>≥ 1.0</td>
+                                </tr>
+                                
+                                <!-- Debt to Equity Ratio -->
+                                <tr>
+                                    <td><strong>Debt to Equity Ratio</strong></td>
+                                    <td class="formula">Total Liabilities / Shareholders' Equity</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.solvencyRatios.find(r => r.ratio === "Debt-to-Equity");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('debtToEquity')}</td>
+                                    <td>≤ 0.7</td>
+                                </tr>
+                                
+                                <!-- Debt to Assets Ratio -->
+                                <tr>
+                                    <td><strong>Debt to Assets Ratio</strong></td>
+                                    <td class="formula">Total Liabilities / Total Assets</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.solvencyRatios.find(r => r.ratio === "Debt-to-Assets");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('debtToAssets')}</td>
+                                    <td>≤ 0.6</td>
+                                </tr>
+                                
+                                <!-- Return on Assets -->
+                                <tr>
+                                    <td><strong>Return on Assets (ROA)</strong></td>
+                                    <td class="formula">Net Income / Total Assets</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.profitabilityRatios.find(r => r.ratio === "Return on Assets (ROA)");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('returnOnAssets')}</td>
+                                    <td>≥ 5%</td>
+                                </tr>
+                                
+                                <!-- Gross Margin -->
+                                <tr>
+                                    <td><strong>Gross Margin</strong></td>
+                                    <td class="formula">Gross Profit / Revenue</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.profitabilityRatios.find(r => r.ratio === "Gross Margin");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('grossMargin')}</td>
+                                    <td>≥ 30%</td>
+                                </tr>
+                                
+                                <!-- Asset Turnover -->
+                                <tr>
+                                    <td><strong>Asset Turnover</strong></td>
+                                    <td class="formula">Revenue / Total Assets</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.efficiencyRatios.find(r => r.ratio === "Asset Turnover");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('assetTurnover')}</td>
+                                    <td>≥ 0.5</td>
+                                </tr>
+                                
+                                <!-- Cash Flow Adequacy -->
+                                <tr>
+                                    <td><strong>Cash Flow Adequacy</strong></td>
+                                    <td class="formula">Operating Cash Flow / Total Liabilities</td>
+                                    ${years.map(year => {
+                                        const ratio = financialAnalysis.ratioAnalysis.efficiencyRatios.find(r => r.ratio === "Cash Flow Adequacy");
+                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${getRatioAssessment('cashFlowAdequacy')}</td>
+                                    <td>≥ 0.1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : '<p>No financial ratios data available.</p>'}
+                </div>
+            </div>
+            
+            <!-- Financial Analysis Report -->
+            <div class="year-content" id="financial-analysis">
+                <div class="subsection">
+                    <h3><i class="fas fa-chart-area"></i> Comprehensive Financial Analysis Report</h3>
+                    
+                    <!-- Executive Summary -->
+                    <div class="finding-card high">
+                        <h4><i class="fas fa-file-alt"></i> Executive Summary</h4>
+                        <p>${financialAnalysis?.executiveSummary || 'No summary available.'}</p>
+                    </div>
+                    
+                    <div class="key-findings">
+                        <!-- Key Findings -->
+                        <div class="finding-card ${financialAnalysis?.keyFindings?.find(f => f.category === "Profitability")?.riskLevel?.toLowerCase() || 'high'}">
+                            <h4><i class="fas fa-chart-line"></i> Profitability Analysis</h4>
+                            <p><strong>Trend:</strong> ${financialAnalysis?.trendAnalysis?.profitabilityTrend?.assessment || 'Not Available'}</p>
+                            <p><strong>Key Metrics:</strong> 
+                                ${years.map(year => {
+                                    const roa = financialAnalysis?.ratioAnalysis?.profitabilityRatios?.find(r => r.ratio === "Return on Assets (ROA)")?.[year];
+                                    const grossMargin = financialAnalysis?.ratioAnalysis?.profitabilityRatios?.find(r => r.ratio === "Gross Margin")?.[year];
+                                    return `${year}: ROA ${roa || 'N/A'}, Gross Margin ${grossMargin || 'N/A'}`;
+                                }).join('<br>')}
+                            </p>
+                            <div class="action">${financialAnalysis?.keyFindings?.find(f => f.category === "Profitability")?.finding || 'Analysis not available'}</div>
+                        </div>
+                        
+                        <!-- Liquidity Analysis -->
+                        <div class="finding-card ${financialAnalysis?.keyFindings?.find(f => f.category === "Liquidity")?.riskLevel?.toLowerCase() || 'critical'}">
+                            <h4><i class="fas fa-tint"></i> Liquidity Analysis</h4>
+                            <p><strong>Current Ratio Trend:</strong> ${analyzeLiquidityTrend()}</p>
+                            <p><strong>Cash Position:</strong> 
+                                ${years.map(year => {
+                                    const netChange = financialData?.statementOfCashFlows?.data?.find(d => d.item === "Net Cash Increase/(Decrease)")?.[year];
+                                    return `${year}: Net Cash Flow ${formatNumber(netChange) || 'N/A'}`;
+                                }).join('<br>')}
+                            </p>
+                            <div class="action">${financialAnalysis?.keyFindings?.find(f => f.category === "Liquidity")?.finding || 'Analysis not available'}</div>
+                        </div>
+                        
+                        <!-- Solvency Analysis -->
+                        <div class="finding-card ${financialAnalysis?.keyFindings?.find(f => f.category === "Solvency")?.riskLevel?.toLowerCase() || 'critical'}">
+                            <h4><i class="fas fa-balance-scale"></i> Solvency Analysis</h4>
+                            <p><strong>Debt Position:</strong> ${financialAnalysis?.trendAnalysis?.liquidityTrend?.assessment || 'Not Available'}</p>
+                            <p><strong>Leverage:</strong> 
+                                ${years.map(year => {
+                                    const debtToEquity = financialAnalysis?.ratioAnalysis?.solvencyRatios?.find(r => r.ratio === "Debt-to-Equity")?.[year];
+                                    return `${year}: Debt to Equity ${debtToEquity || 'N/A'}`;
+                                }).join('<br>')}
+                            </p>
+                            <div class="action">${financialAnalysis?.keyFindings?.find(f => f.category === "Solvency")?.finding || 'Analysis not available'}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trend Analysis Table -->
+                    <div class="subsection" style="margin-top: 20px;">
+                        <h3><i class="fas fa-chart-bar"></i> Year-over-Year Trend Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Note</th>
+                                    ${years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Growth Rate (2022-2024)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Revenue Growth</td>
+                                    <td class="note-number">${getNoteNumber('Revenue', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Revenue");
+                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${financialAnalysis?.trendAnalysis?.revenueTrend?.growthRate || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td>Net Profit/(Loss)</td>
+                                    <td class="note-number">${getNoteNumber('Profit / (Loss) After Tax', financialData.statementOfComprehensiveIncome.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) After Tax");
+                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${calculateGrowthRate('netProfit')}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Assets</td>
+                                    <td class="note-number">${getNoteNumber('Total Assets', financialData.statementOfFinancialPosition.data)}</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Assets");
+                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${calculateGrowthRate('totalAssets')}</td>
+                                </tr>
+                                <tr>
+                                    <td>Operating Cash Flow</td>
+                                    <td class="note-number">N/A</td>
+                                    ${years.map(year => {
+                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from operating activities");
+                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
+                                    }).join('')}
+                                    <td>${calculateGrowthRate('operatingCashFlow')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    financialTab.insertAdjacentHTML('beforeend', financialContent);
+}
+
+// Helper function to get note number from data
+function getNoteNumber(itemName, dataArray) {
+    if (!dataArray) return '';
+    const item = dataArray.find(d => d.item === itemName);
+    return item ? item.note || '' : '';
+}
+
+// Helper function to format numbers
+function formatNumber(value) {
+    if (value === null || value === undefined || value === '' || value === 'N/A') {
+        return 'N/A';
+    }
+    
+    // Convert to number
+    let num;
+    if (typeof value === 'string') {
+        // Remove any existing formatting
+        const cleanStr = value.replace(/[$,()\s]/g, '');
+        // Check if it was negative (had parentheses)
+        const wasNegative = value.includes('(') && value.includes(')');
+        num = parseFloat(cleanStr);
+        if (wasNegative && !isNaN(num)) {
+            num = -Math.abs(num);
+        }
+    } else {
+        num = value;
+    }
+    
+    // Check if valid number
+    if (isNaN(num)) {
+        return String(value);
+    }
+    
+    // Format with commas, no scaling
+    const options = {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+        useGrouping: true  // This adds comma separators
+    };
+    
+    const formatted = Math.abs(num).toLocaleString('en-US', options);
+    
+    // Add parentheses for negative numbers
+    if (num < 0) {
+        return `(${formatted})`;
+    }
+    
+    return formatted;
+}
+
+// Helper function to calculate growth rates
+function calculateGrowthRate(metric) {
+    if (!currentCompany?.financialDataTables) return 'N/A';
+    
+    const years = ['2022', '2023', '2024'];
+    
+    // Get start and end values
+    let startValue, endValue;
+    
+    if (metric === 'revenue') {
+        const data = currentCompany.financialDataTables.statementOfComprehensiveIncome.data.find(d => d.item === "Revenue");
+        startValue = parseFloat(data?.['2022']?.replace(/[(),]/g, '') || '0');
+        endValue = parseFloat(data?.['2024']?.replace(/[(),]/g, '') || '0');
+    } else if (metric === 'netProfit') {
+        const data = currentCompany.financialDataTables.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) After Tax");
+        startValue = parseFloat(data?.['2022']?.replace(/[(),]/g, '') || '0');
+        endValue = parseFloat(data?.['2024']?.replace(/[(),]/g, '') || '0');
+    } else if (metric === 'totalAssets') {
+        const data = currentCompany.financialDataTables.statementOfFinancialPosition.data.find(d => d.item === "Total Assets");
+        startValue = parseFloat(data?.['2022']?.replace(/[(),]/g, '') || '0');
+        endValue = parseFloat(data?.['2024']?.replace(/[(),]/g, '') || '0');
+    } else if (metric === 'operatingCashFlow') {
+        const data = currentCompany.financialDataTables.statementOfCashFlows.data.find(d => d.item === "Cash flows from operating activities");
+        startValue = parseFloat(data?.['2022']?.replace(/[(),]/g, '') || '0');
+        endValue = parseFloat(data?.['2024']?.replace(/[(),]/g, '') || '0');
+    }
+    
+    if (startValue === 0) return 'N/A';
+    
+    const growth = ((endValue - startValue) / Math.abs(startValue)) * 100;
+    return `${growth.toFixed(2)}%`;
+}
+        // Helper functions for financial analysis
+
+        function formatNegativeNumber(value) {
+            if (!value) return 'N/A';
+            // Check if value is already formatted as negative
+            if (value.startsWith('(') && value.endsWith(')')) {
+                return value;
+            }
+            // Convert to number and check if negative
+            const num = parseFloat(value.replace(/[^0-9.-]+/g, ''));
+            if (num < 0) {
+                return `(${Math.abs(num).toLocaleString()})`;
+            }
+            return value;
+        }
+
+        function getFinancialTrendIcon(field, section) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis[section] || currentCompany.years.length < 2) {
+                return '<i class="fas fa-minus" style="color: #666;"></i>';
+            }
+            
+            const years = currentCompany.years;
+            const firstYear = years[0];
+            const lastYear = years[years.length - 1];
+            
+            const firstValue = currentCompany.financialAnalysis[section][firstYear]?.[field];
+            const lastValue = currentCompany.financialAnalysis[section][lastYear]?.[field];
+            
+            if (!firstValue || !lastValue) {
+                return '<i class="fas fa-minus" style="color: #666;"></i>';
+            }
+            
+            // Parse values, handling negative numbers in parentheses
+            const parseValue = (val) => {
+                if (typeof val === 'string') {
+                    if (val.startsWith('(') && val.endsWith(')')) {
+                        return -parseFloat(val.replace(/[(),]/g, ''));
+                    }
+                    return parseFloat(val.replace(/[^0-9.-]+/g, ''));
+                }
+                return val;
+            };
+            
+            const firstNum = parseValue(firstValue);
+            const lastNum = parseValue(lastValue);
+            
+            // For expenses (cost items), decreasing is better
+            const isExpense = ['directExpenses', 'adminExpenses', 'financialExpenses', 'investing'].includes(field);
+            
+            if (lastNum > firstNum) {
+                return isExpense ? 
+                    '<i class="fas fa-arrow-up" style="color: #d32f2f;"></i>' : 
+                    '<i class="fas fa-arrow-up" style="color: #388e3c;"></i>';
+            } else if (lastNum < firstNum) {
+                return isExpense ? 
+                    '<i class="fas fa-arrow-down" style="color: #388e3c;"></i>' : 
+                    '<i class="fas fa-arrow-down" style="color: #d32f2f;"></i>';
+            } else {
+                return '<i class="fas fa-minus" style="color: #f57c00;"></i>';
+            }
+        }
+
+        function getRatioAssessment(ratioName) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) {
+                return '<span class="risk-moderate">Not Available</span>';
+            }
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const value = currentCompany.financialAnalysis.ratios[lastYear]?.[ratioName];
+            
+            if (!value) return '<span class="risk-moderate">N/A</span>';
+            
+            // Parse the value (remove % sign if present)
+            const numValue = parseFloat(value.replace('%', ''));
+            
+            switch(ratioName) {
+                case 'currentRatio':
+                    if (numValue < 1) return '<span class="risk-high">Critical</span>';
+                    if (numValue < 1.5) return '<span class="risk-moderate">Weak</span>';
+                    return '<span class="risk-low">Strong</span>';
+                    
+                case 'debtToEquity':
+                    if (numValue > 1) return '<span class="risk-high">Critical</span>';
+                    if (numValue > 0.7) return '<span class="risk-moderate">High</span>';
+                    return '<span class="risk-low">Acceptable</span>';
+                    
+                case 'returnOnAssets':
+                    if (numValue < 0) return '<span class="risk-high">Negative</span>';
+                    if (numValue < 5) return '<span class="risk-moderate">Low</span>';
+                    return '<span class="risk-low">Good</span>';
+                    
+                case 'grossMargin':
+                    if (numValue < 0) return '<span class="risk-high">Negative</span>';
+                    if (numValue < 20) return '<span class="risk-moderate">Low</span>';
+                    if (numValue < 30) return '<span class="risk-low">Moderate</span>';
+                    return '<span class="risk-low">Strong</span>';
+                    
+                case 'cashFlowToIncome':
+                    if (numValue < 0) return '<span class="risk-high">Negative</span>';
+                    if (numValue < 1) return '<span class="risk-moderate">Weak</span>';
+                    return '<span class="risk-low">Strong</span>';
+                    
+                default:
+                    return '<span class="risk-moderate">Review</span>';
+            }
+        }
+
+        function analyzeCashFlowPatterns() {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.cashFlow) {
+                return 'No cash flow data available';
+            }
+            
+            const years = currentCompany.years;
+            const patterns = years.map(year => {
+                const op = parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.operating || 0);
+                const inv = parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.investing || 0);
+                const fin = parseFloat(currentCompany.financialAnalysis.cashFlow[year]?.financing || 0);
+                
+                if (op > 0 && inv < 0 && fin > 0) return `${year}: Healthy`;
+                if (op > 0 && inv < 0 && fin < 0) return `${year}: Repaying debt`;
+                if (op < 0 && inv < 0 && fin > 0) return `${year}: High risk`;
+                if (op > 0 && inv > 0 && fin < 0) return `${year}: Liquidating`;
+                return `${year}: Unusual`;
+            });
+            
+            return patterns.join(' | ');
+        }
+
+        function getOverallFinancialHealth() {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) {
+                return 'Cannot assess';
+            }
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const ratios = currentCompany.financialAnalysis.ratios[lastYear];
+            
+            if (!ratios) return 'No data';
+            
+            let score = 0;
+            let total = 0;
+            
+            // Current Ratio
+            const cr = parseFloat(ratios.currentRatio || 0);
+            if (cr >= 1.5) score += 2;
+            else if (cr >= 1) score += 1;
+            total += 2;
+            
+            // Debt to Equity
+            const de = parseFloat(ratios.debtToEquity || 0);
+            if (de <= 0.5) score += 2;
+            else if (de <= 0.7) score += 1;
+            total += 2;
+            
+            // Return on Assets
+            const roa = parseFloat(ratios.returnOnAssets || 0);
+            if (roa >= 5) score += 2;
+            else if (roa >= 0) score += 1;
+            total += 2;
+            
+            // Gross Margin
+            const gm = parseFloat(ratios.grossMargin || 0);
+            if (gm >= 30) score += 2;
+            else if (gm >= 20) score += 1;
+            total += 2;
+            
+            const percentage = (score / total) * 100;
+            
+            if (percentage >= 75) return '<span style="color: #388e3c;">Strong</span>';
+            if (percentage >= 50) return '<span style="color: #f57c00;">Moderate</span>';
+            return '<span style="color: #d32f2f;">Weak</span>';
+        }
+
+        function getOverallRiskLevel() {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) {
+                return 'Cannot assess';
+            }
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const ratios = currentCompany.financialAnalysis.ratios[lastYear];
+            
+            if (!ratios) return 'No data';
+            
+            let riskScore = 0;
+            
+            // Current Ratio risk
+            const cr = parseFloat(ratios.currentRatio || 0);
+            if (cr < 1) riskScore += 3;
+            else if (cr < 1.5) riskScore += 1;
+            
+            // Debt to Equity risk
+            const de = parseFloat(ratios.debtToEquity || 0);
+            if (de > 1) riskScore += 3;
+            else if (de > 0.7) riskScore += 2;
+            else if (de > 0.5) riskScore += 1;
+            
+            // Return on Assets risk
+            const roa = parseFloat(ratios.returnOnAssets || 0);
+            if (roa < 0) riskScore += 3;
+            else if (roa < 2) riskScore += 2;
+            else if (roa < 5) riskScore += 1;
+            
+            if (riskScore >= 6) return '<span class="risk-high">High</span>';
+            if (riskScore >= 3) return '<span class="risk-moderate">Moderate</span>';
+            return '<span class="risk-low">Low</span>';
+        }
+
+        function getRatioTrendAnalysis() {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios || currentCompany.years.length < 2) {
+                return 'Insufficient data';
+            }
+            
+            const years = currentCompany.years;
+            const improving = [];
+            const deteriorating = [];
+            const stable = [];
+            
+            // Check each ratio
+            const ratioNames = Object.keys(currentCompany.financialAnalysis.ratios[years[0]] || {});
+            
+            ratioNames.forEach(ratio => {
+                const firstValue = parseFloat(currentCompany.financialAnalysis.ratios[years[0]]?.[ratio] || 0);
+                const lastValue = parseFloat(currentCompany.financialAnalysis.ratios[years[years.length - 1]]?.[ratio] || 0);
+                
+                // Determine if improvement or deterioration based on ratio type
+                const isImprovement = (ratio === 'currentRatio' && lastValue > firstValue) ||
+                                    (ratio === 'returnOnAssets' && lastValue > firstValue) ||
+                                    (ratio === 'grossMargin' && lastValue > firstValue) ||
+                                    (ratio === 'debtToEquity' && lastValue < firstValue);
+                
+                if (Math.abs(lastValue - firstValue) < 0.1) {
+                    stable.push(ratio);
+                } else if (isImprovement) {
+                    improving.push(ratio);
+                } else {
+                    deteriorating.push(ratio);
+                }
+            });
+            
+            if (improving.length > deteriorating.length) return '<span style="color: #388e3c;">Improving</span>';
+            if (deteriorating.length > improving.length) return '<span style="color: #d32f2f;">Deteriorating</span>';
+            return '<span style="color: #f57c00;">Stable</span>';
+        }
+
+        // Additional helper functions for the accrual analysis tab
+
+        function getProfitabilityRiskLevel() {
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const netProfit = currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit;
+            
+            if (netProfit && (netProfit.startsWith('(') || parseFloat(netProfit.replace(/[(),]/g, '')) < 0)) {
+                return 'high';
+            }
+            
+            const roa = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.returnOnAssets || 0);
+            if (roa < 0) return 'high';
+            if (roa < 2) return 'moderate';
+            return 'low';
+        }
+
+        function analyzeProfitabilityTrend() {
+            if (currentCompany.years.length < 2) return 'Single year data';
+            
+            const firstYear = currentCompany.years[0];
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            
+            const firstProfit = currentCompany.financialAnalysis.profitLoss?.[firstYear]?.netProfit;
+            const lastProfit = currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit;
+            
+            if (!firstProfit || !lastProfit) return 'Insufficient data';
+            
+            const firstNum = parseFloat(firstProfit.replace(/[(),]/g, ''));
+            const lastNum = parseFloat(lastProfit.replace(/[(),]/g, ''));
+            
+            if (firstNum < 0 && lastNum < 0) return 'Consistent losses';
+            if (firstNum < 0 && lastNum >= 0) return 'Turned profitable';
+            if (firstNum >= 0 && lastNum < 0) return 'Became unprofitable';
+            if (lastNum > firstNum) return 'Improving profitability';
+            if (lastNum < firstNum) return 'Declining profitability';
+            return 'Stable profitability';
+        }
+
+        function getProfitabilityRecommendation() {
+            const riskLevel = getProfitabilityRiskLevel();
+            if (riskLevel === 'high') return 'Immediate cost optimization and revenue enhancement needed';
+            if (riskLevel === 'moderate') return 'Monitor margins and implement efficiency measures';
+            return 'Maintain current profitability strategies';
+        }
+
+        function getLiquidityRiskLevel() {
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const currentRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.currentRatio || 0);
+            
+            if (currentRatio < 1) return 'high';
+            if (currentRatio < 1.2) return 'moderate';
+            return 'low';
+        }
+
+        function analyzeLiquidityTrend() {
+            if (currentCompany.years.length < 2) return 'Single year data';
+            
+            const firstYear = currentCompany.years[0];
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            
+            const firstRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[firstYear]?.currentRatio || 0);
+            const lastRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.currentRatio || 0);
+            
+            if (lastRatio > firstRatio + 0.1) return 'Improving';
+            if (lastRatio < firstRatio - 0.1) return 'Deteriorating';
+            return 'Stable';
+        }
+
+        function getLiquidityRecommendation() {
+            const riskLevel = getLiquidityRiskLevel();
+            if (riskLevel === 'high') return 'Urgent working capital management required';
+            if (riskLevel === 'moderate') return 'Improve cash conversion cycle';
+            return 'Maintain adequate liquidity buffers';
+        }
+
+        function getSolvencyRiskLevel() {
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const debtToEquity = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.debtToEquity || 0);
+            
+            if (debtToEquity > 1) return 'high';
+            if (debtToEquity > 0.7) return 'moderate';
+            return 'low';
+        }
+
+        function analyzeDebtTrend() {
+            if (currentCompany.years.length < 2) return 'Single year data';
+            
+            const firstYear = currentCompany.years[0];
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            
+            const firstDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[firstYear]?.debtToEquity || 0);
+            const lastDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.debtToEquity || 0);
+            
+            if (lastDebt > firstDebt + 0.1) return 'Increasing leverage';
+            if (lastDebt < firstDebt - 0.1) return 'Reducing leverage';
+            return 'Stable leverage';
+        }
+
+        function getSolvencyRecommendation() {
+            const riskLevel = getSolvencyRiskLevel();
+            if (riskLevel === 'high') return 'Debt restructuring and equity infusion needed';
+            if (riskLevel === 'moderate') return 'Focus on debt reduction';
+            return 'Maintain conservative capital structure';
+        }
+
+        function getCashFlowRiskLevel() {
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const operatingCash = parseFloat(currentCompany.financialAnalysis.cashFlow?.[lastYear]?.operating || 0);
+            const netProfit = parseFloat(currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit?.replace(/[(),]/g, '') || 0);
+            
+            if (operatingCash < 0 && netProfit < 0) return 'high';
+            if (operatingCash < 0 || operatingCash < netProfit) return 'moderate';
+            return 'low';
+        }
+
+        function analyzeOperatingCashFlow() {
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const operatingCash = parseFloat(currentCompany.financialAnalysis.cashFlow?.[lastYear]?.operating || 0);
+            const netProfit = parseFloat(currentCompany.financialAnalysis.profitLoss?.[lastYear]?.netProfit?.replace(/[(),]/g, '') || 0);
+            
+            if (operatingCash > 0 && netProfit > 0 && operatingCash > netProfit) return 'Strong cash generation';
+            if (operatingCash > 0 && netProfit > 0) return 'Adequate cash generation';
+            if (operatingCash > 0 && netProfit < 0) return 'Cash positive despite losses';
+            if (operatingCash < 0 && netProfit > 0) return 'Profit not converting to cash';
+            return 'Cash flow challenges';
+        }
+
+        function getCashFlowRecommendation() {
+            const riskLevel = getCashFlowRiskLevel();
+            if (riskLevel === 'high') return 'Immediate cash flow improvement actions required';
+            if (riskLevel === 'moderate') return 'Focus on working capital efficiency';
+            return 'Continue effective cash management';
+        }
+
+        function calculateGrowthRate(field, section) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis[section] || currentCompany.years.length < 2) {
+                return 'N/A';
+            }
+            
+            const years = currentCompany.years;
+            const firstYear = years[0];
+            const lastYear = years[years.length - 1];
+            
+            const firstValue = currentCompany.financialAnalysis[section][firstYear]?.[field];
+            const lastValue = currentCompany.financialAnalysis[section][lastYear]?.[field];
+            
+            if (!firstValue || !lastValue) return 'N/A';
+            
+            const parseValue = (val) => {
+                if (typeof val === 'string') {
+                    if (val.startsWith('(') && val.endsWith(')')) {
+                        return -parseFloat(val.replace(/[(),]/g, ''));
+                    }
+                    return parseFloat(val.replace(/[^0-9.-]+/g, ''));
+                }
+                return val;
+            };
+            
+            const firstNum = parseValue(firstValue);
+            const lastNum = parseValue(lastValue);
+            
+            if (firstNum === 0) return '∞';
+            
+            const growthRate = ((lastNum - firstNum) / Math.abs(firstNum)) * 100;
+            
+            if (growthRate > 20) return `<span style="color: #388e3c;">+${growthRate.toFixed(1)}%</span>`;
+            if (growthRate < -20) return `<span style="color: #d32f2f;">${growthRate.toFixed(1)}%</span>`;
+            return `<span style="color: #f57c00;">${growthRate.toFixed(1)}%</span>`;
+        }
+
+        function analyzeFinancialRedFlags() {
+            const redFlags = [];
+            
+            // Check for consecutive losses
+            let consecutiveLosses = 0;
+            currentCompany.years.forEach(year => {
+                const netProfit = currentCompany.financialAnalysis.profitLoss?.[year]?.netProfit;
+                if (netProfit && (netProfit.startsWith('(') || parseFloat(netProfit.replace(/[(),]/g, '')) < 0)) {
+                    consecutiveLosses++;
+                }
+            });
+            if (consecutiveLosses >= 2) {
+                redFlags.push(`Consecutive losses for ${consecutiveLosses} years`);
+            }
+            
+            // Check current ratio below 1
+            currentCompany.years.forEach(year => {
+                const currentRatio = parseFloat(currentCompany.financialAnalysis.ratios?.[year]?.currentRatio || 0);
+                if (currentRatio < 1) {
+                    redFlags.push(`Current ratio below 1 in ${year} (${currentRatio})`);
+                }
+            });
+            
+            // Check negative operating cash flow
+            currentCompany.years.forEach(year => {
+                const operatingCash = parseFloat(currentCompany.financialAnalysis.cashFlow?.[year]?.operating || 0);
+                if (operatingCash < 0) {
+                    redFlags.push(`Negative operating cash flow in ${year}`);
+                }
+            });
+            
+            // Check increasing debt
+            if (currentCompany.years.length >= 2) {
+                const firstYear = currentCompany.years[0];
+                const lastYear = currentCompany.years[currentCompany.years.length - 1];
+                const firstDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[firstYear]?.debtToEquity || 0);
+                const lastDebt = parseFloat(currentCompany.financialAnalysis.ratios?.[lastYear]?.debtToEquity || 0);
+                if (lastDebt > firstDebt + 0.2) {
+                    redFlags.push(`Significant increase in debt-to-equity ratio (${firstDebt.toFixed(2)} to ${lastDebt.toFixed(2)})`);
+                }
+            }
+            
+            if (redFlags.length === 0) {
+                return '<p style="color: #388e3c;">No significant red flags identified in financial statements.</p>';
+            }
+            
+            return redFlags.map(flag => `<p style="color: #d32f2f;"><i class="fas fa-exclamation-triangle"></i> ${flag}</p>`).join('');
+        }
+        // Load risk indicators data
+        function loadRiskIndicatorsData() {
+            const riskTab = document.getElementById('tab-risk');
+            
+            if (!currentCompany.riskIndicators) {
+                riskTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Risk Indicators Data</h2><p>This company does not have risk indicators data available.</p></div>';
+                return;
+            }
+
+            let riskContent = `
+                <div class="section materiality-high">
+                    <h2><i class="fas fa-exclamation-circle"></i> Risk Indicators</h2>
+                    
+                    ${currentCompany.riskIndicators.yearData ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-search"></i> Year-Wise Risk Assessment</h3>
+                        
+                        <div class="year-tabs">
+                            ${currentCompany.years.map((year, index) => `
+                                <div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchYear('risk', ${index})">${year}</div>
+                            `).join('')}
+                        </div>
+                        
+                        ${currentCompany.years.map((year, index) => {
+                            const yearData = currentCompany.riskIndicators.yearData[year];
+                            if (!yearData || !Array.isArray(yearData)) return '';
+                            
+                            return `
+                                <div class="year-content ${index === 0 ? 'active' : ''}" id="risk-year-${year}">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Risk Indicator</th>
+                                                <th>Evidence</th>
+                                                <th>Risk Level</th>
+                                                <th>Reference</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${yearData.map(indicator => `
+                                                <tr>
+                                                    <td>${indicator.indicator || 'Unknown'}</td>
+                                                    <td>${indicator.evidence || 'No evidence'}</td>
+                                                    <td><span class="risk-${indicator.risk || 'moderate'}">${indicator.risk || 'Moderate'}</span></td>
+                                                    <td>${indicator.reference || 'No reference'}</td>
+                                                </tr>
+                                            `).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.riskIndicators.aggregateRisks ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-chart-bar"></i> Aggregate Risk Analysis</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Risk Category</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Trend</th>
+                                    <th>Aggregate Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.riskIndicators.aggregateRisks.map(risk => `
+                                    <tr>
+                                        <td>${risk.category || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `
+                                            <td><span class="risk-${risk[year] || 'moderate'}">${risk[year] || 'N/A'}</span></td>
+                                        `).join('')}
+                                        <td>${risk.trend || 'Unknown'}</td>
+                                        <td><span class="risk-${risk.aggregate?.toLowerCase() || 'moderate'}">${risk.aggregate || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            riskTab.insertAdjacentHTML('beforeend', riskContent);
+        }
+
+        // Load governance data
+        function loadGovernanceData() {
+            const governanceTab = document.getElementById('tab-governance');
+            
+            if (!currentCompany.governance) {
+                governanceTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Governance Data</h2><p>This company does not have governance data available.</p></div>';
+                return;
+            }
+
+            let governanceContent = `
+                <div class="section">
+                    <h2><i class="fas fa-user-tie"></i> Governance Assessment</h2>
+                    
+                    ${currentCompany.governance.board ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-users"></i> Board Governance</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Status</th>
+                                    <th>Evidence</th>
+                                    <th>Assessment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.board.map(item => `
+                                    <tr>
+                                        <td>${item.aspect || 'Unknown'}</td>
+                                        <td>${item.status || 'Unknown'}</td>
+                                        <td>${item.evidence || 'No evidence'}</td>
+                                        <td><span class="risk-${item.assessment?.toLowerCase() || 'moderate'}">${item.assessment || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.governance.auditQuality ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-check"></i> Audit Quality</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Factor</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Assessment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.auditQuality.map(item => `
+                                    <tr>
+                                        <td>${item.factor || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `<td>${item[year] || 'N/A'}</td>`).join('')}
+                                        <td>${item.assessment || 'Unknown'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.governance.internalControls ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-cogs"></i> Internal Controls</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Control Area</th>
+                                    ${currentCompany.years.map(year => `<th>${year}</th>`).join('')}
+                                    <th>Effectiveness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.governance.internalControls.map(item => `
+                                    <tr>
+                                        <td>${item.area || 'Unknown'}</td>
+                                        ${currentCompany.years.map(year => `<td>${item[year] || 'N/A'}</td>`).join('')}
+                                        <td><span class="risk-${item.effectiveness?.toLowerCase() || 'moderate'}">${item.effectiveness || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.governance.auditCommittee ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-clipboard-list"></i> Audit Committee</h3>
+                        <div style="background-color: #f0f5ff; padding: 15px; border-radius: 8px;">
+                            <p><strong>Existence:</strong> ${currentCompany.governance.auditCommittee.existence || 'Unknown'}</p>
+                            <p><strong>Composition:</strong> ${currentCompany.governance.auditCommittee.composition || 'Unknown'}</p>
+                            <p><strong>Assessment:</strong> <span class="risk-${currentCompany.governance.auditCommittee.assessment?.toLowerCase() || 'moderate'}">${currentCompany.governance.auditCommittee.assessment || 'Unknown'}</span></p>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            governanceTab.insertAdjacentHTML('beforeend', governanceContent);
+        }
+
+        // Load enforcement data
+        function loadEnforcementData() {
+            const enforcementTab = document.getElementById('tab-enforcement');
+            
+            if (!currentCompany.enforcement) {
+                enforcementTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Enforcement Data</h2><p>This company does not have enforcement data available.</p></div>';
+                return;
+            }
+
+            let enforcementContent = `
+                <div class="section materiality-high">
+                    <h2><i class="fas fa-gavel"></i> Enforcement Actions</h2>
+                    
+                    ${currentCompany.enforcement.findings ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Key Findings</h3>
+                        <div class="key-findings">
+                            ${currentCompany.enforcement.findings.map(finding => `
+                                <div class="finding-card ${finding.severity || 'moderate'}">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> ${finding.title || 'Untitled finding'}</h4>
+                                    <p>${finding.description || 'No description'}</p>
+                                    <div class="action">${finding.action || 'Action required'}</div>
+                                    ${finding.legalReference ? `<div style="font-size: 12px; color: #666; margin-top: 5px;"><strong>Legal Reference:</strong> ${finding.legalReference}</div>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.enforcement.materiality ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-weight"></i> Materiality Assessment</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Impact</th>
+                                    <th>Quantitative</th>
+                                    <th>Qualitative</th>
+                                    <th>Overall</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.enforcement.materiality.map(item => `
+                                    <tr>
+                                        <td>${item.category || 'Unknown'}</td>
+                                        <td>${item.impact || 'Unknown'}</td>
+                                        <td>${item.quantitative || 'Unknown'}</td>
+                                        <td>${item.qualitative || 'Unknown'}</td>
+                                        <td><span class="risk-high">${item.overall || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                    
+                    ${currentCompany.enforcement.actions ? `
+                    <div class="subsection">
+                        <h3><i class="fas fa-tasks"></i> Recommended Actions</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Action Type</th>
+                                    <th>Specific Action</th>
+                                    <th>Responsible Party</th>
+                                    <th>Timeframe</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${currentCompany.enforcement.actions.map(action => `
+                                    <tr>
+                                        <td>${action.type || 'Unknown'}</td>
+                                        <td>${action.action || 'Unknown'}</td>
+                                        <td>${action.responsible || 'Unknown'}</td>
+                                        <td>${action.timeframe || 'Unknown'}</td>
+                                        <td><span class="risk-${action.priority?.toLowerCase() || 'moderate'}">${action.priority || 'Unknown'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            enforcementTab.insertAdjacentHTML('beforeend', enforcementContent);
+        }
+
+        // Reset to blank state
+        function resetToBlankState() {
+            currentCompany = null;
+
+            // Reset header
+            document.getElementById('header-subtitle').textContent = 'Regulatory Inspection Portal - Select a company to begin analysis';
+
+            // Hide file navigation and notes
+            document.getElementById('fileNavigation').style.display = 'none';
+            document.getElementById('inspectorNotes').style.display = 'none';
+
+            // Show blank states
+            document.querySelectorAll('.blank-state').forEach(state => {
+                state.style.display = 'flex';
+            });
+
+            // Clear all loaded content
+            document.querySelectorAll('.section').forEach(section => {
+                section.remove();
+            });
+        }
+
+        // Helper functions
+        function getTrendIcon(ratioName) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'minus';
+            
+            const years = currentCompany.years;
+            if (years.length < 2) return 'minus';
+            
+            const firstValue = parseFloat(currentCompany.financialAnalysis.ratios[years[0]]?.[ratioName]) || 0;
+            const lastValue = parseFloat(currentCompany.financialAnalysis.ratios[years[years.length - 1]]?.[ratioName]) || 0;
+            
+            if (ratioName.includes('Ratio') || ratioName.includes('Margin')) {
+                // For ratios, higher is generally better
+                return lastValue > firstValue ? 'arrow-up' : lastValue < firstValue ? 'arrow-down' : 'minus';
+            } else {
+                return lastValue > firstValue ? 'arrow-up' : lastValue < firstValue ? 'arrow-down' : 'minus';
+            }
+        }
+
+        function getTrendColor(ratioName) {
+            const icon = getTrendIcon(ratioName);
+            if (icon === 'arrow-up') {
+                if (ratioName.includes('Debt') || ratioName.includes('Loss')) return 'red';
+                return 'green';
+            } else if (icon === 'arrow-down') {
+                if (ratioName.includes('Debt') || ratioName.includes('Loss')) return 'green';
+                return 'red';
+            }
+            return 'orange';
+        }
+
+        function getComplianceTrend(data) {
+            const years = currentCompany.years;
+            if (years.length < 2) return 'N/A';
+            
+            const firstStatus = data[years[0]];
+            const lastStatus = data[years[years.length - 1]];
+            
+            if (firstStatus === 'non-compliant' && lastStatus === 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+            if (firstStatus === 'compliant' && lastStatus === 'non-compliant') return '<i class="fas fa-arrow-down" style="color:red"></i> Deteriorating';
+            if (firstStatus === 'partial' && lastStatus === 'compliant') return '<i class="fas fa-arrow-up" style="color:green"></i> Improving';
+            if (firstStatus === 'compliant' && lastStatus === 'partial') return '<i class="fas fa-arrow-down" style="color:orange"></i> Declining';
+            return '<i class="fas fa-minus" style="color:orange"></i> Stable';
+        }
+
+        function formatRatioName(ratio) {
+            return ratio.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        }
+
+        function getRiskLevelForRatio(ratio) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'moderate';
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const value = parseFloat(currentCompany.financialAnalysis.ratios[lastYear]?.[ratio]) || 0;
+            
+            if (ratio.includes('currentRatio')) {
+                return value < 1 ? 'high' : value < 1.5 ? 'moderate' : 'low';
+            } else if (ratio.includes('debtToEquity')) {
+                return value > 1 ? 'high' : value > 0.7 ? 'moderate' : 'low';
+            } else if (ratio.includes('grossMargin')) {
+                return value < 10 ? 'high' : value < 20 ? 'moderate' : 'low';
+            } else if (ratio.includes('returnOnAssets')) {
+                return value < 0 ? 'high' : value < 5 ? 'moderate' : 'low';
+            }
+            
+            return 'moderate';
+        }
+
+        // Tab management
+        function switchTab(tabIndex) {
+            // Update tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[tabIndex].classList.add('active');
+
+            // Update tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const tabIds = ['tab-overview', 'tab-audit', 'tab-compliance', 'tab-financial', 'tab-risk', 'tab-governance', 'tab-enforcement'];
+            document.getElementById(tabIds[tabIndex]).classList.add('active');
+        }
+
+        // Year tab management for different tabs
+        function switchYear(tabPrefix, yearIndex) {
+            const tabContent = document.querySelector(`#tab-${tabPrefix}`);
+            if (!tabContent) return;
+            
+            const yearTabs = tabContent.querySelectorAll('.year-tab');
+            const yearContents = tabContent.querySelectorAll('.year-content');
+
+            // Update tabs
+            yearTabs.forEach(tab => tab.classList.remove('active'));
+            if (yearTabs[yearIndex]) {
+                yearTabs[yearIndex].classList.add('active');
+            }
+
+            // Update contents
+            yearContents.forEach(content => content.classList.remove('active'));
+
+            // Show the corresponding content
+            const contentIds = {
+                'financial': ['pl', 'bs', 'cf', 'ratios', 'accrual'],
+                'risk': currentCompany.years.map(year => `year-${year}`),
+                'overview': currentCompany.years.map(year => `year-${year}`).concat(['comparison']),
+                'audit': currentCompany.years.map(year => `year-${year}`)
+            };
+
+            if (contentIds[tabPrefix] && contentIds[tabPrefix][yearIndex]) {
+                const content = document.getElementById(`${tabPrefix}-${contentIds[tabPrefix][yearIndex]}`);
+                if (content) content.classList.add('active');
+            }
+        }
+
+        // PDF Generation Function
+        // PDF Generation Function
+        async function generatePDFReport() {
+            if (!currentCompany) {
+                alert('Please select a company first');
+                return;
+            }
+            
+            // Show loading state
+            const originalBtnText = document.querySelector('.btn-export').innerHTML;
+            document.querySelector('.btn-export').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Report...';
+            document.querySelector('.btn-export').disabled = true;
+            
+            try {
+                // Import jsPDF if not already available globally
+                const { jsPDF } = window.jspdf;
+                
+                // Create PDF document
+                const doc = new jsPDF('p', 'mm', 'a4');
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                let currentY = 20;
+                
+                // Helper function to add page break if needed
+                function checkPageBreak(minSpace = 50) {
+                    if (currentY > pageHeight - minSpace) {
+                        doc.addPage();
+                        currentY = 20;
+                        return true;
+                    }
+                    return false;
+                }
+                
+                // Helper function to add section
+                function addSection(title, contentFunc, spacing = 15) {
+                    checkPageBreak(30);
+                    doc.setFontSize(16);
+                    doc.setTextColor(26, 58, 143);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(title, 20, currentY);
+                    currentY += spacing;
+                    
+                    contentFunc();
+                    
+                    currentY += 10;
+                    // Add separator line
+                    doc.setDrawColor(200, 200, 200);
+                    doc.line(20, currentY, pageWidth - 20, currentY);
+                    currentY += 15;
+                }
+                
+                // Helper function to add table
+                function addTable(headers, rows, columnWidths = null) {
+                    checkPageBreak(50);
+                    
+                    const tableTop = currentY;
+                    doc.autoTable({
+                        startY: tableTop,
+                        head: [headers],
+                        body: rows,
+                        theme: 'striped',
+                        headStyles: {
+                            fillColor: [26, 58, 143],
+                            textColor: 255,
+                            fontStyle: 'bold'
+                        },
+                        alternateRowStyles: {
+                            fillColor: [245, 245, 245]
+                        },
+                        columnStyles: columnWidths || {},
+                        margin: { left: 20, right: 20 },
+                        didDrawPage: function(data) {
+                            currentY = data.cursor.y + 10;
+                        }
+                    });
+                }
+                
+                // ===== COVER PAGE =====
+                doc.setFillColor(26, 58, 143);
+                doc.rect(0, 0, pageWidth, 80, 'F');
+                
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(24);
+                doc.setFont('helvetica', 'bold');
+                doc.text('FRC BANGLADESH', pageWidth / 2, 40, null, null, 'center');
+                doc.setFontSize(18);
+                doc.text('Regulatory Inspection Report', pageWidth / 2, 50, null, null, 'center');
+                doc.setFontSize(14);
+                doc.text(currentCompany.name, pageWidth / 2, 60, null, null, 'center');
+                
+                // Report Details
+                currentY = 100;
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(11);
+                doc.setFont('helvetica', 'normal');
+                
+                const reportDetails = [
+                    ['Report Generated:', new Date().toLocaleDateString('en-GB', { 
+                        day: 'numeric', month: 'long', year: 'numeric' 
+                    })],
+                    ['Inspection Period:', currentCompany.years?.join(', ') || 'N/A'],
+                    ['Auditor:', currentCompany.auditAnalysis?.auditor || 'Not specified'],
+                    ['Reporting Currency:', 'BDT']
+                ];
+                
+                reportDetails.forEach(([label, value], index) => {
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(label, 20, currentY + (index * 8));
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(value, 80, currentY + (index * 8));
+                });
+                
+                currentY += 60;
+                
+                // ===== EXECUTIVE SUMMARY =====
+                addSection('EXECUTIVE SUMMARY', () => {
+                    doc.setFontSize(11);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(0, 0, 0);
+                    
+                    const summaryText = currentCompany.overview?.description || 
+                        `Regulatory inspection report for ${currentCompany.name} covering financial years ${currentCompany.years?.join(', ')}.`;
+                    
+                    const splitText = doc.splitTextToSize(summaryText, pageWidth - 40);
+                    doc.text(splitText, 20, currentY);
+                    currentY += splitText.length * 5 + 10;
+                    
+                    // Key Statistics
+                    if (currentCompany.overview?.yearData && currentCompany.years) {
+                        const latestYear = currentCompany.years[currentCompany.years.length - 1];
+                        const yearData = currentCompany.overview.yearData[latestYear];
+                        
+                        if (yearData) {
+                            const stats = [
+                                ['Latest Audit Opinion:', yearData.auditOpinion || 'Not available'],
+                                ['Latest Revenue:', yearData.revenue || 'Not available'],
+                                ['Latest Net Profit/Loss:', yearData.netProfit || yearData.netLoss || 'Not available'],
+                                ['Latest Total Liabilities:', yearData.totalLiabilities || 'Not available']
+                            ];
+                            
+                            stats.forEach(([label, value], index) => {
+                                doc.setFont('helvetica', 'bold');
+                                doc.text(label, 20, currentY + (index * 7));
+                                doc.setFont('helvetica', 'normal');
+                                doc.text(value, 80, currentY + (index * 7));
+                            });
+                            
+                            currentY += stats.length * 7 + 10;
+                        }
+                    }
+                });
+                
+                // ===== AUDIT ANALYSIS =====
+                if (currentCompany.auditAnalysis) {
+                    addSection('AUDIT ANALYSIS', () => {
+                        doc.setFontSize(11);
+                        doc.setFont('helvetica', 'normal');
+                        
+                        // Basic audit info
+                        doc.setFont('helvetica', 'bold');
+                        doc.text('Auditor Firm:', 20, currentY);
+                        doc.setFont('helvetica', 'normal');
+                        doc.text(currentCompany.auditAnalysis.auditor || 'Not specified', 60, currentY);
+                        currentY += 7;
+                        
+                        doc.setFont('helvetica', 'bold');
+                        doc.text('Overall Opinion:', 20, currentY);
+                        doc.setFont('helvetica', 'normal');
+                        doc.text(currentCompany.auditAnalysis.opinionType || 'Not specified', 60, currentY);
+                        currentY += 15;
+                        
+                        // Year-wise audit issues table
+                        if (currentCompany.auditAnalysis.yearDetails) {
+                            doc.setFont('helvetica', 'bold');
+                            doc.text('Year-wise Audit Issues:', 20, currentY);
+                            currentY += 7;
+                            
+                            for (const [year, yearData] of Object.entries(currentCompany.auditAnalysis.yearDetails)) {
+                                if (yearData?.issues?.length > 0) {
+                                    doc.setFont('helvetica', 'bold');
+                                    doc.text(`${year}:`, 25, currentY);
+                                    currentY += 5;
+                                    
+                                    doc.setFont('helvetica', 'normal');
+                                    yearData.issues.forEach((issue, index) => {
+                                        const issueText = doc.splitTextToSize(`• ${issue}`, pageWidth - 50);
+                                        doc.text(issueText, 30, currentY);
+                                        currentY += issueText.length * 5;
+                                    });
+                                    currentY += 5;
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // ===== FINANCIAL ANALYSIS =====
+                if (currentCompany.financialAnalysis) {
+                    addSection('FINANCIAL ANALYSIS', () => {
+                        // Profit & Loss Table
+                        if (currentCompany.financialAnalysis.profitLoss && currentCompany.years) {
+                            const headers = ['Particulars', ...currentCompany.years];
+                            const rows = [
+                                ['Revenue', ...currentCompany.years.map(y => currentCompany.financialAnalysis.profitLoss[y]?.revenue || 'N/A')],
+                                ['Gross Profit', ...currentCompany.years.map(y => currentCompany.financialAnalysis.profitLoss[y]?.grossProfit || 'N/A')],
+                                ['Net Profit/(Loss)', ...currentCompany.years.map(y => currentCompany.financialAnalysis.profitLoss[y]?.netProfit || 'N/A')]
+                            ];
+                            
+                            addTable(headers, rows, {
+                                0: { cellWidth: 60 },
+                                ...Object.fromEntries(currentCompany.years.map((_, i) => [i + 1, { cellWidth: 40 }]))
+                            });
+                        }
+                        
+                        // Financial Ratios Table
+                        if (currentCompany.financialAnalysis.ratios && currentCompany.years) {
+                            doc.setFontSize(12);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text('Financial Ratios:', 20, currentY);
+                            currentY += 10;
+                            
+                            const ratioHeaders = ['Ratio', ...currentCompany.years, 'Assessment'];
+                            const ratioRows = Object.keys(currentCompany.financialAnalysis.ratios[currentCompany.years[0]] || {}).map(ratio => {
+                                const ratioName = ratio.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                                const lastYear = currentCompany.years[currentCompany.years.length - 1];
+                                const riskLevel = getRiskLevelForRatio(ratio);
+                                
+                                return [
+                                    ratioName,
+                                    ...currentCompany.years.map(y => currentCompany.financialAnalysis.ratios[y]?.[ratio] || 'N/A'),
+                                    riskLevel.toUpperCase()
+                                ];
+                            });
+                            
+                            addTable(ratioHeaders, ratioRows, {
+                                0: { cellWidth: 50 },
+                                ...Object.fromEntries([...currentCompany.years.map((_, i) => [i + 1, { cellWidth: 30 }]), 
+                                [ratioHeaders.length - 1, { cellWidth: 30 }]])
+                            });
+                        }
+                    });
+                }
+                
+                // ===== IFRS COMPLIANCE =====
+                if (currentCompany.ifrsCompliance?.standards) {
+                    addSection('IFRS COMPLIANCE ASSESSMENT', () => {
+                        const headers = ['Standard', 'Description', ...currentCompany.years, 'Overall Status'];
+                        const rows = Object.entries(currentCompany.ifrsCompliance.standards).map(([code, data]) => {
+                            const latestYear = currentCompany.years[currentCompany.years.length - 1];
+                            const overallStatus = data[latestYear] === 'compliant' ? 'COMPLIANT' : 
+                                                data[latestYear] === 'partial' ? 'PARTIAL' : 'NON-COMPLIANT';
+                            
+                            return [
+                                code,
+                                data.name || 'N/A',
+                                ...currentCompany.years.map(y => data[y] ? data[y].toUpperCase() : 'N/A'),
+                                overallStatus
+                            ];
+                        });
+                        
+                        addTable(headers, rows, {
+                            0: { cellWidth: 30 },
+                            1: { cellWidth: 50 },
+                            ...Object.fromEntries([...currentCompany.years.map((_, i) => [i + 2, { cellWidth: 25 }]), 
+                            [headers.length - 1, { cellWidth: 30 }]])
+                        });
+                    });
+                }
+                
+                // ===== RISK INDICATORS =====
+                if (currentCompany.riskIndicators?.yearData) {
+                    addSection('RISK INDICATORS', () => {
+                        const latestYear = currentCompany.years[currentCompany.years.length - 1];
+                        const latestRisks = currentCompany.riskIndicators.yearData[latestYear];
+                        
+                        if (latestRisks && latestRisks.length > 0) {
+                            const headers = ['Risk Indicator', 'Evidence', 'Risk Level', 'Reference'];
+                            const rows = latestRisks.map(risk => [
+                                risk.indicator || 'N/A',
+                                risk.evidence || 'N/A',
+                                (risk.risk || 'moderate').toUpperCase(),
+                                risk.reference || 'N/A'
+                            ]);
+                            
+                            addTable(headers, rows, {
+                                0: { cellWidth: 50 },
+                                1: { cellWidth: 60 },
+                                2: { cellWidth: 30 },
+                                3: { cellWidth: 40 }
+                            });
+                        }
+                    });
+                }
+                
+                // ===== KEY FINDINGS & RECOMMENDATIONS =====
+                addSection('KEY FINDINGS & RECOMMENDATIONS', () => {
+                    let findings = [];
+                    
+                    // Collect findings from various sections
+                    if (currentCompany.enforcement?.findings) {
+                        findings = [...findings, ...currentCompany.enforcement.findings];
+                    }
+                    
+                    if (currentCompany.overview?.keyFindings) {
+                        findings = [...findings, ...currentCompany.overview.keyFindings];
+                    }
+                    
+                    if (findings.length > 0) {
+                        findings.forEach((finding, index) => {
+                            checkPageBreak(20);
+                            
+                            doc.setFontSize(11);
+                            doc.setFont('helvetica', 'bold');
+                            doc.text(`${index + 1}. ${finding.title || 'Finding'}`, 20, currentY);
+                            currentY += 6;
+                            
+                            doc.setFont('helvetica', 'normal');
+                            const desc = doc.splitTextToSize(finding.description || 'No description provided', pageWidth - 40);
+                            doc.text(desc, 25, currentY);
+                            currentY += desc.length * 5 + 4;
+                            
+                            if (finding.action) {
+                                doc.setFont('helvetica', 'bold');
+                                doc.text('Recommended Action:', 25, currentY);
+                                currentY += 6;
+                                
+                                doc.setFont('helvetica', 'normal');
+                                const actionText = doc.splitTextToSize(finding.action, pageWidth - 45);
+                                doc.text(actionText, 30, currentY);
+                                currentY += actionText.length * 5 + 10;
+                            } else {
+                                currentY += 5;
+                            }
+                        });
+                    } else {
+                        doc.setFontSize(11);
+                        doc.text('No specific findings documented.', 20, currentY);
+                        currentY += 10;
+                    }
+                    
+                    // Add inspector notes if available
+                    if (currentCompany.inspectorNotes) {
+                        checkPageBreak(30);
+                        
+                        doc.setFontSize(12);
+                        doc.setFont('helvetica', 'bold');
+                        doc.text('Inspector Notes:', 20, currentY);
+                        currentY += 8;
+                        
+                        doc.setFontSize(11);
+                        doc.setFont('helvetica', 'normal');
+                        const notes = doc.splitTextToSize(currentCompany.inspectorNotes, pageWidth - 40);
+                        doc.text(notes, 20, currentY);
+                        currentY += notes.length * 5 + 15;
+                    }
+                });
+                
+                // ===== APPENDICES =====
+                addSection('APPENDICES', () => {
+                    doc.setFontSize(11);
+                    doc.setFont('helvetica', 'normal');
+                    
+                    // List of processed files
+                    if (currentCompany.pdfFiles && currentCompany.pdfFiles.length > 0) {
+                        doc.setFont('helvetica', 'bold');
+                        doc.text('Processed Documents:', 20, currentY);
+                        currentY += 8;
+                        
+                        currentCompany.pdfFiles.forEach((file, index) => {
+                            doc.setFont('helvetica', 'normal');
+                            doc.text(`${index + 1}. ${file.name || 'Unnamed file'} (${file.year || 'N/A'}) - ${file.type || 'Unknown type'}`, 25, currentY);
+                            currentY += 6;
+                        });
+                    }
+                    
+                    currentY += 10;
+                    
+                    // Data source information
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Data Sources:', 20, currentY);
+                    currentY += 8;
+                    
+                    doc.setFont('helvetica', 'normal');
+                    doc.text('• Company Annual Reports', 25, currentY);
+                    currentY += 6;
+                    doc.text('• Audit Reports', 25, currentY);
+                    currentY += 6;
+                    doc.text('• FRC Inspection Database', 25, currentY);
+                });
+                
+                // ===== FOOTER & PAGE NUMBERS =====
+                const totalPages = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPages; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(8);
+                    doc.setTextColor(128, 128, 128);
+                    doc.setFont('helvetica', 'normal');
+                    
+                    // Footer line
+                    doc.setDrawColor(200, 200, 200);
+                    doc.line(20, pageHeight - 20, pageWidth - 20, pageHeight - 20);
+                    
+                    // Page number
+                    doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, pageHeight - 15, null, null, 'center');
+                    
+                    // Confidential notice
+                    doc.text('CONFIDENTIAL - For FRC Internal Use Only', pageWidth - 20, pageHeight - 15, null, null, 'right');
+                    
+                    // Report timestamp
+                    doc.text(`Generated: ${new Date().toLocaleString()}`, 20, pageHeight - 15);
+                }
+                
+                // ===== SAVE THE PDF =====
+                const fileName = `FRC_Report_${currentCompany.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+                doc.save(fileName);
+                
+                console.log('PDF report generated successfully:', fileName);
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF report. Please check console for details.');
+            } finally {
+                // Restore button state
+                document.querySelector('.btn-export').innerHTML = originalBtnText;
+                document.querySelector('.btn-export').disabled = false;
+            }
+        }
+
+        // Helper function for risk level - same as in main code
+        function getRiskLevelForRatio(ratio) {
+            if (!currentCompany.financialAnalysis || !currentCompany.financialAnalysis.ratios) return 'moderate';
+            
+            const lastYear = currentCompany.years[currentCompany.years.length - 1];
+            const value = parseFloat(currentCompany.financialAnalysis.ratios[lastYear]?.[ratio]) || 0;
+            
+            if (ratio.includes('currentRatio')) {
+                return value < 1 ? 'high' : value < 1.5 ? 'moderate' : 'low';
+            } else if (ratio.includes('debtToEquity')) {
+                return value > 1 ? 'high' : value > 0.7 ? 'moderate' : 'low';
+            } else if (ratio.includes('grossMargin')) {
+                return value < 10 ? 'high' : value < 20 ? 'moderate' : 'low';
+            } else if (ratio.includes('returnOnAssets')) {
+                return value < 0 ? 'high' : value < 5 ? 'moderate' : 'low';
+            }
+            
+            return 'moderate';
+        }
+    </script>
+</body>
+
+</html>
