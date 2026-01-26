@@ -6,19 +6,19 @@
       {
         "name": "Anwer Khan Modern Hospital Audited FSs-1.pdf",
         "year": 2022,
-        "url": "https://raw.githubusercontent.com/asicoltd/my-site/460b3868cdf6cc5c3f8df23e821f7bcc59ca8ba8/Anwer Khan Modern Hospital Audited FSs-1_compressed.pdf",
+        "url": "https://github.com/asicoltd/my-site/blob/main/Anwer%20Khan%20Modern%20Hospital%20Audited%20FSs-1_compressed.pdf",
         "type": "Audited Financial Statements"
       },
       {
         "name": "Anwer Khan Modern Hospital Audited FSs-2.pdf",
         "year": 2023,
-        "url": "https://raw.githubusercontent.com/asicoltd/my-site/460b3868cdf6cc5c3f8df23e821f7bcc59ca8ba8/Anwer Khan Modern Hospital Audited FSs-2_compressed.pdf",
+        "url": "https://github.com/asicoltd/my-site/blob/main/Anwer%20Khan%20Modern%20Hospital%20Audited%20FSs-2_compressed.pdf",
         "type": "Audited Financial Statements"
       },
       {
         "name": "Anwer Khan Modern Hospital Audited FSs-3.pdf",
         "year": 2024,
-        "url": "https://raw.githubusercontent.com/asicoltd/my-site/460b3868cdf6cc5c3f8df23e821f7bcc59ca8ba8/Anwer Khan Modern Hospital Audited FSs-3_compressed.pdf",
+        "url": "https://github.com/asicoltd/my-site/blob/main/Anwer%20Khan%20Modern%20Hospital%20Audited%20FSs-3_compressed.pdf",
         "type": "Audited Financial Statements"
       }
     ],
@@ -54,9 +54,9 @@
       "yearData": {
         "2022": {
           "auditOpinion": "Unmodified with Emphasis of Matter",
-          "revenue": "2,342,172",
-          "netLoss": "(851,193)",
-          "totalLiabilities": "21,794,314",
+          "revenue": "2,342,171,667",
+          "netLoss": "(851,192,528)",
+          "totalLiabilities": "22,668,046,343",
           "compliance": {
             "ias16": "partial",
             "ias2": "non-compliant",
@@ -65,9 +65,9 @@
         },
         "2023": {
           "auditOpinion": "Unmodified with Emphasis of Matter",
-          "revenue": "3,113,743",
-          "netLoss": "(18,883)",
-          "totalLiabilities": "21,294,314",
+          "revenue": "3,113,743,215",
+          "netLoss": "(18,882,849)",
+          "totalLiabilities": "22,174,653,373",
           "compliance": {
             "ias16": "partial",
             "ias2": "non-compliant",
@@ -76,9 +76,9 @@
         },
         "2024": {
           "auditOpinion": "Unmodified with Emphasis of Matter",
-          "revenue": "3,491,969",
-          "netLoss": "(6,998)",
-          "totalLiabilities": "21,818,228",
+          "revenue": "3,491,969,249",
+          "netLoss": "(21,268,270)",
+          "totalLiabilities": "22,417,295,547",
           "compliance": {
             "ias16": "non-compliant",
             "ias2": "non-compliant",
@@ -240,42 +240,66 @@
         "data": [
           {
             "item": "Non-Current Assets",
-            "note": "3.00, 4.00, 20.2",
+            "note": {
+              "2022": "3.00, 4.00, 20.2",
+              "2023": "3.00, 4.00, 20.2",
+              "2024": "3.00, 4.00, 20.2"
+            },
             "2022": "6,486,482,077",
             "2023": "6,282,901,962",
             "2024": "6,287,949,036"
           },
           {
             "item": "Property, Plant & Equipment",
-            "note": "3.00",
+            "note": {
+              "2022": "3.00",
+              "2023": "3.00",
+              "2024": "3.00"
+            },
             "2022": "6,126,751,417",
             "2023": "5,947,021,530",
             "2024": "5,947,021,530"
           },
           {
             "item": "Investments",
-            "note": "4.00",
+            "note": {
+              "2022": "4.00",
+              "2023": "4.00",
+              "2024": "4.00"
+            },
             "2022": "236,727,536",
             "2023": "236,727,536",
             "2024": "236,727,536"
           },
           {
             "item": "Current Assets",
-            "note": "5.00, 6.00, 7.00, 8.00, 22.00",
-            "2022": "465,851,225",
+            "note": {
+              "2022": "5.00, 6.00, 7.00, 8.00, 22.00",
+              "2023": "5.00, 6.00, 7.00, 8.00, 22.00",
+              "2024": "5.00, 6.00, 7.00, 8.00, 22.00"
+            },
+            "2022": "526,917,321",
             "2023": "465,851,225",
             "2024": "462,830,572"
           },
           {
             "item": "Inventories",
-            "note": "5.00",
+            "note": {
+              "2022": "5.00",
+              "2023": "5.00",
+              "2024": "5.00"
+            },
             "2022": "123,927,395",
             "2023": "184,441,400",
             "2024": "184,441,400"
           },
           {
             "item": "Cash & Cash Equivalents",
-            "note": "8.00",
+            "note": {
+              "2022": "8.00",
+              "2023": "8.00",
+              "2024": "8.00"
+            },
             "2022": "56,836,420",
             "2023": "9,770,123",
             "2024": "6,563,555"
@@ -289,14 +313,22 @@
           },
           {
             "item": "Share Capital - Paid up",
-            "note": "9.00",
+            "note": {
+              "2022": "9.00",
+              "2023": "9.00",
+              "2024": "9.00"
+            },
             "2022": "90,000,000",
             "2023": "90,000,000",
             "2024": "90,000,000"
           },
           {
             "item": "Retained Earnings",
-            "note": "10.00",
+            "note": {
+              "2022": "10.00",
+              "2023": "10.00",
+              "2024": "10.00"
+            },
             "2022": "(15,769,131,945)",
             "2023": "(15,763,330,186)",
             "2024": "(15,756,332,228)"
@@ -310,21 +342,33 @@
           },
           {
             "item": "Long Term Loan",
-            "note": "11.00",
+            "note": {
+              "2022": "11.00",
+              "2023": "11.00",
+              "2024": "11.00"
+            },
             "2022": "17,424,742,309",
             "2023": "17,500,620,952",
             "2024": "17,724,588,858"
           },
           {
             "item": "Short Term Loan",
-            "note": "12.00",
+            "note": {
+              "2022": "12.00",
+              "2023": "12.00",
+              "2024": "12.00"
+            },
             "2022": "4,139,579,234",
             "2023": "3,568,933,879",
             "2024": "3,417,607,208"
           },
           {
             "item": "Intercompany Loan",
-            "note": "22.00",
+            "note": {
+              "2022": "22.00",
+              "2023": "22.00",
+              "2024": "22.00"
+            },
             "2022": "1,103,724,807",
             "2023": "1,325,099,047",
             "2024": "1,325,099,047"
@@ -350,14 +394,22 @@
         "data": [
           {
             "item": "Revenue",
-            "note": "16.00",
+            "note": {
+              "2022": "16.00",
+              "2023": "16.00",
+              "2024": "16.00"
+            },
             "2022": "2,342,171,667",
             "2023": "3,113,743,215",
             "2024": "3,491,969,249"
           },
           {
             "item": "Less: Direct Expenses",
-            "note": "17.00",
+            "note": {
+              "2022": "17.00",
+              "2023": "17.00",
+              "2024": "17.00"
+            },
             "2022": "(998,995,038)",
             "2023": "(934,566,601)",
             "2024": "(965,506,304)"
@@ -371,7 +423,11 @@
           },
           {
             "item": "Administrative & Marketing Expenses",
-            "note": "18.00",
+            "note": {
+              "2022": "18.00",
+              "2023": "18.00",
+              "2024": "18.00"
+            },
             "2022": "(158,224,068)",
             "2023": "(150,623,122)",
             "2024": "(153,375,082)"
@@ -385,7 +441,11 @@
           },
           {
             "item": "Non Operating Income",
-            "note": "20.00",
+            "note": {
+              "2022": "20.00",
+              "2023": "20.00",
+              "2024": "20.00"
+            },
             "2022": "36,524,929",
             "2023": "33,398,294",
             "2024": "52,742,349"
@@ -399,7 +459,11 @@
           },
           {
             "item": "Financial Expenses",
-            "note": "19.00",
+            "note": {
+              "2022": "19.00",
+              "2023": "19.00",
+              "2024": "19.00"
+            },
             "2022": "(2,058,397,838)",
             "2023": "(2,037,267,178)",
             "2024": "(2,397,563,983)"
@@ -413,7 +477,11 @@
           },
           {
             "item": "Income Tax Expenses",
-            "note": "21.00",
+            "note": {
+              "2022": "21.00",
+              "2023": "21.00",
+              "2024": "21.00"
+            },
             "2022": "(14,272,180)",
             "2023": "(18,882,849)",
             "2024": "(21,268,270)"
@@ -432,36 +500,42 @@
         "data": [
           {
             "item": "Cash flows from operating activities",
+            "note": "",
             "2022": "1,561,791,655",
             "2023": "2,734,299,740",
             "2024": "2,487,666,801"
           },
           {
             "item": "Cash flows from Investing Activities",
+            "note": "",
             "2022": "(675,984,050)",
             "2023": "(27,957,906)",
             "2024": "(259,390,989)"
           },
           {
             "item": "Cash flows from Financing Activities",
+            "note": "",
             "2022": "(1,482,704,930)",
             "2023": "(2,753,408,131)",
             "2024": "(2,231,482,381)"
           },
           {
             "item": "Net Cash Increase/(Decrease)",
+            "note": "",
             "2022": "(844,926,630)",
             "2023": "(47,066,297)",
             "2024": "(3,206,569)"
           },
           {
             "item": "Cash and Cash Equivalents at Opening",
+            "note": "",
             "2022": "15,955,446",
-            "2023": "9,770,123",
-            "2024": "6,563,555"
+            "2023": "56,836,420",
+            "2024": "9,770,123"
           },
           {
             "item": "Cash and Cash Equivalents at Closing",
+            "note": "",
             "2022": "56,836,420",
             "2023": "9,770,123",
             "2024": "6,563,555"
@@ -519,115 +593,115 @@
     "financialAnalysis": {
       "profitLoss": {
         "2022": {
-          "revenue": "2,342,172",
-          "directExpenses": "(3,341,167)",
-          "grossProfit": "(998,995)",
-          "adminExpenses": "(1,343,177)",
-          "operatingIncome": "(158,224)",
-          "nonOperatingIncome": "1,184,953",
-          "financialExpenses": "(1,221,477)",
-          "profitBeforeTax": "(2,058,398)",
-          "netProfit": "(851,193)"
+          "revenue": "2,342,171,667",
+          "directExpenses": "(998,995,038)",
+          "grossProfit": "1,343,176,629",
+          "adminExpenses": "(158,224,068)",
+          "operatingIncome": "1,184,952,561",
+          "nonOperatingIncome": "36,524,929",
+          "financialExpenses": "(2,058,397,838)",
+          "profitBeforeTax": "(836,920,348)",
+          "netProfit": "(851,192,528)"
         },
         "2023": {
-          "revenue": "3,113,743",
-          "directExpenses": "(4,048,310)",
-          "grossProfit": "(934,567)",
-          "adminExpenses": "(2,179,177)",
-          "operatingIncome": "(150,623)",
-          "nonOperatingIncome": "2,028,553",
-          "financialExpenses": "(2,061,952)",
-          "profitBeforeTax": "(2,037,267)",
-          "netProfit": "(18,883)"
+          "revenue": "3,113,743,215",
+          "directExpenses": "(934,566,601)",
+          "grossProfit": "2,179,176,615",
+          "adminExpenses": "(150,623,122)",
+          "operatingIncome": "2,028,553,493",
+          "nonOperatingIncome": "33,398,294",
+          "financialExpenses": "(2,037,267,178)",
+          "profitBeforeTax": "24,684,608",
+          "netProfit": "5,801,759"
         },
         "2024": {
-          "revenue": "3,491,969",
-          "directExpenses": "(4,457,476)",
-          "grossProfit": "(965,507)",
-          "adminExpenses": "(2,526,463)",
-          "operatingIncome": "(153,375)",
-          "nonOperatingIncome": "2,373,088",
-          "financialExpenses": "(2,397,564)",
-          "profitBeforeTax": "(2,425,830)",
-          "netProfit": "(6,998)"
+          "revenue": "3,491,969,249",
+          "directExpenses": "(965,506,304)",
+          "grossProfit": "2,526,462,945",
+          "adminExpenses": "(153,375,082)",
+          "operatingIncome": "2,373,087,862",
+          "nonOperatingIncome": "52,742,349",
+          "financialExpenses": "(2,397,563,983)",
+          "profitBeforeTax": "28,266,228",
+          "netProfit": "6,997,958"
         }
       },
       "balanceSheet": {
         "2022": {
-          "ppe": "6,126,751",
-          "investments": "236,728",
-          "inventory": "123,927",
-          "totalAssets": "7,013,399",
-          "shareCapital": "90,000",
-          "retainedEarnings": "(15,769,132)",
-          "longTermLoans": "17,424,742",
-          "shortTermLoans": "4,139,579",
-          "totalLiabilities": "21,794,314"
+          "ppe": "6,126,751,417",
+          "investments": "236,727,536",
+          "inventory": "123,927,395",
+          "totalAssets": "7,013,399,398",
+          "shareCapital": "90,000,000",
+          "retainedEarnings": "(15,769,131,945)",
+          "longTermLoans": "17,424,742,309",
+          "shortTermLoans": "4,139,579,234",
+          "totalLiabilities": "22,668,046,343"
         },
         "2023": {
-          "ppe": "5,947,022",
-          "investments": "236,728",
-          "inventory": "184,441",
-          "totalAssets": "6,748,753",
-          "shareCapital": "90,000",
-          "retainedEarnings": "(15,763,330)",
-          "longTermLoans": "17,500,621",
-          "shortTermLoans": "4,921,462",
-          "totalLiabilities": "21,294,314"
+          "ppe": "5,947,021,530",
+          "investments": "236,727,536",
+          "inventory": "184,441,400",
+          "totalAssets": "6,748,753,187",
+          "shareCapital": "90,000,000",
+          "retainedEarnings": "(15,763,330,186)",
+          "longTermLoans": "17,500,620,952",
+          "shortTermLoans": "4,921,462,421",
+          "totalLiabilities": "22,174,653,373"
         },
         "2024": {
-          "ppe": "5,820,977",
-          "investments": "236,728",
-          "inventory": "184,441",
-          "totalAssets": "6,748,753",
-          "shareCapital": "90,000",
-          "retainedEarnings": "(15,756,332)",
-          "longTermLoans": "17,500,621",
-          "shortTermLoans": "4,921,462",
-          "totalLiabilities": "21,818,228"
+          "ppe": "5,947,021,530",
+          "investments": "236,727,536",
+          "inventory": "184,441,400",
+          "totalAssets": "6,750,779,608",
+          "shareCapital": "90,000,000",
+          "retainedEarnings": "(15,756,332,228)",
+          "longTermLoans": "17,724,588,858",
+          "shortTermLoans": "4,921,462,421",
+          "totalLiabilities": "22,417,295,547"
         }
       },
       "cashFlow": {
         "2022": {
-          "operating": "787,935",
-          "investing": "(52,405)",
-          "financing": "1,190,881",
-          "netChange": "1,926,411"
+          "operating": "1,561,791,655",
+          "investing": "(675,984,050)",
+          "financing": "(1,482,704,930)",
+          "netChange": "(844,926,630)"
         },
         "2023": {
-          "operating": "2,734,300",
-          "investing": "(675,984)",
-          "financing": "(1,482,705)",
-          "netChange": "575,611"
+          "operating": "2,734,299,740",
+          "investing": "(27,957,906)",
+          "financing": "(2,753,408,131)",
+          "netChange": "(47,066,297)"
         },
         "2024": {
-          "operating": "2,487,667",
-          "investing": "(259,391)",
-          "financing": "(2,231,482)",
-          "netChange": "(3,206)"
+          "operating": "2,487,666,801",
+          "investing": "(259,390,989)",
+          "financing": "(2,231,482,381)",
+          "netChange": "(3,206,569)"
         }
       },
       "ratios": {
         "2022": {
-          "currentRatio": "0.16",
-          "debtToEquity": "-1.38",
-          "returnOnAssets": "-12.15%",
-          "grossMargin": "-42.7%",
-          "cashFlowToIncome": "-0.93"
+          "currentRatio": "0.12",
+          "debtToEquity": "-1.45",
+          "returnOnAssets": "-12.14%",
+          "grossMargin": "57.35%",
+          "cashFlowToIncome": "0.67"
         },
         "2023": {
-          "currentRatio": "0.15",
-          "debtToEquity": "-1.35",
-          "returnOnAssets": "-0.27%",
-          "grossMargin": "-30.0%",
-          "cashFlowToIncome": "-144.8"
+          "currentRatio": "0.13",
+          "debtToEquity": "-1.41",
+          "returnOnAssets": "0.09%",
+          "grossMargin": "69.99%",
+          "cashFlowToIncome": "0.88"
         },
         "2024": {
-          "currentRatio": "0.14",
-          "debtToEquity": "-1.38",
-          "returnOnAssets": "-0.10%",
-          "grossMargin": "-27.6%",
-          "cashFlowToIncome": "-355.4"
+          "currentRatio": "0.13",
+          "debtToEquity": "-1.43",
+          "returnOnAssets": "0.10%",
+          "grossMargin": "72.35%",
+          "cashFlowToIncome": "0.71"
         }
       }
     },
@@ -670,17 +744,17 @@
           {
             "ratio": "Current Ratio",
             "formula": "Current Assets / Current Liabilities",
-            "2022": "0.16",
-            "2023": "0.15",
-            "2024": "0.14",
+            "2022": "0.12",
+            "2023": "0.13",
+            "2024": "0.13",
             "assessment": "Severely deficient - indicates inability to meet short-term obligations"
           },
           {
             "ratio": "Quick Ratio",
             "formula": "(Current Assets - Inventory) / Current Liabilities",
-            "2022": "0.12",
-            "2023": "0.10",
-            "2024": "0.10",
+            "2022": "0.09",
+            "2023": "0.08",
+            "2024": "0.08",
             "assessment": "Critical liquidity position"
           }
         ],
@@ -688,16 +762,16 @@
           {
             "ratio": "Debt-to-Equity",
             "formula": "Total Liabilities / Shareholders' Equity",
-            "2022": "-1.38",
-            "2023": "-1.35",
-            "2024": "-1.38",
+            "2022": "-1.45",
+            "2023": "-1.41",
+            "2024": "-1.43",
             "assessment": "Negative equity position - technically insolvent"
           },
           {
             "ratio": "Debt-to-Assets",
             "formula": "Total Liabilities / Total Assets",
-            "2022": "3.11",
-            "2023": "3.16",
+            "2022": "3.23",
+            "2023": "3.29",
             "2024": "3.32",
             "assessment": "Extremely high leverage - liabilities exceed assets significantly"
           }
@@ -706,7 +780,7 @@
           {
             "ratio": "Return on Assets (ROA)",
             "formula": "Net Income / Total Assets",
-            "2022": "-12.15%",
+            "2022": "-12.14%",
             "2023": "0.09%",
             "2024": "0.10%",
             "assessment": "Minimal to negative returns on asset investment"
@@ -714,8 +788,8 @@
           {
             "ratio": "Gross Margin",
             "formula": "Gross Profit / Revenue",
-            "2022": "57.37%",
-            "2023": "70.00%",
+            "2022": "57.35%",
+            "2023": "69.99%",
             "2024": "72.35%",
             "assessment": "Improving but offset by high operating and financial expenses"
           }
@@ -733,7 +807,7 @@
             "ratio": "Cash Flow Adequacy",
             "formula": "Operating Cash Flow / Total Liabilities",
             "2022": "0.07",
-            "2023": "0.13",
+            "2023": "0.12",
             "2024": "0.11",
             "assessment": "Inadequate cash flow relative to liabilities"
           }
@@ -744,7 +818,7 @@
           "2022": "2,342,171,667",
           "2023": "3,113,743,215",
           "2024": "3,491,969,249",
-          "growthRate": "22.12% (2022-2023), 12.15% (2023-2024)",
+          "growthRate": "32.94% (2022-2023), 12.15% (2023-2024)",
           "assessment": "Strong revenue growth but from unverified sources"
         },
         "profitabilityTrend": {
@@ -829,7 +903,7 @@
           },
           {
             "indicator": "Unverified Related Party Transactions",
-            "evidence": "Intercompany loans of Tk. 1.1B not verified",
+            "evidence": "Intercompany loans of Tk. 1,103,724,807 not verified",
             "risk": "high",
             "reference": "2022 Audit Report p. 2"
           },
@@ -1051,580 +1125,1147 @@
       ]
     }
   },
-  "golden-harvest-agro-industries-limited": {
-    "name": "Golden Harvest Agro Industries Limited",
-    "years": [
-      2022,
-      2023
-    ],
+  "bank-asia-limited": {
+    "name": "Bank Asia PLC",
+    "years": [2024, 2023, 2022, 2021],
     "pdfFiles": [
       {
-        "name": "2022.pdf",
-        "year": 2022,
-        "url": "",
-        "type": "Annual Report including Audited Financial Statements"
+        "name": "2024.pdf",
+        "year": 2024,
+        "url": "https://drive.google.com/file/d/1gHvTHnfqDZH1mj8V2iuEbuVxlM-QA-LA/view?usp=drive_link",
+        "type": "Audited Financial Statements"
       },
       {
-        "name": "2023.pdf",
+        "name": "2023_compressed.pdf",
         "year": 2023,
-        "url": "",
-        "type": "Annual Report including Audited Financial Statements"
+        "url": "https://drive.google.com/file/d/1M6Ygu-4x7wXnLvKnTI8AneAEZ_9yAUAM/view?usp=drive_link",
+        "type": "Audited Financial Statements"
+      },
+      {
+        "name": "a855610a-c6bd-403d-a59e-f27088f136db.pdf",
+        "year": 2022,
+        "url": "https://drive.google.com/file/d/1GwiFI7vy2FDbYUmcIWXXbDE1pV8J6E8E/view?usp=sharing",
+        "type": "Audited Financial Statements"
       }
     ],
-    "inspectorNotes": "This analysis of Golden Harvest Agro Industries Limited (GHAIL) for the years ended 30 June 2022 and 2023, based on the provided annual reports, reveals several areas of significant concern requiring regulatory attention. The 2022 audit opinion was qualified due to two main issues: 1) Non-distribution of Workers Profit Participation Fund (WPPF) of Taka 27,885,580 as per Labor Act 2006, and 2) Failure to convert share money deposit of Taka 48,355,038 into share capital within the required 6-month period as per FRC Circular. Additionally, the company had no policy or procedures for conducting impairment reviews of PPE, representing non-compliance with IAS 36. The 2023 audit opinion was also qualified due to continued WPPF non-compliance. Significant emphasis of matter was raised concerning the company's high reliance on short-term debt, constituting 72.44% of equity, and the consequent high finance costs which form 42% of total expenses. Financial performance shows a marginal net profit of BDT 3.99 million in 2023 compared to a substantial loss of BDT 101.16 million in 2022, though this improvement is largely attributed to a tax credit and profit share from associates. Liquidity and solvency ratios indicate heightened risk, with a deteriorating current ratio. The company's subsidiary, Golden Harvest Dairy Limited, is assessed as a going concern with material uncertainty. Key audit matters appropriately highlighted revenue recognition, PPE valuation, inventory, deferred tax, and consolidation. However, recurring issues in WPPF compliance and persistent high leverage warrant enhanced scrutiny. Corporate governance appears functional but is under pressure from financial stress. Overall, while the financial statements purport compliance with IFRS, the qualified audit opinions, significant financial risks, and identified non-compliances necessitate regulatory follow-up to ensure corrective actions are taken and future reporting integrity is maintained.",
+    "inspectorNotes": "Bank Asia PLC maintains strong financial reporting quality with an unmodified audit opinion for 2024. The bank demonstrates robust regulatory compliance, effective risk management, and transparent disclosure of key audit matters. Continued growth in profitability and asset base observed.",
     "overview": {
-      "description": "Regulatory inspection of the Consolidated and Separate Financial Statements of Golden Harvest Agro Industries Ltd. and its subsidiaries for the years ended 30 June 2022 and 2023, prepared under International Financial Reporting Standards (IFRS). The 2022 financial statements were audited by MABS & J Partners, Chartered Accountants, while the 2023 financial statements were audited by S. F. Ahmed & Co., Chartered Accountants. The inspection focuses on compliance with IFRS, ISA, the Companies Act 1994, SEC Rules, and assesses financial health, audit quality, and corporate governance.",
+      "description": "Bank Asia PLC is a private commercial bank in Bangladesh with subsidiaries in securities, exchange, and remittance services. The 2024 financial statements show continued growth, strong capitalization, and compliance with IFRS and Bangladesh Bank regulations.",
       "keyFindings": [
         {
-          "title": "Qualified Audit Opinion Due to Regulatory Non-Compliance (2022)",
-          "description": "Auditors issued a qualified opinion for 2022 because: 1) The company provided for Workers Profit Participation Fund (WPPF) of Taka 27,885,580 but had not distributed it among Employees Welfare Fund, Bangladesh Workers Welfare Fund, and WPPF in the mandated 80:10:10 ratio as per the Labor Act 2006; 2) The company provided Taka 48,355,038 as Share Money Deposit to Golden Harvest QSR Ltd., which was not converted into share capital within the required 6-month period as per FRC Circular No. 146/FRC/Admin/Circular/2020/01 dated 11 February 2020.",
-          "severity": "high",
-          "action": "Issue directive to the company to immediately distribute the WPPF provision as per law and convert the share money deposit into share capital. Require restatement of the liability in the financial statements and verification by the auditor."
+          "title": "Strong Financial Performance",
+          "description": "Net profit after tax of Tk. 2,867,916,432 with steady asset growth.",
+          "severity": "low",
+          "action": "Monitor Sustainability"
         },
         {
-          "title": "Qualified Audit Opinion Due to Regulatory Non-Compliance (2023)",
-          "description": "Auditors issued a qualified opinion for 2023 because the company provided for BDT 34,774,853 towards Workers Profit Participation Fund (WPPF) but had not distributed it among Employees Welfare Fund, Bangladesh Workers Welfare Fund, and WPPF in the mandated 80:10:10 ratio as per the Labor Act 2006 (amended 2015).",
-          "severity": "high",
-          "action": "Issue directive to the company to immediately distribute the WPPF provision as per law and restate the liability in the financial statements. Require the auditor to verify and report on compliance."
+          "title": "Regulatory Compliance",
+          "description": "Full compliance with Bangladesh Bank guidelines and IFRS with appropriate disclosures.",
+          "severity": "low",
+          "action": "Continue Monitoring"
         },
         {
-          "title": "Non-Compliance with IAS 36 - Impairment of Assets (2022)",
-          "description": "The company had no policy and procedures for conducting impairment review of Property, Plant and Equipment as required by IAS 36. No impairment test had been exercised by the company since inception of business or operation.",
-          "severity": "high",
-          "action": "Require the company to establish proper impairment testing policies and procedures in accordance with IAS 36, and conduct retrospective impairment assessments where necessary."
+          "title": "Adequate Capitalization",
+          "description": "CRAR of 15.61% well above regulatory minimum of 10%.",
+          "severity": "low",
+          "action": "Maintain Standards"
         },
         {
-          "title": "Material Uncertainty Regarding Going Concern of Subsidiary",
-          "description": "Management's note discloses that the financial statements of subsidiary Golden Harvest Dairy Ltd. are prepared on a going concern basis despite 'significant financial challenges that create a material uncertainty regarding its continuity.' These include sustained losses, high liabilities, and dependence on external financing.",
-          "severity": "high",
-          "action": "Require the Board of GHAIL to submit a detailed turnaround plan and ongoing viability assessment for Golden Harvest Dairy Ltd. to the FRC for monitoring."
-        },
-        {
-          "title": "Excessive Reliance on Debt and High Financial Risk",
-          "description": "The company's working capital is mainly financed by short-term loans. Total loans (BDT 1,951,570,716 in 2022) were 66.87% of shareholders' equity. Finance costs (BDT 112,002,129 in 2022) constituted 36% of total expenses (Administrative, Selling and Finance Expenses), indicating severe interest rate and refinancing risk.",
-          "severity": "high",
-          "action": "Require the company to submit a formal debt restructuring and capital management plan. The Board should provide quarterly updates on covenant compliance and refinancing efforts to the FRC."
-        },
-        {
-          "title": "Weak Liquidity Position",
-          "description": "The consolidated current ratio deteriorated from approximately 1.51 in 2022 to 1.54 in 2023. The acid-test ratio is approximately 1.13 (2023) and 1.09 (2022), indicating limited liquidity buffer after excluding inventory. Significant current liabilities against current assets pose a short-term solvency risk.",
-          "severity": "moderate",
-          "action": "Direct the company's audit committee to oversee enhanced working capital management and cash flow forecasting. Review the terms and renewal status of short-term credit facilities."
+          "title": "Effective Risk Management",
+          "description": "Well-defined risk management framework with focus on credit, market, and IT risks.",
+          "severity": "low",
+          "action": "Enhance Proactive Measures"
         }
       ],
       "yearData": {
-        "2022": {
-          "auditOpinion": "Qualified",
-          "revenue": "BDT 845,055,756",
-          "netLoss": "BDT (101,162,595)",
-          "totalLiabilities": "BDT 2,239,586,439",
+        "2024": {
+          "auditOpinion": "Unmodified Opinion",
+          "revenue": "27,458,252,163",
+          "netProfit": "2,867,916,432",
+          "totalAssets": "535,312,197,170",
+          "totalLiabilities": "503,504,307,201",
           "compliance": {
-            "ias16": "compliant",
-            "ias2": "compliant",
-            "ias36": "non-compliant",
-            "laborAct": "non-compliant",
-            "frcCircular": "non-compliant"
+            "ifrs": "compliant",
+            "bangladeshBank": "compliant",
+            "baselIII": "compliant"
           }
         },
         "2023": {
-          "auditOpinion": "Qualified",
-          "revenue": "BDT 968,131,772",
-          "netProfit": "BDT 3,992,271",
-          "totalLiabilities": "BDT 2,365,092,100",
+          "auditOpinion": "Unmodified Opinion",
+          "revenue": "21,467,855,783",
+          "netProfit": "2,478,851,655",
+          "totalAssets": "476,552,532,288",
+          "totalLiabilities": "447,149,794,610",
           "compliance": {
-            "ias16": "compliant",
-            "ias2": "compliant",
-            "ias36": "N/A",
-            "laborAct": "non-compliant",
-            "frcCircular": "N/A"
+            "ifrs": "compliant",
+            "bangladeshBank": "compliant",
+            "baselIII": "compliant"
+          }
+        },
+        "2022": {
+          "auditOpinion": "Unmodified Opinion",
+          "revenue": "20,691,149,605",
+          "netProfit": "3,052,330,481",
+          "totalAssets": "470,722,130,861",
+          "totalLiabilities": "442,258,293,212",
+          "compliance": {
+            "ifrs": "compliant",
+            "bangladeshBank": "compliant",
+            "baselIII": "compliant"
+          }
+        },
+        "2021": {
+          "auditOpinion": "Unmodified Opinion",
+          "revenue": "17,291,007,252",
+          "netProfit": "2,728,270,279",
+          "totalAssets": "441,026,191,438",
+          "totalLiabilities": "413,822,446,078",
+          "compliance": {
+            "ifrs": "compliant",
+            "bangladeshBank": "compliant",
+            "baselIII": "compliant"
           }
         }
       }
     },
     "auditAnalysis": {
-      "years": [
-        2022,
-        2023
-      ],
-      "auditor": "MABS & J Partners, Chartered Accountants (2022); S. F. Ahmed & Co., Chartered Accountants (2023)",
-      "opinionType": "Qualified (both years)",
+      "years": [2024, 2023, 2022],
+      "auditor": "MABS & J Partners, Chartered Accountants",
+      "opinionType": "Unmodified Opinion",
       "yearDetails": {
-        "2022": {
-          "issues": [
-            "Basis for Qualified Opinion: 1) Non-distribution of Workers Profit Participation Fund (WPPF) provision of Taka 27,885,580 as per the Labor Act 2006; 2) Failure to convert share money deposit of Taka 48,355,038 into share capital within 6-month period as per FRC Circular (Page 3).",
-            "Non-compliance with IAS 36: Company had no policy and procedures for conducting impairment review of Property, Plant and Equipment (Page 4).",
-            "Emphasis of Matter: High reliance on short-term borrowings for working capital, with total loans at 66.87% of equity and finance costs constituting 36% of total expenses (Page 4)."
-          ]
+        "2024": {
+          "keyAuditMatters": [
+            "Measurement of provision for loans and advances",
+            "Recognition of interest income on loans and advances",
+            "Valuation of treasury bill and treasury bond",
+            "Measurement of Deferred Tax",
+            "IT systems and controls",
+            "Legal and regulatory matters"
+          ],
+          "auditResponse": "Comprehensive audit procedures including testing of controls, substantive testing, analytical procedures, and independent verification",
+          "scope": "Over 80% of risk-weighted assets reviewed, 8,650 person-hours spent"
         },
         "2023": {
-          "issues": [
-            "Basis for Qualified Opinion: Non-distribution of Workers Profit Participation Fund (WPPF) provision of BDT 34,774,853 as per the Labor Act 2006 (Page 3).",
-            "Emphasis of Matter: High reliance on short-term borrowings for working capital, with total loans at 72.44% of equity and finance costs constituting 42% of total expenses, posing significant loan servicing risk (Page 4)."
-          ]
+          "keyAuditMatters": [
+            "Measurement of provision for loans and advances",
+            "Recognition of interest income on loans and advances",
+            "Valuation of treasury bill and treasury bond",
+            "Measurement of Deferred Tax",
+            "IT systems and controls"
+          ],
+          "auditResponse": "Comprehensive audit procedures including testing of controls, substantive testing, analytical procedures, and independent verification",
+          "scope": "Over 80% of risk-weighted assets reviewed, 5,800 person-hours spent"
+        },
+        "2022": {
+          "keyAuditMatters": [
+            "Measurement of provision for loans, advances and leases",
+            "Interest income recognition",
+            "Valuation of treasury bill and treasury bond",
+            "Impairment assessment of unquoted investments",
+            "IT systems and controls",
+            "Legal and regulatory matters",
+            "Carrying value of investments in subsidiaries",
+            "Revaluation of property, plant and equipment"
+          ],
+          "auditResponse": "Comprehensive audit procedures including testing of controls, substantive testing, analytical procedures, and independent verification",
+          "scope": "Over 80% of risk-weighted assets reviewed, 7,100 person-hours spent"
         }
       },
       "recurringIssues": [
         {
-          "issue": "Workers Profit Participation Fund (WPPF) Compliance",
-          "2022": true,
+          "issue": "Loan Provisioning Complexity",
+          "2024": true,
           "2023": true,
-          "2024": null,
-          "status": "Unresolved",
-          "risk": "high"
+          "2022": true,
+          "status": "Adequately Addressed",
+          "risk": "moderate"
         },
         {
-          "issue": "High Financial Leverage and Interest Burden",
-          "2022": true,
+          "issue": "IT Controls in Complex Environment",
+          "2024": true,
           "2023": true,
-          "2024": null,
-          "status": "Persistent",
-          "risk": "high"
+          "2022": true,
+          "status": "Comprehensively Tested",
+          "risk": "moderate"
         },
         {
-          "issue": "Material Uncertainty Related to Going Concern (Subsidiary)",
-          "2022": true,
+          "issue": "Investment Valuation Judgments",
+          "2024": true,
           "2023": true,
-          "2024": null,
-          "status": "Unresolved",
-          "risk": "high"
+          "2022": true,
+          "status": "Professionally Assessed",
+          "risk": "moderate"
+        },
+        {
+          "issue": "Legal and Regulatory Compliance",
+          "2024": true,
+          "2023": false,
+          "2022": true,
+          "status": "Properly Monitored",
+          "risk": "moderate"
         }
       ]
     },
     "ifrsCompliance": {
       "standards": {
+        "IFRS 9": {
+          "name": "Financial Instruments",
+          "requirements": [
+            "Impairment assessment",
+            "Classification and measurement",
+            "Hedge accounting"
+          ],
+          "2024": "compliant",
+          "2023": "compliant",
+          "2022": "compliant",
+          "issues": "Some differences with Bangladesh Bank guidelines appropriately disclosed"
+        },
         "IAS 1": {
           "name": "Presentation of Financial Statements",
           "requirements": [
             "Fair presentation",
             "Going concern",
-            "Accrual basis",
             "Comparative information"
           ],
-          "2022": "partial",
-          "2023": "partial",
-          "2024": "N/A",
-          "issues": "Qualified audit opinion in both years affects fair presentation. Going concern basis used for subsidiary despite material uncertainty. Comparative information is presented."
-        },
-        "IAS 2": {
-          "name": "Inventories",
-          "requirements": [
-            "Measurement at lower of cost and NRV",
-            "Use of FIFO/Weighted Average cost formula",
-            "Recognition as expense"
-          ],
-          "2022": "compliant",
+          "2024": "compliant",
           "2023": "compliant",
-          "2024": "N/A",
-          "issues": "Inventories stated at lower of cost (FIFO) and net realizable value. Adequate disclosure in notes 3.9 and 11."
+          "2022": "compliant",
+          "issues": "Format differences with Bangladesh Bank templates disclosed"
         },
         "IAS 16": {
-          "name": "Property, Plant and Equipment",
+          "name": "Property, Plant & Equipment",
           "requirements": [
-            "Recognition at cost/fair value",
-            "Depreciation over useful life",
-            "Disclosure of carrying amounts"
+            "Recognition",
+            "Measurement",
+            "Depreciation"
           ],
-          "2022": "compliant",
+          "2024": "compliant",
           "2023": "compliant",
-          "2024": "N/A",
-          "issues": "PPE initially at cost, with land, buildings & plant revalued in 2009, 2011, 2013. Depreciated on reducing balance method. Disclosed in notes 3.2, 5, 5A."
-        },
-        "IAS 24": {
-          "name": "Related Party Disclosures",
-          "requirements": [
-            "Identification of relationships",
-            "Disclosure of transactions and balances"
-          ],
-          "2022": "partial",
-          "2023": "partial",
-          "2024": "N/A",
-          "issues": "Transactions with related parties disclosed in Note 40.2. However, the note references IAS 24 but the structure and completeness of disclosures should be verified for full compliance."
-        },
-        "IAS 36": {
-          "name": "Impairment of Assets",
-          "requirements": [
-            "Impairment testing when indicators exist",
-            "Recognition of impairment losses",
-            "Disclosure of assumptions"
-          ],
-          "2022": "non-compliant",
-          "2023": "N/A",
-          "2024": "N/A",
-          "issues": "Company had no policy and procedures for conducting impairment review of PPE. No impairment test had been exercised since inception (Page 4)."
-        },
-        "IFRS 15": {
-          "name": "Revenue from Contracts with Customers",
-          "requirements": [
-            "Five-step model application",
-            "Disclosure of accounting policies"
-          ],
           "2022": "compliant",
-          "2023": "compliant",
-          "2024": "N/A",
-          "issues": "Revenue recognized when control transfers, measured net of taxes/discounts. Policy disclosed in note 3.18. Revenue recognition was a key audit matter."
+          "issues": "Revaluation appropriately accounted for"
         },
         "IFRS 16": {
           "name": "Leases",
           "requirements": [
-            "Recognition of right-of-use assets and lease liabilities",
-            "Depreciation and interest expense"
+            "Right-of-use assets",
+            "Lease liabilities",
+            "Disclosure"
           ],
-          "2022": "non-compliant",
+          "2024": "compliant",
           "2023": "compliant",
-          "2024": "N/A",
-          "issues": "IFRS 16 applied from 2023, with right-of-use assets and lease liabilities recognized. No such assets/liabilities in 2022, suggesting correct adoption in 2023."
+          "2022": "compliant",
+          "issues": "Applied using modified retrospective approach"
+        },
+        "IAS 36": {
+          "name": "Impairment of Assets",
+          "requirements": [
+            "Impairment testing",
+            "Recoverable amount",
+            "Disclosure"
+          ],
+          "2024": "compliant",
+          "2023": "compliant",
+          "2022": "compliant",
+          "issues": "Applied to investments in subsidiaries"
         }
+      }
+    },
+    "financialDataTables": {
+      "statementOfFinancialPosition": {
+        "noteReference": "Consolidated Balance Sheet",
+        "data": [
+          {
+            "item": "Cash",
+            "note": "",
+            "2024": "23,988,516,011",
+            "2023": "21,776,999,205",
+            "2022": "25,797,237,229",
+            "2021": "33,365,082,062"
+          },
+          {
+            "item": "Balance with other banks and financial institutions",
+            "note": "",
+            "2024": "16,146,171,433",
+            "2023": "24,131,298,642",
+            "2022": "39,983,468,523",
+            "2021": "41,288,613,589"
+          },
+          {
+            "item": "Investments",
+            "note": "",
+            "2024": "177,935,396,486",
+            "2023": "115,801,404,654",
+            "2022": "103,838,255,588",
+            "2021": "77,951,433,954"
+          },
+          {
+            "item": "Loans and advances/investments",
+            "note": "",
+            "2024": "296,533,717,659",
+            "2023": "294,072,425,920",
+            "2022": "280,591,467,444",
+            "2021": "264,999,483,971"
+          },
+          {
+            "item": "Fixed assets including premises, furniture and fixtures",
+            "note": "",
+            "2024": "5,289,381,960",
+            "2023": "5,957,156,399",
+            "2022": "5,704,012,877",
+            "2021": "6,145,270,470"
+          },
+          {
+            "item": "Other assets",
+            "note": "",
+            "2024": "15,419,013,621",
+            "2023": "14,513,247,468",
+            "2022": "11,057,689,200",
+            "2021": "10,876,307,392"
+          },
+          {
+            "item": "Total assets",
+            "note": "",
+            "2024": "535,312,197,170",
+            "2023": "476,552,532,288",
+            "2022": "470,722,130,861",
+            "2021": "441,026,191,438"
+          },
+          {
+            "item": "Borrowings from other banks, financial institutions and agents",
+            "note": "",
+            "2024": "18,114,043,540",
+            "2023": "27,071,897,305",
+            "2022": "51,024,080,743",
+            "2021": "47,836,151,368"
+          },
+          {
+            "item": "Subordinated non-convertible and perpetual bonds",
+            "note": "",
+            "2024": "7,680,250,000",
+            "2023": "7,680,250,000",
+            "2022": "9,340,000,000",
+            "2021": "8,600,000,000"
+          },
+          {
+            "item": "Deposits and other accounts",
+            "note": "",
+            "2024": "416,727,954,479",
+            "2023": "361,719,880,870",
+            "2022": "337,853,124,886",
+            "2021": "318,424,929,865"
+          },
+          {
+            "item": "Other liabilities",
+            "note": "",
+            "2024": "60,982,059,182",
+            "2023": "50,677,766,435",
+            "2022": "44,041,087,583",
+            "2021": "38,961,364,845"
+          },
+          {
+            "item": "Total liabilities",
+            "note": "",
+            "2024": "503,504,307,201",
+            "2023": "447,149,794,610",
+            "2022": "442,258,293,212",
+            "2021": "413,822,446,078"
+          },
+          {
+            "item": "Paid-up capital",
+            "note": "",
+            "2024": "11,659,068,600",
+            "2023": "11,659,068,600",
+            "2022": "11,659,068,600",
+            "2021": "11,659,068,600"
+          },
+          {
+            "item": "Statutory reserve",
+            "note": "",
+            "2024": "11,750,000,000",
+            "2023": "11,750,000,000",
+            "2022": "11,750,000,000",
+            "2021": "10,725,443,940"
+          },
+          {
+            "item": "Revaluation reserve",
+            "note": "",
+            "2024": "4,300,808,341",
+            "2023": "2,685,555,009",
+            "2022": "2,117,047,124",
+            "2021": "2,159,144,877"
+          },
+          {
+            "item": "Retained earnings",
+            "note": "",
+            "2024": "4,150,895,777",
+            "2023": "3,350,452,926",
+            "2022": "2,957,002,831",
+            "2021": "2,650,999,337"
+          },
+          {
+            "item": "Total shareholders' equity",
+            "note": "",
+            "2024": "31,807,889,969",
+            "2023": "29,402,737,678",
+            "2022": "28,463,837,649",
+            "2021": "27,203,745,360"
+          },
+          {
+            "item": "Total liabilities and shareholders' equity",
+            "note": "",
+            "2024": "535,312,197,170",
+            "2023": "476,552,532,288",
+            "2022": "470,722,130,861",
+            "2021": "441,026,191,438"
+          }
+        ]
+      },
+      "statementOfComprehensiveIncome": {
+        "noteReference": "Consolidated Profit and Loss Account",
+        "data": [
+          {
+            "item": "Interest income",
+            "note": "",
+            "2024": "30,651,886,991",
+            "2023": "23,380,598,457",
+            "2022": "20,484,449,300",
+            "2021": "18,422,217,336"
+          },
+          {
+            "item": "Interest paid on deposits and borrowings, etc",
+            "note": "",
+            "2024": "24,509,147,634",
+            "2023": "17,067,340,832",
+            "2022": "14,937,341,626",
+            "2021": "12,727,962,811"
+          },
+          {
+            "item": "Net interest income",
+            "note": "",
+            "2024": "6,142,739,357",
+            "2023": "6,313,257,625",
+            "2022": "5,547,107,674",
+            "2021": "5,694,254,525"
+          },
+          {
+            "item": "Investment income",
+            "note": "",
+            "2024": "14,335,176,498",
+            "2023": "8,376,526,748",
+            "2022": "6,270,764,596",
+            "2021": "6,848,834,433"
+          },
+          {
+            "item": "Commission, exchange and brokerage",
+            "note": "",
+            "2024": "5,376,452,602",
+            "2023": "5,343,451,964",
+            "2022": "7,655,343,919",
+            "2021": "3,562,596,602"
+          },
+          {
+            "item": "Other operating income",
+            "note": "",
+            "2024": "1,603,883,706",
+            "2023": "1,434,619,446",
+            "2022": "1,217,933,416",
+            "2021": "1,185,321,692"
+          },
+          {
+            "item": "Total operating income",
+            "note": "",
+            "2024": "27,458,252,163",
+            "2023": "21,467,855,783",
+            "2022": "20,691,149,605",
+            "2021": "17,291,007,252"
+          },
+          {
+            "item": "Operating expenses",
+            "note": "",
+            "2024": "10,160,191,693",
+            "2023": "9,748,242,928",
+            "2022": "9,821,913,177",
+            "2021": "7,738,553,580"
+          },
+          {
+            "item": "Profit before provision",
+            "note": "",
+            "2024": "17,298,060,470",
+            "2023": "11,719,612,855",
+            "2022": "10,869,236,428",
+            "2021": "9,552,453,672"
+          },
+          {
+            "item": "Provision for loans and advances/investments",
+            "note": "",
+            "2024": "10,020,459,333",
+            "2023": "6,554,652,511",
+            "2022": "4,293,933,239",
+            "2021": "4,343,239,734"
+          },
+          {
+            "item": "Total profit before tax",
+            "note": "",
+            "2024": "6,452,101,137",
+            "2023": "4,829,960,344",
+            "2022": "6,620,303,189",
+            "2021": "4,523,005,715"
+          },
+          {
+            "item": "Provision for taxation",
+            "note": "",
+            "2024": "3,584,184,705",
+            "2023": "2,351,108,689",
+            "2022": "3,567,972,708",
+            "2021": "1,794,735,436"
+          },
+          {
+            "item": "Net profit after tax",
+            "note": "",
+            "2024": "2,867,916,432",
+            "2023": "2,478,851,655",
+            "2022": "3,052,330,481",
+            "2021": "2,728,270,279"
+          },
+          {
+            "item": "Earnings Per Share (EPS)",
+            "note": "",
+            "2024": "2.14",
+            "2023": "1.79",
+            "2022": "2.62",
+            "2021": "N/A"
+          }
+        ]
+      },
+      "statementOfCashFlows": {
+        "noteReference": "Consolidated Cash Flow Statement",
+        "data": [
+          {
+            "item": "Cash flows from operating activities",
+            "note": "",
+            "2024": "58,830,444,314",
+            "2023": "(6,637,402,302)",
+            "2022": "16,114,504,873",
+            "2021": "17,753,936,573"
+          },
+          {
+            "item": "Cash flows from investing activities",
+            "note": "",
+            "2024": "(62,314,759,844)",
+            "2023": "(12,398,173,130)",
+            "2022": "(26,193,753,470)",
+            "2021": "16,480,948,408"
+          },
+          {
+            "item": "Cash flows from financing activities",
+            "note": "",
+            "2024": "(2,587,950,573)",
+            "2023": "(4,286,384,573)",
+            "2022": "(1,444,450,402)",
+            "2021": "(3,185,449,870)"
+          },
+          {
+            "item": "Net increase/(decrease) in cash and cash equivalents",
+            "note": "",
+            "2024": "(6,072,266,103)",
+            "2023": "(23,321,960,005)",
+            "2022": "(11,523,698,999)",
+            "2021": "31,049,435,111"
+          },
+          {
+            "item": "Cash and cash equivalents at the beginning of the year",
+            "note": "",
+            "2024": "46,211,250,847",
+            "2023": "69,533,210,852",
+            "2022": "81,056,909,851",
+            "2021": "50,007,474,740"
+          },
+          {
+            "item": "Cash and cash equivalents at the end of the year",
+            "note": "",
+            "2024": "40,138,984,744",
+            "2023": "46,211,250,847",
+            "2022": "69,533,210,852",
+            "2021": "81,056,909,851"
+          }
+        ]
       }
     },
     "financialAnalysis": {
       "profitLoss": {
-        "2022": {
-          "revenue": "845,055,756",
-          "directExpenses": "518,975,143",
-          "grossProfit": "326,080,613",
-          "adminExpenses": "50,421,445",
-          "operatingIncome": "143,986,444",
-          "nonOperatingIncome": "1,412,741",
-          "financialExpenses": "112,002,129",
-          "profitBeforeTax": "(37,662,102)",
-          "netProfit": "(101,162,595)"
+        "2024": {
+          "interestIncome": "30,651,886,991",
+          "interestExpense": "24,509,147,634",
+          "netInterestIncome": "6,142,739,357",
+          "nonInterestIncome": "21,315,512,806",
+          "totalIncome": "27,458,252,163",
+          "operatingExpenses": "10,160,191,693",
+          "profitBeforeProvision": "17,298,060,470",
+          "provisions": "10,845,959,333",
+          "profitBeforeTax": "6,452,101,137",
+          "taxExpense": "3,584,184,705",
+          "netProfit": "2,867,916,432"
         },
         "2023": {
-          "revenue": "968,131,772",
-          "directExpenses": "569,684,720",
-          "grossProfit": "398,447,052",
-          "adminExpenses": "45,868,726",
-          "operatingIncome": "219,090,970",
-          "nonOperatingIncome": "750,531",
-          "financialExpenses": "145,421,439",
-          "profitBeforeTax": "6,767,660",
-          "netProfit": "3,992,271"
+          "interestIncome": "23,380,598,457",
+          "interestExpense": "17,067,340,832",
+          "netInterestIncome": "6,313,257,625",
+          "nonInterestIncome": "15,154,598,158",
+          "totalIncome": "21,467,855,783",
+          "operatingExpenses": "9,748,242,928",
+          "profitBeforeProvision": "11,719,612,855",
+          "provisions": "6,889,652,511",
+          "profitBeforeTax": "4,829,960,344",
+          "taxExpense": "2,351,108,689",
+          "netProfit": "2,478,851,655"
+        },
+        "2022": {
+          "interestIncome": "20,484,449,300",
+          "interestExpense": "14,937,341,626",
+          "netInterestIncome": "5,547,107,674",
+          "nonInterestIncome": "15,144,041,931",
+          "totalIncome": "20,691,149,605",
+          "operatingExpenses": "9,821,913,177",
+          "profitBeforeProvision": "10,869,236,428",
+          "provisions": "4,293,933,239",
+          "profitBeforeTax": "6,620,303,189",
+          "taxExpense": "3,567,972,708",
+          "netProfit": "3,052,330,481"
+        },
+        "2021": {
+          "interestIncome": "18,422,217,336",
+          "interestExpense": "12,727,962,811",
+          "netInterestIncome": "5,694,254,525",
+          "nonInterestIncome": "11,596,752,727",
+          "totalIncome": "17,291,007,252",
+          "operatingExpenses": "7,738,553,580",
+          "profitBeforeProvision": "9,552,453,672",
+          "provisions": "5,029,447,957",
+          "profitBeforeTax": "4,523,005,715",
+          "taxExpense": "1,794,735,436",
+          "netProfit": "2,728,270,279"
         }
       },
       "balanceSheet": {
-        "2022": {
-          "ppe": "1,864,297,271",
-          "investments": "596,615,210",
-          "inventory": "500,495,296",
-          "totalAssets": "5,152,061,032",
-          "shareCapital": "2,158,376,210",
-          "retainedEarnings": "547,730,352",
-          "longTermLoans": "945,622,259",
-          "shortTermLoans": "696,339,024",
-          "totalLiabilities": "2,239,586,439"
+        "2024": {
+          "totalAssets": "535,312,197,170",
+          "grossLoans": "296,533,717,659",
+          "investments": "177,935,396,486",
+          "cashAndBalances": "40,138,984,744",
+          "totalDeposits": "416,727,954,479",
+          "borrowings": "18,114,043,540",
+          "totalLiabilities": "503,504,307,201",
+          "totalEquity": "31,807,889,969"
         },
         "2023": {
-          "ppe": "1,963,321,652",
-          "investments": "533,760,662",
-          "inventory": "507,641,366",
-          "totalAssets": "5,245,851,735",
-          "shareCapital": "2,158,376,210",
-          "retainedEarnings": "516,628,846",
-          "longTermLoans": "1,047,778,573",
-          "shortTermLoans": "688,151,612",
-          "totalLiabilities": "2,365,092,100"
+          "totalAssets": "476,552,532,288",
+          "grossLoans": "294,072,425,920",
+          "investments": "115,801,404,654",
+          "cashAndBalances": "46,211,250,847",
+          "totalDeposits": "361,719,880,870",
+          "borrowings": "27,071,897,305",
+          "totalLiabilities": "447,149,794,610",
+          "totalEquity": "29,402,737,678"
+        },
+        "2022": {
+          "totalAssets": "470,722,130,861",
+          "grossLoans": "280,591,467,444",
+          "investments": "103,838,255,588",
+          "cashAndBalances": "69,533,210,852",
+          "totalDeposits": "337,853,124,886",
+          "borrowings": "51,024,080,743",
+          "totalLiabilities": "442,258,293,212",
+          "totalEquity": "28,463,837,649"
+        },
+        "2021": {
+          "totalAssets": "441,026,191,438",
+          "grossLoans": "264,999,483,971",
+          "investments": "77,951,433,954",
+          "cashAndBalances": "81,056,909,851",
+          "totalDeposits": "318,424,929,865",
+          "borrowings": "47,836,151,368",
+          "totalLiabilities": "413,822,446,078",
+          "totalEquity": "27,203,745,360"
         }
       },
       "cashFlow": {
-        "2022": {
-          "operating": "134,131,576",
-          "investing": "(247,439,955)",
-          "financing": "105,306,286",
-          "netChange": "(8,002,094)"
+        "2024": {
+          "operating": "58,830,444,314",
+          "investing": "(62,314,759,844)",
+          "financing": "(2,587,950,573)",
+          "netChange": "(6,072,266,103)"
         },
         "2023": {
-          "operating": "149,697,969",
-          "investing": "(146,917,443)",
-          "financing": "(62,406,138)",
-          "netChange": "(59,625,609)"
+          "operating": "(6,637,402,302)",
+          "investing": "(12,398,173,130)",
+          "financing": "(4,286,384,573)",
+          "netChange": "(23,321,960,005)"
+        },
+        "2022": {
+          "operating": "16,114,504,873",
+          "investing": "(26,193,753,470)",
+          "financing": "(1,444,450,402)",
+          "netChange": "(11,523,698,999)"
+        },
+        "2021": {
+          "operating": "17,753,936,573",
+          "investing": "16,480,948,408",
+          "financing": "(3,185,449,870)",
+          "netChange": "31,049,435,111"
         }
       },
       "ratios": {
-        "2022": {
-          "currentRatio": "1.51",
-          "debtToEquity": "0.77",
-          "returnOnAssets": "-1.96%",
-          "grossMargin": "38.59%",
-          "cashFlowToIncome": "N/A (Negative Net Income)",
-          "acidTestRatio": "1.09",
-          "returnOnEquity": "-3.47%",
-          "interestCoverageRatio": "1.29"
+        "2024": {
+          "loanToDepositRatio": "71.15%",
+          "capitalAdequacyRatio": "15.61%",
+          "returnOnAssets": "0.54%",
+          "returnOnEquity": "9.01%",
+          "costToIncomeRatio": "37.00%",
+          "nplRatio": "Not explicitly stated but provisions increased",
+          "provisionCoverage": "Not explicitly stated"
         },
         "2023": {
-          "currentRatio": "1.54",
-          "debtToEquity": "0.82",
-          "returnOnAssets": "0.08%",
-          "grossMargin": "41.16%",
-          "cashFlowToIncome": "37.49",
-          "acidTestRatio": "1.13",
-          "returnOnEquity": "0.14%",
-          "interestCoverageRatio": "1.51"
+          "loanToDepositRatio": "81.28%",
+          "capitalAdequacyRatio": "16.45%",
+          "returnOnAssets": "0.52%",
+          "returnOnEquity": "8.56%",
+          "costToIncomeRatio": "45.41%",
+          "nplRatio": "Not explicitly stated but provisions increased",
+          "provisionCoverage": "Not explicitly stated"
+        },
+        "2022": {
+          "loanToDepositRatio": "83.03%",
+          "capitalAdequacyRatio": "17.70%",
+          "returnOnAssets": "0.65%",
+          "returnOnEquity": "10.99%",
+          "costToIncomeRatio": "47.46%",
+          "nplRatio": "4.87%",
+          "provisionCoverage": "Not explicitly stated"
+        },
+        "2021": {
+          "loanToDepositRatio": "83.20%",
+          "capitalAdequacyRatio": "15.72%",
+          "returnOnAssets": "0.62%",
+          "returnOnEquity": "10.30%",
+          "costToIncomeRatio": "44.75%",
+          "nplRatio": "N/A",
+          "provisionCoverage": "N/A"
         }
       }
     },
+    "financialAnalysisReport": {
+      "executiveSummary": "Bank Asia PLC demonstrates continued financial growth in 2024 with net profit of Tk. 2.87 billion, showing recovery from 2023. The bank maintains strong capitalization with CRAR of 15.61%, well above regulatory requirements. Significant increase in total assets to Tk. 535.31 billion with strong growth in investments. The bank shows improved operational efficiency with reduced cost-to-income ratio.",
+      "keyFindings": [
+        {
+          "category": "Profitability",
+          "finding": "Net profit increased to Tk. 2.87 billion from Tk. 2.48 billion in 2023, showing recovery.",
+          "trend": "Improving",
+          "riskLevel": "Low"
+        },
+        {
+          "category": "Asset Quality",
+          "finding": "Continued high provisions for loans and advances at Tk. 10.02 billion, slightly down from Tk. 10.85 billion total provisions in 2023.",
+          "trend": "Stable",
+          "riskLevel": "Moderate"
+        },
+        {
+          "category": "Liquidity",
+          "finding": "Cash and balances decreased to Tk. 40.14 billion from Tk. 46.21 billion in 2023, but operating cash flow significantly improved.",
+          "trend": "Mixed",
+          "riskLevel": "Moderate"
+        },
+        {
+          "category": "Capital Adequacy",
+          "finding": "Strong capital position with CRAR of 15.61%, above regulatory minimum of 10%.",
+          "trend": "Slightly Declining",
+          "riskLevel": "Low"
+        },
+        {
+          "category": "Operational Efficiency",
+          "finding": "Cost-to-income ratio significantly improved to 37.00% from 45.41% in 2023.",
+          "trend": "Improving",
+          "riskLevel": "Low"
+        }
+      ],
+      "ratioAnalysis": {
+        "profitabilityRatios": [
+          {
+            "ratio": "Return on Assets (ROA)",
+            "formula": "Net Income / Total Assets",
+            "2024": "0.54%",
+            "2023": "0.52%",
+            "2022": "0.65%",
+            "2021": "0.62%",
+            "assessment": "Slight improvement but still low"
+          },
+          {
+            "ratio": "Return on Equity (ROE)",
+            "formula": "Net Income / Shareholders' Equity",
+            "2024": "9.01%",
+            "2023": "8.56%",
+            "2022": "10.99%",
+            "2021": "10.30%",
+            "assessment": "Improved from 2023 but below 2022 levels"
+          }
+        ],
+        "assetQualityRatios": [
+          {
+            "ratio": "Provision to Loans Ratio",
+            "formula": "Loan Provisions / Total Loans",
+            "2024": "3.38%",
+            "2023": "2.23%",
+            "assessment": "Increased provisioning indicating continued asset quality pressure"
+          }
+        ],
+        "liquidityRatios": [
+          {
+            "ratio": "Loan-to-Deposit Ratio",
+            "formula": "Total Loans / Total Deposits",
+            "2024": "71.15%",
+            "2023": "81.28%",
+            "2022": "83.03%",
+            "2021": "83.20%",
+            "assessment": "Significant improvement indicating better liquidity management"
+          }
+        ],
+        "capitalAdequacyRatios": [
+          {
+            "ratio": "Capital to Risk-weighted Assets (CRAR)",
+            "formula": "Total Capital / RWA",
+            "2024": "15.61%",
+            "2023": "16.45%",
+            "2022": "17.70%",
+            "2021": "15.72%",
+            "assessment": "Strong capital buffer above regulatory minimum but trending downward"
+          }
+        ]
+      },
+      "trendAnalysis": {
+        "revenueTrend": {
+          "2021": "17,291,007,252",
+          "2022": "20,691,149,605",
+          "2023": "21,467,855,783",
+          "2024": "27,458,252,163",
+          "growthRate": "19.66% (2021-2022), 3.75% (2022-2023), 27.89% (2023-2024)",
+          "assessment": "Strong revenue growth in 2024 after moderate growth in 2023"
+        },
+        "profitabilityTrend": {
+          "netProfit": {
+            "2021": "2,728,270,279",
+            "2022": "3,052,330,481",
+            "2023": "2,478,851,655",
+            "2024": "2,867,916,432"
+          },
+          "growthRate": "11.85% (2021-2022), -18.79% (2022-2023), 15.70% (2023-2024)",
+          "assessment": "Profitability recovered in 2024 after decline in 2023"
+        },
+        "assetGrowthTrend": {
+          "totalAssets": {
+            "2021": "441,026,191,438",
+            "2022": "470,722,130,861",
+            "2023": "476,552,532,288",
+            "2024": "535,312,197,170"
+          },
+          "growthRate": "6.73% (2021-2022), 1.26% (2022-2023), 12.33% (2023-2024)",
+          "assessment": "Strong asset growth in 2024 after slow growth in 2023"
+        },
+        "loanGrowthTrend": {
+          "totalLoans": {
+            "2021": "264,999,483,971",
+            "2022": "280,591,467,444",
+            "2023": "294,072,425,920",
+            "2024": "296,533,717,659"
+          },
+          "growthRate": "5.88% (2021-2022), 4.80% (2022-2023), 0.84% (2023-2024)",
+          "assessment": "Loan growth slowed significantly in 2024"
+        }
+      },
+      "goingConcernAssessment": {
+        "indicators": [
+          {
+            "indicator": "Profitability",
+            "status": "Profitability recovered in 2024",
+            "severity": "Low"
+          },
+          {
+            "indicator": "Capital Adequacy",
+            "status": "Strong capital position maintained",
+            "severity": "Low"
+          },
+          {
+            "indicator": "Liquidity",
+            "status": "Improved operating cash flow but reduced cash balances",
+            "severity": "Moderate"
+          },
+          {
+            "indicator": "Asset Quality",
+            "status": "Continued high provisioning indicating asset quality concerns",
+            "severity": "Moderate"
+          },
+          {
+            "indicator": "Economic Environment",
+            "status": "Challenging global and local conditions persist",
+            "severity": "Moderate"
+          }
+        ],
+        "overallAssessment": "No material uncertainty regarding going concern. The bank maintains adequate capitalization, shows profitability recovery, and has improved operational efficiency despite economic challenges.",
+        "recommendation": "Continue monitoring asset quality trends and maintain prudent liquidity management."
+      },
+      "auditImplications": {
+        "qualifications": [
+          "2024: Unmodified audit opinion with comprehensive key audit matters disclosure",
+          "2023: Unmodified audit opinion with comprehensive key audit matters disclosure",
+          "2022: Unmodified audit opinion with comprehensive key audit matters disclosure",
+          "2021: Unmodified audit opinion"
+        ],
+        "materiality": {
+          "auditScope": "Over 80% of risk-weighted assets reviewed",
+          "auditHours": "8,650 person-hours (2024), 5,800 person-hours (2023), 7,100 person-hours (2022)",
+          "assessment": "Comprehensive audit coverage maintained with increased hours in 2024"
+        },
+        "recommendation": "Continue robust audit approach with focus on credit risk, investment valuation, and IT controls"
+      },
+      "conclusion": "Bank Asia PLC demonstrates strong financial recovery in 2024 with improved profitability and operational efficiency. The bank maintains robust capitalization and shows significant revenue growth. While asset quality remains a concern with high provisioning, the bank's risk management framework appears effective. Continued focus on asset quality and liquidity management is recommended."
+    },
     "riskIndicators": {
       "yearData": {
-        "2022": [
+        "2024": [
           {
-            "indicator": "Qualified Audit Opinion",
-            "evidence": "Audit report contains a qualified opinion due to WPPF non-compliance and share money deposit issue (Page 3).",
-            "risk": "high",
-            "reference": "Page 3, Independent Auditor's Report"
+            "indicator": "Credit Risk",
+            "evidence": "High provisions for loans and advances at Tk. 10.02 billion",
+            "risk": "moderate",
+            "reference": "Key Audit Matters & Financial Statements"
           },
           {
-            "indicator": "Negative Profitability",
-            "evidence": "Net loss after tax of BDT 101.16 million (Page 13).",
-            "risk": "high",
-            "reference": "Page 13, Consolidated Statement of Profit or Loss"
+            "indicator": "Market Risk",
+            "evidence": "Treasury bill and bond valuation complexities in volatile market",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
           },
           {
-            "indicator": "High Debt Burden",
-            "evidence": "Total loans of BDT 1,951.57 million (LT+ST) representing 66.87% of shareholders' equity. Finance expenses BDT 112.00 million (Page 4, 13).",
-            "risk": "high",
-            "reference": "Page 4, 13"
+            "indicator": "Operational Risk",
+            "evidence": "Complex IT environment and reliance on automated controls",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
           },
           {
-            "indicator": "Non-Compliance with IAS 36",
-            "evidence": "Company had no policy and procedures for conducting impairment review of PPE (Page 4).",
-            "risk": "high",
-            "reference": "Page 4, Basis for Qualified Opinion"
+            "indicator": "Liquidity Risk",
+            "evidence": "Cash and balances decreased but operating cash flow improved",
+            "risk": "moderate",
+            "reference": "Balance Sheet Analysis"
+          },
+          {
+            "indicator": "Legal and Regulatory Risk",
+            "evidence": "Significant litigation and regulatory proceedings exposure",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
           }
         ],
         "2023": [
           {
-            "indicator": "Qualified Audit Opinion",
-            "evidence": "Audit report contains a qualified opinion due to WPPF non-compliance (Page 3).",
-            "risk": "high",
-            "reference": "Page 3, Independent Auditor's Report"
-          },
-          {
-            "indicator": "Emphasis of Matter on Liquidity & Solvency",
-            "evidence": "Working capital sourced from short-term loans; total loans are 72.44% of equity; finance cost is 42% of total expenses (Page 4).",
-            "risk": "high",
-            "reference": "Page 4, Emphasis of Matters"
-          },
-          {
-            "indicator": "Material Uncertainty on Going Concern (Subsidiary)",
-            "evidence": "Note states Golden Harvest Dairy Ltd. faces significant financial challenges creating material uncertainty (Page 21).",
-            "risk": "high",
-            "reference": "Page 21, Note 2.5"
-          },
-          {
-            "indicator": "Declining Cash Balance",
-            "evidence": "Cash and cash equivalents decreased by BDT 59.63 million (Page 17).",
+            "indicator": "Credit Risk",
+            "evidence": "Increased provisions for loans and advances to Tk. 6.55 billion",
             "risk": "moderate",
-            "reference": "Page 17, Consolidated Statement of Cash Flows"
+            "reference": "Key Audit Matters & Financial Statements"
+          },
+          {
+            "indicator": "Market Risk",
+            "evidence": "Treasury bill and bond valuation complexities in volatile market",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
+          },
+          {
+            "indicator": "Operational Risk",
+            "evidence": "Complex IT environment and reliance on automated controls",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
+          },
+          {
+            "indicator": "Liquidity Risk",
+            "evidence": "Cash and balances decreased significantly",
+            "risk": "moderate",
+            "reference": "Balance Sheet Analysis"
+          }
+        ],
+        "2022": [
+          {
+            "indicator": "Credit Risk",
+            "evidence": "Classified loans at 4.87% with economic uncertainties",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
+          },
+          {
+            "indicator": "Market Risk",
+            "evidence": "Treasury bill and bond valuation complexities",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
+          },
+          {
+            "indicator": "Operational Risk",
+            "evidence": "Complex IT environment and reliance on automated controls",
+            "risk": "moderate",
+            "reference": "Key Audit Matters"
           }
         ]
       },
       "aggregateRisks": [
         {
-          "category": "Financial Risk (Liquidity & Solvency)",
-          "2022": "high",
-          "2023": "high",
-          "2024": "N/A",
-          "trend": "Persistent",
-          "aggregate": "Critical"
-        },
-        {
-          "category": "Compliance Risk",
-          "2022": "high",
-          "2023": "high",
-          "2024": "N/A",
-          "trend": "Persistent",
-          "aggregate": "High"
-        },
-        {
-          "category": "Going Concern Risk (Group/Subsidiary)",
+          "category": "Credit Risk",
+          "2024": "moderate",
+          "2023": "moderate",
           "2022": "moderate",
-          "2023": "high",
-          "2024": "N/A",
-          "trend": "Escalating",
-          "aggregate": "High"
+          "trend": "Stable",
+          "aggregate": "Moderate"
+        },
+        {
+          "category": "Market Risk",
+          "2024": "moderate",
+          "2023": "moderate",
+          "2022": "moderate",
+          "trend": "Stable",
+          "aggregate": "Moderate"
+        },
+        {
+          "category": "Operational Risk",
+          "2024": "moderate",
+          "2023": "moderate",
+          "2022": "moderate",
+          "trend": "Stable",
+          "aggregate": "Moderate"
+        },
+        {
+          "category": "Liquidity Risk",
+          "2024": "moderate",
+          "2023": "moderate",
+          "2022": "low",
+          "trend": "Stable",
+          "aggregate": "Moderate"
+        },
+        {
+          "category": "Legal and Regulatory Risk",
+          "2024": "moderate",
+          "2023": "low",
+          "2022": "moderate",
+          "trend": "Variable",
+          "aggregate": "Moderate"
         }
       ]
     },
     "governance": {
       "board": [
         {
-          "aspect": "Financial Reporting Oversight",
-          "status": "Financial statements authorized for issue by Board of Directors on 30 October 2022 (2022) and 28 October 2023 (2023).",
-          "evidence": "Note 1.3, Page 17 (2022); Note 1.3, Page 19 (2023).",
-          "assessment": "Acceptable"
+          "aspect": "Board Composition",
+          "status": "Disclosed with director details and shareholdings",
+          "evidence": "Directors' names and shareholdings disclosed in notes",
+          "assessment": "Transparent"
         },
         {
-          "aspect": "Related Party Transaction Oversight",
-          "status": "Transactions with related parties disclosed, including those with common directors.",
-          "evidence": "Note 40.2, Page 50 (2022); Note 42.2, Page 54 (2023).",
-          "assessment": "Acceptable"
+          "aspect": "Audit Committee",
+          "status": "Functioning effectively",
+          "evidence": "Mentioned in risk management and audit processes",
+          "assessment": "Effective"
         },
         {
-          "aspect": "Addressing Material Uncertainties",
-          "status": "Management disclosed going concern uncertainties for a subsidiary and outlined mitigating measures.",
-          "evidence": "Note 2.5, Page 18 (2022); Note 2.5, Page 21 (2023).",
-          "assessment": "Deficient"
-        },
-        {
-          "aspect": "Regulatory Compliance Oversight",
-          "status": "Failed to ensure compliance with Labor Act 2006 regarding WPPF distribution and FRC Circular regarding share money deposit conversion.",
-          "evidence": "Auditor's Report Page 3 (2022).",
-          "assessment": "Deficient"
+          "aspect": "Risk Management Committee",
+          "status": "Well-structured",
+          "evidence": "Comprehensive risk management framework described",
+          "assessment": "Strong"
         }
       ],
       "auditQuality": [
         {
-          "factor": "Auditor Independence & Rotation",
-          "2022": "MABS & J Partners, Chartered Accountants",
-          "2023": "S. F. Ahmed & Co. (New auditor)",
-          "2024": "N/A",
-          "assessment": "Auditor changed in 2023. Both auditors assert independence per IESBA Code."
+          "factor": "Auditor Independence",
+          "2024": "Confirmed in audit report",
+          "2023": "Confirmed in audit report",
+          "2022": "Confirmed in audit report",
+          "assessment": "Adequate"
         },
         {
-          "factor": "Communication of Key Audit Matters (KAMs)",
-          "2022": "Two KAMs identified and addressed (Revenue Recognition, Property Plant and Equipment) (Pages 4-5).",
-          "2023": "Five KAMs identified and addressed (Revenue, PPE, Inventory, Deferred Tax, Consolidation) (Pages 4-8).",
-          "2024": "N/A",
-          "assessment": "Compliant with ISA 701. Appropriate matters selected and procedures described."
+          "factor": "Audit Scope",
+          "2024": "Comprehensive (80% of RWA, 8,650 hours)",
+          "2023": "Comprehensive (80% of RWA, 5,800 hours)",
+          "2022": "Comprehensive (80% of RWA, 7,100 hours)",
+          "assessment": "Strong"
         },
         {
-          "factor": "Response to Identified Misstatements",
-          "2022": "Issued qualified opinion for specific non-compliances and included emphasis of matter on liquidity risk.",
-          "2023": "Issued qualified opinion for a specific non-compliance but did not modify for emphasis of matter on liquidity risk.",
-          "2024": "N/A",
-          "assessment": "Appropriate professional judgment applied in forming the opinions."
+          "factor": "Professional Skepticism",
+          "2024": "Demonstrated in key audit matters",
+          "2023": "Demonstrated in key audit matters",
+          "2022": "Demonstrated in key audit matters",
+          "assessment": "Adequate"
         }
       ],
       "internalControls": [
         {
-          "area": "Revenue Recognition",
-          "2022": "Key audit matter addressed by auditor through testing controls and substantive procedures.",
-          "2023": "Continued as a key audit matter; auditor tested controls over revenue recognition process.",
-          "2024": "N/A",
-          "effectiveness": "Partially Effective"
+          "area": "IT Controls",
+          "2024": "Comprehensively tested as key audit matter",
+          "2023": "Comprehensively tested as key audit matter",
+          "2022": "Comprehensively tested as key audit matter",
+          "effectiveness": "Effective"
         },
         {
-          "area": "Inventory Management",
-          "2022": "Not identified as key audit matter.",
-          "2023": "Key audit matter; auditor attended physical counts and tested costing procedures.",
-          "2024": "N/A",
-          "effectiveness": "Partially Effective"
+          "area": "Credit Controls",
+          "2024": "Well-documented provisioning processes",
+          "2023": "Well-documented provisioning processes",
+          "2022": "Well-documented credit processes",
+          "effectiveness": "Effective"
         },
         {
-          "area": "Compliance with Labor Laws",
-          "2022": "Failed, as evidenced by the qualified opinion regarding WPPF non-distribution.",
-          "2023": "Failed, as evidenced by the qualified opinion regarding WPPF non-distribution.",
-          "2024": "N/A",
-          "effectiveness": "Failed"
-        },
-        {
-          "area": "Impairment Testing",
-          "2022": "Failed, company had no policy or procedures for conducting impairment reviews.",
-          "2023": "N/A",
-          "2024": "N/A",
-          "effectiveness": "Failed"
+          "area": "Financial Reporting Controls",
+          "2024": "Auditor-tested and effective",
+          "2023": "Auditor-tested and effective",
+          "2022": "Auditor-tested and effective",
+          "effectiveness": "Effective"
         }
       ]
     },
     "enforcement": {
       "findings": [
         {
-          "title": "Non-Compliance with Bangladesh Labor Act, 2006 (Amended 2015)",
-          "description": "Company accrued BDT 27,885,580 (2022) and BDT 34,774,853 (2023) for Workers Profit Participation Fund (WPPF) but failed to distribute it into the three mandated funds (Employees Welfare, Bangladesh Workers Welfare, WPPF) in the 80:10:10 ratio, as required by law.",
-          "action": "Issue a directive under the Financial Reporting Act, 2015, requiring the company to: 1. Immediately distribute the accrued WPPF amounts as per law. 2. Submit proof of distribution to the FRC and the auditor. 3. Restate the relevant liability line items in its next financial statements with a note explaining the correction. 4. Review and strengthen its internal controls over statutory compliance.",
-          "severity": "high"
+          "title": "Regulatory Compliance",
+          "description": "Full compliance with Bangladesh Bank regulations and IFRS requirements",
+          "action": "Continue Monitoring",
+          "severity": "low"
         },
         {
-          "title": "Non-Compliance with FRC Circular No. 146/FRC/Admin/Circular/2020/01",
-          "description": "Company provided Taka 48,355,038 as Share Money Deposit to Golden Harvest QSR Ltd. which was not converted into share capital within the required 6-month period as per the FRC Circular.",
-          "action": "Require the company to immediately convert the share money deposit into share capital and submit evidence of conversion to the FRC. Impose penalty for non-compliance with FRC directive.",
-          "severity": "high"
+          "title": "Financial Reporting Quality",
+          "description": "High quality financial reporting with comprehensive disclosures",
+          "action": "Maintain Standards",
+          "severity": "low"
         },
         {
-          "title": "Non-Compliance with IAS 36 - Impairment of Assets",
-          "description": "Company had no policy and procedures for conducting impairment review of Property, Plant and Equipment. No impairment test had been exercised since inception of business, representing material non-compliance with IFRS.",
-          "action": "Require the company to: 1. Establish proper impairment testing policies and procedures in accordance with IAS 36. 2. Conduct retrospective impairment assessments for relevant periods. 3. Engage an independent expert to validate the impairment testing methodology. 4. Restate financial statements if material impairments are identified.",
-          "severity": "high"
-        },
-        {
-          "title": "Inadequate Disclosure and Plan for Subsidiary's Going Concern",
-          "description": "While management acknowledges material uncertainty regarding the going concern of Golden Harvest Dairy Ltd., the disclosures and the outlined mitigating measures are generic. A detailed, credible, and monitored turnaround plan is absent from the public report.",
-          "action": "Require the Board of GHAIL to prepare and submit to the FRC, within 30 days, a comprehensive, board-approved viability plan for Golden Harvest Dairy Ltd., including detailed cash flow projections, debt restructuring negotiations, capital injection plans, and monthly monitoring milestones. The FRC will review this plan quarterly.",
-          "severity": "high"
-        },
-        {
-          "title": "Unchecked Escalation of Financial Leverage",
-          "description": "The company's debt-to-equity ratio increased from 0.77 to 0.82, with total loans at 66.87% (2022) and 72.44% (2023) of equity. The 'Emphasis of Matter' by the auditor highlights an unsustainable capital structure heavily reliant on short-term debt, exposing the company to severe refinancing and interest rate risk.",
-          "action": "1. Require the company's audit committee to commission an independent review of its capital structure and long-term financing strategy. 2. Direct the company to engage with its lenders to formalize a medium-term debt restructuring plan and submit a copy to the FRC within 60 days. 3. Impose a condition that any further significant borrowing requires prior notification to the FRC.",
-          "severity": "high"
+          "title": "Risk Management",
+          "description": "Comprehensive risk management framework in place with focus on emerging risks",
+          "action": "Enhance Monitoring of Credit and Legal Risks",
+          "severity": "low"
         }
       ],
       "materiality": [
         {
-          "category": "WPPF Non-Compliance",
-          "impact": "Qualified audit opinion, non-compliance with law, potential employee dissatisfaction.",
-          "quantitative": "BDT 27.89 million provision (2022) and BDT 34.77 million (2023) (0.54% and 0.66% of total assets respectively).",
-          "qualitative": "High - Relates to legal compliance and social obligation. Affects the true and fair view of liabilities.",
-          "overall": "Clearly Material"
-        },
-        {
-          "category": "Share Money Deposit Non-Compliance",
-          "impact": "Qualified audit opinion, non-compliance with FRC directive, misrepresentation of equity.",
-          "quantitative": "BDT 48.36 million (0.94% of total assets).",
-          "qualitative": "High - Regulatory non-compliance affecting the classification between liabilities and equity.",
-          "overall": "Clearly Material"
-        },
-        {
-          "category": "IAS 36 Non-Compliance",
-          "impact": "Potential overstatement of asset values, inaccurate financial position representation.",
-          "quantitative": "PPE carrying value BDT 1,864.30 million (36.19% of total assets).",
-          "qualitative": "High - Fundamental accounting standard non-compliance affecting asset valuation.",
-          "overall": "Pervasively Material"
-        },
-        {
-          "category": "High Financial Leverage & Liquidity Risk",
-          "impact": "Threatens continuity of operations, increases cost of capital, limits strategic flexibility.",
-          "quantitative": "Total loans BDT 1,951.57 million (2022) and BDT 2,086.73 million (2023). Finance cost BDT 112.00 million (2022) and BDT 145.42 million (2023).",
-          "qualitative": "Pervasively Material - Impacts the entity's ability to continue as a going concern, a fundamental assumption in financial reporting.",
-          "overall": "Pervasively Material"
+          "category": "Key Audit Matters",
+          "impact": "Properly identified and addressed",
+          "quantitative": "Material areas covered",
+          "qualitative": "Transparent disclosure",
+          "overall": "Appropriately Managed"
         }
       ],
       "actions": [
         {
-          "type": "Corrective Directive",
-          "action": "Formal letter to the Board of Directors detailing the findings and requiring specific corrective actions on WPPF distribution, share money deposit conversion, IAS 36 compliance, debt management, and subsidiary viability.",
-          "responsible": "FRC Bangladesh Enforcement Division",
-          "timeframe": "7 days",
-          "priority": "Critical"
+          "type": "Monitoring",
+          "action": "Regular review of asset quality and provisioning adequacy",
+          "responsible": "Regulatory Authority",
+          "timeframe": "Quarterly",
+          "priority": "Medium"
         },
         {
-          "type": "Information Request",
-          "action": "Request detailed board minutes, cash flow forecasts, lender correspondence, impairment testing documentation, and the subsidiary's latest management accounts.",
-          "responsible": "FRC Bangladesh Inspection Team",
-          "timeframe": "15 days",
-          "priority": "High"
-        },
-        {
-          "type": "Follow-up Review",
-          "action": "Schedule a follow-up inspection in Q4 2024 to assess implementation of corrective actions, financial restructuring progress, IAS 36 compliance, and the subsidiary's status.",
-          "responsible": "FRC Bangladesh",
-          "timeframe": "6 months",
-          "priority": "High"
-        },
-        {
-          "type": "Penalty Consideration",
-          "action": "Initiate proceedings for imposing penalties under the Financial Reporting Act, 2015 for repeated non-compliance with regulatory requirements.",
-          "responsible": "FRC Bangladesh Legal Division",
-          "timeframe": "30 days",
+          "type": "Advisory",
+          "action": "Maintain prudent liquidity management and monitor legal exposures",
+          "responsible": "Bank Management",
+          "timeframe": "Immediate",
           "priority": "Medium"
         }
       ]
     }
   }
-  ,
-  "test-company": {
-    "name": "Test Company Ltd",
-    "years": [2022, 2023],
-    "pdfFiles": [],
-    "inspectorNotes": "Test company for demonstration purposes."
-  }
+
 }
