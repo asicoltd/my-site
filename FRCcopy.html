@@ -875,6 +875,7 @@
             
             <div class="pdf-viewer-container">
                 <h3><i class="fas fa-eye"></i> Document Viewer</h3>
+                <!-- <p id="viewerUrl"></p> -->
                 <iframe id="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file="></iframe>
             </div>
             
@@ -1002,10 +1003,31 @@
                 fileItem.onclick = () => selectFile(index);
 
                 fileItem.innerHTML = `
-                    <div class="file-name"><i class="fas fa-file-pdf"></i> ${file.name || 'Unnamed File'}</div>
-                    <div><span class="file-type">PDF</span> <span class="file-year">${file.year || 'N/A'}</span></div>
-                    <div style="margin-top: 8px; font-size: 14px; color: #555;">${file.type || 'Unknown Type'}</div>
+                <div class="file-name">
+                    <i class="fas fa-file-pdf"></i> ${file.name || 'Unnamed File'}
+                </div>
+
+                <div>
+                    <span class="file-type">PDF</span>
+                    <span class="file-year">${file.year || 'N/A'}</span>
+                </div>
+
+                <div style="margin-top: 8px; font-size: 14px; color: #555;">
+                    ${file.type || 'Unknown Type'}
+                </div>
+
+                ${
+                    file.url
+                    ? `<a href="${file.url}" target="_blank" rel="noopener"
+                        style="display:inline-block; margin-top:6px; font-size:13px; color:#2563eb;">
+                        View / Download
+                        </a>`
+                    : `<div style="margin-top:6px; font-size:13px; color:#999;">
+                        No link available
+                        </div>`
+                }
                 `;
+
 
                 fileList.appendChild(fileItem);
             });
@@ -1029,6 +1051,9 @@
                 pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(fileUrl)}`;
             }
         }
+
+
+
 
         // Load all tab data
         function loadAllTabData() {
@@ -1322,7 +1347,7 @@ function loadFinancialAnalysisData() {
     const financialTab = document.getElementById('tab-financial');
     
     // Clear any existing content first
-    financialTab.querySelectorAll('.section').forEach(section => section.remove());
+    financialTab.innerHTML = '';
     
     if (!currentCompany || !currentCompany.financialDataTables) {
         financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Analysis Data</h2><p>This company does not have financial analysis data available.</p></div>';
@@ -1331,678 +1356,455 @@ function loadFinancialAnalysisData() {
 
     // Get the financial data
     const financialData = currentCompany.financialDataTables;
-    const financialAnalysis = currentCompany.financialAnalysisReport;
-    const years = ['2022', '2023', '2024'];
+    
+    // Generate tabs based on available financial statements
+    const statementTypes = Object.keys(financialData);
+    if (statementTypes.length === 0) {
+        financialTab.innerHTML += '<div class="section"><h2><i class="fas fa-exclamation-triangle"></i> No Financial Data Available</h2></div>';
+        return;
+    }
 
     let financialContent = `
         <div class="section">
             <h2><i class="fas fa-file-invoice-dollar"></i> Financial Analysis</h2>
             
-            <div class="year-tabs">
-                <div class="year-tab active" onclick="switchYear('financial', 0)">Profit & Loss</div>
-                <div class="year-tab" onclick="switchYear('financial', 1)">Balance Sheet</div>
-                <div class="year-tab" onclick="switchYear('financial', 2)">Cash Flow</div>
-                <div class="year-tab" onclick="switchYear('financial', 3)">Ratios</div>
-                <div class="year-tab" onclick="switchYear('financial', 4)">Financial Analysis</div>
+            <div class="year-tabs" id="financial-tabs">
+    `;
+    
+    // Generate tabs dynamically
+    statementTypes.forEach((type, index) => {
+        const displayName = getDisplayName(type);
+        financialContent += `<div class="year-tab ${index === 0 ? 'active' : ''}" onclick="switchFinancialTab(${index})">${displayName}</div>`;
+    });
+    
+    // Add ratios tab if available
+    if (currentCompany.financialAnalysisReport?.ratioAnalysis) {
+        financialContent += `<div class="year-tab" onclick="switchFinancialTab(${statementTypes.length})">Financial Ratios</div>`;
+    }
+    
+    // Add comprehensive analysis tab if available
+    if (currentCompany.financialAnalysisReport) {
+        financialContent += `<div class="year-tab" onclick="switchFinancialTab(${statementTypes.length + 1})">Analysis Report</div>`;
+    }
+    
+    financialContent += `
             </div>
             
-            <!-- Profit & Loss -->
-            <div class="year-content active" id="financial-pl">
+            <div id="financial-content-container">
+    `;
+    
+    // Generate content for each statement type
+    statementTypes.forEach((type, index) => {
+        const statementData = financialData[type];
+        const displayName = getDisplayName(type);
+        const noteReference = statementData.noteReference || 'Notes to Financial Statements';
+        
+        financialContent += `
+            <div class="year-content ${index === 0 ? 'active' : ''}" id="financial-content-${index}">
                 <div class="subsection">
-                    <h3><i class="fas fa-chart-line"></i> Statement of Comprehensive Income</h3>
-                    <p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${financialData.statementOfComprehensiveIncome.noteReference}</p>
-                    ${financialData.statementOfComprehensiveIncome ? `
-                    <div class="data-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Particulars</th>
-                                    <th>Note</th>
-                                    ${years.map(year => `<th>${year}</th>`).join('')}
-                                    <th>Trend</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Revenue -->
-                                <tr>
-                                    <td><strong>Revenue</strong></td>
-                                    <td class="note-number">${getNoteNumber('Revenue', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Revenue");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('revenue', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Direct Expenses -->
-                                <tr>
-                                    <td>Less: Direct Expenses</td>
-                                    <td class="note-number">${getNoteNumber('Less: Direct Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Less: Direct Expenses");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('directExpenses', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Gross Profit -->
-                                <tr style="border-bottom: 2px solid #ddd;">
-                                    <td><strong>Gross Profit</strong></td>
-                                    <td class="note-number">${getNoteNumber('Gross Profit', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Gross Profit");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('grossProfit', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Administrative Expenses -->
-                                <tr>
-                                    <td>Administrative & Marketing Expenses</td>
-                                    <td class="note-number">${getNoteNumber('Administrative & Marketing Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Administrative & Marketing Expenses");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('adminExpenses', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Income from Operation -->
-                                <tr>
-                                    <td>Income from Operation</td>
-                                    <td class="note-number">${getNoteNumber('Income from Operation', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Income from Operation");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('operatingIncome', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Non-Operating Income -->
-                                <tr>
-                                    <td>Non Operating Income</td>
-                                    <td class="note-number">${getNoteNumber('Non Operating Income', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Non Operating Income");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('nonOperatingIncome', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Profit Before Interest and Taxes -->
-                                <tr>
-                                    <td>Profit/(Loss) before Interest and Taxes</td>
-                                    <td class="note-number">${getNoteNumber('Profit/(Loss) before Interest and Taxes', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit/(Loss) before Interest and Taxes");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('profitBeforeInterestTax', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Financial Expenses -->
-                                <tr>
-                                    <td>Financial Expenses</td>
-                                    <td class="note-number">${getNoteNumber('Financial Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Financial Expenses");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('financialExpenses', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Profit Before Tax -->
-                                <tr style="border-bottom: 2px solid #ddd;">
-                                    <td><strong>Profit/(Loss) Before Tax</strong></td>
-                                    <td class="note-number">${getNoteNumber('Profit / (Loss) Before Tax', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) Before Tax");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('profitBeforeTax', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Income Tax Expenses -->
-                                <tr>
-                                    <td>Income Tax Expenses</td>
-                                    <td class="note-number">${getNoteNumber('Income Tax Expenses', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Income Tax Expenses");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('incomeTaxExpenses', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                                
-                                <!-- Net Profit/(Loss) -->
-                                <tr style="background-color: #f0f5ff;">
-                                    <td><strong>NET PROFIT/(LOSS)</strong></td>
-                                    <td class="note-number">${getNoteNumber('Profit / (Loss) After Tax', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) After Tax");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('netProfit', 'statementOfComprehensiveIncome')}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    ` : '<p>No profit and loss data available.</p>'}
+                    <h3><i class="fas ${getStatementIcon(type)}"></i> ${displayName}</h3>
+                    ${noteReference ? `<p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${noteReference}</p>` : ''}
+                    ${generateFinancialTable(type, statementData)}
                 </div>
             </div>
-            
-            <!-- Balance Sheet -->
-            <div class="year-content" id="financial-bs">
-                <div class="subsection">
-                    <h3><i class="fas fa-balance-scale"></i> Statement of Financial Position</h3>
-                    <p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${financialData.statementOfFinancialPosition.noteReference}</p>
-                    ${financialData.statementOfFinancialPosition ? `
-                    <div class="data-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Particulars</th>
-                                    <th>Note</th>
-                                    ${years.map(year => `<th>${year}</th>`).join('')}
-                                    <th>Growth</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- ASSETS -->
-                                <tr>
-                                    <td colspan="${years.length + 3}" style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">ASSETS</td>
-                                </tr>
-                                
-                                <!-- Property, Plant & Equipment -->
-                                <tr>
-                                    <td>Property, Plant & Equipment</td>
-                                    <td class="note-number">${getNoteNumber('Property, Plant & Equipment', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Property, Plant & Equipment");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('ppe', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Investments -->
-                                <tr>
-                                    <td>Investments</td>
-                                    <td class="note-number">${getNoteNumber('Investments', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Investments");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('investments', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Inventory -->
-                                <tr>
-                                    <td>Inventory</td>
-                                    <td class="note-number">${getNoteNumber('Inventories', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Inventories");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('inventory', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Total Assets -->
-                                <tr style="border-bottom: 2px solid #ddd;">
-                                    <td><strong>TOTAL ASSETS</strong></td>
-                                    <td class="note-number">${getNoteNumber('Total Assets', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Assets");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('totalAssets', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- EQUITY & LIABILITIES -->
-                                <tr>
-                                    <td colspan="${years.length + 3}" style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">EQUITY & LIABILITIES</td>
-                                </tr>
-                                
-                                <!-- Share Capital -->
-                                <tr>
-                                    <td>Share Capital - Paid up</td>
-                                    <td class="note-number">${getNoteNumber('Share Capital - Paid up', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Share Capital - Paid up");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('shareCapital', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Retained Earnings -->
-                                <tr>
-                                    <td>Retained Earnings</td>
-                                    <td class="note-number">${getNoteNumber('Retained Earnings', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Retained Earnings");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('retainedEarnings', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Total Shareholders' Equity -->
-                                <tr style="border-bottom: 1px solid #ddd;">
-                                    <td><strong>TOTAL SHAREHOLDERS' EQUITY</strong></td>
-                                    <td class="note-number">${getNoteNumber('Total Shareholders\' Equity', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Shareholders' Equity");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('totalEquity', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Long Term Loans -->
-                                <tr>
-                                    <td>Long Term Loans</td>
-                                    <td class="note-number">${getNoteNumber('Long Term Loan', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Long Term Loan");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('longTermLoans', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Short Term Loans -->
-                                <tr>
-                                    <td>Short Term Loans</td>
-                                    <td class="note-number">${getNoteNumber('Short Term Loan', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Short Term Loan");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('shortTermLoans', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Intercompany Loan -->
-                                <tr>
-                                    <td>Intercompany Loan</td>
-                                    <td class="note-number">${getNoteNumber('Intercompany Loan', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Intercompany Loan");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('intercompanyLoan', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Total Liabilities -->
-                                <tr style="background-color: #f0f5ff;">
-                                    <td><strong>TOTAL LIABILITIES</strong></td>
-                                    <td class="note-number">${getNoteNumber('Total Liabilities', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Liabilities");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('totalLiabilities', 'statementOfFinancialPosition')}</td>
-                                </tr>
-                                
-                                <!-- Financial Position Analysis -->
-                                <tr style="border-top: 2px solid #ddd;">
-                                    <td colspan="${years.length + 3}" style="background-color: #f9f9f9; padding: 10px;">
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <div>
-                                                <strong>Debt to Equity Ratio:</strong><br>
-                                                ${years.map(year => `${year}: ${financialAnalysis?.ratioAnalysis?.solvencyRatios?.find(r => r.ratio === "Debt-to-Equity")?.[year] || 'N/A'}`).join(' | ')}
-                                            </div>
-                                            <div>
-                                                <strong>Current Ratio:</strong><br>
-                                                ${years.map(year => `${year}: ${financialAnalysis?.ratioAnalysis?.liquidityRatios?.find(r => r.ratio === "Current Ratio")?.[year] || 'N/A'}`).join(' | ')}
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    ` : '<p>No balance sheet data available.</p>'}
-                </div>
+        `;
+    });
+    
+    // Generate ratios tab if available
+    if (currentCompany.financialAnalysisReport?.ratioAnalysis) {
+        financialContent += generateRatiosTab(statementTypes.length);
+    }
+    
+    // Generate analysis report tab if available
+    if (currentCompany.financialAnalysisReport) {
+        financialContent += generateAnalysisReportTab(statementTypes.length + 1);
+    }
+    
+    financialContent += `
             </div>
+        </div>
+    `;
+    
+    financialTab.innerHTML = financialContent;
+}
+
+// Helper function to generate display name from camelCase
+function getDisplayName(type) {
+    const names = {
+        'statementOfFinancialPosition': 'Statement of Financial Position',
+        'statementOfComprehensiveIncome': 'Statement of Comprehensive Income',
+        'statementOfCashFlows': 'Statement of Cash Flows',
+        'statementOfChangesInEquity': 'Statement of Changes in Equity'
+    };
+    return names[type] || type.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+}
+
+// Helper function to get appropriate icon for statement type
+function getStatementIcon(type) {
+    const icons = {
+        'statementOfFinancialPosition': 'fa-balance-scale',
+        'statementOfComprehensiveIncome': 'fa-chart-line',
+        'statementOfCashFlows': 'fa-money-bill-wave',
+        'statementOfChangesInEquity': 'fa-chart-area'
+    };
+    return icons[type] || 'fa-file-invoice';
+}
+
+// Helper function to generate financial table dynamically
+function generateFinancialTable(type, statementData) {
+    if (!statementData.data || !Array.isArray(statementData.data) || statementData.data.length === 0) {
+        return '<p>No data available for this statement.</p>';
+    }
+    
+    // Extract years from the first data item
+    const firstItem = statementData.data[0];
+    const years = [];
+    for (const key in firstItem) {
+        if (key.match(/^\d{4}$/)) { // Check if key is a year (4 digits)
+            years.push(key);
+        }
+    }
+    
+    // Sort years if needed
+    years.sort();
+    
+    // Special handling for Statement of Changes in Equity
+    if (type === 'statementOfChangesInEquity') {
+        return generateEquityTable(statementData, years);
+    }
+    
+    let tableHtml = `
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Particulars</th>
+                        ${getNotesColumn(statementData.data) ? '<th>Note</th>' : ''}
+                        ${years.map(year => `<th>${year}</th>`).join('')}
+                        <th>Trend</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+    
+    // Track if we need to add section headers
+    let hasSections = statementData.data.some(item => item.section);
+    
+    // Group items by section if sections exist
+    const groupedData = {};
+    statementData.data.forEach(item => {
+        const section = item.section || 'main';
+        if (!groupedData[section]) {
+            groupedData[section] = [];
+        }
+        groupedData[section].push(item);
+    });
+    
+    // Generate table rows
+    for (const section in groupedData) {
+        // Add section header if needed
+        if (hasSections && section !== 'main') {
+            tableHtml += `
+                <tr>
+                    <td colspan="${years.length + (getNotesColumn(statementData.data) ? 3 : 2)}" 
+                        style="background-color: #1a3a8f; color: white; font-weight: bold; text-align: center;">
+                        ${section.toUpperCase()}
+                    </td>
+                </tr>
+            `;
+        }
+        
+        // Add rows for this section
+        groupedData[section].forEach(item => {
+            const isStrong = item.item && (
+                item.item.toLowerCase().includes('total') || 
+                item.item.toLowerCase().includes('net') ||
+                item.item.toLowerCase().includes('gross')
+            );
             
-            <!-- Cash Flow -->
-            <div class="year-content" id="financial-cf">
-                <div class="subsection">
-                    <h3><i class="fas fa-money-bill-wave"></i> Statement of Cash Flows</h3>
-                    <p class="note-reference"><i class="fas fa-sticky-note"></i> Note References: ${financialData.statementOfCashFlows.noteReference}</p>
-                    ${financialData.statementOfCashFlows ? `
-                    <div class="data-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Particulars</th>
-                                    ${years.map(year => `<th>${year}</th>`).join('')}
-                                    <th>Trend</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Operating Activities -->
-                                <tr>
-                                    <td><strong>Cash Flow from Operating Activities</strong></td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from operating activities");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('operating', 'statementOfCashFlows')}</td>
-                                </tr>
-                                
-                                <!-- Investing Activities -->
-                                <tr>
-                                    <td>Cash Flow from Investing Activities</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from Investing Activities");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('investing', 'statementOfCashFlows')}</td>
-                                </tr>
-                                
-                                <!-- Financing Activities -->
-                                <tr>
-                                    <td>Cash Flow from Financing Activities</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from Financing Activities");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('financing', 'statementOfCashFlows')}</td>
-                                </tr>
-                                
-                                <!-- Net Change in Cash -->
-                                <tr style="border-bottom: 2px solid #ddd;">
-                                    <td><strong>Net Increase/(Decrease) in Cash</strong></td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Net Cash Increase/(Decrease)");
-                                        const value = data ? data[year] : "0";
-                                        const isNegative = value && (value.startsWith('(') || parseFloat(value.replace(/[(),]/g, '')) < 0);
-                                        return `<td class="metric-value ${isNegative ? 'metric-trend-down' : 'metric-trend-up'}">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('netChange', 'statementOfCashFlows')}</td>
-                                </tr>
-                                
-                                <!-- Cash and Cash Equivalents at Opening -->
-                                <tr>
-                                    <td>Cash and Cash Equivalents at Opening</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash and Cash Equivalents at Opening");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('openingCash', 'statementOfCashFlows')}</td>
-                                </tr>
-                                
-                                <!-- Cash and Cash Equivalents at Closing -->
-                                <tr style="background-color: #f0f5ff;">
-                                    <td><strong>Cash and Cash Equivalents at Closing</strong></td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash and Cash Equivalents at Closing");
-                                        return `<td class="metric-value">${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getFinancialTrendIcon('closingCash', 'statementOfCashFlows')}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    ` : '<p>No cash flow data available.</p>'}
-                </div>
-            </div>
+            const rowClass = isStrong ? 'strong-row' : '';
+            const borderClass = item.borderBottom ? 'border-bottom' : '';
             
-            <!-- Ratios -->
-            <div class="year-content" id="financial-ratios">
-                <div class="subsection">
-                    <h3><i class="fas fa-calculator"></i> Financial Ratios Analysis</h3>
-                    ${financialAnalysis?.ratioAnalysis ? `
-                    <div class="data-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Ratio</th>
-                                    <th>Formula</th>
-                                    ${years.map(year => `<th>${year}</th>`).join('')}
-                                    <th>Assessment</th>
-                                    <th>Benchmark</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Current Ratio -->
-                                <tr>
-                                    <td><strong>Current Ratio</strong></td>
-                                    <td class="formula">Current Assets / Current Liabilities</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.liquidityRatios.find(r => r.ratio === "Current Ratio");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('currentRatio')}</td>
-                                    <td>≥ 1.5</td>
-                                </tr>
-                                
-                                <!-- Quick Ratio -->
-                                <tr>
-                                    <td><strong>Quick Ratio</strong></td>
-                                    <td class="formula">(Current Assets - Inventory) / Current Liabilities</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.liquidityRatios.find(r => r.ratio === "Quick Ratio");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('quickRatio')}</td>
-                                    <td>≥ 1.0</td>
-                                </tr>
-                                
-                                <!-- Debt to Equity Ratio -->
-                                <tr>
-                                    <td><strong>Debt to Equity Ratio</strong></td>
-                                    <td class="formula">Total Liabilities / Shareholders' Equity</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.solvencyRatios.find(r => r.ratio === "Debt-to-Equity");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('debtToEquity')}</td>
-                                    <td>≤ 0.7</td>
-                                </tr>
-                                
-                                <!-- Debt to Assets Ratio -->
-                                <tr>
-                                    <td><strong>Debt to Assets Ratio</strong></td>
-                                    <td class="formula">Total Liabilities / Total Assets</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.solvencyRatios.find(r => r.ratio === "Debt-to-Assets");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('debtToAssets')}</td>
-                                    <td>≤ 0.6</td>
-                                </tr>
-                                
-                                <!-- Return on Assets -->
-                                <tr>
-                                    <td><strong>Return on Assets (ROA)</strong></td>
-                                    <td class="formula">Net Income / Total Assets</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.profitabilityRatios.find(r => r.ratio === "Return on Assets (ROA)");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('returnOnAssets')}</td>
-                                    <td>≥ 5%</td>
-                                </tr>
-                                
-                                <!-- Gross Margin -->
-                                <tr>
-                                    <td><strong>Gross Margin</strong></td>
-                                    <td class="formula">Gross Profit / Revenue</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.profitabilityRatios.find(r => r.ratio === "Gross Margin");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('grossMargin')}</td>
-                                    <td>≥ 30%</td>
-                                </tr>
-                                
-                                <!-- Asset Turnover -->
-                                <tr>
-                                    <td><strong>Asset Turnover</strong></td>
-                                    <td class="formula">Revenue / Total Assets</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.efficiencyRatios.find(r => r.ratio === "Asset Turnover");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('assetTurnover')}</td>
-                                    <td>≥ 0.5</td>
-                                </tr>
-                                
-                                <!-- Cash Flow Adequacy -->
-                                <tr>
-                                    <td><strong>Cash Flow Adequacy</strong></td>
-                                    <td class="formula">Operating Cash Flow / Total Liabilities</td>
-                                    ${years.map(year => {
-                                        const ratio = financialAnalysis.ratioAnalysis.efficiencyRatios.find(r => r.ratio === "Cash Flow Adequacy");
-                                        return `<td class="metric-value">${ratio ? ratio[year] : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${getRatioAssessment('cashFlowAdequacy')}</td>
-                                    <td>≥ 0.1</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    ` : '<p>No financial ratios data available.</p>'}
-                </div>
-            </div>
-            
-            <!-- Financial Analysis Report -->
-            <div class="year-content" id="financial-analysis">
-                <div class="subsection">
-                    <h3><i class="fas fa-chart-area"></i> Comprehensive Financial Analysis Report</h3>
-                    
-                    <!-- Executive Summary -->
-                    <div class="finding-card high">
-                        <h4><i class="fas fa-file-alt"></i> Executive Summary</h4>
-                        <p>${financialAnalysis?.executiveSummary || 'No summary available.'}</p>
-                    </div>
-                    
-                    <div class="key-findings">
-                        <!-- Key Findings -->
-                        <div class="finding-card ${financialAnalysis?.keyFindings?.find(f => f.category === "Profitability")?.riskLevel?.toLowerCase() || 'high'}">
-                            <h4><i class="fas fa-chart-line"></i> Profitability Analysis</h4>
-                            <p><strong>Trend:</strong> ${financialAnalysis?.trendAnalysis?.profitabilityTrend?.assessment || 'Not Available'}</p>
-                            <p><strong>Key Metrics:</strong> 
-                                ${years.map(year => {
-                                    const roa = financialAnalysis?.ratioAnalysis?.profitabilityRatios?.find(r => r.ratio === "Return on Assets (ROA)")?.[year];
-                                    const grossMargin = financialAnalysis?.ratioAnalysis?.profitabilityRatios?.find(r => r.ratio === "Gross Margin")?.[year];
-                                    return `${year}: ROA ${roa || 'N/A'}, Gross Margin ${grossMargin || 'N/A'}`;
-                                }).join('<br>')}
-                            </p>
-                            <div class="action">${financialAnalysis?.keyFindings?.find(f => f.category === "Profitability")?.finding || 'Analysis not available'}</div>
-                        </div>
-                        
-                        <!-- Liquidity Analysis -->
-                        <div class="finding-card ${financialAnalysis?.keyFindings?.find(f => f.category === "Liquidity")?.riskLevel?.toLowerCase() || 'critical'}">
-                            <h4><i class="fas fa-tint"></i> Liquidity Analysis</h4>
-                            <p><strong>Current Ratio Trend:</strong> ${analyzeLiquidityTrend()}</p>
-                            <p><strong>Cash Position:</strong> 
-                                ${years.map(year => {
-                                    const netChange = financialData?.statementOfCashFlows?.data?.find(d => d.item === "Net Cash Increase/(Decrease)")?.[year];
-                                    return `${year}: Net Cash Flow ${formatNumber(netChange) || 'N/A'}`;
-                                }).join('<br>')}
-                            </p>
-                            <div class="action">${financialAnalysis?.keyFindings?.find(f => f.category === "Liquidity")?.finding || 'Analysis not available'}</div>
-                        </div>
-                        
-                        <!-- Solvency Analysis -->
-                        <div class="finding-card ${financialAnalysis?.keyFindings?.find(f => f.category === "Solvency")?.riskLevel?.toLowerCase() || 'critical'}">
-                            <h4><i class="fas fa-balance-scale"></i> Solvency Analysis</h4>
-                            <p><strong>Debt Position:</strong> ${financialAnalysis?.trendAnalysis?.liquidityTrend?.assessment || 'Not Available'}</p>
-                            <p><strong>Leverage:</strong> 
-                                ${years.map(year => {
-                                    const debtToEquity = financialAnalysis?.ratioAnalysis?.solvencyRatios?.find(r => r.ratio === "Debt-to-Equity")?.[year];
-                                    return `${year}: Debt to Equity ${debtToEquity || 'N/A'}`;
-                                }).join('<br>')}
-                            </p>
-                            <div class="action">${financialAnalysis?.keyFindings?.find(f => f.category === "Solvency")?.finding || 'Analysis not available'}</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Trend Analysis Table -->
-                    <div class="subsection" style="margin-top: 20px;">
-                        <h3><i class="fas fa-chart-bar"></i> Year-over-Year Trend Analysis</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Metric</th>
-                                    <th>Note</th>
-                                    ${years.map(year => `<th>${year}</th>`).join('')}
-                                    <th>Growth Rate (2022-2024)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Revenue Growth</td>
-                                    <td class="note-number">${getNoteNumber('Revenue', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Revenue");
-                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${financialAnalysis?.trendAnalysis?.revenueTrend?.growthRate || 'N/A'}</td>
-                                </tr>
-                                <tr>
-                                    <td>Net Profit/(Loss)</td>
-                                    <td class="note-number">${getNoteNumber('Profit / (Loss) After Tax', financialData.statementOfComprehensiveIncome.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfComprehensiveIncome.data.find(d => d.item === "Profit / (Loss) After Tax");
-                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${calculateGrowthRate('netProfit')}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total Assets</td>
-                                    <td class="note-number">${getNoteNumber('Total Assets', financialData.statementOfFinancialPosition.data)}</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfFinancialPosition.data.find(d => d.item === "Total Assets");
-                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${calculateGrowthRate('totalAssets')}</td>
-                                </tr>
-                                <tr>
-                                    <td>Operating Cash Flow</td>
-                                    <td class="note-number">N/A</td>
-                                    ${years.map(year => {
-                                        const data = financialData.statementOfCashFlows.data.find(d => d.item === "Cash flows from operating activities");
-                                        return `<td>${data ? formatNumber(data[year]) : 'N/A'}</td>`;
-                                    }).join('')}
-                                    <td>${calculateGrowthRate('operatingCashFlow')}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            tableHtml += `
+                <tr class="${rowClass} ${borderClass}">
+                    <td>${isStrong ? `<strong>${item.item}</strong>` : item.item}</td>
+                    ${getNotesColumn(statementData.data) ? `<td class="note-number">${getNoteNumber(item.item, statementData.data)}</td>` : ''}
+                    ${years.map(year => {
+                        const value = item[year] || 'N/A';
+                        const isNegative = value && (value.startsWith('(') || value.includes('-'));
+                        const formattedValue = formatNumber(value);
+                        const trendClass = isNegative ? 'metric-trend-down' : 'metric-trend-up';
+                        return `<td class="metric-value ${trendClass}">${formattedValue}</td>`;
+                    }).join('')}
+                    <td>${getFinancialTrendIcon(item.item, type)}</td>
+                </tr>
+            `;
+        });
+    }
+    
+    tableHtml += `
+                </tbody>
+            </table>
+        </div>
+    `;
+    
+    return tableHtml;
+}
+
+// Helper function for Statement of Changes in Equity
+function generateEquityTable(statementData, years) {
+    let tableHtml = `
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Share Capital</th>
+                        <th>Retained Earnings</th>
+                        <th>Total Equity</th>
+                        <th>Net Profit/(Loss)</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+    
+    statementData.data.forEach(yearData => {
+        const year = yearData.year;
+        const balance = yearData.balanceAsOn30June || yearData.balanceAsOn30June;
+        const netProfit = yearData.netProfitLossAfterTax;
+        
+        tableHtml += `
+            <tr>
+                <td><strong>${year}</strong></td>
+                <td>${formatNumber(balance?.shareCapital || 'N/A')}</td>
+                <td class="${(balance?.retainedEarnings || '').startsWith('(') ? 'metric-trend-down' : ''}">
+                    ${formatNumber(balance?.retainedEarnings || 'N/A')}
+                </td>
+                <td class="${(balance?.total || '').startsWith('(') ? 'metric-trend-down' : ''}">
+                    ${formatNumber(balance?.total || 'N/A')}
+                </td>
+                <td class="${(netProfit || '').startsWith('(') ? 'metric-trend-down' : ''}">
+                    ${formatNumber(netProfit || 'N/A')}
+                </td>
+            </tr>
+        `;
+    });
+    
+    tableHtml += `
+                </tbody>
+            </table>
+        </div>
+    `;
+    
+    return tableHtml;
+}
+
+// Helper function to generate ratios tab
+function generateRatiosTab(index) {
+    const ratioAnalysis = currentCompany.financialAnalysisReport?.ratioAnalysis;
+    if (!ratioAnalysis) return '';
+    
+    const years = ['2022', '2023', '2024']; // Default years
+    
+    return `
+        <div class="year-content" id="financial-content-${index}">
+            <div class="subsection">
+                <h3><i class="fas fa-calculator"></i> Financial Ratios Analysis</h3>
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Ratio</th>
+                                <th>Formula</th>
+                                ${years.map(year => `<th>${year}</th>`).join('')}
+                                <th>Assessment</th>
+                                <th>Benchmark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${generateRatioRows('Liquidity', ratioAnalysis.liquidityRatios, years)}
+                            ${generateRatioRows('Solvency', ratioAnalysis.solvencyRatios, years)}
+                            ${generateRatioRows('Profitability', ratioAnalysis.profitabilityRatios, years)}
+                            ${generateRatioRows('Efficiency', ratioAnalysis.efficiencyRatios, years)}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     `;
-
-    financialTab.insertAdjacentHTML('beforeend', financialContent);
 }
 
-// Helper function to get note number from data
-function getNoteNumber(itemName, dataArray) {
-    if (!dataArray) return '';
-    const item = dataArray.find(d => d.item === itemName);
-    return item ? item.note || '' : '';
+// Helper function to generate ratio rows
+function generateRatioRows(category, ratios, years) {
+    if (!ratios || !Array.isArray(ratios)) return '';
+    
+    return ratios.map((ratio, idx) => `
+        <tr>
+            ${idx === 0 ? `<td rowspan="${ratios.length}" style="vertical-align: middle;"><strong>${category}</strong></td>` : ''}
+            <td><strong>${ratio.ratio}</strong></td>
+            <td class="formula">${ratio.formula || 'N/A'}</td>
+            ${years.map(year => `<td>${ratio[year] || 'N/A'}</td>`).join('')}
+            <td>${ratio.assessment || getRatioAssessment(ratio.ratio)}</td>
+            <td>${getBenchmark(ratio.ratio)}</td>
+        </tr>
+    `).join('');
 }
 
+// Helper function to generate analysis report tab
+function generateAnalysisReportTab(index) {
+    const analysis = currentCompany.financialAnalysisReport;
+    if (!analysis) return '';
+    
+    return `
+        <div class="year-content" id="financial-content-${index}">
+            <div class="subsection">
+                <h3><i class="fas fa-chart-area"></i> Comprehensive Financial Analysis Report</h3>
+                
+                ${analysis.executiveSummary ? `
+                <div class="finding-card high">
+                    <h4><i class="fas fa-file-alt"></i> Executive Summary</h4>
+                    <p>${analysis.executiveSummary}</p>
+                </div>
+                ` : ''}
+                
+                ${analysis.keyFindings ? `
+                <div class="key-findings">
+                    ${analysis.keyFindings.map(finding => `
+                        <div class="finding-card ${finding.severity?.toLowerCase() || 'high'}">
+                            <h4><i class="fas ${getFindingIcon(finding.category)}"></i> ${finding.category}</h4>
+                            <p><strong>Finding:</strong> ${finding.finding || 'N/A'}</p>
+                            <p><strong>Trend:</strong> ${finding.trend || 'N/A'}</p>
+                            <p><strong>Risk Level:</strong> ${finding.riskLevel || 'High'}</p>
+                            <div class="action">${finding.action || 'Analysis not available'}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
+                
+                ${analysis.trendAnalysis ? generateTrendAnalysisTable(analysis.trendAnalysis) : ''}
+                
+                ${analysis.goingConcernAssessment ? `
+                <div class="finding-card critical" style="margin-top: 20px;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Going Concern Assessment</h4>
+                    <p><strong>Overall Assessment:</strong> ${analysis.goingConcernAssessment.overallAssessment || 'N/A'}</p>
+                    <p><strong>Recommendation:</strong> ${analysis.goingConcernAssessment.recommendation || 'N/A'}</p>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+// Helper function to generate trend analysis table
+function generateTrendAnalysisTable(trendAnalysis) {
+    if (!trendAnalysis) return '';
+    
+    return `
+        <div class="subsection" style="margin-top: 20px;">
+            <h3><i class="fas fa-chart-bar"></i> Trend Analysis</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>2022</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>Growth/Change</th>
+                        <th>Assessment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${Object.keys(trendAnalysis).map(key => {
+                        const data = trendAnalysis[key];
+                        if (typeof data === 'object' && data !== null) {
+                            return `
+                                <tr>
+                                    <td><strong>${key.replace('Trend', '').replace(/([A-Z])/g, ' $1')}</strong></td>
+                                    <td>${formatNumber(data['2022'] || 'N/A')}</td>
+                                    <td>${formatNumber(data['2023'] || 'N/A')}</td>
+                                    <td>${formatNumber(data['2024'] || 'N/A')}</td>
+                                    <td>${data.growthRate || 'N/A'}</td>
+                                    <td>${data.assessment || 'N/A'}</td>
+                                </tr>
+                            `;
+                        }
+                        return '';
+                    }).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+// Helper function to get finding icon
+function getFindingIcon(category) {
+    const icons = {
+        'Profitability': 'fa-chart-line',
+        'Liquidity': 'fa-tint',
+        'Solvency': 'fa-balance-scale',
+        'Asset Quality': 'fa-shield-alt',
+        'Cash Flow': 'fa-money-bill-wave'
+    };
+    return icons[category] || 'fa-chart-bar';
+}
+
+// Helper function to check if notes column is needed
+function getNotesColumn(data) {
+    return data && Array.isArray(data) && data.some(item => item.note);
+}
+
+// Helper function to get note number (updated for new structure)
+function getNoteNumber(itemName, data) {
+    if (!data || !Array.isArray(data)) return '';
+    
+    const item = data.find(d => d.item === itemName);
+    if (!item) return '';
+    
+    if (item.note && typeof item.note === 'object') {
+        // Handle object structure with years
+        const years = Object.keys(item.note).filter(k => k.match(/^\d{4}$/));
+        if (years.length > 0) {
+            return years.map(year => `${year}: ${item.note[year]}`).join('<br>');
+        }
+    }
+    
+    return item.note || '';
+}
+
+// Helper function to get benchmark for ratio
+function getBenchmark(ratioName) {
+    const benchmarks = {
+        'Current Ratio': '≥ 1.5',
+        'Quick Ratio': '≥ 1.0',
+        'Debt-to-Equity Ratio': '≤ 0.7',
+        'Debt-to-Assets Ratio': '≤ 0.6',
+        'Return on Assets (ROA)': '≥ 5%',
+        'Gross Margin': '≥ 30%',
+        'Asset Turnover': '≥ 0.5',
+        'Cash Flow Adequacy': '≥ 0.1'
+    };
+    return benchmarks[ratioName] || 'N/A';
+}
+
+// Function to switch between financial tabs
+function switchFinancialTab(index) {
+    // Remove active class from all tabs
+    document.querySelectorAll('#financial-tabs .year-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Add active class to clicked tab
+    document.querySelectorAll('#financial-tabs .year-tab')[index].classList.add('active');
+    
+    // Hide all content
+    document.querySelectorAll('#financial-content-container .year-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Show selected content
+    document.getElementById(`financial-content-${index}`)?.classList.add('active');
+}
 // Helper function to format numbers
 function formatNumber(value) {
     if (value === null || value === undefined || value === '' || value === 'N/A') {
