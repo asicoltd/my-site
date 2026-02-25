@@ -43,6 +43,13 @@ function closePopup() {
 
 // Initialize 3D background after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // First, hide or remove the old canvas if it exists
+    const oldCanvas = document.getElementById('starfield');
+    if (oldCanvas) {
+        oldCanvas.style.display = 'none';
+    }
+    
+    // Initialize the new 3D background
     init3DBackground();
 });
 
@@ -309,8 +316,8 @@ style.textContent = `
         display: block;
     }
 
-    /* Hide old background container */
-    .bg-container {
+    /* Hide old background container and canvas */
+    .bg-container, #starfield {
         display: none !important;
     }
 
