@@ -1,24 +1,82 @@
-// Create a new file called background.js or add this to your existing script.js
-// Make sure this runs after the DOM is loaded
+// Complete script.js with all original functionality + new 3D background
 
+// ============================================
+// ORIGINAL FUNCTIONS (PRESERVED)
+// ============================================
+
+// JavaScript to handle toggle functionality for experience section
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('#experience ul').forEach(ul => {
+        // Add initial collapsed state
+        ul.classList.add('collapsed');
+
+        ul.addEventListener('click', function (e) {
+            // Toggle active state
+            this.classList.toggle('active');
+            this.classList.toggle('collapsed');
+
+            // Collapse other items if needed (optional)
+            // document.querySelectorAll('#experience ul').forEach(otherUl => {
+            //     if (otherUl !== this) {
+            //         otherUl.classList.remove('active');
+            //         otherUl.classList.add('collapsed');
+            //     }
+            // });
+        });
+    });
+});
+
+// Popup functions
+function openPopup(page) {
+    document.getElementById("popupFrame").src = page;
+    document.getElementById("popupOverlay").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+    document.getElementById("popupFrame").src = "";
+}
+
+// ============================================
+// NEW 3D BACKGROUND WITH SCROLL EFFECT
+// ============================================
+
+// Initialize 3D background after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    init3DBackground();
+});
+
+function init3DBackground() {
     // Check if Three.js is loaded, if not load it
     if (typeof THREE === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-        script.onload = initBackground;
+        script.onload = setup3DScene;
         document.head.appendChild(script);
     } else {
-        initBackground();
+        setup3DScene();
     }
-});
+}
 
-function initBackground() {
-    // Get the canvas element
-    const canvas = document.getElementById('bg-canvas');
+function setup3DScene() {
+    // Get or create canvas
+    let canvas = document.getElementById('bg-canvas');
+    
+    // If canvas doesn't exist, create it
     if (!canvas) {
-        console.error('Canvas element not found');
-        return;
+        // Remove old background container if it exists
+        const oldContainer = document.querySelector('.bg-container');
+        if (oldContainer) {
+            oldContainer.style.display = 'none';
+        }
+        
+        // Create new container and canvas
+        const container = document.createElement('div');
+        container.id = 'bg-canvas-container';
+        canvas = document.createElement('canvas');
+        canvas.id = 'bg-canvas';
+        container.appendChild(canvas);
+        document.body.insertBefore(container, document.body.firstChild);
     }
 
     // Scene setup
@@ -32,7 +90,7 @@ function initBackground() {
     const renderer = new THREE.WebGLRenderer({ 
         canvas: canvas,
         antialias: true,
-        alpha: false // Set to false for solid background
+        alpha: false
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -150,7 +208,7 @@ function initBackground() {
     const stars3 = new THREE.Points(stars3Geometry, stars3Material);
     scene.add(stars3);
 
-    // Add a subtle nebula effect using a large sphere
+    // Add a subtle nebula effect
     const nebulaGeometry = new THREE.SphereGeometry(80, 32, 32);
     const nebulaMaterial = new THREE.MeshBasicMaterial({
         color: 0x1a237e,
@@ -224,3 +282,65 @@ function initBackground() {
 
     animate();
 }
+
+// ============================================
+// ADDITIONAL CSS FOR BACKGROUND
+// ============================================
+
+// Add necessary CSS for the 3D background
+const style = document.createElement('style');
+style.textContent = `
+    #bg-canvas-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        pointer-events: none;
+    }
+
+    #bg-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    /* Hide old background container */
+    .bg-container {
+        display: none !important;
+    }
+
+    /* Ensure content is above background */
+    body {
+        position: relative;
+        z-index: 1;
+        background-color: transparent !important;
+    }
+
+    section, header, footer {
+        position: relative;
+        z-index: 2;
+        background-color: transparent !important;
+    }
+
+    /* Make dark elements slightly transparent to show background */
+    .bg-dark {
+        background-color: rgba(33, 37, 41, 0.85) !important;
+        backdrop-filter: blur(5px);
+    }
+
+    .card, .accordion-item {
+        background-color: rgba(33, 37, 41, 0.85) !important;
+        backdrop-filter: blur(5px);
+    }
+
+    /* Ensure text remains readable */
+    .text-light {
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+`;
+document.head.appendChild(style);
