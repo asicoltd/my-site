@@ -694,7 +694,7 @@ section, header, footer {
 
 /* Add slight transparency to cards so background shows through */
 .bg-dark1 {
-    background-color: rgba(33, 37, 41, 0.99) !important;
+    background-color: rgba(33, 37, 41, 1) !important;
     backdrop-filter: blur(1px);
 }
 .bg-dark {
