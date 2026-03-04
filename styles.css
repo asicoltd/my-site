@@ -195,7 +195,7 @@ section {
 
 .bg-glass {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+   backdrop-filter: blur(1px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -303,7 +303,7 @@ section {
 .bg-glass {
   background: rgba(255, 255, 255, 0.1);
   /* Transparent white background */
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1px);
   /* Glass blur effect */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -313,7 +313,7 @@ section {
 /* Subtle highlight effect for the about section */
 .about-content {
   padding: 30px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.1);
   /* Semi-transparent black background */
   border-radius: 15px;
 }
@@ -385,6 +385,7 @@ section {
 .accordion-item {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
   border-radius: 12px;
+  
 }
 
 .accordion-item:hover {
@@ -545,11 +546,12 @@ h6:hover {
 /* Card Hover Effect */
 .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
 }
 
 .card:hover {
   transform: translateY(-10px); /* Move the card upwards */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow for floating effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Add shadow for floating effect */
 }
 
 /* Optional: Add some padding for the text inside the card */
@@ -692,11 +694,11 @@ section, header, footer {
 
 /* Add slight transparency to cards so background shows through */
 .bg-dark {
-    background-color: rgba(33, 37, 41, 0.85) !important;
-    backdrop-filter: blur(5px);
+    background-color: rgba(33, 37, 41, 0) !important;
+    backdrop-filter: blur(1px);
 }
 
 .card, .accordion-item {
-    background-color: rgba(33, 37, 41, 0.85) !important;
-    backdrop-filter: blur(5px);
+    background-color: rgba(33, 37, 41, 0) !important;
+    backdrop-filter: blur(1px);
 }
