@@ -316,12 +316,6 @@ style.textContent = `
     body { background-color: transparent !important; margin: 0; }
     section, header, footer { position: relative; z-index: 2; background-color: transparent !important; }
     
-    /* Subtle space-themed card styling */
-    .bg-dark, .card, .accordion-item { 
-        background-color: rgba(10, 10, 20, 0.85) !important; 
-        backdrop-filter: blur(5px);
-        border: 1px solid rgba(100, 150, 255, 0.15) !important;
-    }
     
     /* Subtle text glow */
     .text-light, h1, h2, h3 {
