@@ -650,7 +650,7 @@ h4 {
 }
 
 .navbar .btn:hover {
-    box-shadow: 0 0 10px rgba(0,255,204,0);
+    box-shadow: 0 0 10px rgba(0,255,204,0.5) !important;
 }
 
 
@@ -694,7 +694,7 @@ section, header, footer {
 
 /* Add slight transparency to cards so background shows through */
 .bg-dark {
-    background-color: rgba(33, 37, 41, 0) !important;
+    background-color: rgba(33, 37, 41, 0.9) !important;
     backdrop-filter: blur(1px);
 }
 
