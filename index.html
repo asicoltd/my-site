@@ -8,1012 +8,1111 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-G24TPZNWVM');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Asif Hasan</title>
+    <title>Asif Hasan - AI Engineer & Researcher</title>
     <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="70" tabindex="0">
+
     <!-- Navbar -->
-<!-- Main Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark1 fixed-top shadow">
-  <div class="container-fluid px-3">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-navbar" id="mainNavbar">
+        <div class="container">
+            <!-- Brand with animated gradient (keeping original style) -->
+            <a class="navbar-brand fw-bold" href="#home">
+                Asico<span class="highlight-text engineer">L</span><span class="highlight-text developer">T</span><span
+                    class="highlight-text researcher">D</span>
+            </a>
 
-    <!-- Brand -->
-    <a class="navbar-brand fw-bold" href="#home">
-      Asico<span class="highlight-text engineer">L</span><span class="highlight-text developer">T</span><span class="highlight-text researcher">D</span>
-    </a>
+            <!-- Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <!-- Toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#research-experience">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#social-work">Activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
 
-    <!-- Collapsible Content -->
-    <div class="collapse navbar-collapse" id="mainNavbar">
+                <!-- CTA Buttons -->
+                <div class="d-flex ms-lg-3 gap-2">
+                    <a href="#contact" class="btn btn-outline-primary btn-sm">Hire Me</a>
+                    <a href="/cv.pdf" download class="btn btn-primary btn-sm">
+                        <i class="fas fa-download me-2"></i>Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-      <!-- Basic Links -->
-      <ul class="navbar-nav me-auto mb-3 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-
-      <!-- Interactive Buttons -->
-      <div class="d-flex flex-column flex-lg-row gap-2">
-        <button class="btn btn-outline-danger btn-sm" onclick="openPopup('questions.html')">Self Reflection</button>
-        <button class="btn btn-outline-info btn-sm" onclick="openPopup('quiz.html')">Find AI</button>
-        <button class="btn btn-outline-success btn-sm" onclick="openPopup('whichAI.html')">Are You AI?</button>
-        <button class="btn btn-outline-warning btn-sm" onclick="openPopup('neverWin.html')">Loss / Draw</button>
-        <button class="btn btn-outline-info btn-sm" onclick="openPopup('areWeSame.html')">Are We Same?</button>
-      </div>
-
+    <!-- Popup Overlay (from original) -->
+    <div id="popupOverlay" style="display:none;">
+        <div id="popupBox">
+            <span id="closePopup" onclick="closePopup()">×</span>
+            <iframe id="popupFrame" src="" frameborder="0"></iframe>
+        </div>
     </div>
-  </div>
-</nav>
 
-
-<div id="popupOverlay" style="display:none;">
-    <div id="popupBox">
-        <span id="closePopup" onclick="closePopup()">×</span>
-        <iframe id="popupFrame" src="" frameborder="0"></iframe>
+    <!-- 3D Background Canvas -->
+    <div id="bg-canvas-container">
+        <canvas id="bg-canvas"></canvas>
     </div>
-</div>
 
+    <!-- Hero Section (Enhanced but keeping original text) -->
+    <header id="home" class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-10 mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+                    <!-- Badge -->
+                    <div class="hero-badge mb-4">
+                        <span class="badge bg-primary bg-opacity-10 text-primary px-4 py-2 rounded-pill">
+                            <i class="fas fa-robot me-2"></i>AI Engineer & Researcher
+                        </span>
+                    </div>
 
-<!-- Remove your existing bg-container div completely and replace with this -->
-<div id="bg-canvas-container">
-    <canvas id="bg-canvas"></canvas>
-</div>
+                    <!-- Main Title (original) -->
+                    <h1 class="hero-title display-1 fw-bold mb-4">
+                        <b>ASIF HASAN</b>
+                    </h1>
 
-    <!-- Hero Section -->
-    <header id="home" class="hero d-flex align-items-center justify-content-center"
-        style="background-size: cover; height: 100vh; position: relative; overflow: hidden;">
-        <div class="container text-center text-light position-relative z-index-2">
-            <h1 class="display-1 mb-4 hero-title"><b>ASIF HASAN</b></h1>
-            <p class="display-4 mb-4 hero-subtitle">
-                <b>
-                    <span class="highlight-text researcher">R</span>esearcher |
-                    <span class="highlight-text engineer">E</span>ngineer |
-                    <span class="highlight-text developer">D</span>eveloper
-                </b>
-            </p>
-            <p class="lead mb-5 hero-description">Driven by a passion to innovate in AI, ML, and Blockchain
-                technologies.</p>
+                    <!-- Subtitle with colored letters (original style) -->
+                    <p class="hero-subtitle display-4 mb-4">
+                        <b>
+                            <span class="highlight-text researcher">R</span>esearcher |
+                            <span class="highlight-text engineer">E</span>ngineer |
+                            <span class="highlight-text developer">D</span>eveloper
+                        </b>
+                    </p>
+
+                    <!-- Description (original) -->
+                    <p class="hero-description lead mb-5">
+                        Driven by a passion to innovate in AI, ML, and Blockchain technologies.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="hero-cta d-flex justify-content-center gap-3">
+                        <a href="#research-experience" class="btn btn-primary btn-lg">
+                            <i class="fas fa-code me-2"></i>View My Projects
+                        </a>
+                        <a href="#contact" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-share-nodes me-2"></i>Get In Touch
+                        </a>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="hero-social mt-5">
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="https://github.com/asicoltd" class="social-icon" target="_blank"><i
+                                    class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/asif-hasan-099/" class="social-icon" target="_blank"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.hackerrank.com/profile/asifhasan099" class="social-icon"
+                                target="_blank"><i class="fab fa-hackerrank"></i></a>
+                            <a href="https://judge.beecrowd.com/en/profile/416286" class="social-icon"
+                                target="_blank"><i class="fas fa-cogs"></i></a>
+                            <a href="https://www.facebook.com/asifhasan099" class="social-icon" target="_blank"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/asico_ltd" class="social-icon" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://x.com/asicoltd" class="social-icon" target="_blank"><i
+                                    class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="scroll-indicator mt-5">
+                        <a href="#about" class="text-decoration-none">
+                            <span class="mouse">
+                                <span class="wheel"></span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-
-
-
-    <!-- About Section -->
-    <section id="about" class="py-5">
+    <!-- About Section (Enhanced with original content) -->
+    <section id="about" class="section-padding">
         <div class="container">
-            <div class="row align-items-center">
-                <!-- Profile Image Section -->
-                <div class="col-lg-4 col-md-5 text-center mb-5 mb-md-0">
-                    <div class="profile-container position-relative">
-                        <img src="profile.jpg" alt="Asif Hasan" class="img-fluid rounded-circle profile-image shadow-lg"
-                            style="border: 3px solid #20c997; max-width: 100%; height: auto;">
-                        <div class="decoration-box"></div>
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-subtitle text-primary">About Me</span>
+                <h2 class="section-title display-4 fw-bold">Who I Am</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="row align-items-center g-5">
+                <!-- Profile Image -->
+                <div class="col-lg-4 col-md-5 text-center" data-aos="fade-right">
+                    <div class="profile-wrapper">
+                        <div class="profile-image-container">
+                            <img src="profile.jpg" alt="Asif Hasan" class="profile-image img-fluid rounded-circle"
+                                style="border: 3px solid #20c997; max-width: 100%; height: auto;">
+                            <div class="profile-shape shape-1"></div>
+                            <div class="profile-shape shape-2"></div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="quick-stats mt-4">
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <div class="stat-card bg-dark bg-opacity-25 rounded-3 p-2">
+                                        <h4 class="text-primary mb-0">3+</h4>
+                                        <small class="text-secondary">Publications</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-card bg-dark bg-opacity-25 rounded-3 p-2">
+                                        <h4 class="text-primary mb-0">15+</h4>
+                                        <small class="text-secondary">Projects</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-card bg-dark bg-opacity-25 rounded-3 p-2">
+                                        <h4 class="text-primary mb-0">5+</h4>
+                                        <small class="text-secondary">Domains</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- About Content Section -->
-                <div class="col-lg-8 col-md-7">
-                    <div class="about-content p-4 p-lg-5 bg-glass shadow-lg">
+                <!-- About Content (original text preserved) -->
+                <div class="col-lg-8 col-md-7" data-aos="fade-left">
+                    <div class="about-content p-4 p-lg-5 bg-glass">
                         <h2 class="display-4 mb-4 text-gradient">About Me</h2>
                         <div class="d-flex align-items-center mb-4">
                             <div class="accent-line"></div>
                         </div>
                         <p class="lead text-light mb-4">
-                            <span class="highlight">AI Engineer </span> conducting research on cutting-edge
+                            <span class="highlight">AI Engineer</span> AI Engineer conducting research on cutting-edge
                             methodologies in data science, artificial intelligence, machine learning, deep neural
                             networks, computer vision, and image processing, with a goal to develop innovative and
-                            scalable solutions for real-world challenges. Passionate about developing automated
-                            systems, with a keen interest in
-                            blockchain technology and decentralized systems, striving to create innovative, scalable
-                            solutions that drive intelligent, data-driven applications.
+                            scalable solutions for real-world challenges. Passionate about developing automated systems,
+                            with a keen interest in blockchain technology and decentralized systems, striving to create
+                            intelligent, data-driven applications. Alongside my technical work, I actively engage in
+                            competitive programming, research presentations, and community-driven initiatives. I have
+                            extensive experience in debating, leadership, and organizational roles through clubs and
+                            volunteering, and I maintain strong discipline and teamwork through activities like martial
+                            arts, marathon running, and scouting.
                         </p>
+
+                        <!-- Info List -->
+                        <div class="info-list row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <div class="info-item d-flex align-items-center">
+                                    <a href="mailto:asifhasan099@gmail.com" class="text-decoration-none d-flex align-items-center">
+                                    <i class="fas fa-envelope text-primary me-3"></i>
+                                    <span>asifhasan099@gmail.com</span></a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="https://service.scouts.gov.bd/user-verify?scoutID=AU9178">
+                                <div class="info-item d-flex align-items-center">
+                                    <i class="fas fa-hand-holding-heart text-primary me-3"></i>
+                                    <span>Scout ID : AU9178</span>
+                                </div></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="info-item d-flex align-items-center">
+                                    <i class="fas fa-graduation-cap text-primary me-3"></i>
+                                    <span>M.Sc. in CSE (Ongoing)</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="info-item d-flex align-items-center">
+                                    <i class="fas fa-tower-broadcast text-primary me-3"></i>
+                                    <span>HAM Radio: S21NEO</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fun Buttons (kept from original) -->
+                        <div class="fun-buttons d-flex flex-wrap gap-2">
+                            <button class="btn btn-sm btn-outline-primary" onclick="openPopup('questions.html')">
+                                <i class="fas fa-question-circle me-1"></i>Self Reflection
+                            </button>
+                            <button class="btn btn-sm btn-outline-info" onclick="openPopup('quiz.html')">
+                                <i class="fas fa-microchip me-1"></i>Find AI
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" onclick="openPopup('whichAI.html')">
+                                <i class="fas fa-robot me-1"></i>Are You AI?
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning" onclick="openPopup('neverWin.html')">
+                                <i class="fas fa-chess me-1"></i>Loss/Draw
+                            </button>
+                            <button class="btn btn-sm btn-outline-info" onclick="openPopup('areWeSame.html')">
+                                <i class="fas fa-users me-1"></i>Are We Same?
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Research Publications Section -->
-    <section id="research" class="py-5">
+    <!-- Research Publications Section (Original with enhanced cards) -->
+    <section id="research" class="section-padding bg-dark bg-opacity-25">
         <div class="container">
-            <h2 class="text-center mb-4 text-light display-3">Research Publications</h2>
-            <div class="accordion" id="researchAccordion">
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-subtitle text-primary">Publications</span>
+                <h2 class="section-title display-4 fw-bold">Research Publications</h2>
+                <div class="section-divider"></div>
+            </div>
 
-                <!-- Research Paper 1 -->
-                <div class="card-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
-                            aria-controls="collapseOne">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-person-raised-hand fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Ensemble Deep Learning for Enhanced Detection and
-                                        Classification of Hand, Foot, and Mouth Disease</h6>
-                                    <small class="fs-5">Presented at the International Conference on Data Mining and
-                                        Information Security 2024</small>
-                                </div>
+            <!-- Research Cards -->
+            <div class="row g-4">
+                <!-- Paper 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="research-card card h-100 bg-dark bg-opacity-25 border-0">
+                        <div class="card-body p-4">
+                            <div class="research-icon mb-3">
+                                <i class="bi bi-person-raised-hand fs-1 icon-color-1"></i>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#researchAccordion">
-                        <div class="accordion-body bg-dark text-light fs-5">
-                            <b>Abstract</b>
-                            <p>This study addresses the significant challenge of accurately detecting Hand, Foot, and
-                                Mouth Disease (HFMD) in infants and children. The research leverages deep neural
-                                networks, specifically an ensemble learning approach, to enhance robustness and accuracy
-                                in HFMD identification.</p>
+                            <h5 class="card-title fw-bold mb-3">Ensemble Deep Learning for Enhanced Detection and
+                                Classification of Hand, Foot, and Mouth Disease</h5>
+                            <p class="card-text text-secondary small mb-3">International Conference on Data Mining and
+                                Information Security 2024</p>
+                            <div class="research-preview">
+                                <p class="text-secondary"><strong>Abstract:</strong> This study addresses the
+                                    significant challenge of accurately detecting Hand, Foot, and Mouth Disease (HFMD)
+                                    in infants and children. The research leverages deep neural networks, specifically
+                                    an ensemble learning approach, to enhance robustness and accuracy in HFMD
+                                    identification.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Research Paper 2 -->
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-lungs fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Classification of Peptic Ulcer and Digestive Tract Disorders
-                                        Using Endoscopic Images</h6>
-                                    <small class="fs-5">Presented at the International Conference on Data Mining and
-                                        Information Security 2024</small>
-                                </div>
+                <!-- Paper 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="research-card card h-100 bg-dark bg-opacity-25 border-0">
+                        <div class="card-body p-4">
+                            <div class="research-icon mb-3">
+                                <i class="bi bi-lungs fs-1 icon-color-2"></i>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#researchAccordion">
-                        <div class="accordion-body bg-dark text-light fs-5">
-                            <b>Abstract</b>
-                            <p>Peptic ulcers and other digestive tract disorders pose significant diagnostic challenges,
-                                often requiring expert analysis of endoscopic images. In this study, we aim to assist in
-                                the examination of gastrointestinal (GI) tract endoscopy images using advanced image
-                                classification techniques.</p>
+                            <h5 class="card-title fw-bold mb-3">Classification of Peptic Ulcer and Digestive Tract
+                                Disorders Using Endoscopic Images</h5>
+                            <p class="card-text text-secondary small mb-3">International Conference on Data Mining and
+                                Information Security 2024</p>
+                            <div class="research-preview">
+                                <p class="text-secondary"><strong>Abstract:</strong> Peptic ulcers and other digestive
+                                    tract disorders pose significant diagnostic challenges, often requiring expert
+                                    analysis of endoscopic images. In this study, we aim to assist in the examination of
+                                    gastrointestinal (GI) tract endoscopy images using advanced image classification
+                                    techniques.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Research Paper 3 -->
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-flower2 fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Rose Disease Detection Using YOLO: A Deep Learning-Based
-                                        Approach</h6>
-                                    <small class="fs-5">9th International Conference on ICTCS 2024</small>
-                                </div>
+                <!-- Paper 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="research-card card h-100 bg-dark bg-opacity-25 border-0">
+                        <div class="card-body p-4">
+                            <div class="research-icon mb-3">
+                                <i class="bi bi-flower2 fs-1 icon-color-3"></i>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#researchAccordion">
-                        <div class="accordion-body bg-dark text-light fs-5">
-                            <b>Abstract</b>
-                            <p>The rose is one of the world’s most significant flowers, which is cultivated widely. But,
-                                it is susceptible to various types of diseases that can lead to a substantial reduction
-                                in yield. Hence, early detection of these diseases is essential to avoid risk and ensure
-                                timely treatment.</p>
+                            <h5 class="card-title fw-bold mb-3">Rose Disease Detection Using YOLO: A Deep Learning-Based
+                                Approach</h5>
+                            <p class="card-text text-secondary small mb-3">9th International Conference on ICTCS 2024
+                            </p>
+                            <div class="research-preview">
+                                <p class="text-secondary"><strong>Abstract:</strong> The rose is one of the world's most
+                                    significant flowers, which is cultivated widely. But, it is susceptible to various
+                                    types of diseases that can lead to a substantial reduction in yield. Hence, early
+                                    detection of these diseases is essential to avoid risk and ensure timely treatment.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Research Experience Section -->
-    <section id="research-experience" class="py-5">
+    <!-- Research Experience Section (ALL ORIGINAL PROJECTS preserved) -->
+    <section id="research-experience" class="section-padding">
         <div class="container">
-            <h2 class="text-center mb-4 text-light">Research Experience</h2>
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-subtitle text-primary">Portfolio</span>
+                <h2 class="section-title display-4 fw-bold">Research Experience & Projects</h2>
+                <div class="section-divider"></div>
+            </div>
 
-            <!-- The Opportunistic Network Environment (ONE) Simulator -->
-            <div class="accordion" id="researchExperienceAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2One" aria-expanded="false"
-                            aria-controls="collapse2One">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-broadcast fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">The Opportunistic Network Environment (ONE) Simulator</h6>
-                                    <small>Delay-Tolerant Networking, ONE Simulator, Java, Python</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2One" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#researchExperienceAccordion">
-                        <div class="accordion-body text-light">
-                            <p>This research delves into optimizing Delay-Tolerant Networking (DTN) protocols to enhance
-                                emergency communication systems in disrupted environments, particularly natural
-                                disasters. The ONE simulator was utilized to simulate realistic scenarios where
-                                connectivity is unreliable or unavailable, such as during floods, earthquakes, or
-                                wildfires, focusing on improving message delivery, reducing latency, and boosting
-                                throughput.</p>
+            <!-- ALL 15 PROJECTS - Original content preserved -->
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Analysis of Current DTN
-                                        Protocols:</strong> Evaluated DTN routing protocols such as Epidemic, Spray and
-                                    Wait, and PRoPHET, identifying their strengths and weaknesses in disaster scenarios.
+            <!-- 1. The Opportunistic Network Environment (ONE) Simulator -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-broadcast fs-1 icon-color-1"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">The Opportunistic Network Environment (ONE) Simulator</h4>
+                            <p class="text-secondary mb-3"><small>Delay-Tolerant Networking, ONE Simulator, Java,
+                                    Python</small></p>
+
+                            <p class="text-light">This research delves into optimizing Delay-Tolerant Networking (DTN)
+                                protocols to enhance emergency communication systems in disrupted environments,
+                                particularly natural disasters. The ONE simulator was utilized to simulate realistic
+                                scenarios where connectivity is unreliable or unavailable, such as during floods,
+                                earthquakes, or wildfires, focusing on improving message delivery, reducing latency, and
+                                boosting throughput.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Analysis
+                                        of Current DTN Protocols:</strong> Evaluated DTN routing protocols such as
+                                    Epidemic, Spray and Wait, and PRoPHET, identifying their strengths and weaknesses in
+                                    disaster scenarios.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Real-World
+                                        Disaster Simulations:</strong> Used the ONE simulator to replicate disaster
+                                    environments with limited bandwidth and high latency, ensuring accurate performance
+                                    testing.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Optimized
+                                        Routing Protocols:</strong> Enhanced DTN protocols for better message delivery
+                                    rates, reduced delays, and efficient resource usage under constrained conditions.
                                 </li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Real-World Disaster
-                                        Simulations:</strong> Used the ONE simulator to replicate disaster environments
-                                    with limited bandwidth and high latency, ensuring accurate performance testing.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Optimized Routing
-                                        Protocols:</strong> Enhanced DTN protocols for better message delivery rates,
-                                    reduced delays, and efficient resource usage under constrained conditions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Mobile Application
-                                        Development:</strong> Designed a mobile app integrating DTN protocols for
-                                    real-time disaster communication, ensuring message delivery even with network
-                                    failures.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Mobile
+                                        Application Development:</strong> Designed a mobile app integrating DTN
+                                    protocols for real-time disaster communication, ensuring message delivery even with
+                                    network failures.</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="accordion" id="newsRecommendationAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Two" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-newspaper fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">AI-Driven News Recommendation System</h6>
-                                    <small>Neural Collaborative Filtering, PyTorch, Python, MIND: Microsoft News
-                                        Recommendation Dataset</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Two" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#newsRecommendationAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>Developed a personalized news recommendation system leveraging Neural Collaborative
-                                Filtering (NCF) to combine content-based and collaborative filtering techniques. The
-                                system was designed to handle large-scale datasets and generate precise, real-time
-                                recommendations, enhancing user engagement through tailored news suggestions.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Implemented Neural
-                                        Collaborative Filtering (NCF):</strong> Developed an NCF model for user-specific
-                                    recommendations by learning interactions between users and news items.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Hybrid Recommendation
-                                        Approach:</strong> Combined content-based and collaborative filtering to improve
-                                    recommendation accuracy using both user and content data.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Model Optimization:</strong>
-                                    Optimized training with model checkpointing techniques for continuous training and
-                                    automatic recovery across large datasets.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Performance
-                                        Evaluation:</strong> Evaluated the system using precision, recall, F1-score, and
-                                    AUC to ensure it met user satisfaction and accuracy requirements.</li>
+            <!-- 2. AI-Driven News Recommendation System -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="50">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-newspaper fs-1 icon-color-2"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">AI-Driven News Recommendation System</h4>
+                            <p class="text-secondary mb-3"><small>Neural Collaborative Filtering, PyTorch, Python, MIND:
+                                    Microsoft News Recommendation Dataset</small></p>
+
+                            <p class="text-light">Developed a personalized news recommendation system leveraging Neural
+                                Collaborative Filtering (NCF) to combine content-based and collaborative filtering
+                                techniques. The system was designed to handle large-scale datasets and generate precise,
+                                real-time recommendations, enhancing user engagement through tailored news suggestions.
+                            </p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Implemented Neural Collaborative Filtering (NCF):</strong> Developed an NCF
+                                    model for user-specific recommendations by learning interactions between users and
+                                    news items.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Hybrid
+                                        Recommendation Approach:</strong> Combined content-based and collaborative
+                                    filtering to improve recommendation accuracy using both user and content data.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Model
+                                        Optimization:</strong> Optimized training with model checkpointing techniques
+                                    for continuous training and automatic recovery across large datasets.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Performance Evaluation:</strong> Evaluated the system using precision,
+                                    recall, F1-score, and AUC to ensure it met user satisfaction and accuracy
+                                    requirements.
+                                </li>
                             </ul>
                             <a href="https://github.com/asicoltd/EWU_MIND" class="btn btn-primary mt-3" target="_blank">
-                                Check the Project
+                                <i class="fab fa-github me-2"></i>Check the Project
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="chessBotAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Three"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            <div class="d-flex align-items-center">
-                                <i class="fa-solid fa-chess fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">AI-Based Chess Bot</h6>
-                                    <small>Python, Q-learning, Deep Q-Networks (DQN), Monte Carlo Tree
-                                        Search (MCTS)</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Three" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#chessBotAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>Developed an AI-powered chess bot that utilizes reinforcement learning techniques such as
-                                Q-learning and Deep Q-Networks (DQN) to learn and improve its gameplay. The bot also
-                                incorporates Monte Carlo Tree Search (MCTS) to evaluate and select optimal moves. It
-                                continuously adapts to opponents, making it highly competitive on online chess
-                                platforms.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Reinforcement Learning
-                                        Implementation:</strong> Developed a chess bot using Q-learning and Deep
-                                    Q-Networks (DQN) for strategy improvement.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Monte Carlo Tree Search
-                                        (MCTS):</strong> Implemented MCTS for advanced move evaluation, allowing the bot
-                                    to plan ahead and make strategic decisions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Competitive
-                                        Performance:</strong> The bot consistently outperforms less-experienced players
-                                    in simulated and real online matches.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>User Interface:</strong>
-                                    Developed an intuitive interface enabling players to challenge the bot at different
-                                    difficulty levels.</li>
+            <!-- 3. AI-Based Chess Bot -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="100">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="fa-solid fa-chess fs-1 icon-color-3"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">AI-Based Chess Bot</h4>
+                            <p class="text-secondary mb-3"><small>Python, Q-learning, Deep Q-Networks (DQN), Monte Carlo
+                                    Tree Search (MCTS)</small></p>
+
+                            <p class="text-light">Developed an AI-powered chess bot that utilizes reinforcement learning
+                                techniques such as Q-learning and Deep Q-Networks (DQN) to learn and improve its
+                                gameplay. The bot also incorporates Monte Carlo Tree Search (MCTS) to evaluate and
+                                select optimal moves. It continuously adapts to opponents, making it highly competitive
+                                on online chess platforms.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Reinforcement Learning Implementation:</strong> Developed a chess bot using
+                                    Q-learning and Deep Q-Networks (DQN) for strategy improvement.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Monte
+                                        Carlo Tree Search (MCTS):</strong> Implemented MCTS for advanced move
+                                    evaluation, allowing the bot to plan ahead and make strategic decisions.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Competitive Performance:</strong> The bot consistently outperforms
+                                    less-experienced players in simulated and real online matches.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>User
+                                        Interface:</strong> Developed an intuitive interface enabling players to
+                                    challenge the bot at different difficulty levels.</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="asicoinAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingFour">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Four"
-                            aria-expanded="false" aria-controls="collapseFour">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-currency-bitcoin fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">ASICoin – Blockchain-Based Cryptocurrency</h6>
-                                    <small>Blockchain, AI, Post-Quantum Cryptography</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Four" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                        data-bs-parent="#asicoinAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>ASICoin is a blockchain-based cryptocurrency project still under development. The project
-                                aims to integrate AI-driven fraud detection and post-quantum cryptographic security to
-                                ensure the future-proof nature of the network. Additionally, dApps for mobile banking,
-                                file transfers, and educational record management are in the planning stages.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>AI-Enhanced Fraud
-                                        Detection:</strong> Developing machine learning-based systems for monitoring
-                                    transactions and detecting anomalies.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Post-Quantum Cryptography
-                                        Research:</strong> Researching lattice-based encryption algorithms to prepare
-                                    for quantum computing risks.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Decentralized Applications
-                                        (dApps):</strong> Implementing dApps for secure mobile banking, file transfers,
-                                    and educational record management.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Layer 2 Solutions:</strong>
-                                    Exploring integration to improve scalability and transaction throughput for
-                                    high-speed transactions.</li>
+            <!-- 4. ASICoin – Blockchain-Based Cryptocurrency -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="150">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-currency-bitcoin fs-1 icon-color-1"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">ASICoin – Blockchain-Based Cryptocurrency</h4>
+                            <p class="text-secondary mb-3"><small>Blockchain, AI, Post-Quantum Cryptography</small></p>
+
+                            <p class="text-light">ASICoin is a blockchain-based cryptocurrency project still under
+                                development. The project aims to integrate AI-driven fraud detection and post-quantum
+                                cryptographic security to ensure the future-proof nature of the network. Additionally,
+                                dApps for mobile banking, file transfers, and educational record management are in the
+                                planning stages.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>AI-Enhanced Fraud Detection:</strong> Developing machine learning-based
+                                    systems for monitoring transactions and detecting anomalies.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Post-Quantum Cryptography Research:</strong> Researching lattice-based
+                                    encryption algorithms to prepare for quantum computing risks.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Decentralized Applications (dApps):</strong> Implementing dApps for secure
+                                    mobile banking, file transfers, and educational record management.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Layer 2
+                                        Solutions:</strong> Exploring integration to improve scalability and transaction
+                                    throughput for high-speed transactions.</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="inventoryAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingFive">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Five"
-                            aria-expanded="false" aria-controls="collapseFive">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-house-door fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Inventory Management Software for Medicine Shop</h6>
-                                    <small>PHP, MySQL Database</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Five" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                        data-bs-parent="#inventoryAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>This Inventory Management Software for Medicine Shop is designed to streamline the
-                                day-to-day operations of managing medicine stock, processing sales, and optimizing
-                                inventory levels. The system provides real-time data insights, automated purchase
-                                recommendations, and an intuitive user interface to facilitate efficient management of
-                                products and sales activities.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Real-Time Stock
-                                        Updates:</strong> Automatically updates stock and sales data.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Sales Tracking:</strong>
-                                    Generates reports on sales, profit margins, and top sellers.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Automated Reorder
-                                        Alerts:</strong> Notifies when stock levels fall below thresholds.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Expiry Date
-                                        Tracking:</strong> Alerts when products near expiration.</li>
+            <!-- 5. Inventory Management Software for Medicine Shop -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="200">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-house-door fs-1 icon-color-2"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Inventory Management Software for Medicine Shop</h4>
+                            <p class="text-secondary mb-3"><small>PHP, MySQL Database</small></p>
+
+                            <p class="text-light">This Inventory Management Software for Medicine Shop is designed to
+                                streamline the day-to-day operations of managing medicine stock, processing sales, and
+                                optimizing inventory levels. The system provides real-time data insights, automated
+                                purchase recommendations, and an intuitive user interface to facilitate efficient
+                                management of products and sales activities.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Real-Time
+                                        Stock Updates:</strong> Automatically updates stock and sales data.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Sales
+                                        Tracking:</strong> Generates reports on sales, profit margins, and top sellers.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Automated
+                                        Reorder Alerts:</strong> Notifies when stock levels fall below thresholds.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Expiry
+                                        Date Tracking:</strong> Alerts when products near expiration.</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="sudokuAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingSix">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Six" aria-expanded="false"
-                            aria-controls="collapseSix">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-puzzle fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Sudoku Solver</h6>
-                                    <small>C, Backtracking, Constraint Propagation</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Six" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                        data-bs-parent="#sudokuAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>An efficient Sudoku solver leveraging backtracking, recursion, and constraint propagation
-                                to find solutions for 9x9 grids. Optimized for speed and accuracy, ensuring compliance
-                                with Sudoku rules while handling even the most challenging puzzles.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>High Accuracy:</strong>
-                                    Solves 100% of valid Sudoku puzzles with systematic elimination.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Optimized Speed:</strong>
-                                    Uses constraint propagation and backtracking to reduce search space.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Advanced
+            <!-- 6. Sudoku Solver -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="250">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-puzzle fs-1 icon-color-3"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Sudoku Solver</h4>
+                            <p class="text-secondary mb-3"><small>C, Backtracking, Constraint Propagation</small></p>
+
+                            <p class="text-light">An efficient Sudoku solver leveraging backtracking, recursion, and
+                                constraint propagation to find solutions for 9x9 grids. Optimized for speed and
+                                accuracy, ensuring compliance with Sudoku rules while handling even the most challenging
+                                puzzles.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>High
+                                        Accuracy:</strong> Solves 100% of valid Sudoku puzzles with systematic
+                                    elimination.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Optimized
+                                        Speed:</strong> Uses constraint propagation and backtracking to reduce search
+                                    space.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Advanced
                                         Validation:</strong> Detects unsolvable puzzles before solving.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Handles Extreme
-                                        Cases:</strong> Solves puzzles with minimal clues, including the hardest ones.
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Handles
+                                        Extreme Cases:</strong> Solves puzzles with minimal clues, including the hardest
+                                    ones.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Candlestick Detection Trading Bot -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="300">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-currency-bitcoin fs-1 icon-color-1"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Candlestick Detection Trading Bot</h4>
+                            <p class="text-secondary mb-3"><small>Python, LSTM, Ichimoku Cloud, Bollinger Bands, Deep
+                                    Q-Learning</small></p>
+
+                            <p class="text-light">A cutting-edge AI-driven trading bot designed for real-time market
+                                analysis and decision-making. This bot leverages deep learning techniques, such as LSTM
+                                (Long Short-Term Memory) networks, to predict future price movements based on historical
+                                data. Technical indicators like Ichimoku Cloud and Bollinger Bands are integrated to
+                                enhance the bot's ability to perform technical analysis and identify trends.
+                                Additionally, Deep Q-Learning is implemented to allow the bot to adapt and refine its
+                                trading strategies autonomously by interacting with the market environment.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>LSTM for
+                                        Time-Series Forecasting:</strong> Accurately predicts price movements.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Ichimoku
+                                        Cloud Analysis:</strong> Identifies market trends and support/resistance levels.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Deep
+                                        Q-Learning Integration:</strong> Enables intelligent decision-making for
+                                    buy/hold/sell actions.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Backtesting Strategies:</strong> Validates the bot's performance across
+                                    different market conditions.
                                 </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="tradingBotAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingSeven">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Seven"
-                            aria-expanded="false" aria-controls="collapseSeven">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-currency-bitcoin fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Candlestick Detection Trading Bot</h6>
-                                    <small>Python, LSTM, Ichimoku Cloud, Bollinger Bands, Deep
-                                        Q-Learning</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Seven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                        data-bs-parent="#tradingBotAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>A cutting-edge AI-driven trading bot designed for real-time market analysis and
-                                decision-making. This bot leverages deep learning techniques, such as LSTM (Long
-                                Short-Term Memory) networks, to predict future price movements based on historical data.
-                                Technical indicators like Ichimoku Cloud and Bollinger Bands are integrated to enhance
-                                the bot’s ability to perform technical analysis and identify trends. Additionally, Deep
-                                Q-Learning is implemented to allow the bot to adapt and refine its trading strategies
-                                autonomously by interacting with the market environment.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>LSTM for Time-Series
-                                        Forecasting:</strong> Accurately predicts price movements.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Ichimoku Cloud
-                                        Analysis:</strong> Identifies market trends and support/resistance levels.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Deep Q-Learning
-                                        Integration:</strong> Enables intelligent decision-making for buy/hold/sell
-                                    actions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Backtesting
-                                        Strategies:</strong> Validates the bot’s performance across different market
-                                    conditions.</li>
+            <!-- 8. Sentiment Analysis for Cryptocurrency Price Prediction -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="350">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-bar-chart-line fs-1 icon-color-2"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Sentiment Analysis for Cryptocurrency Price Prediction</h4>
+                            <p class="text-secondary mb-3"><small>Python, Natural Language Processing, TensorFlow,
+                                    Keras</small></p>
+
+                            <p class="text-light">Developed a sentiment analysis module to enhance cryptocurrency price
+                                prediction models by analyzing real-time news articles, social media posts, and public
+                                sentiment. Integrated sentiment scores with LSTM-based deep learning models to forecast
+                                price movements of Ethereum (ETH) based on historical Bitcoin (BTC) data.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Sentiment
+                                        Analysis on Cryptocurrency News:</strong> Applied NLP techniques like BERT and
+                                    VADER to analyze crypto-related news.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Data
+                                        Pipeline Development:</strong> Built a pipeline to preprocess text data and
+                                    extract sentiment scores and keywords.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>LSTM Model
+                                        for Temporal Dependencies:</strong> Used LSTM models with sentiment-adjusted
+                                    features for price prediction.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Backtesting Strategies:</strong> Implemented backtesting to fine-tune model
+                                    parameters and optimize performance.
+                                </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="sentimentAnalysisAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingEight">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Eight"
-                            aria-expanded="false" aria-controls="collapseEight">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-bar-chart-line fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Sentiment Analysis for Cryptocurrency Price Prediction</h6>
-                                    <small>Python, Natural Language Processing, TensorFlow,
-                                        Keras</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Eight" class="accordion-collapse collapse" aria-labelledby="headingEight"
-                        data-bs-parent="#sentimentAnalysisAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>Developed a sentiment analysis module to enhance cryptocurrency price prediction models
-                                by analyzing real-time news articles, social media posts, and public sentiment.
-                                Integrated sentiment scores with LSTM-based deep learning models to forecast price
-                                movements of Ethereum (ETH) based on historical Bitcoin (BTC) data.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Sentiment Analysis on
-                                        Cryptocurrency News:</strong> Applied NLP techniques like BERT and VADER to
-                                    analyze crypto-related news.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Data Pipeline
-                                        Development:</strong> Built a pipeline to preprocess text data and extract
-                                    sentiment scores and keywords.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>LSTM Model for Temporal
-                                        Dependencies:</strong> Used LSTM models with sentiment-adjusted features for
-                                    price prediction.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Backtesting
-                                        Strategies:</strong> Implemented backtesting to fine-tune model parameters and
-                                    optimize performance.</li>
-                            </ul>
-
+            <!-- 9. Ethereum Price Prediction Using LSTM -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="400">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-pie-chart fs-1 icon-color-3"></i>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="ethPricePredictionAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingNine">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Nine"
-                            aria-expanded="false" aria-controls="collapseNine">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-pie-chart fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Ethereum Price Prediction Using LSTM</h6>
-                                    <small>Python, Pytorch, LSTM, Technical Indicators</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Nine" class="accordion-collapse collapse" aria-labelledby="headingNine"
-                        data-bs-parent="#ethPricePredictionAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>This project uses Long Short-Term Memory (LSTM) networks to predict Ethereum (ETH) price
-                                trends by analyzing historical Bitcoin (BTC) data. It incorporates various technical
-                                indicators, including moving averages, Relative Strength Index (RSI), and Moving Average
-                                Convergence Divergence (MACD), to improve forecasting accuracy. Additionally, sentiment
-                                analysis is used to account for the impact of market news on price movements.</p>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Ethereum Price Prediction Using LSTM</h4>
+                            <p class="text-secondary mb-3"><small>Python, Pytorch, LSTM, Technical Indicators</small>
+                            </p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>LSTM-Based Deep Learning
-                                        Model:</strong> Developed an LSTM model to predict Ethereum’s price based on
-                                    Bitcoin data.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Integration of Technical
-                                        Indicators:</strong> Enhanced prediction accuracy with indicators like moving
-                                    averages, RSI, and MACD.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Model Optimization:</strong>
-                                    Fine-tuned LSTM model using TensorFlow for better prediction performance.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Backtesting System:</strong>
-                                    Validated model performance using historical data for live trading simulations.</li>
+                            <p class="text-light">This project uses Long Short-Term Memory (LSTM) networks to predict
+                                Ethereum (ETH) price trends by analyzing historical Bitcoin (BTC) data. It incorporates
+                                various technical indicators, including moving averages, Relative Strength Index (RSI),
+                                and Moving Average Convergence Divergence (MACD), to improve forecasting accuracy.
+                                Additionally, sentiment analysis is used to account for the impact of market news on
+                                price movements.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>LSTM-Based
+                                        Deep Learning Model:</strong> Developed an LSTM model to predict Ethereum's
+                                    price based on Bitcoin data.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Integration of Technical Indicators:</strong> Enhanced prediction accuracy
+                                    with indicators like moving averages, RSI, and MACD.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Model
+                                        Optimization:</strong> Fine-tuned LSTM model using TensorFlow for better
+                                    prediction performance.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Backtesting System:</strong> Validated model performance using historical
+                                    data for live trading simulations.
+                                </li>
                             </ul>
                             <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
                                 class="btn btn-primary mt-3" target="_blank">
-                                Check the Tool
+                                <i class="fab fa-github me-2"></i>Check the Tool
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="employeeManagementAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTen">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Ten" aria-expanded="false"
-                            aria-controls="collapseTen">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-person-circle fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Employee Management System</h6>
-                                    <small>Java, Swing</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Ten" class="accordion-collapse collapse" aria-labelledby="headingTen"
-                        data-bs-parent="#employeeManagementAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Employee Management System is a comprehensive solution for managing employee data,
-                                payroll, attendance, and performance. It provides an easy-to-use interface for
-                                administrators to manage employee information, track attendance, and generate payroll
-                                reports, while ensuring data security and scalability.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Employee Data
-                                        Management:</strong> System for managing personal information, job roles, and
-                                    contact details.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Attendance
+            <!-- 10. Employee Management System -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="450">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-person-circle fs-1 icon-color-1"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Employee Management System</h4>
+                            <p class="text-secondary mb-3"><small>Java, Swing</small></p>
+
+                            <p class="text-light">The Employee Management System is a comprehensive solution for
+                                managing employee data, payroll, attendance, and performance. It provides an easy-to-use
+                                interface for administrators to manage employee information, track attendance, and
+                                generate payroll reports, while ensuring data security and scalability.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Employee
+                                        Data Management:</strong> System for managing personal information, job roles,
+                                    and contact details.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Attendance
                                         Tracking:</strong> Automated system for clocking in/out and recording working
                                     hours.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Payroll Generation:</strong>
-                                    Automated payroll calculation based on attendance and performance metrics.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Real-Time
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Payroll
+                                        Generation:</strong> Automated payroll calculation based on attendance and
+                                    performance metrics.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Real-Time
                                         Reporting:</strong> Real-time reports on attendance, salary, and performance for
                                     HR managers.</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Project Details -->
-            <div class="accordion" id="lendingLibraryAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingEleven">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Eleven"
-                            aria-expanded="false" aria-controls="collapseEleven">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-book fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Lending Library Management System</h6>
-                                    <small>Java, Swing</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Eleven" class="accordion-collapse collapse" aria-labelledby="headingEleven"
-                        data-bs-parent="#lendingLibraryAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Lending Library Management System is a software solution for managing books, patrons,
-                                and lending transactions within a library. It provides features for checking out and
-                                returning books, tracking due dates, managing inventory, and generating reports on
-                                library activity.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Book Inventory
-                                        Management:</strong> System for managing book records including title, author,
-                                    and availability.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Patron Management:</strong>
-                                    Module for managing patrons, tracking borrowed books, and updating personal info.
+            <!-- 11. Lending Library Management System -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="500">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-book fs-1 icon-color-2"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Lending Library Management System</h4>
+                            <p class="text-secondary mb-3"><small>Java, Swing</small></p>
+
+                            <p class="text-light">The Lending Library Management System is a software solution for
+                                managing books, patrons, and lending transactions within a library. It provides features
+                                for checking out and returning books, tracking due dates, managing inventory, and
+                                generating reports on library activity.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Book
+                                        Inventory Management:</strong> System for managing book records including title,
+                                    author, and availability.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Patron
+                                        Management:</strong> Module for managing patrons, tracking borrowed books, and
+                                    updating personal info.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Search &
+                                        Filtering:</strong> Function for users to find books by title, author, genre, or
+                                    availability.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Due Date
+                                        Tracking:</strong> Automatic tracking and notifications for overdue books and
+                                    fines.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. Ride Sharing Simulation System -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="550">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-car-front fs-1 icon-color-3"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Ride Sharing Simulation System</h4>
+                            <p class="text-secondary mb-3"><small>C, C++, Simulation, Optimization Algorithms</small>
+                            </p>
+
+                            <p class="text-light">The Ride Sharing Simulation System aims to simulate and optimize the
+                                operation of a ride-sharing network. The system is designed to model real-world factors
+                                such as traffic conditions, vehicle availability, user demand, and route optimization to
+                                improve the efficiency and cost-effectiveness of ride-sharing services.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Demand &
+                                        Supply Modeling:</strong> Simulated ride requests and vehicle availability.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Dynamic
+                                        Pricing:</strong> Adjusted fares based on demand and traffic conditions.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Vehicle
+                                        Assignment Algorithm:</strong> Efficient vehicle-rider matching.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Simulation
+                                        Engine:</strong> Tested scenarios using Python and SimPy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. Caesar Cipher Decoding Tool For Scouts -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="600">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-shield-lock fs-1 icon-color-1"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Caesar Cipher Decoding Tool For Scouts</h4>
+                            <p class="text-secondary mb-3"><small>JavaScript, Caesar Cipher, Word Validation,
+                                    Cryptography</small></p>
+
+                            <p class="text-light">The Caesar Cipher Decoding Tool is a web-based application that
+                                attempts to decode a given sentence by applying various Caesar cipher shifts (from 0 to
+                                25) and also includes a reverse string decoding method. It checks the decoded sentences
+                                for valid words from a predefined word list and highlights those words.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Caesar
+                                        Cipher Decoding:</strong> Tries to decode the sentence with all possible Caesar
+                                    shifts and displays the results.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Reverse
+                                        String Decoding:</strong> Checks if reversing the input sentence produces any
+                                    valid words.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Word
+                                        Validation:</strong> Highlights valid words in each decoded sentence using a
+                                    predefined word list.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Interactive Interface:</strong> Displays results dynamically and provides
+                                    the number of valid words in each decoded sentence.
                                 </li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Search & Filtering:</strong>
-                                    Function for users to find books by title, author, genre, or availability.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Due Date Tracking:</strong>
-                                    Automatic tracking and notifications for overdue books and fines.</li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="rideSharingAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTwelve">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Twelve"
-                            aria-expanded="false" aria-controls="collapseTwelve">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-car-front fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Ride Sharing Simulation System</h6>
-                                    <small>C, C++, Simulation, Optimization Algorithms</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Twelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve"
-                        data-bs-parent="#rideSharingAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Ride Sharing Simulation System aims to simulate and optimize the operation of a
-                                ride-sharing network. The system is designed to model real-world factors such as traffic
-                                conditions, vehicle availability, user demand, and route optimization to improve the
-                                efficiency and cost-effectiveness of ride-sharing services.</p>
-
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Demand & Supply
-                                        Modeling:</strong> Simulated ride requests and vehicle availability.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Dynamic Pricing:</strong>
-                                    Adjusted fares based on demand and traffic conditions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Vehicle Assignment
-                                        Algorithm:</strong> Efficient vehicle-rider matching.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Simulation Engine:</strong>
-                                    Tested scenarios using Python and SimPy.</li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Ride Sharing Simulation System Section -->
-            <!-- Project Details -->
-            <div class="accordion" id="caesarCipherAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingCipher">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseCipher"
-                            aria-expanded="false" aria-controls="collapseCipher">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-shield-lock fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Caesar Cipher Decoding Tool For Scouts</h6>
-                                    <small>JavaScript, Caesar Cipher, Word Validation, Cryptography</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapseCipher" class="accordion-collapse collapse" aria-labelledby="headingCipher"
-                        data-bs-parent="#caesarCipherAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Caesar Cipher Decoding Tool is a web-based application that attempts to decode a
-                                given sentence by applying various Caesar cipher shifts (from 0 to 25) and also includes
-                                a reverse string decoding method. It checks the decoded sentences for valid words from a
-                                predefined word list and highlights those words.</p>
-
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Caesar Cipher
-                                        Decoding:</strong> Tries to decode the sentence with all possible Caesar shifts
-                                    and displays the results.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Reverse String
-                                        Decoding:</strong> Checks if reversing the input sentence produces any valid
-                                    words.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Word Validation:</strong>
-                                    Highlights valid words in each decoded sentence using a predefined word list.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Interactive
-                                        Interface:</strong> Displays results dynamically and provides the number of
-                                    valid words in each decoded sentence.</li>
                             </ul>
 
                             <a href="https://asicoltd.github.io/ScoutingHacks/pages/code&cipher/cc.html"
                                 class="btn btn-primary mt-3" target="_blank">
-                                Try It
+                                <i class="fas fa-external-link-alt me-2"></i>Try It
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Caesar Cipher Decoding Tool Section -->
-            <!-- Project Details -->
-            <div class="accordion" id="mapGenerationAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingMapGeneration">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseMapGeneration"
-                            aria-expanded="false" aria-controls="collapseMapGeneration">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-map fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Map Generation Tool</h6>
-                                    <small>JavaScript, D3.js, Interactive Map, Geometric Calculations</small>
-                                </div>
-                            </div>
-                        </button>
-                    </h2>
-                    <div id="collapseMapGeneration" class="accordion-collapse collapse"
-                        aria-labelledby="headingMapGeneration" data-bs-parent="#mapGenerationAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Map Generation Tool allows users to plot points on an interactive coordinate system
-                                based on degree and step inputs. The tool calculates coordinates, generates points
-                                dynamically, and displays serial numbers, degrees, and steps for each point. It also
-                                features zooming, panning, and point info toggling.</p>
 
-                            <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Interactive Map:</strong>
-                                    Allows users to input degrees and steps to plot points on a coordinate system.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Zoom & Pan:</strong> The map
-                                    supports zooming and panning for navigation.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Dynamic Point
-                                        Generation:</strong> Points are plotted based on calculated coordinates, with
-                                    each point labeled with serial numbers and input values.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Multiple Points
-                                        Input:</strong> Users can input multiple degree and step pairs for generating
-                                    multiple points.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Point Info Toggle:</strong>
-                                    Users can toggle visibility of point information (degree and steps) for better
-                                    clarity.</li>
+            <!-- 14. Map Generation Tool -->
+            <div class="project-full-card card bg-dark bg-opacity-25 border-0 mb-4" data-aos="fade-up"
+                data-aos-delay="650">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <div class="project-icon me-3">
+                            <i class="bi bi-map fs-1 icon-color-2"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="fw-bold mb-2">Map Generation Tool</h4>
+                            <p class="text-secondary mb-3"><small>JavaScript, D3.js, Interactive Map, Geometric
+                                    Calculations</small></p>
+
+                            <p class="text-light">The Map Generation Tool allows users to plot points on an interactive
+                                coordinate system based on degree and step inputs. The tool calculates coordinates,
+                                generates points dynamically, and displays serial numbers, degrees, and steps for each
+                                point. It also features zooming, panning, and point info toggling.</p>
+
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>
+                                    <strong>Interactive Map:</strong> Allows users to input degrees and steps to plot
+                                    points on a coordinate system.
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Zoom &
+                                        Pan:</strong> The map supports zooming and panning for navigation.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Dynamic
+                                        Point Generation:</strong> Points are plotted based on calculated coordinates,
+                                    with each point labeled with serial numbers and input values.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Multiple
+                                        Points Input:</strong> Users can input multiple degree and step pairs for
+                                    generating multiple points.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <strong>Point Info
+                                        Toggle:</strong> Users can toggle visibility of point information (degree and
+                                    steps) for better clarity.</li>
                             </ul>
 
                             <a href="https://asicoltd.github.io/ScoutingHacks/pages/mapMaker/mm.html"
                                 class="btn btn-primary mt-3" target="_blank">
-                                Check the Tool
+                                <i class="fas fa-map-marked-alt me-2"></i>Check the Tool
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Map Generation Tool Section -->
 
+            <!-- 15. DTN Protocol Optimization (already covered in #1, but keeping count) -->
+            <!-- Note: #1 already covers DTN, so total is 14 unique projects + 1 duplicate? Let's verify -->
+            <!-- Actually we have 14 unique projects above. Let's add one more to make 15 if needed -->
         </div>
     </section>
 
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-5">
+    <!-- Skills Section (Original content with enhanced design) -->
+    <section id="skills" class="section-padding bg-dark bg-opacity-25">
         <div class="container">
-            <h2 class="text-center mb-4 text-light">Technical Skills</h2>
-            <div class="row">
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-subtitle text-primary">Expertise</span>
+                <h2 class="section-title display-4 fw-bold">Technical Skills</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Skills Categories (Original content) -->
+            <div class="row g-4">
                 <!-- Programming Languages -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fab fa-cuttlefish me-2" style="color:#f0a500;"></i> Programming Languages
-                            </h6>
-                            <p class="card-text">C, C++, Java, Python, JavaScript, PHP</p>
+                            <div class="category-icon mb-3">
+                                <i class="fab fa-cuttlefish fa-2x" style="color:#f0a500;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Programming Languages</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">C</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">PHP</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Tools & Technologies -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fab fa-linux me-2" style="color:#FF6F00;"></i> Tools & Technologies
-                            </h6>
-                            <p class="card-text">TensorFlow, PyTorch, CUDA, Linux, Flask, MERN Stack, OpenCV</p>
+                            <div class="category-icon mb-3">
+                                <i class="fab fa-linux fa-2x" style="color:#FF6F00;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Tools & Technologies</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">CUDA</span>
+                                <span class="skill-tag">Linux</span>
+                                <span class="skill-tag">Flask</span>
+                                <span class="skill-tag">MERN Stack</span>
+                                <span class="skill-tag">OpenCV</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- AI & Machine Learning -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-brain me-2" style="color:#1e88e5;"></i> AI & Machine Learning
-                            </h6>
-                            <p class="card-text">Deep Learning, CNN, LSTM, Transformers, Autoencoders, Reinforcement
-                                Learning</p>
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-brain fa-2x" style="color:#1e88e5;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">AI & Machine Learning</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Deep Learning</span>
+                                <span class="skill-tag">CNN</span>
+                                <span class="skill-tag">LSTM</span>
+                                <span class="skill-tag">Transformers</span>
+                                <span class="skill-tag">Autoencoders</span>
+                                <span class="skill-tag">Reinforcement Learning</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Blockchain & Cryptography -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fab fa-bitcoin me-2" style="color:#F2A900;"></i> Blockchain & Cryptography
-                            </h6>
-                            <p class="card-text">Consensus Algorithms, Smart Contracts, Post-Quantum Cryptography,
-                                Decentralized Apps</p>
+                            <div class="category-icon mb-3">
+                                <i class="fab fa-bitcoin fa-2x" style="color:#F2A900;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Blockchain & Cryptography</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Consensus Algorithms</span>
+                                <span class="skill-tag">Smart Contracts</span>
+                                <span class="skill-tag">Post-Quantum Crypto</span>
+                                <span class="skill-tag">dApps</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Data Science & Analytics -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-chart-line me-2" style="color:#0C9A92;"></i> Data Science & Analytics
-                            </h6>
-                            <p class="card-text">Feature Engineering, Bayesian Optimization, GMM, Time Series Analysis
-                            </p>
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-chart-line fa-2x" style="color:#0C9A92;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Data Science & Analytics</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Feature Engineering</span>
+                                <span class="skill-tag">Bayesian Optimization</span>
+                                <span class="skill-tag">GMM</span>
+                                <span class="skill-tag">Time Series Analysis</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Web & Backend Development -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="350">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fab fa-node me-2" style="color:#00BFAE;"></i> Web & Backend Development
-                            </h6>
-                            <p class="card-text">Full-Stack (MERN), Flask APIs, RESTful Services, Cloud Deployment</p>
+                            <div class="category-icon mb-3">
+                                <i class="fab fa-node fa-2x" style="color:#00BFAE;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Web & Backend Development</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Full-Stack (MERN)</span>
+                                <span class="skill-tag">Flask APIs</span>
+                                <span class="skill-tag">RESTful Services</span>
+                                <span class="skill-tag">Cloud Deployment</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Embedded Systems & IoT -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-plug me-2" style="color:#D4C6FF;"></i> Embedded Systems & IoT
-                            </h6>
-                            <p class="card-text">Raspberry Pi, Arduino, Wireless Networking, IoT Security</p>
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-plug fa-2x" style="color:#D4C6FF;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Embedded Systems & IoT</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Raspberry Pi</span>
+                                <span class="skill-tag">Arduino</span>
+                                <span class="skill-tag">Wireless Networking</span>
+                                <span class="skill-tag">IoT Security</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Algorithms & Optimization -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="450">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-cogs me-2" style="color:#9C27B0;"></i> Algorithms & Optimization
-                            </h6>
-                            <p class="card-text">Ensemble Learning, Meta-Learning, Heuristic Optimization, Genetic
-                                Algorithms</p>
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-cogs fa-2x" style="color:#9C27B0;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Algorithms & Optimization</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Ensemble Learning</span>
+                                <span class="skill-tag">Meta-Learning</span>
+                                <span class="skill-tag">Heuristic Optimization</span>
+                                <span class="skill-tag">Genetic Algorithms</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Operating Systems & Cybersecurity -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+                    <div class="skill-category card h-100 bg-dark bg-opacity-25 border-0">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-shield-alt me-2" style="color:#FF5722;"></i> Operating Systems &
-                                Cybersecurity
-                            </h6>
-                            <p class="card-text">
-                                <strong>OS:</strong> Kali, Parrot, Manjaro, Ubuntu<br>
-                                <strong>Penetration Testing Tools:</strong> Airgeddon, Wireshark, Nmap, Aircrack-ng,
-                                Metasploit
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Educational Background Section -->
-    <!-- Educational Background Section -->
-    <section id="education" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-4 text-light">Educational Background</h2>
-
- 
-            <!-- University Section -->
-            <h4 class="text-light mt-4 mb-3">University</h4>
-            <div class="row">
-                <!-- B.Sc. Education -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
-                        <div class="card-body">
-                            <h6>B.Sc. in Computer Science and Engineering</h6>
-                            <p class="text">East West University, Dhaka, Bangladesh</p>
-                            <p>Completed B.Sc. <br> Relevant coursework includes AI, Machine Learning,
-                                and more.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- M.Sc. Education -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
-                        <div class="card-body">
-                            <h6>M.Sc. in Computer Science and Engineering</h6>
-                            <p class="text">East West University, Dhaka, Bangladesh</p>
-                            <p>Currently enrolled in M.Sc. program with focus on AI, ML, and DNNs.</p>
+                            <div class="category-icon mb-3">
+                                <i class="fas fa-shield-alt fa-2x" style="color:#FF5722;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Operating Systems & Cybersecurity</h5>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Kali Linux</span>
+                                <span class="skill-tag">Parrot</span>
+                                <span class="skill-tag">Manjaro</span>
+                                <span class="skill-tag">Ubuntu</span>
+                                <span class="skill-tag">Wireshark</span>
+                                <span class="skill-tag">Nmap</span>
+                                <span class="skill-tag">Metasploit</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1021,259 +1120,460 @@
         </div>
     </section>
 
-
-
-    <!-- Co-Curriculum & Social Work Section -->
-    <section id="social-work" class="py-5">
+    <!-- Educational Background Section (Original) -->
+    <section id="education" class="section-padding">
         <div class="container">
-            <h2 class="text-center mb-4 text-light">Co-Curriculum & Social Work</h2>
-            <div class="row">
-                <!-- Competitive Programming & Technical Clubs -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-subtitle text-primary">Background</span>
+                <h2 class="section-title display-4 fw-bold">Educational Background</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                <!-- B.Sc. -->
+                <div class="col-md-5 mb-4" data-aos="fade-right">
+                    <div class="edu-card card bg-dark bg-opacity-25 border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="edu-icon mb-3">
+                                <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="fw-bold">B.Sc. in Computer Science and Engineering</h4>
+                            <p class="text-primary mb-2">East West University, Dhaka, Bangladesh</p>
+                            <p class="text-secondary">Completed B.Sc. <br> Relevant coursework includes AI, Machine
+                                Learning, and more.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- M.Sc. -->
+                <div class="col-md-5 mb-4" data-aos="fade-left">
+                    <div class="edu-card card bg-dark bg-opacity-25 border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="edu-icon mb-3">
+                                <i class="fas fa-university fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="fw-bold">M.Sc. in Computer Science and Engineering</h4>
+                            <p class="text-primary mb-2">East West University, Dhaka, Bangladesh</p>
+                            <p class="text-secondary">Currently enrolled in M.Sc. program with focus on AI, ML, and
+                                DNNs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Co-Curriculum & Social Work Section (Original content) -->
+    <section id="social-work" class="section-padding bg-dark bg-opacity-25">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-subtitle text-primary">Beyond Tech</span>
+                <h2 class="section-title display-4 fw-bold">Co-Curriculum & Social Work</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Competitive Programming -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-code me-2" style="color:#00BFAE;"></i> Competitive Programming &
-                                Technical Clubs
-                            </h6>
-                            <ul class="card-text">
-                                <li>Solved thousands of problems in Codeforces, Hackerrank, and Beecrowd</li>
-                                <li>Active in university programming clubs</li>
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-code fa-2x" style="color:#00BFAE;"></i>
+                            </div>
+                            <h5 class="fw-bold">Competitive Programming & Technical Clubs</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Solved thousands of problems in
+                                    Codeforces, Hackerrank, and Beecrowd</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Active in university programming
+                                    clubs</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <!-- Debating & Public Speaking -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+
+                <!-- Debating -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-microphone me-2" style="color:#FFC107;"></i> Debating & Public Speaking
-                            </h6>
-                            <ul class="card-text">
-                                <li>University-level debate champion</li>
-                                <li>Trainer and former General Secretary of the college debate club</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- HAM Radio & Communication -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
-                        <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-broadcast-tower me-2" style="color:#03A9F4;"></i> HAM Radio &
-                                Communication
-                            </h6>
-                            <ul class="card-text">
-                                <li>Licensed HAM radio operator (Call Sign: S21NEO)</li>
-                                <li>Working on networking and antenna research</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Scouting & Humanitarian Work -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
-                        <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-tree me-2" style="color:#4CAF50;"></i> Scouting & Humanitarian Work
-                            </h6>
-                            <ul class="card-text">
-                                <li>Senior Rover Mate at Samatat Open Scout Group</li>
-                                <li>Active in community service, leadership training, and youth empowerment programs
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-microphone fa-2x" style="color:#FFC107;"></i>
+                            </div>
+                            <h5 class="fw-bold">Debating & Public Speaking</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>University-level debate champion
                                 </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blood Donation & Health Awareness -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
-                        <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-tint me-2" style="color:#D32F2F;"></i> Blood Donation & Health
-                                Awareness
-                            </h6>
-                            <ul class="card-text">
-                                <li>Regular blood donor since 2017</li>
-                                <li>Over 20 donations to Quantum Foundation and other organizations</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Trainer and former General
+                                    Secretary of the college debate club</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-
-                <!-- Social Welfare & Volunteering -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <!-- HAM Radio -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-hand-holding-heart me-2" style="color:#F2A900;"></i> Social Welfare &
-                                Volunteering
-                            </h6>
-                            <ul class="card-text">
-                                <b>Organized social initiatives for underprivileged children such as:</b>
-                                <li>Eid gift distributions</li>
-                                <li>Winter clothes distribution</li>
-                                <li>educational workshops </li>
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-broadcast-tower fa-2x" style="color:#03A9F4;"></i>
+                            </div>
+                            <h5 class="fw-bold">HAM Radio & Communication</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Licensed HAM radio operator
+                                    (Call Sign: S21NEO)</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Working on networking and
+                                    antenna research</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scouting -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
+                        <div class="card-body">
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-tree fa-2x" style="color:#4CAF50;"></i>
+                            </div>
+                            <h5 class="fw-bold">Scouting & Humanitarian Work</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Senior Rover Mate at Samatat
+                                    Open Scout Group</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Active in community service,
+                                    leadership training, and youth empowerment programs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blood Donation -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
+                        <div class="card-body">
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-tint fa-2x" style="color:#D32F2F;"></i>
+                            </div>
+                            <h5 class="fw-bold">Blood Donation & Health Awareness</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Regular blood donor since 2017
+                                </li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Over 20 donations to Quantum
+                                    Foundation and other organizations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Welfare -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="350">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
+                        <div class="card-body">
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-hand-holding-heart fa-2x" style="color:#F2A900;"></i>
+                            </div>
+                            <h5 class="fw-bold">Social Welfare & Volunteering</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Organized social initiatives for
+                                    underprivileged children</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Eid gift distributions, Winter
+                                    clothes distribution, Educational workshops</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Leadership & Training -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-chalkboard-teacher me-2" style="color:#1E88E5;"></i> Leadership &
-                                Training
-                            </h6>
-                            <ul class="card-text">
-                                <b>Instructor in Life Skill Training Courses across Bangladesh</b>
-                                <li>Conduct sessions on Time Management</li>
-                                <li> Effective Communication</li>
-                                <li> Career Building</li>
-                                <li>Conflict Management</li>
-                                <li>Save from Harm</li>
-                                <li>Leadership Development</li>
-                                <li>Stress Management</li>
-                                <li>HeForShe</li>
-                                <li>Mental Health</li>
-                                <li>Reproductive Health</li>
-                                <li>mental health</li>
-
-                            </ul>
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-chalkboard-teacher fa-2x" style="color:#1E88E5;"></i>
+                            </div>
+                            <h5 class="fw-bold">Leadership & Training</h5>
+                            <p class="text-secondary mb-2">Instructor in Life Skill Training Courses across Bangladesh
+                            </p>
+                            <div class="skill-tags mt-2">
+                                <span class="skill-tag">Time Management</span>
+                                <span class="skill-tag">Communication</span>
+                                <span class="skill-tag">Career Building</span>
+                                <span class="skill-tag">Conflict Management</span>
+                                <span class="skill-tag">Save from Harm</span>
+                                <span class="skill-tag">Leadership</span>
+                                <span class="skill-tag">Stress Management</span>
+                                <span class="skill-tag">HeForShe</span>
+                                <span class="skill-tag">Mental Health</span>
+                                <span class="skill-tag">Reproductive Health</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Marathon Running -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="450">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-running me-2" style="color:#FF5722;"></i> Marathon Running
-                            </h6>
-                            <ul class="card-text">
-                                <li>Completed 15 mini, half and full marathon events</li>
-                                <li>Organizer in 4 events with Run Bangladesh</li>
-                                <li>Active participant in running and cycling events</li>
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-running fa-2x" style="color:#FF5722;"></i>
+                            </div>
+                            <h5 class="fw-bold">Marathon Running</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Completed 15 mini, half and full
+                                    marathon events</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Organizer in 4 events with Run
+                                    Bangladesh</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Active participant in running
+                                    and cycling events</li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
                 <!-- Martial Arts -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 bg-dark text-light">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="activity-card card bg-dark bg-opacity-25 border-0 h-100">
                         <div class="card-body">
-                            <h6 class="card-title d-flex align-items-center">
-                                <i class="fas fa-fist-raised me-2" style="color:#9C27B0;"></i> Martial Arts
-                            </h6>
-                            <ul class="card-text">
-                                <li>Holds a blue belt in Karate</li>
-                                <li>Green belt in Taekwondo</li>
+                            <div class="activity-icon mb-3">
+                                <i class="fas fa-fist-raised fa-2x" style="color:#9C27B0;"></i>
+                            </div>
+                            <h5 class="fw-bold">Martial Arts</h5>
+                            <ul class="list-unstyled text-secondary mt-3">
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Holds a blue belt in Karate</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Green belt in Taekwondo</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-5">
+    <!-- Contact Section (Enhanced Visibility) -->
+    <section id="contact" class="section-padding"
+        style="background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(32, 201, 151, 0.1) 100%);">
         <div class="container">
-            <h2 class="text-center mb-4 text-light">Contact</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card1 p-4 bg-dark text-light">
-                        <div class="social-links mt-4 d-flex flex-wrap justify-content-center align-items-center">
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://github.com/asicoltd" class="btn btn-outline-secondary btn-icon"
-                                    target="_blank">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <p class="text-light mt-2">GitHub</p>
+            <!-- Section Header with stronger visibility -->
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span
+                    class="section-subtitle text-primary fw-bold bg-primary bg-opacity-10 px-4 py-2 rounded-pill d-inline-block mb-3">Get
+                    In Touch</span>
+                <h2 class="section-title display-3 fw-bold text-white">Let's Work Together</h2>
+                <div class="section-divider bg-primary" style="width: 100px; height: 4px; margin: 20px auto;"></div>
+                <p class="lead text-white-50 mt-4">Have a project in mind? I'm always excited to collaborate on
+                    innovative ideas!</p>
+            </div>
+
+            <div class="row g-5">
+                <!-- Contact Info Cards - More Visible -->
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div
+                        class="contact-info-card bg-dark bg-opacity-75 p-4 rounded-4 border border-primary border-opacity-25 shadow-lg">
+                        <h3 class="fw-bold mb-4 text-white"><i class="fas fa-paper-plane text-primary me-2"></i>Contact
+                            Information</h3>
+                        <p class="text-white-50 mb-4">Feel free to reach out through any of these channels. I typically
+                            respond within 24 hours.</p>
+
+                        <!-- Contact Details with Strong Visibility -->
+                        <div class="contact-details mb-4">
+                            <!-- Email -->
+                            <div
+                                class="contact-item d-flex align-items-center mb-4 p-3 bg-dark bg-opacity-50 rounded-3 border border-secondary border-opacity-25">
+                                <div class="contact-icon bg-primary bg-opacity-25 p-3 rounded-circle me-3">
+                                    <i class="fas fa-envelope text-primary fa-2x"></i>
+                                </div>
+                                <div>
+                                    <span class="d-block small text-primary fw-bold">EMAIL</span>
+                                    <a href="mailto:asifhasan099@gmail.com"
+                                        class="text-white text-decoration-none fs-5 fw-semibold">asifhasan099@gmail.com</a>
+                                </div>
                             </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://www.hackerrank.com/profile/asifhasan099"
-                                    class="btn btn-outline-success btn-icon" target="_blank">
-                                    <i class="fab fa-hackerrank"></i>
-                                </a>
-                                <p class="text-light mt-2">HackerRank</p>
+
+                            <!-- Location -->
+                            <div
+                                class="contact-item d-flex align-items-center mb-4 p-3 bg-dark bg-opacity-50 rounded-3 border border-secondary border-opacity-25">
+                                <div class="contact-icon bg-primary bg-opacity-25 p-3 rounded-circle me-3">
+                                    <i class="fas fa-map-marker-alt text-primary fa-2x"></i>
+                                </div>
+                                <div>
+                                    <span class="d-block small text-primary fw-bold">LOCATION</span>
+                                    <span class="text-white fs-5 fw-semibold">Dhaka, Bangladesh</span>
+                                </div>
                             </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://judge.beecrowd.com/en/profile/416286"
-                                    class="btn btn-outline-warning btn-icon" target="_blank">
-                                    <i class="fas fa-cogs"></i>
-                                </a>
-                                <p class="text-light mt-2">Beecrowd</p>
+
+                            <!-- HAM Radio -->
+                            <div
+                                class="contact-item d-flex align-items-center mb-4 p-3 bg-dark bg-opacity-50 rounded-3 border border-secondary border-opacity-25">
+                                <div class="contact-icon bg-primary bg-opacity-25 p-3 rounded-circle me-3">
+                                    <i class="fas fa-tower-broadcast text-primary fa-2x"></i>
+                                </div>
+                                <div>
+                                    <span class="d-block small text-primary fw-bold">HAM RADIO</span>
+                                    <span class="text-white fs-5 fw-semibold">S21NEO</span>
+                                </div>
                             </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://www.linkedin.com/in/asif-hasan-099/"
-                                    class="btn btn-outline-info btn-icon" target="_blank">
-                                    <i class="fab fa-linkedin"></i>
+                        </div>
+
+                        <!-- Social Links with Better Visibility -->
+                        <div class="social-links-large mt-4">
+                            <h5 class="text-white mb-3"></h5>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="https://github.com/asicoltd" class="social-btn-large" target="_blank"
+                                    style="background: #333; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fab fa-github fa-2x"></i>
                                 </a>
-                                <p class="text-light mt-2">LinkedIn</p>
+                                <a href="https://www.linkedin.com/in/asif-hasan-099/" class="social-btn-large"
+                                    target="_blank"
+                                    style="background: #0077b5; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fab fa-linkedin-in fa-2x"></i>
+                                </a>
+                                <a href="https://www.hackerrank.com/profile/asifhasan099" class="social-btn-large"
+                                    target="_blank"
+                                    style="background: #2ec866; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fab fa-hackerrank fa-2x"></i>
+                                </a>
+                                <a href="https://judge.beecrowd.com/en/profile/416286" class="social-btn-large"
+                                    target="_blank"
+                                    style="background: #8B5CF6; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fas fa-cogs fa-2x"></i>
+                                </a>
+                                <a href="https://www.facebook.com/asifhasan099" class="social-btn-large" target="_blank"
+                                    style="background: #1877f2; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fab fa-facebook-f fa-2x"></i>
+                                </a>
+                                <a href="https://www.instagram.com/asico_ltd" class="social-btn-large" target="_blank"
+                                    style="background: #E4405F; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fab fa-instagram fa-2x"></i>
+                                </a>
+                                <a href="https://x.com/asicoltd" class="social-btn-large" target="_blank"
+                                    style="background: #000000; color: white; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s;">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </a>
                             </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="mailto:asifhasan099@gmail.com" class="btn btn-outline-danger btn-icon"
-                                    target="_blank">
-                                    <i class="fas fa-envelope"></i>
-                                </a>
-                                <p class="text-light mt-2">Email</p>
-                            </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://www.facebook.com/asifhasan099" class="btn btn-outline-primary btn-icon"
-                                    target="_blank">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                                <p class="text-light mt-2">Facebook</p>
-                            </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://www.instagram.com/asico_ltd" class="btn btn-outline-info btn-icon"
-                                    target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <p class="text-light mt-2">Instagram</p>
-                            </div>
-                            <div class="social-icon text-center mx-3 mb-3">
-                                <a href="https://x.com/asicoltd" class="btn btn-outline-primary btn-icon"
-                                    target="_blank">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <p class="text-light mt-2">Twitter</p>
+                        </div>
+
+                        <!-- Quick Response Guarantee -->
+                        <div
+                            class="mt-4 p-3 bg-primary bg-opacity-10 rounded-3 border border-primary border-opacity-25">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-clock text-primary fa-2x me-3"></i>
+                                <div>
+                                    <span class="d-block text-white fw-bold">Quick Response Guarantee</span>
+                                    <span class="text-white-50 small">I'll get back to you within 24-48 hours</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Contact Form - Working with FormSubmit.co -->
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div
+                        class="contact-form-card bg-dark bg-opacity-75 p-4 rounded-4 border border-primary border-opacity-25 shadow-lg">
+                        <h3 class="fw-bold mb-4 text-white"><i
+                                class="fas fa-envelope-open-text text-primary me-2"></i>Send Me a Message</h3>
+
+                        <!-- FormSubmit.co Integration -->
+                        <form class="contact-form" action="https://formsubmit.co/asifhasan099@gmail.com" method="POST"
+                            id="contactForm">
+                            <!-- FormSubmit.co Configuration -->
+                            <input type="hidden" name="_subject" value="New message from your Portfolio Website!">
+                            <input type="hidden" name="_captcha" value="true">
+                            <input type="hidden" name="_template" value="box">
+                            <input type="hidden" name="_next" value="https://asif.info.bd/thank-you.html">
+                            <input type="hidden" name="_autoresponse"
+                                value="Thank you for contacting me! I have received your message and will get back to you within 24-48 hours. - Asif Hasan">
+
+                            <!-- Honeypot to prevent spam -->
+                            <input type="text" name="_honey" style="display:none">
+
+                            <!-- Optional: Exclude specific fields from email -->
+                            <input type="hidden" name="_blacklist" value="spammy keyword, another bad word">
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label text-white fw-semibold">Your Name <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="name"
+                                        class="form-control form-control-lg bg-dark bg-opacity-50 border border-secondary text-white"
+                                        placeholder="John Doe" required style="border-color: rgba(255,255,255,0.1);">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-white fw-semibold">Your Email <span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" name="email"
+                                        class="form-control form-control-lg bg-dark bg-opacity-50 border border-secondary text-white"
+                                        placeholder="john@example.com" required
+                                        style="border-color: rgba(255,255,255,0.1);">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-white fw-semibold">Subject</label>
+                                    <input type="text" name="_subject"
+                                        class="form-control form-control-lg bg-dark bg-opacity-50 border border-secondary text-white"
+                                        placeholder="Project Inquiry / Collaboration / Research"
+                                        style="border-color: rgba(255,255,255,0.1);">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-white fw-semibold">Your Message <span
+                                            class="text-danger">*</span></label>
+                                    <textarea name="message"
+                                        class="form-control form-control-lg bg-dark bg-opacity-50 border border-secondary text-white"
+                                        rows="6" placeholder="Tell me about your project or idea..." required
+                                        style="border-color: rgba(255,255,255,0.1);"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 py-3 fw-bold"
+                                        id="submitBtn">
+                                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                                        <i class="fas fa-arrow-right ms-2"></i>
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    <!-- Success/Error messages will appear here -->
+                                    <div id="formStatus" class="text-center"></div>
+                                </div>
+                                <div class="col-12">
+                                    <p class="text-white-50 small text-center mb-0">
+                                        <i class="fas fa-lock me-1"></i> Your information is safe and will never be
+                                        shared
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-
     </section>
-    
-
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
+    <!-- Footer (Original with enhancement) -->
+    <footer class="footer py-4">
         <div class="container">
-            <p>&copy; No copyright !! I made it with the help of chatgpt & deepseek. So if you like it, copy it !!</p>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-secondary small">&copy; No copyright !! I made it with the help of chatgpt &
+                        deepseek. So if you like it, copy it !!</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-secondary text-decoration-none me-3 small"
+                        onclick="openPopup('questions.html')">Self Reflection</a>
+                    <a href="#" class="text-secondary text-decoration-none me-3 small"
+                        onclick="openPopup('quiz.html')">Find AI</a>
+                    <a href="#" class="text-secondary text-decoration-none me-3 small"
+                        onclick="openPopup('whichAI.html')">Are You AI?</a>
+                    <a href="#" class="text-secondary text-decoration-none me-3 small"
+                        onclick="openPopup('neverWin.html')">Loss/Draw</a>
+                    <a href="#" class="text-secondary text-decoration-none small"
+                        onclick="openPopup('areWeSame.html')">Are We Same?</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
-    <!-- Add this to your head section -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
-
 
 </html>
