@@ -27,58 +27,63 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="70" tabindex="0">
     <!-- Navbar -->
-<!-- Main Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark1 fixed-top shadow">
-  <div class="container-fluid px-3">
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark1 fixed-top shadow">
+        <div class="container-fluid px-3">
 
-    <!-- Brand -->
-    <a class="navbar-brand fw-bold" href="#home">
-      Asico<span class="highlight-text engineer">L</span><span class="highlight-text developer">T</span><span class="highlight-text researcher">D</span>
-    </a>
+            <!-- Brand -->
+            <a class="navbar-brand fw-bold" href="#home">
+                Asico<span class="highlight-text engineer">L</span><span class="highlight-text developer">T</span><span
+                    class="highlight-text researcher">D</span>
+            </a>
 
-    <!-- Toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <!-- Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <!-- Collapsible Content -->
-    <div class="collapse navbar-collapse" id="mainNavbar">
+            <!-- Collapsible Content -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
 
-      <!-- Basic Links -->
-      <ul class="navbar-nav me-auto mb-3 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+                <!-- Basic Links -->
+                <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
 
-      <!-- Interactive Buttons -->
-      <div class="d-flex flex-column flex-lg-row gap-2">
-        <button class="btn btn-outline-danger btn-sm" onclick="openPopup('questions.html')">Self Reflection</button>
-        <button class="btn btn-outline-info btn-sm" onclick="openPopup('quiz.html')">Find AI</button>
-        <button class="btn btn-outline-success btn-sm" onclick="openPopup('whichAI.html')">Are You AI?</button>
-        <button class="btn btn-outline-warning btn-sm" onclick="openPopup('neverWin.html')">Loss / Draw</button>
-        <button class="btn btn-outline-info btn-sm" onclick="openPopup('areWeSame.html')">Are We Same?</button>
-      </div>
+                <!-- Interactive Buttons -->
+                <div class="d-flex flex-column flex-lg-row gap-2">
+                    <button class="btn btn-outline-danger btn-sm" onclick="openPopup('questions.html')">Self
+                        Reflection</button>
+                    <button class="btn btn-outline-info btn-sm" onclick="openPopup('quiz.html')">Find AI</button>
+                    <button class="btn btn-outline-success btn-sm" onclick="openPopup('whichAI.html')">Are You
+                        AI?</button>
+                    <button class="btn btn-outline-warning btn-sm" onclick="openPopup('neverWin.html')">Loss /
+                        Draw</button>
+                    <button class="btn btn-outline-info btn-sm" onclick="openPopup('areWeSame.html')">Are We
+                        Same?</button>
+                </div>
 
+            </div>
+        </div>
+    </nav>
+
+
+    <div id="popupOverlay" style="display:none;">
+        <div id="popupBox">
+            <span id="closePopup" onclick="closePopup()">×</span>
+            <iframe id="popupFrame" src="" frameborder="0"></iframe>
+        </div>
     </div>
-  </div>
-</nav>
 
 
-<div id="popupOverlay" style="display:none;">
-    <div id="popupBox">
-        <span id="closePopup" onclick="closePopup()">×</span>
-        <iframe id="popupFrame" src="" frameborder="0"></iframe>
+    <!-- Remove your existing bg-container div completely and replace with this -->
+    <div id="bg-canvas-container">
+        <canvas id="bg-canvas"></canvas>
     </div>
-</div>
-
-
-<!-- Remove your existing bg-container div completely and replace with this -->
-<div id="bg-canvas-container">
-    <canvas id="bg-canvas"></canvas>
-</div>
 
     <!-- Hero Section -->
     <header id="home" class="hero d-flex align-items-center justify-content-center"
@@ -167,7 +172,7 @@
                                 Mouth Disease (HFMD) in infants and children. The research leverages deep neural
                                 networks, specifically an ensemble learning approach, to enhance robustness and accuracy
                                 in HFMD identification.</p>
-                                <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25">Link</a>
+                            <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25">Link</a>
                         </div>
                     </div>
                 </div>
@@ -198,7 +203,7 @@
                                 often requiring expert analysis of endoscopic images. In this study, we aim to assist in
                                 the examination of gastrointestinal (GI) tract endoscopy images using advanced image
                                 classification techniques.</p>
-                                <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32">Link</a>
+                            <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32">Link</a>
                         </div>
                     </div>
                 </div>
@@ -228,7 +233,7 @@
                                 it is susceptible to various types of diseases that can lead to a substantial reduction
                                 in yield. Hence, early detection of these diseases is essential to avoid risk and ensure
                                 timely treatment.</p>
-                                <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13">Link</a>
+                            <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13">Link</a>
                         </div>
                     </div>
                 </div>
@@ -242,633 +247,360 @@
         <div class="container">
             <h2 class="text-center mb-4 text-light">Research Experience</h2>
 
-            <!-- The Opportunistic Network Environment (ONE) Simulator -->
-            <div class="accordion" id="researchExperienceAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2One" aria-expanded="false"
-                            aria-controls="collapse2One">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-broadcast fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">The Opportunistic Network Environment (ONE) Simulator</h6>
+            <div class="row g-4">
+                <!-- The Opportunistic Network Environment (ONE) Simulator -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-broadcast fs-3 me-3 icon-color-1"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">The Opportunistic Network Environment (ONE) Simulator
+                                    </h5>
                                     <small>Delay-Tolerant Networking, ONE Simulator, Java, Python</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2One" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#researchExperienceAccordion">
-                        <div class="accordion-body text-light">
-                            <p>This research delves into optimizing Delay-Tolerant Networking (DTN) protocols to enhance
-                                emergency communication systems in disrupted environments, particularly natural
-                                disasters. The ONE simulator was utilized to simulate realistic scenarios where
-                                connectivity is unreliable or unavailable, such as during floods, earthquakes, or
-                                wildfires, focusing on improving message delivery, reducing latency, and boosting
-                                throughput.</p>
-
+                            <p class="card-text">This research delves into optimizing Delay-Tolerant Networking (DTN)
+                                protocols to enhance emergency communication systems in disrupted environments,
+                                particularly natural disasters. The ONE simulator was utilized to simulate realistic
+                                scenarios where connectivity is unreliable or unavailable.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Analysis of Current DTN
-                                        Protocols:</strong> Evaluated DTN routing protocols such as Epidemic, Spray and
-                                    Wait, and PRoPHET, identifying their strengths and weaknesses in disaster scenarios.
+                                <li><i class="bi bi-check-circle text-success"></i> Analysis of Current DTN Protocols
                                 </li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Real-World Disaster
-                                        Simulations:</strong> Used the ONE simulator to replicate disaster environments
-                                    with limited bandwidth and high latency, ensuring accurate performance testing.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Optimized Routing
-                                        Protocols:</strong> Enhanced DTN protocols for better message delivery rates,
-                                    reduced delays, and efficient resource usage under constrained conditions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Mobile Application
-                                        Development:</strong> Designed a mobile app integrating DTN protocols for
-                                    real-time disaster communication, ensuring message delivery even with network
-                                    failures.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Real-World Disaster Simulations</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Optimized Routing Protocols</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Mobile Application Development</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion" id="newsRecommendationAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Two" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-newspaper fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">AI-Driven News Recommendation System</h6>
-                                    <small>Neural Collaborative Filtering, PyTorch, Python, MIND: Microsoft News
-                                        Recommendation Dataset</small>
+
+                <!-- AI-Driven News Recommendation System -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-newspaper fs-3 me-3 icon-color-2"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">AI-Driven News Recommendation System</h5>
+                                    <small>Neural Collaborative Filtering, PyTorch, Python, MIND Dataset</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Two" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#newsRecommendationAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>Developed a personalized news recommendation system leveraging Neural Collaborative
-                                Filtering (NCF) to combine content-based and collaborative filtering techniques. The
-                                system was designed to handle large-scale datasets and generate precise, real-time
-                                recommendations, enhancing user engagement through tailored news suggestions.</p>
-
+                            <p class="card-text">Developed a personalized news recommendation system leveraging Neural
+                                Collaborative Filtering (NCF) to combine content-based and collaborative filtering
+                                techniques for large-scale datasets.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Implemented Neural
-                                        Collaborative Filtering (NCF):</strong> Developed an NCF model for user-specific
-                                    recommendations by learning interactions between users and news items.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Hybrid Recommendation
-                                        Approach:</strong> Combined content-based and collaborative filtering to improve
-                                    recommendation accuracy using both user and content data.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Model Optimization:</strong>
-                                    Optimized training with model checkpointing techniques for continuous training and
-                                    automatic recovery across large datasets.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Performance
-                                        Evaluation:</strong> Evaluated the system using precision, recall, F1-score, and
-                                    AUC to ensure it met user satisfaction and accuracy requirements.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Implemented Neural Collaborative
+                                    Filtering (NCF)</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Hybrid Recommendation Approach</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Model Optimization with
+                                    Checkpointing</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Performance Evaluation Metrics</li>
                             </ul>
-                            <a href="https://github.com/asicoltd/EWU_MIND" class="btn btn-primary mt-3" target="_blank">
-                                Check the Project
-                            </a>
+                            <a href="https://github.com/asicoltd/EWU_MIND" class="btn btn-primary mt-2"
+                                target="_blank">Check the Project</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="chessBotAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Three"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            <div class="d-flex align-items-center">
-                                <i class="fa-solid fa-chess fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">AI-Based Chess Bot</h6>
-                                    <small>Python, Q-learning, Deep Q-Networks (DQN), Monte Carlo Tree
-                                        Search (MCTS)</small>
+
+                <!-- AI-Based Chess Bot -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fa-solid fa-chess fs-3 me-3 icon-color-3"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">AI-Based Chess Bot</h5>
+                                    <small>Python, Q-learning, Deep Q-Networks (DQN), Monte Carlo Tree Search
+                                        (MCTS)</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Three" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#chessBotAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>Developed an AI-powered chess bot that utilizes reinforcement learning techniques such as
-                                Q-learning and Deep Q-Networks (DQN) to learn and improve its gameplay. The bot also
-                                incorporates Monte Carlo Tree Search (MCTS) to evaluate and select optimal moves. It
-                                continuously adapts to opponents, making it highly competitive on online chess
-                                platforms.</p>
-
+                            <p class="card-text">Developed an AI-powered chess bot that utilizes reinforcement learning
+                                techniques such as Q-learning and Deep Q-Networks (DQN) to learn and improve its
+                                gameplay.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Reinforcement Learning
-                                        Implementation:</strong> Developed a chess bot using Q-learning and Deep
-                                    Q-Networks (DQN) for strategy improvement.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Monte Carlo Tree Search
-                                        (MCTS):</strong> Implemented MCTS for advanced move evaluation, allowing the bot
-                                    to plan ahead and make strategic decisions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Competitive
-                                        Performance:</strong> The bot consistently outperforms less-experienced players
-                                    in simulated and real online matches.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>User Interface:</strong>
-                                    Developed an intuitive interface enabling players to challenge the bot at different
-                                    difficulty levels.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Reinforcement Learning
+                                    Implementation</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Monte Carlo Tree Search (MCTS)</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Competitive Performance</li>
+                                <li><i class="bi bi-check-circle text-success"></i> User Interface with Difficulty
+                                    Levels</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="asicoinAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingFour">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Four"
-                            aria-expanded="false" aria-controls="collapseFour">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-currency-bitcoin fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">ASICoin – Blockchain-Based Cryptocurrency</h6>
+
+                <!-- ASICoin – Blockchain-Based Cryptocurrency -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-currency-bitcoin fs-3 me-3 icon-color-1"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">ASICoin – Blockchain-Based Cryptocurrency</h5>
                                     <small>Blockchain, AI, Post-Quantum Cryptography</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Four" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                        data-bs-parent="#asicoinAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>ASICoin is a blockchain-based cryptocurrency project still under development. The project
-                                aims to integrate AI-driven fraud detection and post-quantum cryptographic security to
-                                ensure the future-proof nature of the network. Additionally, dApps for mobile banking,
-                                file transfers, and educational record management are in the planning stages.</p>
-
+                            <p class="card-text">ASICoin is a blockchain-based cryptocurrency project aiming to
+                                integrate AI-driven fraud detection and post-quantum cryptographic security for
+                                future-proof network protection.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>AI-Enhanced Fraud
-                                        Detection:</strong> Developing machine learning-based systems for monitoring
-                                    transactions and detecting anomalies.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Post-Quantum Cryptography
-                                        Research:</strong> Researching lattice-based encryption algorithms to prepare
-                                    for quantum computing risks.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Decentralized Applications
-                                        (dApps):</strong> Implementing dApps for secure mobile banking, file transfers,
-                                    and educational record management.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Layer 2 Solutions:</strong>
-                                    Exploring integration to improve scalability and transaction throughput for
-                                    high-speed transactions.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> AI-Enhanced Fraud Detection</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Post-Quantum Cryptography Research
+                                </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Decentralized Applications (dApps)
+                                </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Layer 2 Solutions Integration</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="inventoryAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingFive">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Five"
-                            aria-expanded="false" aria-controls="collapseFive">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-house-door fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Inventory Management Software for Medicine Shop</h6>
+
+                <!-- Inventory Management Software for Medicine Shop -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-house-door fs-3 me-3 icon-color-2"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Inventory Management Software for Medicine Shop</h5>
                                     <small>PHP, MySQL Database</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Five" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                        data-bs-parent="#inventoryAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>This Inventory Management Software for Medicine Shop is designed to streamline the
-                                day-to-day operations of managing medicine stock, processing sales, and optimizing
-                                inventory levels. The system provides real-time data insights, automated purchase
-                                recommendations, and an intuitive user interface to facilitate efficient management of
-                                products and sales activities.</p>
-
+                            <p class="card-text">Streamlines day-to-day operations of managing medicine stock,
+                                processing sales, and optimizing inventory levels with real-time data insights.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Real-Time Stock
-                                        Updates:</strong> Automatically updates stock and sales data.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Sales Tracking:</strong>
-                                    Generates reports on sales, profit margins, and top sellers.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Automated Reorder
-                                        Alerts:</strong> Notifies when stock levels fall below thresholds.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Expiry Date
-                                        Tracking:</strong> Alerts when products near expiration.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Real-Time Stock Updates</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Sales Tracking & Reporting</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Automated Reorder Alerts</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Expiry Date Tracking</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="sudokuAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingSix">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Six" aria-expanded="false"
-                            aria-controls="collapseSix">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-puzzle fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Sudoku Solver</h6>
+
+                <!-- Sudoku Solver -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-puzzle fs-3 me-3 icon-color-3"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Sudoku Solver</h5>
                                     <small>C, Backtracking, Constraint Propagation</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Six" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                        data-bs-parent="#sudokuAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>An efficient Sudoku solver leveraging backtracking, recursion, and constraint propagation
-                                to find solutions for 9x9 grids. Optimized for speed and accuracy, ensuring compliance
-                                with Sudoku rules while handling even the most challenging puzzles.</p>
-
+                            <p class="card-text">An efficient Sudoku solver leveraging backtracking, recursion, and
+                                constraint propagation to find solutions for 9x9 grids.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>High Accuracy:</strong>
-                                    Solves 100% of valid Sudoku puzzles with systematic elimination.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Optimized Speed:</strong>
-                                    Uses constraint propagation and backtracking to reduce search space.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Advanced
-                                        Validation:</strong> Detects unsolvable puzzles before solving.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Handles Extreme
-                                        Cases:</strong> Solves puzzles with minimal clues, including the hardest ones.
+                                <li><i class="bi bi-check-circle text-success"></i> High Accuracy (100% valid puzzles)
                                 </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Optimized Speed with Constraint
+                                    Propagation</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Advanced Validation System</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Handles Extreme Cases</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="tradingBotAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingSeven">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Seven"
-                            aria-expanded="false" aria-controls="collapseSeven">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-currency-bitcoin fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Candlestick Detection Trading Bot</h6>
-                                    <small>Python, LSTM, Ichimoku Cloud, Bollinger Bands, Deep
-                                        Q-Learning</small>
+
+                <!-- Candlestick Detection Trading Bot -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-currency-bitcoin fs-3 me-3 icon-color-1"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Candlestick Detection Trading Bot</h5>
+                                    <small>Python, LSTM, Ichimoku Cloud, Bollinger Bands, Deep Q-Learning</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Seven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                        data-bs-parent="#tradingBotAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>A cutting-edge AI-driven trading bot designed for real-time market analysis and
-                                decision-making. This bot leverages deep learning techniques, such as LSTM (Long
-                                Short-Term Memory) networks, to predict future price movements based on historical data.
-                                Technical indicators like Ichimoku Cloud and Bollinger Bands are integrated to enhance
-                                the bot’s ability to perform technical analysis and identify trends. Additionally, Deep
-                                Q-Learning is implemented to allow the bot to adapt and refine its trading strategies
-                                autonomously by interacting with the market environment.</p>
-
+                            <p class="card-text">AI-driven trading bot for real-time market analysis using deep
+                                learning, technical indicators, and reinforcement learning for autonomous strategy
+                                refinement.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>LSTM for Time-Series
-                                        Forecasting:</strong> Accurately predicts price movements.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Ichimoku Cloud
-                                        Analysis:</strong> Identifies market trends and support/resistance levels.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Deep Q-Learning
-                                        Integration:</strong> Enables intelligent decision-making for buy/hold/sell
-                                    actions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Backtesting
-                                        Strategies:</strong> Validates the bot’s performance across different market
-                                    conditions.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> LSTM for Time-Series Forecasting
+                                </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Ichimoku Cloud Analysis</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Deep Q-Learning Integration</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Backtesting Strategies</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="sentimentAnalysisAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingEight">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Eight"
-                            aria-expanded="false" aria-controls="collapseEight">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-bar-chart-line fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Sentiment Analysis for Cryptocurrency Price Prediction</h6>
-                                    <small>Python, Natural Language Processing, TensorFlow,
-                                        Keras</small>
+
+                <!-- Sentiment Analysis for Cryptocurrency Price Prediction -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-bar-chart-line fs-3 me-3 icon-color-2"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Sentiment Analysis for Cryptocurrency Price Prediction
+                                    </h5>
+                                    <small>Python, NLP, TensorFlow, Keras</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Eight" class="accordion-collapse collapse" aria-labelledby="headingEight"
-                        data-bs-parent="#sentimentAnalysisAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>Developed a sentiment analysis module to enhance cryptocurrency price prediction models
-                                by analyzing real-time news articles, social media posts, and public sentiment.
-                                Integrated sentiment scores with LSTM-based deep learning models to forecast price
-                                movements of Ethereum (ETH) based on historical Bitcoin (BTC) data.</p>
-
+                            <p class="card-text">Sentiment analysis module enhancing cryptocurrency price prediction by
+                                analyzing real-time news and social media sentiment integrated with LSTM models.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Sentiment Analysis on
-                                        Cryptocurrency News:</strong> Applied NLP techniques like BERT and VADER to
-                                    analyze crypto-related news.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Data Pipeline
-                                        Development:</strong> Built a pipeline to preprocess text data and extract
-                                    sentiment scores and keywords.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>LSTM Model for Temporal
-                                        Dependencies:</strong> Used LSTM models with sentiment-adjusted features for
-                                    price prediction.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Backtesting
-                                        Strategies:</strong> Implemented backtesting to fine-tune model parameters and
-                                    optimize performance.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Sentiment Analysis on Crypto News
+                                </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Data Pipeline Development</li>
+                                <li><i class="bi bi-check-circle text-success"></i> LSTM Model with Sentiment Features
+                                </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Backtesting Strategies</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="ethPricePredictionAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingNine">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Nine"
-                            aria-expanded="false" aria-controls="collapseNine">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-pie-chart fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Ethereum Price Prediction Using LSTM</h6>
-                                    <small>Python, Pytorch, LSTM, Technical Indicators</small>
+
+                <!-- Ethereum Price Prediction Using LSTM -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-pie-chart fs-3 me-3 icon-color-3"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Ethereum Price Prediction Using LSTM</h5>
+                                    <small>Python, PyTorch, LSTM, Technical Indicators</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Nine" class="accordion-collapse collapse" aria-labelledby="headingNine"
-                        data-bs-parent="#ethPricePredictionAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>This project uses Long Short-Term Memory (LSTM) networks to predict Ethereum (ETH) price
-                                trends by analyzing historical Bitcoin (BTC) data. It incorporates various technical
-                                indicators, including moving averages, Relative Strength Index (RSI), and Moving Average
-                                Convergence Divergence (MACD), to improve forecasting accuracy. Additionally, sentiment
-                                analysis is used to account for the impact of market news on price movements.</p>
-
+                            <p class="card-text">LSTM networks predict Ethereum price trends by analyzing historical
+                                Bitcoin data with technical indicators and sentiment analysis integration.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>LSTM-Based Deep Learning
-                                        Model:</strong> Developed an LSTM model to predict Ethereum’s price based on
-                                    Bitcoin data.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Integration of Technical
-                                        Indicators:</strong> Enhanced prediction accuracy with indicators like moving
-                                    averages, RSI, and MACD.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Model Optimization:</strong>
-                                    Fine-tuned LSTM model using TensorFlow for better prediction performance.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Backtesting System:</strong>
-                                    Validated model performance using historical data for live trading simulations.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> LSTM-Based Deep Learning Model</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Integration of Technical Indicators
+                                </li>
+                                <li><i class="bi bi-check-circle text-success"></i> Model Optimization</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Backtesting System</li>
                             </ul>
                             <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
-                                class="btn btn-primary mt-3" target="_blank">
-                                Check the Tool
-                            </a>
+                                class="btn btn-primary mt-2" target="_blank">Check the Tool</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="employeeManagementAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTen">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Ten" aria-expanded="false"
-                            aria-controls="collapseTen">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-person-circle fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Employee Management System</h6>
+
+                <!-- Employee Management System -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-person-circle fs-3 me-3 icon-color-1"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Employee Management System</h5>
                                     <small>Java, Swing</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Ten" class="accordion-collapse collapse" aria-labelledby="headingTen"
-                        data-bs-parent="#employeeManagementAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Employee Management System is a comprehensive solution for managing employee data,
-                                payroll, attendance, and performance. It provides an easy-to-use interface for
-                                administrators to manage employee information, track attendance, and generate payroll
-                                reports, while ensuring data security and scalability.</p>
-
+                            <p class="card-text">Comprehensive solution for managing employee data, payroll, attendance,
+                                and performance with an easy-to-use interface.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Employee Data
-                                        Management:</strong> System for managing personal information, job roles, and
-                                    contact details.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Attendance
-                                        Tracking:</strong> Automated system for clocking in/out and recording working
-                                    hours.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Payroll Generation:</strong>
-                                    Automated payroll calculation based on attendance and performance metrics.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Real-Time
-                                        Reporting:</strong> Real-time reports on attendance, salary, and performance for
-                                    HR managers.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Employee Data Management</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Attendance Tracking</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Payroll Generation</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Real-Time Reporting</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="lendingLibraryAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingEleven">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Eleven"
-                            aria-expanded="false" aria-controls="collapseEleven">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-book fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Lending Library Management System</h6>
+
+                <!-- Lending Library Management System -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-book fs-3 me-3 icon-color-2"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Lending Library Management System</h5>
                                     <small>Java, Swing</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Eleven" class="accordion-collapse collapse" aria-labelledby="headingEleven"
-                        data-bs-parent="#lendingLibraryAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Lending Library Management System is a software solution for managing books, patrons,
-                                and lending transactions within a library. It provides features for checking out and
-                                returning books, tracking due dates, managing inventory, and generating reports on
-                                library activity.</p>
-
+                            <p class="card-text">Software solution for managing books, patrons, and lending transactions
+                                with features for checkouts, returns, and inventory tracking.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Book Inventory
-                                        Management:</strong> System for managing book records including title, author,
-                                    and availability.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Patron Management:</strong>
-                                    Module for managing patrons, tracking borrowed books, and updating personal info.
-                                </li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Search & Filtering:</strong>
-                                    Function for users to find books by title, author, genre, or availability.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Due Date Tracking:</strong>
-                                    Automatic tracking and notifications for overdue books and fines.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Book Inventory Management</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Patron Management</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Search & Filtering</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Due Date Tracking</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Project Details -->
-            <div class="accordion" id="rideSharingAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingTwelve">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse2Twelve"
-                            aria-expanded="false" aria-controls="collapseTwelve">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-car-front fs-5 me-3 icon-color-3"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Ride Sharing Simulation System</h6>
+
+                <!-- Ride Sharing Simulation System -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-car-front fs-3 me-3 icon-color-3"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Ride Sharing Simulation System</h5>
                                     <small>C, C++, Simulation, Optimization Algorithms</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapse2Twelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve"
-                        data-bs-parent="#rideSharingAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Ride Sharing Simulation System aims to simulate and optimize the operation of a
-                                ride-sharing network. The system is designed to model real-world factors such as traffic
-                                conditions, vehicle availability, user demand, and route optimization to improve the
-                                efficiency and cost-effectiveness of ride-sharing services.</p>
-
+                            <p class="card-text">Simulates and optimizes ride-sharing network operations modeling
+                                traffic conditions, vehicle availability, and user demand.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Demand & Supply
-                                        Modeling:</strong> Simulated ride requests and vehicle availability.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Dynamic Pricing:</strong>
-                                    Adjusted fares based on demand and traffic conditions.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Vehicle Assignment
-                                        Algorithm:</strong> Efficient vehicle-rider matching.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Simulation Engine:</strong>
-                                    Tested scenarios using Python and SimPy.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Demand & Supply Modeling</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Dynamic Pricing</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Vehicle Assignment Algorithm</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Simulation Engine</li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Ride Sharing Simulation System Section -->
-            <!-- Project Details -->
-            <div class="accordion" id="caesarCipherAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingCipher">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseCipher"
-                            aria-expanded="false" aria-controls="collapseCipher">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-shield-lock fs-5 me-3 icon-color-1"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Caesar Cipher Decoding Tool For Scouts</h6>
+
+                <!-- Caesar Cipher Decoding Tool For Scouts -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-shield-lock fs-3 me-3 icon-color-1"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Caesar Cipher Decoding Tool For Scouts</h5>
                                     <small>JavaScript, Caesar Cipher, Word Validation, Cryptography</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapseCipher" class="accordion-collapse collapse" aria-labelledby="headingCipher"
-                        data-bs-parent="#caesarCipherAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Caesar Cipher Decoding Tool is a web-based application that attempts to decode a
-                                given sentence by applying various Caesar cipher shifts (from 0 to 25) and also includes
-                                a reverse string decoding method. It checks the decoded sentences for valid words from a
-                                predefined word list and highlights those words.</p>
-
+                            <p class="card-text">Web-based application that decodes sentences using Caesar cipher shifts
+                                and reverse string decoding with word validation highlighting.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Caesar Cipher
-                                        Decoding:</strong> Tries to decode the sentence with all possible Caesar shifts
-                                    and displays the results.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Reverse String
-                                        Decoding:</strong> Checks if reversing the input sentence produces any valid
-                                    words.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Word Validation:</strong>
-                                    Highlights valid words in each decoded sentence using a predefined word list.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Interactive
-                                        Interface:</strong> Displays results dynamically and provides the number of
-                                    valid words in each decoded sentence.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Caesar Cipher Decoding</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Reverse String Decoding</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Word Validation</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Interactive Interface</li>
                             </ul>
-
                             <a href="https://asicoltd.github.io/ScoutingHacks/pages/code&cipher/cc.html"
-                                class="btn btn-primary mt-3" target="_blank">
-                                Try It
-                            </a>
+                                class="btn btn-primary mt-2" target="_blank">Try It</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Caesar Cipher Decoding Tool Section -->
-            <!-- Project Details -->
-            <div class="accordion" id="mapGenerationAccordion">
-                <div class="accordion-item bg-dark text-light border-0 shadow-lg rounded-3 mb-3">
-                    <h2 class="accordion-header" id="headingMapGeneration">
-                        <button
-                            class="accordion-button collapsed bg-dark text-light d-flex justify-content-between align-items-center text-start"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseMapGeneration"
-                            aria-expanded="false" aria-controls="collapseMapGeneration">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-map fs-5 me-3 icon-color-2"></i>
-                                <div class="text-start">
-                                    <h6 class="mb-0 fs-4">Map Generation Tool</h6>
+
+                <!-- Map Generation Tool -->
+                <div class="col-md-6">
+                    <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-map fs-3 me-3 icon-color-2"></i>
+                                <div>
+                                    <h5 class="card-title mb-0">Map Generation Tool</h5>
                                     <small>JavaScript, D3.js, Interactive Map, Geometric Calculations</small>
                                 </div>
                             </div>
-                        </button>
-                    </h2>
-                    <div id="collapseMapGeneration" class="accordion-collapse collapse"
-                        aria-labelledby="headingMapGeneration" data-bs-parent="#mapGenerationAccordion">
-                        <div class="accordion-body bg-dark text-light">
-                            <p>The Map Generation Tool allows users to plot points on an interactive coordinate system
-                                based on degree and step inputs. The tool calculates coordinates, generates points
-                                dynamically, and displays serial numbers, degrees, and steps for each point. It also
-                                features zooming, panning, and point info toggling.</p>
-
+                            <p class="card-text">Interactive tool for plotting points on a coordinate system based on
+                                degree and step inputs with zoom, pan, and point info toggling.</p>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Interactive Map:</strong>
-                                    Allows users to input degrees and steps to plot points on a coordinate system.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Zoom & Pan:</strong> The map
-                                    supports zooming and panning for navigation.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Dynamic Point
-                                        Generation:</strong> Points are plotted based on calculated coordinates, with
-                                    each point labeled with serial numbers and input values.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Multiple Points
-                                        Input:</strong> Users can input multiple degree and step pairs for generating
-                                    multiple points.</li>
-                                <li><i class="bi bi-check-circle text-success"></i> <strong>Point Info Toggle:</strong>
-                                    Users can toggle visibility of point information (degree and steps) for better
-                                    clarity.</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Interactive Map</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Zoom & Pan Support</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Dynamic Point Generation</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Multiple Points Input</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Point Info Toggle</li>
                             </ul>
-
                             <a href="https://asicoltd.github.io/ScoutingHacks/pages/mapMaker/mm.html"
-                                class="btn btn-primary mt-3" target="_blank">
-                                Check the Tool
-                            </a>
+                                class="btn btn-primary mt-2" target="_blank">Check the Tool</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Map Generation Tool Section -->
-
         </div>
     </section>
 
@@ -995,7 +727,7 @@
         <div class="container">
             <h2 class="text-center mb-4 text-light">Educational Background</h2>
 
- 
+
             <!-- University Section -->
             <h4 class="text-light mt-4 mb-3">University</h4>
             <div class="row">
@@ -1260,7 +992,7 @@
         </div>
 
     </section>
-    
+
 
 
     <!-- Footer -->
@@ -1275,7 +1007,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
     <!-- Add this to your head section -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
 
 
