@@ -40,12 +40,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
 
+    <!-- Bootstrap 5 CSS (minified) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome (only one icon library now) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Local styles (ensure it's minified in production) -->
+    <link rel="stylesheet" href="styles.css">
 
-    <!-- Structured Data (VERY IMPORTANT) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -68,7 +70,6 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="70" tabindex="0">
     <!-- Navbar -->
-    <!-- Main Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark1 fixed-top shadow">
         <div class="container-fluid px-3">
 
@@ -112,7 +113,6 @@
         </div>
     </nav>
 
-
     <div id="popupOverlay" style="display:none;">
         <div id="popupBox">
             <span id="closePopup" onclick="closePopup()">×</span>
@@ -120,8 +120,7 @@
         </div>
     </div>
 
-
-    <!-- Remove your existing bg-container div completely and replace with this -->
+    <!-- Three.js background – now loads asynchronously -->
     <div id="bg-canvas-container">
         <canvas id="bg-canvas"></canvas>
     </div>
@@ -143,18 +142,15 @@
         </div>
     </header>
 
-
-
-
     <!-- About Section -->
     <section id="about" class="py-5">
         <div class="container">
             <div class="row align-items-center">
-                <!-- Profile Image Section -->
+                <!-- Profile Image Section with lazy loading -->
                 <div class="col-lg-4 col-md-5 text-center mb-5 mb-md-0">
                     <div class="profile-container position-relative">
                         <img src="profile.jpg" alt="Asif Hasan" class="img-fluid rounded-circle profile-image shadow-lg"
-                            style="border: 3px solid #20c997; max-width: 100%; height: auto;">
+                            style="border: 3px solid #20c997; max-width: 100%; height: auto;" loading="lazy">
                         <div class="decoration-box"></div>
                     </div>
                 </div>
@@ -195,7 +191,7 @@
                             type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
                             aria-controls="collapseOne">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-person-raised-hand fs-5 me-3 icon-color-1"></i>
+                                <i class="fas fa-user-md fs-5 me-3 icon-color-1"></i>
                                 <div class="text-start">
                                     <h6 class="mb-0 fs-4">Ensemble Deep Learning for Enhanced Detection and
                                         Classification of Hand, Foot, and Mouth Disease</h6>
@@ -226,7 +222,7 @@
                             type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                             aria-controls="collapseTwo">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-lungs fs-5 me-3 icon-color-2"></i>
+                                <i class="fas fa-lungs fs-5 me-3 icon-color-2"></i>
                                 <div class="text-start">
                                     <h6 class="mb-0 fs-4">Classification of Peptic Ulcer and Digestive Tract Disorders
                                         Using Endoscopic Images</h6>
@@ -257,7 +253,7 @@
                             type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                             aria-expanded="false" aria-controls="collapseThree">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-flower2 fs-5 me-3 icon-color-3"></i>
+                                <i class="fas fa-flower fs-5 me-3 icon-color-3"></i>
                                 <div class="text-start">
                                     <h6 class="mb-0 fs-4">Rose Disease Detection Using YOLO: A Deep Learning-Based
                                         Approach</h6>
@@ -294,34 +290,34 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="false" aria-controls="collapseOne">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp1"
+                                aria-expanded="false" aria-controls="collapseExp1">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-broadcast fs-3 me-3 icon-color-1"></i>
+                                        <i class="fas fa-wifi fs-3 me-3 icon-color-1"></i>
                                         <div>
                                             <h5 class="card-title mb-0">The Opportunistic Network Environment (ONE)
                                                 Simulator</h5>
                                             <small>Delay-Tolerant Networking, ONE Simulator, Java, Python</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseOne" class="collapse">
+                        <div id="collapseExp1" class="collapse">
                             <div class="card-body">
                                 <p>This research delves into optimizing Delay-Tolerant Networking (DTN) protocols to
                                     enhance emergency communication systems in disrupted environments, particularly
                                     natural disasters. The ONE simulator was utilized to simulate realistic scenarios
                                     where connectivity is unreliable or unavailable.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Analysis of Current DTN
+                                    <li><i class="fas fa-check-circle text-success"></i> Analysis of Current DTN
                                         Protocols</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Real-World Disaster Simulations
+                                    <li><i class="fas fa-check-circle text-success"></i> Real-World Disaster Simulations
                                     </li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Optimized Routing Protocols</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Mobile Application Development
+                                    <li><i class="fas fa-check-circle text-success"></i> Optimized Routing Protocols</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Mobile Application Development
                                     </li>
                                 </ul>
                             </div>
@@ -334,33 +330,33 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                aria-expanded="false" aria-controls="collapseTwo">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp2"
+                                aria-expanded="false" aria-controls="collapseExp2">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-newspaper fs-3 me-3 icon-color-2"></i>
+                                        <i class="fas fa-newspaper fs-3 me-3 icon-color-2"></i>
                                         <div>
                                             <h5 class="card-title mb-0">AI-Driven News Recommendation System</h5>
                                             <small>Neural Collaborative Filtering, PyTorch, Python, MIND Dataset</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseTwo" class="collapse">
+                        <div id="collapseExp2" class="collapse">
                             <div class="card-body">
                                 <p>Developed a personalized news recommendation system leveraging Neural Collaborative
                                     Filtering (NCF) to combine content-based and collaborative filtering techniques for
                                     large-scale datasets.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Implemented Neural Collaborative
+                                    <li><i class="fas fa-check-circle text-success"></i> Implemented Neural Collaborative
                                         Filtering (NCF)</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Hybrid Recommendation Approach
+                                    <li><i class="fas fa-check-circle text-success"></i> Hybrid Recommendation Approach
                                     </li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Model Optimization with
+                                    <li><i class="fas fa-check-circle text-success"></i> Model Optimization with
                                         Checkpointing</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Performance Evaluation Metrics
+                                    <li><i class="fas fa-check-circle text-success"></i> Performance Evaluation Metrics
                                     </li>
                                 </ul>
                                 <a href="https://github.com/asicoltd/EWU_MIND" class="btn btn-primary mt-2"
@@ -375,32 +371,32 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp3"
+                                aria-expanded="false" aria-controls="collapseExp3">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="fa-solid fa-chess fs-3 me-3 icon-color-3"></i>
+                                        <i class="fas fa-chess fs-3 me-3 icon-color-3"></i>
                                         <div>
                                             <h5 class="card-title mb-0">AI-Based Chess Bot</h5>
                                             <small>Python, Q-learning, Deep Q-Networks (DQN), Monte Carlo Tree Search
                                                 (MCTS)</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseThree" class="collapse">
+                        <div id="collapseExp3" class="collapse">
                             <div class="card-body">
                                 <p>Developed an AI-powered chess bot that utilizes reinforcement learning techniques
                                     such as Q-learning and Deep Q-Networks (DQN) to learn and improve its gameplay.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Reinforcement Learning
+                                    <li><i class="fas fa-check-circle text-success"></i> Reinforcement Learning
                                         Implementation</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Monte Carlo Tree Search (MCTS)
+                                    <li><i class="fas fa-check-circle text-success"></i> Monte Carlo Tree Search (MCTS)
                                     </li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Competitive Performance</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> User Interface with Difficulty
+                                    <li><i class="fas fa-check-circle text-success"></i> Competitive Performance</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> User Interface with Difficulty
                                         Levels</li>
                                 </ul>
                             </div>
@@ -413,32 +409,32 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                aria-expanded="false" aria-controls="collapseFour">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp4"
+                                aria-expanded="false" aria-controls="collapseExp4">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-currency-bitcoin fs-3 me-3 icon-color-1"></i>
+                                        <i class="fab fa-bitcoin fs-3 me-3 icon-color-1"></i>
                                         <div>
                                             <h5 class="card-title mb-0">ASICoin – Blockchain-Based Cryptocurrency</h5>
                                             <small>Blockchain, AI, Post-Quantum Cryptography</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseFour" class="collapse">
+                        <div id="collapseExp4" class="collapse">
                             <div class="card-body">
                                 <p>ASICoin is a blockchain-based cryptocurrency project aiming to integrate AI-driven
                                     fraud detection and post-quantum cryptographic security for future-proof network
                                     protection.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> AI-Enhanced Fraud Detection</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Post-Quantum Cryptography
+                                    <li><i class="fas fa-check-circle text-success"></i> AI-Enhanced Fraud Detection</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Post-Quantum Cryptography
                                         Research</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Decentralized Applications
+                                    <li><i class="fas fa-check-circle text-success"></i> Decentralized Applications
                                         (dApps)</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Layer 2 Solutions Integration
+                                    <li><i class="fas fa-check-circle text-success"></i> Layer 2 Solutions Integration
                                     </li>
                                 </ul>
                             </div>
@@ -451,30 +447,30 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                aria-expanded="false" aria-controls="collapseFive">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp5"
+                                aria-expanded="false" aria-controls="collapseExp5">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-house-door fs-3 me-3 icon-color-2"></i>
+                                        <i class="fas fa-store fs-3 me-3 icon-color-2"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Inventory Management Software for Medicine Shop
                                             </h5>
                                             <small>PHP, MySQL Database</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseFive" class="collapse">
+                        <div id="collapseExp5" class="collapse">
                             <div class="card-body">
                                 <p>Streamlines day-to-day operations of managing medicine stock, processing sales, and
                                     optimizing inventory levels with real-time data insights.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Real-Time Stock Updates</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Sales Tracking & Reporting</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Automated Reorder Alerts</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Expiry Date Tracking</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Real-Time Stock Updates</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Sales Tracking & Reporting</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Automated Reorder Alerts</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Expiry Date Tracking</li>
                                 </ul>
                             </div>
                         </div>
@@ -486,31 +482,31 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
-                                aria-expanded="false" aria-controls="collapseSix">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp6"
+                                aria-expanded="false" aria-controls="collapseExp6">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-puzzle fs-3 me-3 icon-color-3"></i>
+                                        <i class="fas fa-puzzle-piece fs-3 me-3 icon-color-3"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Sudoku Solver</h5>
                                             <small>C, Backtracking, Constraint Propagation</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseSix" class="collapse">
+                        <div id="collapseExp6" class="collapse">
                             <div class="card-body">
                                 <p>An efficient Sudoku solver leveraging backtracking, recursion, and constraint
                                     propagation to find solutions for 9x9 grids.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> High Accuracy (100% valid
+                                    <li><i class="fas fa-check-circle text-success"></i> High Accuracy (100% valid
                                         puzzles)</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Optimized Speed with Constraint
+                                    <li><i class="fas fa-check-circle text-success"></i> Optimized Speed with Constraint
                                         Propagation</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Advanced Validation System</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Handles Extreme Cases</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Advanced Validation System</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Handles Extreme Cases</li>
                                 </ul>
                             </div>
                         </div>
@@ -522,31 +518,31 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
-                                aria-expanded="false" aria-controls="collapseSeven">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp7"
+                                aria-expanded="false" aria-controls="collapseExp7">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-currency-bitcoin fs-3 me-3 icon-color-1"></i>
+                                        <i class="fas fa-chart-line fs-3 me-3 icon-color-1"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Candlestick Detection Trading Bot</h5>
                                             <small>Python, LSTM, Ichimoku Cloud, Bollinger Bands, Deep
                                                 Q-Learning</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseSeven" class="collapse">
+                        <div id="collapseExp7" class="collapse">
                             <div class="card-body">
                                 <p>AI-driven trading bot for real-time market analysis using deep learning, technical
                                     indicators, and reinforcement learning for autonomous strategy refinement.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> LSTM for Time-Series Forecasting
+                                    <li><i class="fas fa-check-circle text-success"></i> LSTM for Time-Series Forecasting
                                     </li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Ichimoku Cloud Analysis</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Deep Q-Learning Integration</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Backtesting Strategies</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Ichimoku Cloud Analysis</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Deep Q-Learning Integration</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Backtesting Strategies</li>
                                 </ul>
                             </div>
                         </div>
@@ -558,32 +554,32 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight"
-                                aria-expanded="false" aria-controls="collapseEight">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp8"
+                                aria-expanded="false" aria-controls="collapseExp8">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-bar-chart-line fs-3 me-3 icon-color-2"></i>
+                                        <i class="fas fa-bar-chart fs-3 me-3 icon-color-2"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Sentiment Analysis for Cryptocurrency Price
                                                 Prediction</h5>
                                             <small>Python, NLP, TensorFlow, Keras</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseEight" class="collapse">
+                        <div id="collapseExp8" class="collapse">
                             <div class="card-body">
                                 <p>Sentiment analysis module enhancing cryptocurrency price prediction by analyzing
                                     real-time news and social media sentiment integrated with LSTM models.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Sentiment Analysis on Crypto
+                                    <li><i class="fas fa-check-circle text-success"></i> Sentiment Analysis on Crypto
                                         News</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Data Pipeline Development</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> LSTM Model with Sentiment
+                                    <li><i class="fas fa-check-circle text-success"></i> Data Pipeline Development</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> LSTM Model with Sentiment
                                         Features</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Backtesting Strategies</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Backtesting Strategies</li>
                                 </ul>
                             </div>
                         </div>
@@ -595,31 +591,31 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine"
-                                aria-expanded="false" aria-controls="collapseNine">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp9"
+                                aria-expanded="false" aria-controls="collapseExp9">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-pie-chart fs-3 me-3 icon-color-3"></i>
+                                        <i class="fas fa-pie-chart fs-3 me-3 icon-color-3"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Ethereum Price Prediction Using LSTM</h5>
                                             <small>Python, PyTorch, LSTM, Technical Indicators</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseNine" class="collapse">
+                        <div id="collapseExp9" class="collapse">
                             <div class="card-body">
                                 <p>LSTM networks predict Ethereum price trends by analyzing historical Bitcoin data with
                                     technical indicators and sentiment analysis integration.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> LSTM-Based Deep Learning Model
+                                    <li><i class="fas fa-check-circle text-success"></i> LSTM-Based Deep Learning Model
                                     </li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Integration of Technical
+                                    <li><i class="fas fa-check-circle text-success"></i> Integration of Technical
                                         Indicators</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Model Optimization</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Backtesting System</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Model Optimization</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Backtesting System</li>
                                 </ul>
                                 <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
                                     class="btn btn-primary mt-2" target="_blank">Check the Tool</a>
@@ -633,29 +629,29 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen"
-                                aria-expanded="false" aria-controls="collapseTen">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp10"
+                                aria-expanded="false" aria-controls="collapseExp10">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-person-circle fs-3 me-3 icon-color-1"></i>
+                                        <i class="fas fa-users fs-3 me-3 icon-color-1"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Employee Management System</h5>
                                             <small>Java, Swing</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseTen" class="collapse">
+                        <div id="collapseExp10" class="collapse">
                             <div class="card-body">
                                 <p>Comprehensive solution for managing employee data, payroll, attendance, and
                                     performance with an easy-to-use interface.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Employee Data Management</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Attendance Tracking</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Payroll Generation</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Real-Time Reporting</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Employee Data Management</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Attendance Tracking</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Payroll Generation</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Real-Time Reporting</li>
                                 </ul>
                             </div>
                         </div>
@@ -667,29 +663,29 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven"
-                                aria-expanded="false" aria-controls="collapseEleven">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp11"
+                                aria-expanded="false" aria-controls="collapseExp11">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-book fs-3 me-3 icon-color-2"></i>
+                                        <i class="fas fa-book fs-3 me-3 icon-color-2"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Lending Library Management System</h5>
                                             <small>Java, Swing</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseEleven" class="collapse">
+                        <div id="collapseExp11" class="collapse">
                             <div class="card-body">
                                 <p>Software solution for managing books, patrons, and lending transactions with features
                                     for checkouts, returns, and inventory tracking.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Book Inventory Management</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Patron Management</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Search & Filtering</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Due Date Tracking</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Book Inventory Management</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Patron Management</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Search & Filtering</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Due Date Tracking</li>
                                 </ul>
                             </div>
                         </div>
@@ -701,30 +697,30 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve"
-                                aria-expanded="false" aria-controls="collapseTwelve">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp12"
+                                aria-expanded="false" aria-controls="collapseExp12">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-car-front fs-3 me-3 icon-color-3"></i>
+                                        <i class="fas fa-car fs-3 me-3 icon-color-3"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Ride Sharing Simulation System</h5>
                                             <small>C, C++, Simulation, Optimization Algorithms</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseTwelve" class="collapse">
+                        <div id="collapseExp12" class="collapse">
                             <div class="card-body">
                                 <p>Simulates and optimizes ride-sharing network operations modeling traffic conditions,
                                     vehicle availability, and user demand.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Demand & Supply Modeling</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Dynamic Pricing</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Vehicle Assignment Algorithm
+                                    <li><i class="fas fa-check-circle text-success"></i> Demand & Supply Modeling</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Dynamic Pricing</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Vehicle Assignment Algorithm
                                     </li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Simulation Engine</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Simulation Engine</li>
                                 </ul>
                             </div>
                         </div>
@@ -736,29 +732,29 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseCipher"
-                                aria-expanded="false" aria-controls="collapseCipher">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp13"
+                                aria-expanded="false" aria-controls="collapseExp13">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-shield-lock fs-3 me-3 icon-color-1"></i>
+                                        <i class="fas fa-shield-alt fs-3 me-3 icon-color-1"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Caesar Cipher Decoding Tool For Scouts</h5>
                                             <small>JavaScript, Caesar Cipher, Word Validation, Cryptography</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseCipher" class="collapse">
+                        <div id="collapseExp13" class="collapse">
                             <div class="card-body">
                                 <p>Web-based application that decodes sentences using Caesar cipher shifts and reverse
                                     string decoding with word validation highlighting.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Caesar Cipher Decoding</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Reverse String Decoding</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Word Validation</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Interactive Interface</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Caesar Cipher Decoding</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Reverse String Decoding</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Word Validation</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Interactive Interface</li>
                                 </ul>
                                 <a href="https://asicoltd.github.io/ScoutingHacks/pages/code&cipher/cc.html"
                                     class="btn btn-primary mt-2" target="_blank">Try It</a>
@@ -772,30 +768,30 @@
                     <div class="card bg-dark text-light border-0 shadow-lg rounded-3 h-100">
                         <div class="card-header bg-dark border-0 p-3">
                             <button class="btn btn-link text-light text-decoration-none p-0 w-100 text-start"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseMap"
-                                aria-expanded="false" aria-controls="collapseMap">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp14"
+                                aria-expanded="false" aria-controls="collapseExp14">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-map fs-3 me-3 icon-color-2"></i>
+                                        <i class="fas fa-map fs-3 me-3 icon-color-2"></i>
                                         <div>
                                             <h5 class="card-title mb-0">Map Generation Tool</h5>
                                             <small>JavaScript, D3.js, Interactive Map, Geometric Calculations</small>
                                         </div>
                                     </div>
-                                    <i class="bi bi-chevron-down fs-4"></i>
+                                    <i class="fas fa-chevron-down fs-4"></i>
                                 </div>
                             </button>
                         </div>
-                        <div id="collapseMap" class="collapse">
+                        <div id="collapseExp14" class="collapse">
                             <div class="card-body">
                                 <p>Interactive tool for plotting points on a coordinate system based on degree and step
                                     inputs with zoom, pan, and point info toggling.</p>
                                 <ul class="list-unstyled">
-                                    <li><i class="bi bi-check-circle text-success"></i> Interactive Map</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Zoom & Pan Support</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Dynamic Point Generation</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Multiple Points Input</li>
-                                    <li><i class="bi bi-check-circle text-success"></i> Point Info Toggle</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Interactive Map</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Zoom & Pan Support</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Dynamic Point Generation</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Multiple Points Input</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Point Info Toggle</li>
                                 </ul>
                                 <a href="https://asicoltd.github.io/ScoutingHacks/pages/mapMaker/mm.html"
                                     class="btn btn-primary mt-2" target="_blank">Check the Tool</a>
@@ -923,14 +919,11 @@
             </div>
         </div>
     </section>
-    <!-- Educational Background Section -->
+
     <!-- Educational Background Section -->
     <section id="education" class="py-5">
         <div class="container">
             <h2 class="text-center mb-4 text-light">Educational Background</h2>
-
-
-            <!-- University Section -->
             <h4 class="text-light mt-4 mb-3">University</h4>
             <div class="row">
                 <!-- B.Sc. Education -->
@@ -957,8 +950,6 @@
             </div>
         </div>
     </section>
-
-
 
     <!-- Co-Curriculum & Social Work Section -->
     <section id="social-work" class="py-5">
@@ -1039,8 +1030,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <!-- Social Welfare & Volunteering -->
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 bg-dark text-light">
@@ -1058,7 +1047,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Leadership & Training -->
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 bg-dark text-light">
@@ -1080,12 +1068,10 @@
                                 <li>Mental Health</li>
                                 <li>Reproductive Health</li>
                                 <li>mental health</li>
-
                             </ul>
                         </div>
                     </div>
                 </div>
-
                 <!-- Marathon Running -->
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 bg-dark text-light">
@@ -1115,13 +1101,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
-
-
-
 
     <!-- Contact Section -->
     <section id="contact" class="py-5">
@@ -1192,10 +1174,7 @@
                 </div>
             </div>
         </div>
-
     </section>
-
-
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
@@ -1207,10 +1186,10 @@
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <!-- Three.js loaded asynchronously (non-blocking) -->
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Local script (placed at bottom) -->
     <script src="script.js"></script>
-    <!-- Add this to your head section -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
-
 
 </html>
