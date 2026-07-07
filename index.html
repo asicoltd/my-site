@@ -147,119 +147,200 @@
 <!-- About Section -->
 <section id="about" class="py-5">
 
-<style>
-.about-content{
-    border-radius:20px;
-}
+    <style>
+        .about-content {
+            border-radius: 20px;
+        }
 
-.about-content .lead{
-    line-height:1.9;
-    font-size:1.08rem;
-    color:rgba(255,255,255,.88);
-}
+        .about-content .lead {
+            line-height: 1.9;
+            font-size: 1.08rem;
+            color: rgba(255, 255, 255, .88);
+        }
 
-.about-content strong{
-    color:#20c997;
-    font-weight:600;
-}
+        .about-content strong {
+            color: #20c997;
+            font-weight: 600;
+        }
 
-.badge{
-    font-weight:500;
-    letter-spacing:.3px;
-}
+        .badge {
+            font-weight: 500;
+            letter-spacing: .3px;
+        }
 
-.accent-line{
-    width:80px;
-    height:4px;
-    background:#20c997;
-    border-radius:10px;
-}
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: #20c997;
+            border-radius: 10px;
+        }
 
-.text-gradient{
-    background:linear-gradient(90deg,#20c997,#61dafb);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-}
+        .text-gradient {
+            background: linear-gradient(90deg, #20c997, #61dafb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.profile-image{
-    transition:0.3s ease;
-}
+        .profile-image {
+            transition: .3s ease;
+        }
 
-.profile-image:hover{
-    transform:scale(1.03);
-}
-</style>
+        .profile-image:hover {
+            transform: scale(1.03);
+        }
+
+        .about-highlight {
+            background: rgba(32, 201, 151, .08);
+            border: 1px solid rgba(32, 201, 151, .25);
+            border-radius: 15px;
+        }
+
+        .about-highlight h5 {
+            color: #20c997;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, .04);
+            border-radius: 15px;
+            transition: .3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(32, 201, 151, .08);
+        }
+
+        .stat-card h3 {
+            color: #20c997;
+            font-weight: 700;
+        }
+    </style>
 
     <div class="container">
         <div class="row align-items-center">
 
             <!-- Profile Image -->
             <div class="col-lg-4 col-md-5 text-center mb-5 mb-md-0">
+
                 <div class="profile-container position-relative">
-                    <img src="profile.jpg"
-                         alt="Asif Hasan"
-                         class="img-fluid rounded-circle profile-image shadow-lg"
-                         style="border:3px solid #20c997;"
-                         loading="lazy">
+
+                    <img src="profile.jpg" alt="Asif Hasan" class="img-fluid rounded-circle profile-image shadow-lg"
+                        style="border:3px solid #20c997;" loading="lazy">
 
                     <div class="decoration-box"></div>
+
                 </div>
+
             </div>
 
-            <!-- About Content -->
+            <!-- About -->
             <div class="col-lg-8 col-md-7">
-                <div class="about-content p-4 p-lg-5 bg-glass shadow-lg">
 
-                    <span class="badge bg-success px-3 py-2 mb-3 fs-6">
-                        AI Engineer
-                    </span>
+                <div class="about-content p-4 p-lg-5 bg-glass shadow-lg">
 
                     <h2 class="display-4 text-gradient mb-2">
                         About Me
                     </h2>
 
                     <p class="text-secondary mb-4">
-                        Solving complex problems through Artificial Intelligence.
+                        Building intelligent systems that solve real-world problems.
                     </p>
 
                     <div class="accent-line mb-4"></div>
 
                     <p class="lead text-light mb-4">
-                        I've always been fascinated by solving complex problems, especially when there's an opportunity to discover solutions that are smarter, more efficient, and more elegant than the obvious ones. That curiosity is what inspired me to pursue AI engineering.
+                        I've always been fascinated by solving complex problems, especially when there is an opportunity
+                        to discover solutions that are smarter, more efficient, and more elegant than conventional
+                        approaches. That curiosity led me to Artificial Intelligence, where I enjoy combining
+                        mathematics, algorithms, and software engineering to develop systems capable of learning,
+                        adapting, and making intelligent decisions.
                     </p>
 
                     <p class="lead text-light mb-4">
-                        My work focuses on <strong>Artificial Intelligence</strong>,
-                        <strong>Data Science</strong>,
+                        My primary interests include
+                        <strong>Artificial Intelligence</strong>,
                         <strong>Machine Learning</strong>,
                         <strong>Deep Learning</strong>,
-                        <strong>Computer Vision</strong>, and
-                        <strong>Image Processing</strong>. I'm also passionate about
+                        <strong>Reinforcement Learning</strong>,
+                        <strong>Computer Vision</strong>,
+                        <strong>Image Processing</strong>,
+                        <strong>Natural Language Processing</strong>,
+                        and <strong>Distributed AI Systems</strong>. I also have a strong passion for
                         <strong>Blockchain Technology</strong> and
-                        <strong>Decentralized Systems</strong>, where I design efficient and scalable architectures.
+                        <strong>Decentralized Systems</strong>, where I explore scalable and efficient architectures.
                     </p>
 
                     <p class="lead text-light mb-4">
-                        For me, technology is more than building software. It's about understanding complex challenges, questioning conventional approaches, and creating solutions that are practical, innovative, and as close to optimal as possible.
+                        Beyond developing machine learning models, I enjoy building complete AI solutions from data
+                        collection and preprocessing to model training, evaluation, deployment, optimization, and
+                        real-world integration. My goal is to create intelligent systems that are not only accurate but
+                        also practical, scalable, and reliable.
                     </p>
 
-                    <!-- Tech Tags -->
-                    <div class="d-flex flex-wrap gap-2 mt-4">
-                        <span class="badge rounded-pill bg-primary px-3 py-2">AI</span>
+                    <p class="lead text-light mb-4">
+                        Alongside software engineering, I actively conduct research in Artificial Intelligence. My
+                        research focuses primarily on computer vision, medical image analysis, disease detection, and
+                        deep learning, with published work presented at international conferences. I enjoy transforming
+                        research ideas into practical applications that create real-world impact.
+                    </p>
+
+                    <p class="lead text-light mb-4">
+                        More recently, I have been exploring intelligent financial systems, reinforcement learning,
+                        algorithmic trading, large language models, and distributed computing. I believe the future of
+                        AI lies in combining advanced learning algorithms with scalable software architecture to build
+                        autonomous, efficient, and trustworthy systems.
+                    </p>
+
+                    <p class="lead text-light mb-4">
+                        For me, technology is more than writing software. It is about understanding problems deeply,
+                        questioning existing solutions, and continuously learning to design systems that are
+                        innovative, efficient, and genuinely useful.
+                    </p>
+
+                    <!-- Technology Tags -->
+
+                    <div class="d-flex flex-wrap gap-2 mt-5">
+
+                        <span class="badge rounded-pill bg-primary px-3 py-2">Artificial Intelligence</span>
+
                         <span class="badge rounded-pill bg-info text-dark px-3 py-2">Machine Learning</span>
+
                         <span class="badge rounded-pill bg-warning text-dark px-3 py-2">Deep Learning</span>
+
                         <span class="badge rounded-pill bg-danger px-3 py-2">Computer Vision</span>
+
                         <span class="badge rounded-pill bg-secondary px-3 py-2">Image Processing</span>
+
+                        <span class="badge rounded-pill bg-success px-3 py-2">Reinforcement Learning</span>
+
+                        <span class="badge rounded-pill bg-primary px-3 py-2">Natural Language Processing</span>
+
+                        <span class="badge rounded-pill bg-info text-dark px-3 py-2">PyTorch</span>
+
+                        <span class="badge rounded-pill bg-warning text-dark px-3 py-2">TensorFlow</span>
+
                         <span class="badge rounded-pill bg-success px-3 py-2">Blockchain</span>
-                        <span class="badge rounded-pill bg-dark px-3 py-2">Problem Solving</span>
+
+                        <span class="badge rounded-pill bg-dark px-3 py-2">Distributed Systems</span>
+
+                        <span class="badge rounded-pill bg-secondary px-3 py-2">CUDA</span>
+
+                        <span class="badge rounded-pill bg-primary px-3 py-2">Python</span>
+
+                        <span class="badge rounded-pill bg-danger px-3 py-2">Research</span>
+
+                        <span class="badge rounded-pill bg-success px-3 py-2">Problem Solving</span>
+
                     </div>
 
                 </div>
+
             </div>
 
         </div>
     </div>
+
 </section>
 
     <!-- Research Publications Section -->
