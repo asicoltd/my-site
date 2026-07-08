@@ -214,6 +214,8 @@ section {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 2;
+  padding-bottom: 0.1em;
 }
 
 .accent-line {
@@ -321,9 +323,12 @@ section {
 /* Gradient text */
 .text-gradient {
   background: linear-gradient(90deg, #ff007f, #20c997);
-  background-clip:text;
+  background-clip: text;
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
+  line-height: 2;
+  padding-bottom: 0.1em;
 }
 
 /* Accent line style */
