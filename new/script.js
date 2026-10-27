@@ -1,24 +1,24 @@
 /**
- * ASIF HASAN - AI/ML RESEARCH PORTFOLIO
- * Core Script: WebGL2 Explainable Manifold Engine, Lenis Inertia Scroll & GSAP Choreography
+ * ASIF HASAN — PERSONAL PORTFOLIO CORE SCRIPT
+ * Three.js Atmospheric Constellation, Lenis Smooth Scroll, Interactive Lab & Citation Handlers
  */
 
 (function () {
   'use strict';
 
   // ==========================================================================
-  // 1. Lenis Smooth Scrolling Engine
+  // 1. Lenis Smooth Scrolling
   // ==========================================================================
   let lenis = null;
   if (typeof Lenis !== 'undefined') {
     lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // exponential ease-out
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
       smoothTouch: false,
-      touchMultiplier: 1.5
+      touchMultiplier: 1.4
     });
 
     function raf(time) {
@@ -36,10 +36,10 @@
     }
   }
 
-  // Navbar Scroll State
+  // Navbar Dynamic Scroll Blur
   const navbar = document.querySelector('.navbar');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+    if (window.scrollY > 30) {
       navbar?.classList.add('scrolled');
     } else {
       navbar?.classList.remove('scrolled');
@@ -47,7 +47,7 @@
   }, { passive: true });
 
   // ==========================================================================
-  // 2. Three.js: Explainable Attractor Manifold & Neural Traffic Graph
+  // 2. Three.js: Atmospheric Celestial Constellation Engine
   // ==========================================================================
   const canvas = document.getElementById('webgl-canvas');
   const container = document.getElementById('webgl-canvas-container');
@@ -61,453 +61,276 @@
     }
   }
 
-  if (!canvas || !isWebGLSupported() || typeof THREE === 'undefined') {
-    document.body.classList.add('no-webgl');
-    return;
-  }
+  if (canvas && isWebGLSupported() && typeof THREE !== 'undefined') {
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x08090d, 0.025);
 
-  // Scene Setup
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x08090b, 0.02);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 22);
 
-  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 150);
-  camera.position.set(0, 0, 24);
-
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-  } catch (err) {
-    document.body.classList.add('no-webgl');
-    return;
-  }
-
-  // Graph Data Structure: Clustered Latent Manifold
-  const isMobile = window.innerWidth < 768;
-  const NODE_COUNT = isMobile ? 280 : 540;
-  const CLUSTER_COUNT = 5;
-
-  const clusterCenters = isMobile ? [
-    new THREE.Vector3(-1.5, 2.5, -1),
-    new THREE.Vector3(1.8, 3.0, -3),
-    new THREE.Vector3(0.5, -3.0, 1.5),
-    new THREE.Vector3(-1.0, -1.5, -2),
-    new THREE.Vector3(1.5, -0.8, 2)
-  ] : [
-    new THREE.Vector3(3.5, 3.0, -1),   // Cluster 0: Normal MQTT / IoT Traffic
-    new THREE.Vector3(7.2, 3.8, -3),   // Cluster 1: Benign HTTP/REST Telemetry
-    new THREE.Vector3(4.0, -3.2, 1.5), // Cluster 2: Delay-Tolerant Network Nodes
-    new THREE.Vector3(2.0, -2.0, -2),  // Cluster 3: Time-Series State Vectors
-    new THREE.Vector3(6.8, -1.2, 2)    // Cluster 4: Decision Boundary Frontier
-  ];
-
-  const nodes = [];
-  const nodePositions = new Float32Array(NODE_COUNT * 3);
-  const nodeColors = new Float32Array(NODE_COUNT * 3);
-  const nodeSizes = new Float32Array(NODE_COUNT);
-
-  const colorNormal = new THREE.Color(0x64748b);     // Titanium Slate
-  const colorCluster = new THREE.Color(0x6366f1);    // Latent Indigo
-  const colorAnomaly = new THREE.Color(0x38bdf8);    // Decision Cyan
-
-  for (let i = 0; i < NODE_COUNT; i++) {
-    const clusterIdx = i % CLUSTER_COUNT;
-    const center = clusterCenters[clusterIdx];
-
-    // Clustered dispersion with Gaussian-like spread
-    const spread = (1 - (i % 3) * 0.2) * 2.5;
-    const x = center.x + (Math.random() - 0.5) * spread;
-    const y = center.y + (Math.random() - 0.5) * spread;
-    const z = center.z + (Math.random() - 0.5) * spread;
-
-    nodePositions[i * 3] = x;
-    nodePositions[i * 3 + 1] = y;
-    nodePositions[i * 3 + 2] = z;
-
-    nodes.push({
-      pos: new THREE.Vector3(x, y, z),
-      basePos: new THREE.Vector3(x, y, z),
-      cluster: clusterIdx,
-      velocity: new THREE.Vector3((Math.random() - 0.5) * 0.004, (Math.random() - 0.5) * 0.004, (Math.random() - 0.5) * 0.004),
-      isAnomaly: false,
-      attributionWeight: 0.1
-    });
-
-    const isCenter = Math.random() < 0.2;
-    const c = isCenter ? colorCluster : colorNormal;
-    nodeColors[i * 3] = c.r;
-    nodeColors[i * 3 + 1] = c.g;
-    nodeColors[i * 3 + 2] = c.b;
-
-    nodeSizes[i] = isCenter ? 1.4 : 1.0;
-  }
-
-  // 1. Points Geometry
-  const nodeGeometry = new THREE.BufferGeometry();
-  nodeGeometry.setAttribute('position', new THREE.BufferAttribute(nodePositions, 3));
-  nodeGeometry.setAttribute('color', new THREE.BufferAttribute(nodeColors, 3));
-
-  // Circular point texture with gentle alpha falloff (anti-glare)
-  function createPointTexture() {
-    const pCanvas = document.createElement('canvas');
-    pCanvas.width = 64;
-    pCanvas.height = 64;
-    const ctx = pCanvas.getContext('2d');
-    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 30);
-    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    grad.addColorStop(0.5, 'rgba(255, 255, 255, 0.7)');
-    grad.addColorStop(0.85, 'rgba(255, 255, 255, 0.15)');
-    grad.addColorStop(1.0, 'rgba(255, 255, 255, 0)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(32, 32, 30, 0, Math.PI * 2);
-    ctx.fill();
-    return new THREE.CanvasTexture(pCanvas);
-  }
-
-  const pointTexture = createPointTexture();
-
-  const nodeMaterial = new THREE.PointsMaterial({
-    size: isMobile ? 0.24 : 0.28,
-    vertexColors: true,
-    map: pointTexture,
-    transparent: true,
-    opacity: 0.75,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-
-  const nodePoints = new THREE.Points(nodeGeometry, nodeMaterial);
-  scene.add(nodePoints);
-
-  // 2. Topology Filaments (Connecting nearby neighbors)
-  const MAX_CONNECTIONS = isMobile ? 300 : 750;
-  const linePositions = new Float32Array(MAX_CONNECTIONS * 2 * 3);
-  const lineColors = new Float32Array(MAX_CONNECTIONS * 2 * 3);
-
-  const lineGeometry = new THREE.BufferGeometry();
-  lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3).setUsage(THREE.DynamicDrawUsage));
-  lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3).setUsage(THREE.DynamicDrawUsage));
-
-  const lineMaterial = new THREE.LineBasicMaterial({
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.35,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-
-  const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-  scene.add(lineMesh);
-
-  // 3. Explainability Attribution Rays
-  const ATTRIBUTION_RAYS = 12;
-  const rayPositions = new Float32Array(ATTRIBUTION_RAYS * 2 * 3);
-  const rayGeometry = new THREE.BufferGeometry();
-  rayGeometry.setAttribute('position', new THREE.BufferAttribute(rayPositions, 3).setUsage(THREE.DynamicDrawUsage));
-
-  const rayMaterial = new THREE.LineBasicMaterial({
-    color: 0x38bdf8,
-    transparent: true,
-    opacity: 0.6,
-    blending: THREE.AdditiveBlending,
-    linewidth: 2
-  });
-
-  const rayMesh = new THREE.LineSegments(rayGeometry, rayMaterial);
-  scene.add(rayMesh);
-
-  // 4. Decision Boundary Surface Manifold
-  const surfaceGeom = new THREE.PlaneGeometry(24, 20, 24, 20);
-  const surfaceMat = new THREE.MeshBasicMaterial({
-    color: 0x38bdf8,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.05,
-    blending: THREE.AdditiveBlending
-  });
-  const surfaceMesh = new THREE.Mesh(surfaceGeom, surfaceMat);
-  surfaceMesh.rotation.x = -Math.PI / 3;
-  surfaceMesh.position.set(isMobile ? 0 : 4, -3, -2);
-  scene.add(surfaceMesh);
-
-  // Cursor & Mouse Parallax Rig
-  const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-  const raycaster = new THREE.Raycaster();
-  const pointerCoord = new THREE.Vector2(-100, -100);
-
-  window.addEventListener('mousemove', (e) => {
-    mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
-    pointerCoord.x = mouse.targetX;
-    pointerCoord.y = mouse.targetY;
-  }, { passive: true });
-
-  // Touch Support
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches.length > 0) {
-      mouse.targetX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
-      mouse.targetY = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
-    }
-  }, { passive: true });
-
-  // Resize Handler
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }, { passive: true });
-
-  // Intrusion Anomaly Simulation
-  let intrusionActive = false;
-  let intrusionTimer = 0;
-
-  function triggerIntrusionAnomaly() {
-    intrusionActive = true;
-    intrusionTimer = 1.0;
-
-    // Pick 8-12 nodes to mark as anomalous feature vectors
-    const targetCluster = 4; // Decision boundary cluster
-    nodes.forEach((n, idx) => {
-      if (n.cluster === targetCluster && Math.random() < 0.6) {
-        n.isAnomaly = true;
-        n.attributionWeight = 1.0;
-        nodeColors[idx * 3] = 0.95;
-        nodeColors[idx * 3 + 1] = 0.25;
-        nodeColors[idx * 3 + 2] = 0.35; // Red-cyan alert
-      }
-    });
-
-    nodeGeometry.attributes.color.needsUpdate = true;
-
-    // Update Telemetry Display in DOM
-    const stateVal = document.getElementById('telemetry-state-val');
-    const metricEnt = document.getElementById('metric-entropy');
-    if (stateVal) stateVal.textContent = 'INTRUSION DETECTED';
-    if (stateVal) stateVal.style.color = '#f43f5e';
-    if (metricEnt) metricEnt.textContent = '0.94 bits';
-
-    setTimeout(() => {
-      // Revert to stable equilibrium
-      nodes.forEach((n, idx) => {
-        n.isAnomaly = false;
-        n.attributionWeight = 0.1;
-        const isCenter = Math.random() < 0.15;
-        const c = isCenter ? colorCluster : colorNormal;
-        nodeColors[idx * 3] = c.r;
-        nodeColors[idx * 3 + 1] = c.g;
-        nodeColors[idx * 3 + 2] = c.b;
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance'
       });
-      nodeGeometry.attributes.color.needsUpdate = true;
-      if (stateVal) stateVal.textContent = 'MONITORING';
-      if (stateVal) stateVal.style.color = 'var(--accent-emerald)';
-      if (metricEnt) metricEnt.textContent = '0.04 bits';
-      intrusionActive = false;
-    }, 3200);
-  }
-
-  // Bind simulation button
-  const triggerBtn = document.getElementById('trigger-intrusion-btn');
-  if (triggerBtn) {
-    triggerBtn.addEventListener('click', triggerIntrusionAnomaly);
-  }
-
-  // Render Loop
-  let clock = new THREE.Clock();
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    const delta = clock.getDelta();
-    const time = clock.getElapsedTime();
-
-    // Smooth Mouse Look-At Damping
-    mouse.x += (mouse.targetX - mouse.x) * 0.05;
-    mouse.y += (mouse.targetY - mouse.y) * 0.05;
-
-    camera.position.x = mouse.x * 2.5;
-    camera.position.y = mouse.y * 2.0;
-    camera.lookAt(0, 0, 0);
-
-    // Dynamic Decision Surface Wave
-    const posAttr = surfaceGeom.attributes.position;
-    for (let i = 0; i < posAttr.count; i++) {
-      const u = posAttr.getX(i);
-      const v = posAttr.getY(i);
-      const z = Math.sin(u * 0.4 + time * 1.2) * Math.cos(v * 0.4 + time * 1.0) * 1.2;
-      posAttr.setZ(i, z);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    } catch (err) {
+      console.warn('WebGL init error:', err);
     }
-    posAttr.needsUpdate = true;
 
-    // Node Micro-Drift & Network Connections
-    let connectionIdx = 0;
-    const thresholdDist = isMobile ? 3.2 : 2.8;
+    if (renderer) {
+      const isMobile = window.innerWidth < 768;
+      const PARTICLE_COUNT = isMobile ? 180 : 380;
+      const positions = new Float32Array(PARTICLE_COUNT * 3);
+      const colors = new Float32Array(PARTICLE_COUNT * 3);
+      const velocities = [];
 
-    for (let i = 0; i < NODE_COUNT; i++) {
-      const n = nodes[i];
+      const colorCyan = new THREE.Color(0x38bdf8);
+      const colorTeal = new THREE.Color(0x20c997);
+      const colorSlate = new THREE.Color(0x64748b);
+      const colorViolet = new THREE.Color(0x818cf8);
 
-      // Subtle brownian drift
-      n.pos.add(n.velocity);
-      if (n.pos.distanceTo(n.basePos) > 1.2) {
-        n.velocity.negate();
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const x = (Math.random() - 0.5) * 38;
+        const y = (Math.random() - 0.5) * 26;
+        const z = (Math.random() - 0.5) * 18;
+
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.006,
+          y: (Math.random() - 0.5) * 0.006,
+          z: (Math.random() - 0.5) * 0.004
+        });
+
+        const rand = Math.random();
+        let c = colorSlate;
+        if (rand < 0.25) c = colorCyan;
+        else if (rand < 0.45) c = colorTeal;
+        else if (rand < 0.6) c = colorViolet;
+
+        colors[i * 3] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
       }
 
-      nodePositions[i * 3] = n.pos.x;
-      nodePositions[i * 3 + 1] = n.pos.y;
-      nodePositions[i * 3 + 2] = n.pos.z;
+      // Smooth Particle Texture
+      function createDiscTexture() {
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = 64;
+        pCanvas.height = 64;
+        const ctx = pCanvas.getContext('2d');
+        const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 30);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+        grad.addColorStop(0.4, 'rgba(255, 255, 255, 0.65)');
+        grad.addColorStop(0.85, 'rgba(255, 255, 255, 0.1)');
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(32, 32, 30, 0, Math.PI * 2);
+        ctx.fill();
+        return new THREE.CanvasTexture(pCanvas);
+      }
 
-      // Connect to adjacent cluster members
-      if (connectionIdx < MAX_CONNECTIONS && i % 2 === 0) {
-        for (let j = i + 1; j < NODE_COUNT; j += 3) {
-          const dist = n.pos.distanceTo(nodes[j].pos);
-          if (dist < thresholdDist && connectionIdx < MAX_CONNECTIONS) {
-            const lIdx = connectionIdx * 6;
+      const discTexture = createDiscTexture();
 
-            linePositions[lIdx] = n.pos.x;
-            linePositions[lIdx + 1] = n.pos.y;
-            linePositions[lIdx + 2] = n.pos.z;
+      const particleGeometry = new THREE.BufferGeometry();
+      particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-            linePositions[lIdx + 3] = nodes[j].pos.x;
-            linePositions[lIdx + 4] = nodes[j].pos.y;
-            linePositions[lIdx + 5] = nodes[j].pos.z;
+      const particleMaterial = new THREE.PointsMaterial({
+        size: isMobile ? 0.25 : 0.32,
+        vertexColors: true,
+        map: discTexture,
+        transparent: true,
+        opacity: 0.75,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
 
-            const alpha = 1.0 - dist / thresholdDist;
-            const lineColor = n.isAnomaly || nodes[j].isAnomaly ? colorAnomaly : colorNormal;
+      const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particleSystem);
 
-            lineColors[lIdx] = lineColor.r * alpha;
-            lineColors[lIdx + 1] = lineColor.g * alpha;
-            lineColors[lIdx + 2] = lineColor.b * alpha;
+      // Connecting Filaments
+      const MAX_LINES = isMobile ? 120 : 320;
+      const linePositions = new Float32Array(MAX_LINES * 2 * 3);
+      const lineColors = new Float32Array(MAX_LINES * 2 * 3);
 
-            lineColors[lIdx + 3] = lineColor.r * alpha;
-            lineColors[lIdx + 4] = lineColor.g * alpha;
-            lineColors[lIdx + 5] = lineColor.b * alpha;
+      const lineGeometry = new THREE.BufferGeometry();
+      lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3).setUsage(THREE.DynamicDrawUsage));
+      lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3).setUsage(THREE.DynamicDrawUsage));
 
-            connectionIdx++;
+      const lineMaterial = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.25,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+      scene.add(lineMesh);
+
+      // Mouse Parallax
+      const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+      window.addEventListener('mousemove', (e) => {
+        mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+      }, { passive: true });
+
+      // Resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }, { passive: true });
+
+      // Animation Loop
+      let clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const time = clock.getElapsedTime();
+
+        // Mouse Damping
+        mouse.x += (mouse.targetX - mouse.x) * 0.04;
+        mouse.y += (mouse.targetY - mouse.y) * 0.04;
+
+        camera.position.x = mouse.x * 2.0;
+        camera.position.y = mouse.y * 1.5;
+        camera.lookAt(0, 0, 0);
+
+        // Drift
+        let lineIdx = 0;
+        const distThreshold = isMobile ? 3.0 : 3.8;
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          positions[i * 3] += velocities[i].x;
+          positions[i * 3 + 1] += velocities[i].y;
+          positions[i * 3 + 2] += velocities[i].z;
+
+          // Bounds bounce
+          if (Math.abs(positions[i * 3]) > 19) velocities[i].x *= -1;
+          if (Math.abs(positions[i * 3 + 1]) > 13) velocities[i].y *= -1;
+          if (Math.abs(positions[i * 3 + 2]) > 9) velocities[i].z *= -1;
+
+          // Lines
+          if (lineIdx < MAX_LINES && i % 2 === 0) {
+            for (let j = i + 1; j < PARTICLE_COUNT; j += 4) {
+              const dx = positions[i * 3] - positions[j * 3];
+              const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+              const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+              const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+              if (dist < distThreshold && lineIdx < MAX_LINES) {
+                const l = lineIdx * 6;
+                linePositions[l] = positions[i * 3];
+                linePositions[l + 1] = positions[i * 3 + 1];
+                linePositions[l + 2] = positions[i * 3 + 2];
+
+                linePositions[l + 3] = positions[j * 3];
+                linePositions[l + 4] = positions[j * 3 + 1];
+                linePositions[l + 5] = positions[j * 3 + 2];
+
+                const alpha = Math.max(0, 1 - dist / distThreshold) * 0.6;
+                lineColors[l] = 0.22 * alpha;
+                lineColors[l + 1] = 0.74 * alpha;
+                lineColors[l + 2] = 0.97 * alpha;
+
+                lineColors[l + 3] = 0.22 * alpha;
+                lineColors[l + 4] = 0.74 * alpha;
+                lineColors[l + 5] = 0.97 * alpha;
+
+                lineIdx++;
+              }
+            }
           }
         }
+
+        particleGeometry.attributes.position.needsUpdate = true;
+        lineGeometry.attributes.position.needsUpdate = true;
+        lineGeometry.attributes.color.needsUpdate = true;
+        lineGeometry.setDrawRange(0, lineIdx * 2);
+
+        particleSystem.rotation.y = time * 0.015;
+        lineMesh.rotation.y = time * 0.015;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Scroll Dimming
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.to(container, {
+          opacity: 0.18,
+          scrollTrigger: {
+            trigger: '#about',
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 1
+          }
+        });
       }
     }
-
-    nodeGeometry.attributes.position.needsUpdate = true;
-    lineGeometry.attributes.position.needsUpdate = true;
-    lineGeometry.attributes.color.needsUpdate = true;
-    lineGeometry.setDrawRange(0, connectionIdx * 2);
-
-    // Update Attribution Rays (SHAP Rays connecting decision plane to nodes)
-    let rayCount = 0;
-    nodes.forEach((n) => {
-      if ((n.isAnomaly || Math.random() < 0.008) && rayCount < ATTRIBUTION_RAYS) {
-        const rIdx = rayCount * 6;
-        rayPositions[rIdx] = n.pos.x;
-        rayPositions[rIdx + 1] = n.pos.y;
-        rayPositions[rIdx + 2] = n.pos.z;
-
-        rayPositions[rIdx + 3] = n.pos.x * 0.4;
-        rayPositions[rIdx + 4] = -4; // Grounded to decision manifold
-        rayPositions[rIdx + 5] = n.pos.z * 0.4;
-
-        rayCount++;
-      }
-    });
-    rayGeometry.attributes.position.needsUpdate = true;
-    rayGeometry.setDrawRange(0, rayCount * 2);
-
-    // Rotation of entire galaxy cluster
-    nodePoints.rotation.y = time * 0.02;
-    lineMesh.rotation.y = time * 0.02;
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
-
-  // Scroll-linked camera dolly (GSAP ScrollTrigger)
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(camera.position, {
-      z: 16,
-      y: -3,
-      scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1
-      }
-    });
-
-    // Fade WebGL manifold gracefully when leaving hero into content sections
-    gsap.to(container, {
-      opacity: 0.16,
-      scrollTrigger: {
-        trigger: '#research',
-        start: 'top 85%',
-        end: 'top 25%',
-        scrub: 1
-      }
-    });
-
-    gsap.to(scene.rotation, {
-      x: 0.35,
-      scrollTrigger: {
-        trigger: '#research',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1.5
-      }
-    });
-
-    // Animate Cards Reveal
-    gsap.utils.toArray('.pub-card, .system-card, .academic-card').forEach((card) => {
-      gsap.from(card, {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 88%',
-          toggleActions: 'play none none none'
-        }
-      });
-    });
   }
 
   // ==========================================================================
-  // 3. Card 2.5D Interactive Perspective Tilt
+  // 3. Interactive Lab (Mini-Apps Modal)
   // ==========================================================================
-  const tiltCards = document.querySelectorAll('.pub-card, .system-card, .telemetry-card');
+  const interactiveModal = document.getElementById('interactive-modal');
+  const interactiveFrame = document.getElementById('interactive-frame');
+  const interactiveTitle = document.getElementById('interactive-modal-title');
+  const closeInteractiveBtn = document.getElementById('close-interactive-btn');
 
-  tiltCards.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+  function openInteractiveApp(url, title) {
+    if (!interactiveModal || !interactiveFrame) return;
+    interactiveFrame.src = url;
+    if (interactiveTitle) interactiveTitle.textContent = title;
+    interactiveModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+  function closeInteractiveApp() {
+    if (!interactiveModal || !interactiveFrame) return;
+    interactiveModal.classList.remove('active');
+    interactiveFrame.src = '';
+    document.body.style.overflow = '';
+  }
 
-      const rotateX = ((y - centerY) / centerY) * -4.5;
-      const rotateY = ((x - centerX) / centerX) * 4.5;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+  document.querySelectorAll('[data-interactive-url]').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = trigger.getAttribute('data-interactive-url');
+      const title = trigger.getAttribute('data-interactive-title') || 'Interactive Lab';
+      openInteractiveApp(url, title);
     });
   });
 
+  if (closeInteractiveBtn) {
+    closeInteractiveBtn.addEventListener('click', closeInteractiveApp);
+  }
+
+  if (interactiveModal) {
+    interactiveModal.addEventListener('click', (e) => {
+      if (e.target === interactiveModal) closeInteractiveApp();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeInteractiveApp();
+      closeBibtexModal();
+    }
+  });
+
   // ==========================================================================
-  // 4. BibTeX Modal & Clipboard Toast Notification
+  // 4. BibTeX Citation Modal & Clipboard Toast
   // ==========================================================================
   const bibtexDatabase = {
     hfmd: `@inproceedings{hasan2024hfmd,
@@ -539,52 +362,56 @@
 }`
   };
 
-  const modalOverlay = document.getElementById('bibtex-modal');
-  const bibtexPre = document.getElementById('bibtex-content');
-  const modalClose = document.getElementById('modal-close-btn');
+  const bibtexModal = document.getElementById('bibtex-modal');
+  const bibtexContent = document.getElementById('bibtex-content');
+  const closeBibtexBtn = document.getElementById('close-bibtex-btn');
   const copyBibtexBtn = document.getElementById('copy-bibtex-btn');
   const toast = document.getElementById('toast-alert');
 
-  function showToast(message) {
+  function showToast(msg) {
     if (!toast) return;
-    toast.textContent = message;
+    toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2800);
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  function openBibtexModal(key) {
+    const entry = bibtexDatabase[key];
+    if (entry && bibtexModal && bibtexContent) {
+      bibtexContent.textContent = entry;
+      bibtexModal.classList.add('active');
+    }
+  }
+
+  function closeBibtexModal() {
+    if (bibtexModal) bibtexModal.classList.remove('active');
   }
 
   document.querySelectorAll('.btn-bibtex').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const pubKey = btn.getAttribute('data-pub');
-      const citation = bibtexDatabase[pubKey];
-      if (citation && bibtexPre && modalOverlay) {
-        bibtexPre.textContent = citation;
-        modalOverlay.classList.add('active');
-      }
+      openBibtexModal(pubKey);
     });
   });
 
-  if (modalClose && modalOverlay) {
-    modalClose.addEventListener('click', () => {
-      modalOverlay.classList.remove('active');
-    });
+  if (closeBibtexBtn) {
+    closeBibtexBtn.addEventListener('click', closeBibtexModal);
+  }
 
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
-        modalOverlay.classList.remove('active');
-      }
+  if (bibtexModal) {
+    bibtexModal.addEventListener('click', (e) => {
+      if (e.target === bibtexModal) closeBibtexModal();
     });
   }
 
-  if (copyBibtexBtn && bibtexPre) {
+  if (copyBibtexBtn && bibtexContent) {
     copyBibtexBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(bibtexPre.textContent).then(() => {
-        showToast('✓ BibTeX entry copied to clipboard');
-        if (modalOverlay) modalOverlay.classList.remove('active');
+      navigator.clipboard.writeText(bibtexContent.textContent).then(() => {
+        showToast('✓ BibTeX citation copied to clipboard');
+        closeBibtexModal();
       }).catch(() => {
-        showToast('Error copying to clipboard');
+        showToast('Citation copied');
       });
     });
   }

@@ -4,43 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-  <!-- Primary Academic & SEO Metadata -->
-  <title>Asif Hasan | AI & Machine Learning Researcher | Explainable Systems</title>
-  <meta name="description" content="Academic portfolio of Asif Hasan, an AI/ML researcher specializing in explainable IoT intrusion detection, reinforcement learning trading systems, and high-dimensional decision manifolds. Author of three Springer publications.">
+  <!-- Primary SEO -->
+  <title>Asif Hasan | Personal Portfolio & Research</title>
+  <meta name="description" content="Personal portfolio of Asif Hasan (AsicoLTD) — AI/ML researcher, software engineer, and licensed HAM radio operator (S21NEO). Explore research papers, interactive mini-apps, and software projects.">
   <meta name="author" content="Asif Hasan">
   <link rel="canonical" href="https://asif.info.bd/new/">
 
-  <!-- Open Graph / Academic Social -->
+  <!-- Open Graph -->
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="Asif Hasan | AI & Machine Learning Researcher">
-  <meta property="og:description" content="Research on Explainable IoT Security, Delay-Tolerant Networking, and Reinforcement Learning. 3x Springer LNNS published.">
+  <meta property="og:title" content="Asif Hasan | Personal Portfolio & Research">
+  <meta property="og:description" content="AI/ML researcher, engineer, and amateur radio operator (S21NEO). Check out research publications, projects, and interactive mini-apps.">
   <meta property="og:url" content="https://asif.info.bd/new/">
   <meta property="og:image" content="https://asif.info.bd/profile.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Asif Hasan | AI & Machine Learning Researcher">
-  <meta name="twitter:description" content="Explainable IoT Intrusion Detection, Reinforcement Learning, and Applied Deep Learning.">
+  <meta name="twitter:title" content="Asif Hasan | Personal Portfolio">
+  <meta name="twitter:description" content="Explore research publications, engineering projects, and interactive experiments by Asif Hasan.">
+  <meta name="twitter:image" content="https://asif.info.bd/profile.jpg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Core Stylesheet -->
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Structured Data: Schema.org Person & Researcher -->
+  <!-- Structured Data: Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Asif Hasan",
-    "alternateName": "Md Asif Hasan",
-    "jobTitle": "AI & Machine Learning Researcher",
+    "alternateName": "AsicoLTD",
     "url": "https://asif.info.bd/new/",
     "image": "https://asif.info.bd/profile.jpg",
     "alumniOf": {
@@ -51,13 +51,6 @@
       "https://github.com/asicoltd",
       "https://www.linkedin.com/in/asif-hasan-099/",
       "https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25"
-    ],
-    "knowsAbout": [
-      "Explainable Artificial Intelligence",
-      "IoT Intrusion Detection",
-      "Reinforcement Learning",
-      "Delay-Tolerant Networking",
-      "Deep Neural Networks"
     ]
   }
   </script>
@@ -65,159 +58,129 @@
 
 <body>
 
-  <!-- WebGL2 Fullscreen Coordinate System -->
+  <!-- Atmospheric Background Canvas -->
   <div id="webgl-canvas-container" aria-hidden="true">
     <canvas id="webgl-canvas"></canvas>
-    <div class="webgl-fallback"></div>
   </div>
 
   <div class="page-wrapper">
 
     <!-- ======================================================================
-         Navigation Bar (Backdrop-Blur Glassmorphism + Kinetic Roll Links)
+         Header & Navigation
          ====================================================================== -->
     <header class="navbar">
       <div class="container navbar-inner">
         <a href="#home" class="brand-link" aria-label="Asif Hasan Home">
-          <div class="brand-glyph">AH</div>
-          <span class="brand-name">ASIF HASAN</span>
-          <span class="brand-status">AI RESEARCH</span>
+          <div class="brand-badge">AH</div>
+          <div class="brand-text">
+            <span class="brand-name">Asif Hasan</span>
+            <span class="brand-status">S21NEO • Dhaka, BD</span>
+          </div>
         </a>
 
         <nav>
           <ul class="nav-menu">
-            <li>
-              <a href="#research" class="roll-link">
-                <span class="roll-link-inner">
-                  <span class="roll-link-top">Publications</span>
-                  <span class="roll-link-bottom">Publications</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#systems" class="roll-link">
-                <span class="roll-link-inner">
-                  <span class="roll-link-top">Systems</span>
-                  <span class="roll-link-bottom">Systems</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#academic" class="roll-link">
-                <span class="roll-link-inner">
-                  <span class="roll-link-top">Background</span>
-                  <span class="roll-link-bottom">Background</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#repositories" class="roll-link">
-                <span class="roll-link-inner">
-                  <span class="roll-link-top">Open Source</span>
-                  <span class="roll-link-bottom">Open Source</span>
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="#contact" class="roll-link">
-                <span class="roll-link-inner">
-                  <span class="roll-link-top">Contact</span>
-                  <span class="roll-link-bottom">Contact</span>
-                </span>
-              </a>
-            </li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#lab" class="nav-link">Interactive Lab</a></li>
+            <li><a href="#research" class="nav-link">Research</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#life" class="nav-link">Beyond Code</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
           </ul>
         </nav>
 
         <div class="nav-actions">
-          <a href="assets/docs/PhD_Research_Proposal_Md_Asif_Hasan.pdf" target="_blank" rel="noopener" class="btn btn-accent btn-sm" aria-label="Download PhD Research Proposal (PDF)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            <span class="btn-proposal-text-desktop">Research Proposal (PDF)</span>
-            <span class="btn-proposal-text-mobile" aria-hidden="true">Proposal ↗</span>
-          </a>
+          <button class="btn btn-accent btn-sm" data-interactive-url="quiz.html" data-interactive-title="AI or Real?">
+            <span>🎮 Play Mini-App</span>
+          </button>
         </div>
       </div>
     </header>
 
     <!-- ======================================================================
-         01. Hero Section (Explainable Attractor Manifold + Telemetry Card)
+         01. Hero Section
          ====================================================================== -->
     <section id="home" class="hero-section">
       <div class="container hero-grid">
-        <div class="hero-content">
-          <div class="hero-badge-row">
-            <div class="badge">
-              <span class="badge-pulse"></span>
-              <span>Prospective PhD Applicant</span>
+        <div class="hero-text-content">
+          <div class="hero-status-row">
+            <div class="hero-badge badge-green">
+              <span class="badge-dot"></span>
+              <span>Open to Collaboration</span>
             </div>
-            <div class="badge badge-springer">
-              <span>3x Springer LNNS Published</span>
+            <div class="hero-badge">
+              <span>📻 Callsign: S21NEO</span>
             </div>
-            <div class="badge">
+            <div class="hero-badge">
               <span>East West University</span>
             </div>
           </div>
 
-          <h1 class="hero-name">ASIF HASAN</h1>
+          <h1 class="hero-name text-gradient">Asif Hasan</h1>
+          <p class="hero-title-lead">Researcher • Software Engineer • Builder</p>
 
           <p class="hero-bio">
-            <strong>AI & Machine Learning Researcher</strong> focusing on <strong>Explainable IoT Intrusion Detection</strong>, <strong>Multi-Agent Reinforcement Learning</strong>, and high-dimensional decision manifolds. Architecting robust neural architectures for bandwidth-constrained, adversarial networks.
+            I build software and research intelligent systems. My work spans <strong>machine learning in healthcare diagnostics</strong>, <strong>delay-tolerant routing protocols</strong>, and <strong>decentralized systems</strong>. Outside computing, I am a licensed amateur radio operator, distance runner, and karate blue belt.
           </p>
 
-          <div class="hero-cta-group">
-            <a href="assets/docs/PhD_Research_Proposal_Md_Asif_Hasan.pdf" target="_blank" rel="noopener" class="btn btn-primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span>Download Proposal (PDF)</span>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <span>Explore Projects</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
             </a>
-            <a href="#research" class="btn btn-secondary">
-              <span>Peer-Reviewed Papers ↓</span>
+            <a href="#lab" class="btn btn-secondary">
+              <span>🎮 Interactive Lab</span>
             </a>
-            <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="btn btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              <span>GitHub</span>
+            <a href="#contact" class="btn btn-secondary">
+              <span>Get in Touch</span>
             </a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-num">3</span>
+              <span class="metric-label">Springer Papers</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-num">15+</span>
+              <span class="metric-label">Software Projects</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-num">S21NEO</span>
+              <span class="metric-label">HAM Radio Callsign</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-num">B.Sc.</span>
+              <span class="metric-label">Computer Science</span>
+            </div>
           </div>
         </div>
 
-        <!-- Telemetry & Manifold Simulation HUD -->
-        <div class="hero-telemetry">
-          <div class="telemetry-card">
-            <div class="telemetry-header">
-              <span class="telemetry-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-                <span>Attractor Topology</span>
-              </span>
-              <span id="telemetry-state-val" class="telemetry-badge">MONITORING</span>
+        <!-- Hero Portrait Card -->
+        <div class="hero-portrait-card">
+          <div class="portrait-frame">
+            <img src="profile.jpg" alt="Asif Hasan" class="portrait-img">
+            <div class="portrait-overlay">
+              <span class="portrait-tag">AsicoLTD</span>
+              <span class="portrait-tag">Software & AI</span>
             </div>
-
-            <div class="telemetry-metrics">
-              <div class="metric-item">
-                <div class="metric-label">Latent Nodes</div>
-                <div class="metric-value">680</div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-label">Clusters</div>
-                <div class="metric-value">5 Clustered</div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-label">Perturbation Entropy</div>
-                <div id="metric-entropy" class="metric-value">0.04 bits</div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-label">Explainability</div>
-                <div class="metric-value">SHAP Rays</div>
-              </div>
+          </div>
+          <div class="portrait-card-footer">
+            <div class="ham-callsign">
+              <span class="ham-icon">📻</span>
+              <span>Amateur Radio Operator</span>
             </div>
-
-            <div class="telemetry-controls">
-              <button id="trigger-intrusion-btn" class="telemetry-btn" type="button">
-                <span>Simulate Anomaly & Attribution (SHAP)</span>
-                <span class="btn-indicator"></span>
-              </button>
-            </div>
-
-            <div class="telemetry-caption">
-              Visualizing IoT feature clusters and attribution vectors across high-dimensional manifolds in WebGL.
+            <div class="portrait-socials">
+              <a href="https://github.com/asicoltd" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/asif-hasan-099/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.738-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="mailto:asifhasan099@gmail.com" aria-label="Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -225,438 +188,670 @@
     </section>
 
     <!-- ======================================================================
-         02. Peer-Reviewed Publications (The 3 Springer Papers)
+         02. Interactive Lab (Creative Mini-Apps)
          ====================================================================== -->
-    <section id="research" class="section">
+    <section id="lab" class="lab-section">
       <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Peer-Reviewed Contributions</div>
-          <h2 class="section-title">Springer Research Publications</h2>
-          <p class="section-desc">
-            Primary scientific contributions published in the Springer <em>Lecture Notes in Networks and Systems (LNNS)</em> series. Focused on ensemble deep learning, endoscopic diagnostics, and real-time computer vision.
+        <span class="section-tag">Interactive Playground</span>
+        <h2 class="section-title text-gradient">Creative Mini-Apps</h2>
+        <p class="section-desc">
+          I enjoy experimenting with interactive logic and thought experiments on the web. Click any card to launch the app directly in an embedded window.
+        </p>
+
+        <div class="lab-grid">
+          <!-- App 1: AI or Real? -->
+          <div class="lab-card" data-interactive-url="quiz.html" data-interactive-title="AI or Real? — Perception Test">
+            <div>
+              <div class="lab-card-header">
+                <div class="lab-icon-box" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8;">🧠</div>
+                <span class="lab-badge">Game</span>
+              </div>
+              <h3 class="lab-card-title">AI or Real?</h3>
+              <p class="lab-card-desc">
+                Test your perception by evaluating synthetic outputs side-by-side against real human creations. Can you spot the AI?
+              </p>
+            </div>
+            <div class="lab-card-action">
+              <span>Launch Quiz</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- App 2: Unbeatable Tic Tac Toe -->
+          <div class="lab-card" data-interactive-url="neverWin.html" data-interactive-title="Unbeatable Tic-Tac-Toe (Minimax)">
+            <div>
+              <div class="lab-card-header">
+                <div class="lab-icon-box" style="background: rgba(251, 191, 36, 0.12); color: #fbbf24;">⚔️</div>
+                <span class="lab-badge">Algorithm</span>
+              </div>
+              <h3 class="lab-card-title">Unbeatable Tic-Tac-Toe</h3>
+              <p class="lab-card-desc">
+                An adversarial agent built on the minimax game decision algorithm. Your best outcome is a hard-fought draw.
+              </p>
+            </div>
+            <div class="lab-card-action">
+              <span>Play Game</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- App 3: Which AI Model Are You? -->
+          <div class="lab-card" data-interactive-url="whichAI.html" data-interactive-title="Which AI Model Are You?">
+            <div>
+              <div class="lab-card-header">
+                <div class="lab-icon-box" style="background: rgba(32, 201, 151, 0.12); color: #20c997;">🔮</div>
+                <span class="lab-badge">Quiz</span>
+              </div>
+              <h3 class="lab-card-title">Which AI Model Are You?</h3>
+              <p class="lab-card-desc">
+                A playful questionnaire matching your problem-solving habits to transformer architectures and neural models.
+              </p>
+            </div>
+            <div class="lab-card-action">
+              <span>Take Quiz</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- App 4: Reality Checking Questions -->
+          <div class="lab-card" data-interactive-url="questions.html" data-interactive-title="Reality Checking Questions">
+            <div>
+              <div class="lab-card-header">
+                <div class="lab-icon-box" style="background: rgba(129, 140, 248, 0.12); color: #818cf8;">🌌</div>
+                <span class="lab-badge">Reflection</span>
+              </div>
+              <h3 class="lab-card-title">Reality Checking</h3>
+              <p class="lab-card-desc">
+                A cosmic interface exploring philosophical dilemmas, cognitive biases, and perspectives on computation.
+              </p>
+            </div>
+            <div class="lab-card-action">
+              <span>Explore Questions</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- App 5: Thought Reflections -->
+          <div class="lab-card" data-interactive-url="areWeSame.html" data-interactive-title="Thought Reflections — Are We Same?">
+            <div>
+              <div class="lab-card-header">
+                <div class="lab-icon-box" style="background: rgba(244, 63, 94, 0.12); color: #f43f5e;">🪞</div>
+                <span class="lab-badge">Philosophy</span>
+              </div>
+              <h3 class="lab-card-title">Thought Reflections</h3>
+              <p class="lab-card-desc">
+                An interactive survey examining how humans and artificial agents process intuition, doubt, and certainty.
+              </p>
+            </div>
+            <div class="lab-card-action">
+              <span>Reflect</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- App 6: Pattern Checker -->
+          <div class="lab-card" data-interactive-url="checker.html" data-interactive-title="Interactive Pattern Checker">
+            <div>
+              <div class="lab-card-header">
+                <div class="lab-icon-box" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8;">🧩</div>
+                <span class="lab-badge">Tool</span>
+              </div>
+              <h3 class="lab-card-title">Pattern Checker</h3>
+              <p class="lab-card-desc">
+                An interactive sandbox tool testing logic sequences and heuristic puzzles directly in browser memory.
+              </p>
+            </div>
+            <div class="lab-card-action">
+              <span>Open Tool</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         03. About Me Section
+         ====================================================================== -->
+    <section id="about" class="about-section">
+      <div class="container about-grid">
+        <div class="about-text-content">
+          <span class="section-tag">Biography & Story</span>
+          <h2 class="section-title text-gradient">About Me</h2>
+
+          <p>
+            I am a Computer Science graduate from <strong>East West University</strong> in Dhaka, Bangladesh. My primary drive is building practical intelligent systems that make tangible differences in healthcare, communications, and distributed networking.
           </p>
+
+          <p>
+            In academic research, I have focused on applied computer vision for early clinical diagnosis—co-authoring three Springer LNNS papers on detecting childhood Hand, Foot, and Mouth Disease, identifying gastrointestinal lesions from endoscopy imagery, and automated rose plant pathology using YOLO.
+          </p>
+
+          <p>
+            Beyond deep learning, I care deeply about resilient systems. I experiment with <strong>Delay-Tolerant Networking (DTN)</strong> routing protocols for intermittent environments and build decentralized applications.
+          </p>
+
+          <div class="about-highlights">
+            <div class="highlight-box">
+              <h4>🎓 Academic Foundation</h4>
+              <p>B.Sc. in Computer Science & Engineering from East West University with coursework in algorithms, AI, and distributed systems.</p>
+            </div>
+            <div class="highlight-box">
+              <h4>📡 Radio & Hardware</h4>
+              <p>Licensed HAM radio operator (Callsign S21NEO), building antennas and experimenting with emergency communications.</p>
+            </div>
+            <div class="highlight-box">
+              <h4>🥋 Discipline & Fitness</h4>
+              <p>Karate blue belt holder and long-distance runner, building physical endurance and mental clarity.</p>
+            </div>
+            <div class="highlight-box">
+              <h4>🤝 Social Service</h4>
+              <p>Rover Scout volunteer in humanitarian relief operations, community welfare drives, and youth mentorship.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="publications-grid">
+        <div class="about-visual-side">
+          <div class="about-secondary-card">
+            <img src="profile2.jpg" alt="Asif Hasan Working" class="about-secondary-img">
+            <div class="about-card-caption">
+              <span>Asif Hasan • Research & Engineering</span>
+              <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-cyan);">Dhaka, Bangladesh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ======================================================================
+         04. Research Publications Section
+         ====================================================================== -->
+    <section id="research" class="research-section">
+      <div class="container">
+        <span class="section-tag">Peer-Reviewed Work</span>
+        <h2 class="section-title text-gradient">Research Publications</h2>
+        <p class="section-desc">
+          Published three peer-reviewed conference papers in Springer’s Lecture Notes in Networks and Systems (LNNS).
+        </p>
+
+        <div class="pub-list">
           <!-- Paper 1 -->
-          <article class="pub-card" data-tilt>
+          <article class="pub-card">
             <div class="pub-meta-row">
-              <span class="pub-venue-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>DMIS 2024 • Springer LNNS</span>
-              </span>
-              <span class="pub-year">DOI: 10.1007/978-981-96-6063-6_25</span>
+              <span class="pub-badge-springer">Springer LNNS</span>
+              <span class="pub-badge-year">DMIS 2024</span>
+              <span class="pub-badge-year">DOI: 10.1007/978-981-96-6063-6_25</span>
             </div>
 
             <h3 class="pub-title">
-              <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25" target="_blank" rel="noopener">
-                Ensemble Deep Learning for Enhanced Detection and Classification of Hand, Foot, and Mouth Disease
-              </a>
+              Ensemble Deep Learning for Enhanced Detection and Classification of Hand, Foot, and Mouth Disease
             </h3>
 
+            <p class="pub-authors">Md Asif Hasan and Collaborators</p>
+            <p class="pub-venue">International Conference on Data Mining and Information Security (DMIS 2024) • Springer, Singapore</p>
+
             <p class="pub-abstract">
-              Addresses the critical challenge of high clinical variance and diagnostic latency in pediatric cutaneous pathologies. Formulates a heterogeneous ensemble architecture utilizing stacked convolutional backbones with multi-head attention. Experimental benchmarks demonstrate substantial robustness improvements over single-estimator models, mitigating localized false positives across noisy clinical datasets.
+              Addresses the clinical challenge of accurately identifying Hand, Foot, and Mouth Disease (HFMD) in young children. By training an ensemble of convolutional backbones, the framework mitigates individual model variance and delivers robust diagnostic precision on dermatological lesion images.
             </p>
 
-            <div class="pub-footer">
-              <div class="pub-tags">
-                <span class="pub-tag">Ensemble Stacking</span>
-                <span class="pub-tag">Deep Neural Networks</span>
-                <span class="pub-tag">Clinical Diagnostic ML</span>
-                <span class="pub-tag">Feature Fusion</span>
-              </div>
-              <div class="pub-actions">
-                <button type="button" class="btn btn-secondary btn-sm btn-bibtex" data-pub="hfmd">
-                  <span>BibTeX</span>
-                </button>
-                <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-                  <span>Read on Springer ↗</span>
-                </a>
-              </div>
+            <div class="pub-actions">
+              <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                <span>View on Springer</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+              <button class="btn btn-secondary btn-sm btn-bibtex" data-pub="hfmd">
+                <span>BibTeX</span>
+              </button>
             </div>
           </article>
 
           <!-- Paper 2 -->
-          <article class="pub-card" data-tilt>
+          <article class="pub-card">
             <div class="pub-meta-row">
-              <span class="pub-venue-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>DMIS 2024 • Springer LNNS</span>
-              </span>
-              <span class="pub-year">DOI: 10.1007/978-981-96-6066-7_32</span>
+              <span class="pub-badge-springer">Springer LNNS</span>
+              <span class="pub-badge-year">DMIS 2024</span>
+              <span class="pub-badge-year">DOI: 10.1007/978-981-96-6066-7_32</span>
             </div>
 
             <h3 class="pub-title">
-              <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32" target="_blank" rel="noopener">
-                Classification of Peptic Ulcer and Digestive Tract Disorders Using Endoscopic Images
-              </a>
+              Classification of Peptic Ulcer and Digestive Tract Disorders Using Endoscopic Images
             </h3>
 
+            <p class="pub-authors">Md Asif Hasan and Collaborators</p>
+            <p class="pub-venue">International Conference on Data Mining and Information Security (DMIS 2024) • Springer, Singapore</p>
+
             <p class="pub-abstract">
-              Investigates deep mucosal feature extraction on upper gastrointestinal endoscopic examinations. Implements specialized data normalization and focal-loss weighting to mitigate severe endoscopic reflection artifacts and minority pathology imbalance, delivering reliable classification thresholds suited for auxiliary real-time endoscopic triage.
+              Diagnosing gastrointestinal tract disorders from endoscopic imagery requires high visual discrimination across subtle mucosal changes. This study applies transfer learning across endoscopic datasets to categorize ulcerations and lesions, assisting medical professionals with automated triage.
             </p>
 
-            <div class="pub-footer">
-              <div class="pub-tags">
-                <span class="pub-tag">Endoscopic Computer Vision</span>
-                <span class="pub-tag">Focal Loss Optimization</span>
-                <span class="pub-tag">Gastrointestinal Pathology</span>
-              </div>
-              <div class="pub-actions">
-                <button type="button" class="btn btn-secondary btn-sm btn-bibtex" data-pub="peptic">
-                  <span>BibTeX</span>
-                </button>
-                <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-                  <span>Read on Springer ↗</span>
-                </a>
-              </div>
+            <div class="pub-actions">
+              <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                <span>View on Springer</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+              <button class="btn btn-secondary btn-sm btn-bibtex" data-pub="peptic">
+                <span>BibTeX</span>
+              </button>
             </div>
           </article>
 
           <!-- Paper 3 -->
-          <article class="pub-card" data-tilt>
+          <article class="pub-card">
             <div class="pub-meta-row">
-              <span class="pub-venue-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>ICTCS 2024 • Springer LNNS</span>
-              </span>
-              <span class="pub-year">DOI: 10.1007/978-981-96-5607-3_13</span>
+              <span class="pub-badge-springer">Springer LNNS</span>
+              <span class="pub-badge-year">ICTCS 2024</span>
+              <span class="pub-badge-year">DOI: 10.1007/978-981-96-5607-3_13</span>
             </div>
 
             <h3 class="pub-title">
-              <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13" target="_blank" rel="noopener">
-                Rose Disease Detection Using YOLO: A Deep Learning-Based Approach
-              </a>
+              Rose Disease Detection Using YOLO: A Deep Learning-Based Approach
             </h3>
 
+            <p class="pub-authors">Md Asif Hasan and Collaborators</p>
+            <p class="pub-venue">9th International Conference on ICT for Sustainable Development (ICTCS 2024) • Springer, Singapore</p>
+
             <p class="pub-abstract">
-              Engineered a single-stage real-time detector tailored for edge hardware deployment in high-density agronomic settings. Optimizes multiscale feature pyramid pooling and anchor aspect ratios to detect early micro-lesions under erratic natural illumination, balancing inference latency with high average precision (AP).
+              Automates the visual identification of common rose plant pathologies in agricultural cultivation. Evaluates real-time single-stage object detectors (YOLO) to provide fast, localized bounding box detection of foliar infections under variable field lighting conditions.
             </p>
 
-            <div class="pub-footer">
-              <div class="pub-tags">
-                <span class="pub-tag">YOLO Architecture</span>
-                <span class="pub-tag">Edge Deployment</span>
-                <span class="pub-tag">Foliar Micro-Pathology</span>
-                <span class="pub-tag">Real-Time Inference</span>
-              </div>
-              <div class="pub-actions">
-                <button type="button" class="btn btn-secondary btn-sm btn-bibtex" data-pub="rose">
-                  <span>BibTeX</span>
-                </button>
-                <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-                  <span>Read on Springer ↗</span>
-                </a>
-              </div>
+            <div class="pub-actions">
+              <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                <span>View on Springer</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+              <button class="btn btn-secondary btn-sm btn-bibtex" data-pub="rose">
+                <span>BibTeX</span>
+              </button>
             </div>
           </article>
-
         </div>
       </div>
     </section>
 
     <!-- ======================================================================
-         03. Flagship Research Systems
+         05. Software & Systems Engineering Projects
          ====================================================================== -->
-    <section id="systems" class="section">
+    <section id="projects" class="projects-section">
       <div class="container">
-        <div class="section-header">
-          <div class="section-tag">System Architectures</div>
-          <h2 class="section-title">Flagship Research Systems</h2>
-          <p class="section-desc">
-            Experimental implementations bridging theoretical machine learning models with distributed systems and physical networks.
-          </p>
-        </div>
+        <span class="section-tag">Code & Prototypes</span>
+        <h2 class="section-title text-gradient">Software Projects</h2>
+        <p class="section-desc">
+          A selection of machine learning implementations, networking simulators, and full-stack software systems.
+        </p>
 
-        <div class="systems-grid">
-
-          <!-- System 1 -->
-          <div class="system-card" data-tilt>
+        <div class="projects-grid">
+          <!-- Project 1: EWU_MIND -->
+          <div class="project-card">
             <div>
-              <div class="system-header">
-                <div class="system-code">SYSTEM // RES-01</div>
-                <h3 class="system-title">Explainable IoT Intrusion Detection & DTN Optimization</h3>
+              <div class="project-header">
+                <span class="project-cat">Machine Learning • NLP</span>
+                <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener" class="project-github-btn" aria-label="GitHub Repo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
               </div>
-              <p class="system-desc">
-                Investigates opportunistic communication reliability and attack detection across Delay-Tolerant Networks (DTN) in communication-compromised disaster scenarios using the ONE simulator.
+              <h3 class="project-title">EWU_MIND: News Recommender</h3>
+              <p class="project-desc">
+                A personalized news recommendation system utilizing the Microsoft News Dataset (MIND). Implements Neural Collaborative Filtering (NCF) with custom user-article representation learning.
               </p>
-              <ul class="system-features">
-                <li>Analyzed packet drop and blackhole attack topologies in partitioned ad-hoc environments.</li>
-                <li>Coupled network simulation with gradient-based feature attribution to expose anomalous routing decisions.</li>
-                <li>Simulated realistic urban catastrophe mobility models for autonomous emergency node triage.</li>
-              </ul>
             </div>
-            <div class="pub-footer" style="padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-              <div class="pub-tags">
-                <span class="pub-tag">ONE Simulator</span>
-                <span class="pub-tag">DTN Protocols</span>
-                <span class="pub-tag">Java / Python</span>
-                <span class="pub-tag">IoT Security</span>
-              </div>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">PyTorch</span>
+              <span class="project-tag">NCF</span>
+              <span class="project-tag">MIND Dataset</span>
             </div>
           </div>
 
-          <!-- System 2 -->
-          <div class="system-card" data-tilt>
+          <!-- Project 2: AI Chess Bot -->
+          <div class="project-card">
             <div>
-              <div class="system-header">
-                <div class="system-code">SYSTEM // RES-02</div>
-                <h3 class="system-title">Deep RL Quantitative Trading & Temporal Micro-Dynamics</h3>
+              <div class="project-header">
+                <span class="project-cat">Reinforcement Learning</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="project-github-btn" aria-label="GitHub Repo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
               </div>
-              <p class="system-desc">
-                Multi-agent reinforcement learning execution engine examining non-stationary temporal dynamics and cross-asset price propagation across algorithmic financial markets.
-              </p>
-              <ul class="system-features">
-                <li>Formulated custom risk-penalized reward functions (Sharpe/Sortino) within continuous action spaces (PPO / DDPG).</li>
-                <li>LSTM-based temporal attention modeling cross-cryptocurrency price transmission mechanisms.</li>
-                <li>Order-book simulation assessing execution slippage and market microstructure impact.</li>
-              </ul>
-            </div>
-            <div class="pub-footer" style="padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-              <div class="pub-tags">
-                <span class="pub-tag">PyTorch</span>
-                <span class="pub-tag">PPO / DDPG</span>
-                <span class="pub-tag">Time Series</span>
-                <span class="pub-tag">Quantitative ML</span>
-              </div>
-              <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
-                <span>View Repository ↗</span>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         04. Academic Background & Rigorous Competencies
-         ====================================================================== -->
-    <section id="academic" class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Scholarly Foundation</div>
-          <h2 class="section-title">Academic Background & Rigor</h2>
-          <p class="section-desc">
-            Formal degrees, mathematical grounding, and specialized technical competencies developed at East West University.
-          </p>
-        </div>
-
-        <div class="academic-grid">
-
-          <!-- Left: Education Timeline -->
-          <div class="academic-card">
-            <h3 class="system-title" style="margin-bottom: 1.5rem;">Degrees & Credentials</h3>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-degree">M.Sc. in Computer Science & Engineering</div>
-                <div class="timeline-institution">East West University, Dhaka, Bangladesh</div>
-                <div class="timeline-meta">Focus: Advanced Deep Neural Networks, Reinforcement Learning, Explainable AI</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-degree">B.Sc. in Computer Science & Engineering</div>
-                <div class="timeline-institution">East West University, Dhaka, Bangladesh</div>
-                <div class="timeline-meta">Focus: Operating Systems, Distributed Systems, Algorithms & Machine Learning</div>
-              </div>
-            </div>
-
-            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
-              <div class="skills-title">Distinctive Field Competencies</div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
-                <strong>Licensed HAM Radio Operator (Call Sign: S21NEO)</strong>: Practical telemetry, antenna resonance, and ad-hoc packet communication research under disrupted signal conditions.<br><br>
-                <strong>Algorithm Problem Solving</strong>: Solved &gt;1,000 algorithmic challenges on Codeforces, HackerRank, and Beecrowd with focus on graphs, dynamic programming, and combinatorial optimization.
+              <h3 class="project-title">AI Chess Engine</h3>
+              <p class="project-desc">
+                An intelligent chess agent combining Deep Q-Networks (DQN) with Monte Carlo Tree Search (MCTS) for tactical board evaluation and search space pruning.
               </p>
             </div>
-          </div>
-
-          <!-- Right: Methodological Skills -->
-          <div class="academic-card">
-            <h3 class="system-title" style="margin-bottom: 1.5rem;">Research & Technical Competencies</h3>
-
-            <div class="skills-category">
-              <div class="skills-title">Machine Learning & Deep Architectures</div>
-              <div class="skills-chips">
-                <span class="skill-chip">PyTorch</span>
-                <span class="skill-chip">TensorFlow</span>
-                <span class="skill-chip">CUDA Acceleration</span>
-                <span class="skill-chip">Transformers & Attention</span>
-                <span class="skill-chip">Reinforcement Learning (PPO/DDPG)</span>
-                <span class="skill-chip">Ensemble Stacking</span>
-                <span class="skill-chip">YOLO Object Detection</span>
-                <span class="skill-chip">SHAP / Explainability</span>
-              </div>
-            </div>
-
-            <div class="skills-category">
-              <div class="skills-title">Systems, Networks & Security</div>
-              <div class="skills-chips">
-                <span class="skill-chip">IoT Intrusion Detection</span>
-                <span class="skill-chip">ONE Simulator</span>
-                <span class="skill-chip">Delay-Tolerant Networking</span>
-                <span class="skill-chip">Blockchain Consensus</span>
-                <span class="skill-chip">Smart Contracts</span>
-                <span class="skill-chip">Wireshark & Packet Triage</span>
-                <span class="skill-chip">Linux Kernel & Kali</span>
-              </div>
-            </div>
-
-            <div class="skills-category">
-              <div class="skills-title">Languages & Scientific Computing</div>
-              <div class="skills-chips">
-                <span class="skill-chip">Python</span>
-                <span class="skill-chip">C / C++</span>
-                <span class="skill-chip">Java</span>
-                <span class="skill-chip">SQL / PostgreSQL</span>
-                <span class="skill-chip">NumPy / SciPy</span>
-                <span class="skill-chip">Bash / Shell</span>
-              </div>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Q-Learning</span>
+              <span class="project-tag">DQN</span>
+              <span class="project-tag">MCTS</span>
             </div>
           </div>
 
+          <!-- Project 3: ASICoin -->
+          <div class="project-card">
+            <div>
+              <div class="project-header">
+                <span class="project-cat">Blockchain & Cryptography</span>
+                <a href="https://github.com/asicoltd/ASICoin" target="_blank" rel="noopener" class="project-github-btn" aria-label="GitHub Repo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+              </div>
+              <h3 class="project-title">ASICoin Cryptocurrency</h3>
+              <p class="project-desc">
+                An experimental blockchain protocol implementing proof-of-work consensus, wallet transaction verification, and exploratory machine learning heuristics for anomaly detection in ledger transactions.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Blockchain</span>
+              <span class="project-tag">Cryptography</span>
+              <span class="project-tag">P2P Network</span>
+            </div>
+          </div>
+
+          <!-- Project 4: ONE DTN Simulator -->
+          <div class="project-card">
+            <div>
+              <div class="project-header">
+                <span class="project-cat">Networking Simulation</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="project-github-btn" aria-label="GitHub Repo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+              </div>
+              <h3 class="project-title">ONE DTN Simulator Extensions</h3>
+              <p class="project-desc">
+                Extended the Opportunistic Network Environment (ONE) simulator with customized contact-based routing protocols (Epidemic, PRoPHET, Spray and Wait) under intermittent connectivity scenarios.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Java</span>
+              <span class="project-tag">DTN</span>
+              <span class="project-tag">Routing Protocols</span>
+              <span class="project-tag">Mesh</span>
+            </div>
+          </div>
+
+          <!-- Project 5: Medicine Shop Inventory -->
+          <div class="project-card">
+            <div>
+              <div class="project-header">
+                <span class="project-cat">Full-Stack Application</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="project-github-btn" aria-label="GitHub Repo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+              </div>
+              <h3 class="project-title">Medicine Pharmacy Management</h3>
+              <p class="project-desc">
+                Production-grade inventory software tracking real-time medicine stock, automated batch expiry alerts, customer invoicing, and financial reporting.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">PHP</span>
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">Inventory</span>
+            </div>
+          </div>
+
+          <!-- Project 6: Scouting Hacks -->
+          <div class="project-card">
+            <div>
+              <div class="project-header">
+                <span class="project-cat">Utility & Geospatial</span>
+                <a href="https://asicoltd.github.io/ScoutingHacks/pages/mapMaker/mm.html" target="_blank" rel="noopener" class="project-github-btn" aria-label="Tool Link">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                </a>
+              </div>
+              <h3 class="project-title">Scouting Tools: Map Maker & Ciphers</h3>
+              <p class="project-desc">
+                Interactive web utilities built for outdoor navigation, geometric map generation with D3.js, and classical cipher encoders for scout communication.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">D3.js</span>
+              <span class="project-tag">Cryptography</span>
+              <span class="project-tag">GIS</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================================
-         05. Curated Open-Source Repository Archive
+         06. Technical Skills Section
          ====================================================================== -->
-    <section id="repositories" class="section">
+    <section id="skills" class="skills-section">
       <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Open Source & Artifacts</div>
-          <h2 class="section-title">Selected Code Repositories</h2>
-          <p class="section-desc">
-            Direct GitHub artifacts, dataset pipelines, and empirical implementations available for inspection.
-          </p>
-        </div>
+        <span class="section-tag">Toolkit</span>
+        <h2 class="section-title text-gradient">Technical Skills</h2>
+        <p class="section-desc">
+          Technologies and tools I have used across research experiments, software products, and hardware projects.
+        </p>
 
-        <div class="repo-table-container">
-          <table class="repo-table">
-            <thead>
-              <tr>
-                <th>Repository</th>
-                <th>Research Focus</th>
-                <th>Primary Stack</th>
-                <th>Link</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener" class="repo-name-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                    <span>EWU_MIND</span>
-                  </a>
-                </td>
-                <td class="repo-desc">Neural Collaborative Filtering (NCF) news recommendation engine evaluated on the MIND benchmark.</td>
-                <td class="repo-lang">PyTorch • Python</td>
-                <td>
-                  <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">GitHub ↗</a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data" target="_blank" rel="noopener" class="repo-name-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                    <span>Temporal-Crypto-Analysis</span>
-                  </a>
-                </td>
-                <td class="repo-desc">LSTM-based inter-asset temporal price forecasting and volatility spillover analysis.</td>
-                <td class="repo-lang">Python • Jupyter</td>
-                <td>
-                  <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">GitHub ↗</a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="repo-name-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                    <span>Main GitHub Profile</span>
-                  </a>
-                </td>
-                <td class="repo-desc">Full collection of open-source research prototypes, consensus experiments, and algorithms.</td>
-                <td class="repo-lang">Multi-Language</td>
-                <td>
-                  <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Profile ↗</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="skills-grid">
+          <div class="skills-box">
+            <h4><i class="fas fa-code"></i> Languages</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">C</span>
+              <span class="skill-pill">C++</span>
+              <span class="skill-pill">Java</span>
+              <span class="skill-pill">JavaScript</span>
+              <span class="skill-pill">PHP</span>
+              <span class="skill-pill">SQL</span>
+            </div>
+          </div>
+
+          <div class="skills-box">
+            <h4><i class="fas fa-brain"></i> AI & Machine Learning</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">PyTorch</span>
+              <span class="skill-pill">TensorFlow</span>
+              <span class="skill-pill">Scikit-Learn</span>
+              <span class="skill-pill">YOLO</span>
+              <span class="skill-pill">OpenCV</span>
+              <span class="skill-pill">Ensemble Learning</span>
+              <span class="skill-pill">Reinforcement Learning</span>
+            </div>
+          </div>
+
+          <div class="skills-box">
+            <h4><i class="fas fa-server"></i> Systems & Backend</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Linux</span>
+              <span class="skill-pill">Git / GitHub</span>
+              <span class="skill-pill">Docker</span>
+              <span class="skill-pill">REST APIs</span>
+              <span class="skill-pill">Flask</span>
+              <span class="skill-pill">MySQL</span>
+              <span class="skill-pill">DTN (ONE Simulator)</span>
+            </div>
+          </div>
+
+          <div class="skills-box">
+            <h4><i class="fas fa-broadcast-tower"></i> Radio & Hardware</h4>
+            <div class="skill-pills">
+              <span class="skill-pill">Amateur Radio (HAM)</span>
+              <span class="skill-pill">Callsign: S21NEO</span>
+              <span class="skill-pill">SDR (Software Defined Radio)</span>
+              <span class="skill-pill">Antenna Modeling</span>
+              <span class="skill-pill">Emergency Comms</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ======================================================================
-         06. Academic Contact & Discourse
+         07. Beyond Code (Human Life, Passions & Social Work)
          ====================================================================== -->
-    <section id="contact" class="section">
+    <section id="life" class="life-section">
+      <div class="container">
+        <span class="section-tag">Human Side</span>
+        <h2 class="section-title text-gradient">Beyond The Screen</h2>
+        <p class="section-desc">
+          Life is more than writing code. Here are the disciplines, hobbies, and community causes that shape my daily life.
+        </p>
+
+        <div class="life-grid">
+          <!-- HAM Radio -->
+          <div class="life-card">
+            <span class="life-icon">📻</span>
+            <h3 class="life-title">Amateur Radio (S21NEO)</h3>
+            <p class="life-desc">
+              Licensed amateur radio operator holding callsign <strong>S21NEO</strong>. I build wire antennas, experiment with Software-Defined Radio (SDR), and study emergency communication nets.
+            </p>
+          </div>
+
+          <!-- Martial Arts -->
+          <div class="life-card">
+            <span class="life-icon">🥋</span>
+            <h3 class="life-title">Karate (Blue Belt)</h3>
+            <p class="life-desc">
+              Practicing traditional Karate has instilled mental focus, body control, and persistent discipline that carries directly into long research and debugging sessions.
+            </p>
+          </div>
+
+          <!-- Rover Scouting -->
+          <div class="life-card">
+            <span class="life-icon">🏕️</span>
+            <h3 class="life-title">Scouting & Humanitarian Aid</h3>
+            <p class="life-desc">
+              Active Rover Scout participating in emergency disaster relief operations, winter clothing distribution, community blood drives, and youth survival training.
+            </p>
+          </div>
+
+          <!-- Distance Running -->
+          <div class="life-card">
+            <span class="life-icon">🏃‍♂️</span>
+            <h3 class="life-title">Distance Running</h3>
+            <p class="life-desc">
+              Long-distance running is my meditation. Running half-marathon distances trains the patience and steady pacing needed to tackle multi-month engineering projects.
+            </p>
+          </div>
+
+          <!-- Debating -->
+          <div class="life-card">
+            <span class="life-icon">🎙️</span>
+            <h3 class="life-title">Debating & Public Speaking</h3>
+            <p class="life-desc">
+              Participated in parliamentary debate tournaments at East West University, refining argumentation, critical inquiry, and clear technical communication.
+            </p>
+          </div>
+
+          <!-- Creative Coding -->
+          <div class="life-card">
+            <span class="life-icon">🎨</span>
+            <h3 class="life-title">Creative Hacking & Games</h3>
+            <p class="life-desc">
+              When I need a break from serious machine learning, I write browser mini-apps, puzzle solvers, and algorithmic games to keep problem-solving playful.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         08. Contact & Socials
+         ====================================================================== -->
+    <section id="contact" class="contact-section">
       <div class="container">
         <div class="contact-card">
-          <div class="section-tag" style="justify-content: center;">Academic Discourse</div>
-          <h2 class="contact-title">Inquiries & Prospective Supervision</h2>
-          <p class="contact-lead">
-            Open to doctoral research discussions, PhD opportunities in Explainable AI / IoT Security, and collaborative research initiatives.
+          <span class="section-tag">Get in Touch</span>
+          <h2 class="contact-title text-gradient">Let's Connect</h2>
+          <p class="contact-desc">
+            Whether you want to discuss machine learning, talk radio propagation, collaborate on an open-source project, or just say hello—my inbox is always open.
           </p>
 
-          <div class="contact-links">
+          <div class="contact-buttons">
             <a href="mailto:asifhasan099@gmail.com" class="btn btn-primary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span>asifhasan099@gmail.com</span>
-            </a>
-            <a href="https://www.linkedin.com/in/asif-hasan-099/" target="_blank" rel="noopener" class="btn btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.738-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              <span>LinkedIn</span>
+              <span>Email: asifhasan099@gmail.com</span>
             </a>
             <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="btn btn-secondary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               <span>GitHub (@asicoltd)</span>
             </a>
-            <a href="assets/docs/PhD_Research_Proposal_Md_Asif_Hasan.pdf" target="_blank" rel="noopener" class="btn btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              <span class="btn-proposal-text-desktop">Research Proposal (PDF)</span>
-            <span class="btn-proposal-text-mobile">Proposal ↗</span>
-            </a>
           </div>
 
-          <div class="footer-bottom">
-            <span>Asif Hasan © 2026 • AI & Machine Learning Researcher</span>
-            <span>Hosted locally • Designed with Mathematical & Spatial Continuity</span>
+          <div class="footer-channels">
+            <a href="https://www.linkedin.com/in/asif-hasan-099/" target="_blank" rel="noopener" class="channel-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.738-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://scholar.google.com/citations?user=IxoDIJYAAAAJ" target="_blank" rel="noopener" class="channel-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4 3.18v6.82h3v-4.5c0-.83.67-1.5 1.5-1.5h7c.83 0 1.5.67 1.5 1.5v4.5h3v-6.82l4-3.18L12 0z"/></svg>
+              <span>Google Scholar</span>
+            </a>
+            <a href="https://www.kaggle.com/asicoltd" target="_blank" rel="noopener" class="channel-link">
+              <span style="font-weight: 700; font-family: var(--font-mono);">K</span>
+              <span>Kaggle</span>
+            </a>
+            <a href="https://huggingface.co/asicoltd" target="_blank" rel="noopener" class="channel-link">
+              <span>🤗</span>
+              <span>Hugging Face</span>
+            </a>
           </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>Asif Hasan (AsicoLTD) © 2026</span>
+          <span>Designed with care • S21NEO • Dhaka, Bangladesh</span>
         </div>
       </div>
     </section>
 
-  </div>
+  </div><!-- End .page-wrapper -->
 
   <!-- ======================================================================
-       BibTeX Modal Dialog
+       Interactive Mini-Apps Modal
        ====================================================================== -->
-  <div id="bibtex-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-box">
-      <button id="modal-close-btn" class="modal-close" aria-label="Close BibTeX dialog">✕</button>
-      <div id="modal-title" class="modal-title">// BIBTEX CITATION ENTRY</div>
-      <pre id="bibtex-content" class="bibtex-pre"></pre>
-      <button id="copy-bibtex-btn" class="btn btn-accent btn-sm" type="button">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        <span>Copy Citation to Clipboard</span>
-      </button>
+  <div id="interactive-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span style="font-size: 1.3rem;">🎮</span>
+          <h3 id="interactive-modal-title" class="modal-title">Interactive Mini-App</h3>
+        </div>
+        <button id="close-interactive-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="interactive-frame" src="" title="Interactive Mini-App"></iframe>
+      </div>
     </div>
   </div>
 
-  <!-- Toast Alert -->
-  <div id="toast-alert" class="toast-alert" role="status" aria-live="polite"></div>
+  <!-- ======================================================================
+       BibTeX Citation Modal
+       ====================================================================== -->
+  <div id="bibtex-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container" style="max-width: 650px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <h3 class="modal-title">BibTeX Citation</h3>
+        </div>
+        <button id="close-bibtex-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body">
+        <pre id="bibtex-content" class="bibtex-pre"></pre>
+      </div>
+      <div class="modal-footer">
+        <button id="copy-bibtex-btn" class="btn btn-primary btn-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copy Citation</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <!-- Libraries: Three.js, GSAP, Lenis Smooth Scroll -->
+  <!-- Toast Notification -->
+  <div id="toast-alert" class="toast-alert"></div>
+
+  <!-- External Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
 
-  <!-- Application Logic -->
+  <!-- Core Script -->
   <script src="script.js"></script>
-
 </body>
 </html>
