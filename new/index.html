@@ -3,728 +3,596 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asif Hasan — Portfolio & Research</title>
-  <meta name="description" content="Personal portfolio and research profile of Asif Hasan — AI/ML Researcher, Software Engineer, and B.Sc. Computer Science graduate.">
+  <title>Asif Hasan — Portfolio &amp; Research</title>
+  <meta name="description" content="Personal portfolio and research profile of Asif Hasan — AI/ML Researcher, Systems Engineer, and B.Sc. Computer Science graduate.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="theme-obsidian">
+<body>
   <!-- Interactive WebGL Canvas -->
   <canvas id="bg-canvas"></canvas>
 
-  <!-- Navigation Bar -->
-  <header class="site-header" id="site-header">
-    <div class="header-inner container">
-      <a href="#home" class="brand-link">
-        <span class="brand-symbol">◆</span>
-        <span class="brand-name">ASIF HASAN</span>
-      </a>
+  <div class="page-wrapper">
+    <!-- Navigation Bar -->
+    <header class="navbar" id="navbar">
+      <div class="container navbar-inner">
+        <a href="#home" class="brand-link">
+          <span class="brand-badge">◆</span>
+          <span class="brand-name">ASIF HASAN</span>
+        </a>
 
-      <nav class="site-nav" id="site-nav">
-        <a href="#about" class="nav-item">About</a>
-        <a href="#research" class="nav-item">Research</a>
-        <a href="#research-experience" class="nav-item">Projects</a>
-        <a href="#skills" class="nav-item">Skills</a>
-        <a href="#education" class="nav-item">Education</a>
-        <a href="#social-work" class="nav-item">Activities</a>
-        <a href="#contact" class="nav-item">Contact</a>
-      </nav>
+        <nav class="nav-menu">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#research" class="nav-link">Research</a>
+          <a href="#research-experience" class="nav-link">Projects</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#education" class="nav-link">Education</a>
+          <a href="#social-work" class="nav-link">Activities</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
 
-      <div class="header-actions">
-        <button class="btn btn-outline btn-sm app-launcher-btn" id="open-app-modal-nav">
-          <span class="btn-icon">🎮</span>
-          <span>Play Mini-App</span>
-        </button>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="nav-actions">
+          <button class="btn btn-primary btn-sm btn-play-miniapp">
+            <span>🎮 Play Mini-App</span>
+          </button>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="page-main">
-    <!-- 1. HERO SECTION (#home) -->
-    <section class="section hero-section" id="home">
-      <div class="container hero-container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="badge-dot"></span>
-            <span>AI Researcher &amp; Systems Engineer</span>
-          </div>
-
-          <h1 class="hero-title">
-            <span class="hero-salutation">Hi, I'm</span>
-            <span class="hero-name">Asif Hasan</span>
-          </h1>
-
-          <p class="hero-tagline">
-            Specializing in applied machine learning, explainable IoT intrusion detection, autonomous RL agents, and resilient distributed architectures.
-          </p>
-
-          <p class="hero-bio-short">
-            Computer Science graduate with 3 peer-reviewed Springer LNNS publications, extensive full-stack &amp; systems engineering experience, and a passionate builder of interactive algorithms.
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="#research" class="btn btn-primary">
-              <span>View Research Papers</span>
-              <span class="btn-arrow">↓</span>
-            </a>
-            <a href="#research-experience" class="btn btn-secondary">
-              <span>Explore Projects</span>
-            </a>
-            <button class="btn btn-outline app-launcher-btn" id="open-app-modal-hero">
-              <span class="btn-icon">🎮</span>
-              <span>Play Mini-Apps</span>
-            </button>
-          </div>
-
-          <!-- Hero Highlights / Metrics -->
-          <div class="hero-metrics-grid">
-            <div class="metric-card">
-              <div class="metric-value">3</div>
-              <div class="metric-label">Springer LNNS Papers</div>
+    <main>
+      <!-- 01. HERO SECTION (#home) -->
+      <section class="hero-section" id="home">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="hero-status-row">
+              <span class="badge-green">
+                <span class="badge-dot"></span>
+                AI Researcher &amp; Systems Engineer
+              </span>
             </div>
-            <div class="metric-card">
-              <div class="metric-value">15+</div>
-              <div class="metric-label">Software &amp; AI Systems</div>
+
+            <h1 class="hero-name">Hi, I'm <span class="text-gradient">Asif Hasan</span></h1>
+            <h2 class="hero-subtitle">Machine Learning • IoT Security • Distributed Systems</h2>
+
+            <p class="hero-bio">
+              Computer Science graduate with <strong>3 peer-reviewed Springer LNNS publications</strong>. Researching explainable AI (XAI) for IoT intrusion detection, autonomous reinforcement learning systems, and resilient delay-tolerant network architectures.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#research" class="btn btn-primary">
+                <span>View Research Papers</span>
+                <span>↓</span>
+              </a>
+              <a href="#research-experience" class="btn btn-secondary">
+                <span>Explore Projects</span>
+              </a>
+              <button class="btn btn-accent btn-play-miniapp">
+                <span>🎮 Play Mini-Apps</span>
+              </button>
             </div>
-            <div class="metric-card">
-              <div class="metric-value">B.Sc.</div>
-              <div class="metric-label">Computer Science &amp; Eng.</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-value">100%</div>
-              <div class="metric-label">Open-Source Code</div>
+
+            <div class="hero-metrics">
+              <div class="metric-item">
+                <span class="metric-num">3</span>
+                <span class="metric-label">Springer Papers</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-num">15+</span>
+                <span class="metric-label">Software Builds</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-num">B.Sc.</span>
+                <span class="metric-label">Computer Science</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 2. ABOUT SECTION (#about) -->
-    <section class="section about-section" id="about">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">01 / Background</span>
+      <!-- 02. ABOUT ME SECTION (#about) -->
+      <section class="about-section" id="about">
+        <div class="container">
+          <span class="section-tag">01 / Background</span>
           <h2 class="section-title">About Me</h2>
-          <p class="section-sub">A researcher who builds and an engineer who investigates.</p>
-        </div>
+          <p class="section-desc">A researcher who builds and an engineer who investigates.</p>
 
-        <div class="about-grid">
-          <div class="about-narrative">
-            <p class="lead-text">
-              I am a Computer Science and Engineering graduate from <strong>East West University</strong> with a focus on solving complex computational challenges at the intersection of AI, networking, and distributed systems.
-            </p>
-            <p>
-              My research encompasses <strong>explainable AI (XAI)</strong> for cybersecurity, real-time computer vision pipelines for embedded systems, deep reinforcement learning for high-frequency algorithmic decision-making, and delay-tolerant routing protocols for intermittently connected networks.
-            </p>
-            <p>
-              I believe in rigorous empirical validation combined with clean, accessible engineering. When I am not training models or optimizing backpropagation pipelines, I design interactive simulations, write open-source tools, and mentor students in competitive programming.
-            </p>
-            
-            <div class="about-status-box">
-              <div class="status-indicator"></div>
-              <div class="status-text">
-                <strong>Current Focus:</strong> Exploring scalable multi-agent systems, interpretable feature representations, and delay-tolerant distributed systems.
-              </div>
-            </div>
-          </div>
-
-          <div class="about-pillars">
-            <div class="pillar-card">
-              <div class="pillar-icon">🔬</div>
-              <div class="pillar-content">
-                <h3>Interpretable Machine Learning</h3>
-                <p>Developing SHAP and LIME-based explainable AI frameworks for IoT intrusion detection and security-critical systems.</p>
-              </div>
+          <div class="about-grid">
+            <div class="about-text-content">
+              <p>
+                I am a Computer Science and Engineering graduate from <strong>East West University</strong> with a focus on solving complex computational challenges at the intersection of AI, networking, and distributed systems.
+              </p>
+              <p>
+                My research encompasses <strong>explainable AI (XAI)</strong> for cybersecurity, real-time computer vision pipelines for embedded systems, deep reinforcement learning for high-frequency algorithmic decision-making, and delay-tolerant routing protocols for intermittently connected networks.
+              </p>
+              <p>
+                I believe in rigorous empirical validation combined with clean, accessible engineering. When I am not training models or optimizing backpropagation pipelines, I design interactive simulations, write open-source tools, and mentor students in competitive programming.
+              </p>
             </div>
 
-            <div class="pillar-card">
-              <div class="pillar-icon">👁️</div>
-              <div class="pillar-content">
-                <h3>Applied Computer Vision</h3>
-                <p>Constructing real-time detection, tracking, and assistive vision algorithms deployed on edge hardware and embedded robotics.</p>
+            <div class="about-cards-col">
+              <div class="about-focus-card">
+                <h3 class="focus-card-title">🔬 Interpretable Machine Learning</h3>
+                <p class="focus-card-desc">Developing SHAP and LIME-based explainable AI frameworks for IoT intrusion detection and security-critical systems.</p>
               </div>
-            </div>
 
-            <div class="pillar-card">
-              <div class="pillar-icon">🌐</div>
-              <div class="pillar-content">
-                <h3>Distributed &amp; Opportunistic Networks</h3>
-                <p>Benchmarking buffer management, cache replacement, and message replication in Delay Tolerant Networks (ONE Simulator).</p>
+              <div class="about-focus-card">
+                <h3 class="focus-card-title">👁️ Applied Computer Vision</h3>
+                <p class="focus-card-desc">Constructing real-time detection, tracking, and assistive vision algorithms deployed on edge hardware and embedded robotics.</p>
               </div>
-            </div>
 
-            <div class="pillar-card">
-              <div class="pillar-icon">⚡</div>
-              <div class="pillar-content">
-                <h3>High-Throughput Engineering</h3>
-                <p>Architecting full-stack web platforms, blockchain ledgers, and algorithmic trading execution systems in Python, Go, and C++.</p>
+              <div class="about-focus-card">
+                <h3 class="focus-card-title">🌐 Distributed &amp; Delay-Tolerant Networks</h3>
+                <p class="focus-card-desc">Benchmarking buffer management, cache replacement, and message replication in intermittently connected mobile ad-hoc networks.</p>
+              </div>
+
+              <div class="about-focus-card">
+                <h3 class="focus-card-title">⚡ High-Throughput Engineering</h3>
+                <p class="focus-card-desc">Architecting full-stack web platforms, blockchain ledgers, and algorithmic trading execution systems in Python, Go, and C++.</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 3. RESEARCH PUBLICATIONS SECTION (#research) -->
-    <section class="section research-section" id="research">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">02 / Scholarly Output</span>
+      <!-- 03. RESEARCH PUBLICATIONS SECTION (#research) -->
+      <section id="research">
+        <div class="container">
+          <span class="section-tag">02 / Scholarly Output</span>
           <h2 class="section-title">Research Publications</h2>
-          <p class="section-sub">Peer-reviewed Springer LNNS conference papers indexed in Scopus and Web of Science.</p>
+          <p class="section-desc">Peer-reviewed Springer LNNS conference papers indexed in Scopus and Web of Science.</p>
+
+          <div class="pub-list">
+            <!-- Paper 1 -->
+            <article class="pub-card">
+              <div class="pub-meta-row">
+                <span class="pub-badge-springer">Springer LNNS • Scopus</span>
+                <span class="pub-badge-year">2024</span>
+              </div>
+              <h3 class="pub-title">
+                Explainable Artificial Intelligence for IoT Intrusion Detection: A Tree-Based Ensemble Approach with SHAP Interpretation
+              </h3>
+              <p class="pub-authors">
+                <strong>Asif Hasan</strong>, Co-Authors, et al.
+              </p>
+              <p class="pub-venue">
+                Lecture Notes in Networks and Systems (LNNS), Springer Nature
+              </p>
+              <p class="pub-abstract">
+                Proposes an explainable tree-ensemble framework evaluated against standard benchmark datasets (CICIDS, BoT-IoT) to deliver transparent, feature-level attribution of high-risk network anomalies for resource-constrained edge gateways.
+              </p>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1007/978-981-96-6063-6_25" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
+                  Springer DOI ↗
+                </a>
+                <button class="btn btn-sm btn-accent btn-bibtex" data-pub="hfmd">
+                  Copy BibTeX
+                </button>
+              </div>
+            </article>
+
+            <!-- Paper 2 -->
+            <article class="pub-card">
+              <div class="pub-meta-row">
+                <span class="pub-badge-springer">Springer LNNS • Scopus</span>
+                <span class="pub-badge-year">2023</span>
+              </div>
+              <h3 class="pub-title">
+                Deep Reinforcement Learning for Algorithmic Trading Systems in Dynamic Market Environments
+              </h3>
+              <p class="pub-authors">
+                <strong>Asif Hasan</strong>, Co-Authors, et al.
+              </p>
+              <p class="pub-venue">
+                Lecture Notes in Networks and Systems (LNNS), Springer Nature
+              </p>
+              <p class="pub-abstract">
+                Investigates Proximal Policy Optimization (PPO) and Deep Q-Networks (DQN) with custom reward shaping functions and transaction slippage modeling to outperform conventional heuristic trading benchmarks under volatile regime shifts.
+              </p>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1007/978-981-96-6066-7_32" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
+                  Springer DOI ↗
+                </a>
+                <button class="btn btn-sm btn-accent btn-bibtex" data-pub="peptic">
+                  Copy BibTeX
+                </button>
+              </div>
+            </article>
+
+            <!-- Paper 3 -->
+            <article class="pub-card">
+              <div class="pub-meta-row">
+                <span class="pub-badge-springer">Springer LNNS • Scopus</span>
+                <span class="pub-badge-year">2023</span>
+              </div>
+              <h3 class="pub-title">
+                Decentralized Identity Verification and Smart Contract Verification Framework for Academic Credentials
+              </h3>
+              <p class="pub-authors">
+                <strong>Asif Hasan</strong>, Co-Authors, et al.
+              </p>
+              <p class="pub-venue">
+                Lecture Notes in Networks and Systems (LNNS), Springer Nature
+              </p>
+              <p class="pub-abstract">
+                Presents an immutable distributed ledger architecture employing zero-knowledge proofs and audited Solidity smart contracts to combat credential forgery across higher-education institutions with low gas consumption.
+              </p>
+              <div class="pub-actions">
+                <a href="https://doi.org/10.1007/978-981-96-5607-3_13" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
+                  Springer DOI ↗
+                </a>
+                <button class="btn btn-sm btn-accent btn-bibtex" data-pub="rose">
+                  Copy BibTeX
+                </button>
+              </div>
+            </article>
+          </div>
         </div>
+      </section>
 
-        <div class="publications-list">
-          <!-- Paper 1 -->
-          <article class="paper-card">
-            <div class="paper-meta">
-              <span class="paper-badge">Springer LNNS • Scopus</span>
-              <span class="paper-year">2024</span>
-            </div>
-            <h3 class="paper-title">
-              Explainable Artificial Intelligence for IoT Intrusion Detection: A Tree-Based Ensemble Approach with SHAP Interpretation
-            </h3>
-            <p class="paper-authors">
-              <strong>Asif Hasan</strong>, Co-Authors, et al.
-            </p>
-            <p class="paper-venue">
-              <em>Lecture Notes in Networks and Systems (LNNS), Springer Nature</em>
-            </p>
-            <p class="paper-summary">
-              Proposes an explainable tree-ensemble framework evaluated against standard benchmark datasets (CICIDS, BoT-IoT) to deliver transparent, feature-level attribution of high-risk network anomalies for resource-constrained edge gateways.
-            </p>
-            <div class="paper-tags">
-              <span class="tag">XAI</span>
-              <span class="tag">SHAP &amp; LIME</span>
-              <span class="tag">IoT Security</span>
-              <span class="tag">Ensemble Learning</span>
-              <span class="tag">Random Forest / XGBoost</span>
-            </div>
-            <div class="paper-actions">
-              <a href="https://doi.org" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
-                <span>Springer DOI</span> ↗
-              </a>
-              <button class="btn btn-sm btn-secondary copy-bibtex-btn" data-bibtex="@article{hasan2024xai, title={Explainable Artificial Intelligence for IoT Intrusion Detection}, author={Hasan, Asif}, journal={Springer LNNS}, year={2024}}">
-                <span>Copy BibTeX</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Paper 2 -->
-          <article class="paper-card">
-            <div class="paper-meta">
-              <span class="paper-badge">Springer LNNS • Scopus</span>
-              <span class="paper-year">2023</span>
-            </div>
-            <h3 class="paper-title">
-              Deep Reinforcement Learning for Algorithmic Trading Systems in Dynamic Market Environments
-            </h3>
-            <p class="paper-authors">
-              <strong>Asif Hasan</strong>, Co-Authors, et al.
-            </p>
-            <p class="paper-venue">
-              <em>Lecture Notes in Networks and Systems (LNNS), Springer Nature</em>
-            </p>
-            <p class="paper-summary">
-              Investigates Proximal Policy Optimization (PPO) and Deep Q-Networks (DQN) with custom reward shaping functions and transaction slippage modeling to outperform conventional heuristic trading benchmarks under volatile regime shifts.
-            </p>
-            <div class="paper-tags">
-              <span class="tag">Deep RL</span>
-              <span class="tag">PPO / DQN</span>
-              <span class="tag">Algorithmic Trading</span>
-              <span class="tag">Quantitative Finance</span>
-              <span class="tag">Reward Shaping</span>
-            </div>
-            <div class="paper-actions">
-              <a href="https://doi.org" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
-                <span>Springer DOI</span> ↗
-              </a>
-              <button class="btn btn-sm btn-secondary copy-bibtex-btn" data-bibtex="@article{hasan2023rltrading, title={Deep Reinforcement Learning for Algorithmic Trading Systems in Dynamic Market Environments}, author={Hasan, Asif}, journal={Springer LNNS}, year={2023}}">
-                <span>Copy BibTeX</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Paper 3 -->
-          <article class="paper-card">
-            <div class="paper-meta">
-              <span class="paper-badge">Springer LNNS • Scopus</span>
-              <span class="paper-year">2023</span>
-            </div>
-            <h3 class="paper-title">
-              Decentralized Identity Verification and Smart Contract Verification Framework for Academic Credentials
-            </h3>
-            <p class="paper-authors">
-              <strong>Asif Hasan</strong>, Co-Authors, et al.
-            </p>
-            <p class="paper-venue">
-              <em>Lecture Notes in Networks and Systems (LNNS), Springer Nature</em>
-            </p>
-            <p class="paper-summary">
-              Presents an immutable distributed ledger architecture employing zero-knowledge proofs and audited Solidity smart contracts to combat credential forgery across higher-education institutions with low gas consumption.
-            </p>
-            <div class="paper-tags">
-              <span class="tag">Blockchain</span>
-              <span class="tag">Smart Contracts</span>
-              <span class="tag">Decentralized ID</span>
-              <span class="tag">Cryptography</span>
-              <span class="tag">Solidity</span>
-            </div>
-            <div class="paper-actions">
-              <a href="https://doi.org" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
-                <span>Springer DOI</span> ↗
-              </a>
-              <button class="btn btn-sm btn-secondary copy-bibtex-btn" data-bibtex="@article{hasan2023blockchain, title={Decentralized Identity Verification and Smart Contract Verification Framework for Academic Credentials}, author={Hasan, Asif}, journal={Springer LNNS}, year={2023}}">
-                <span>Copy BibTeX</span>
-              </button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. RESEARCH EXPERIENCE & PROJECTS SECTION (#research-experience) -->
-    <section class="section projects-section" id="research-experience">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">03 / Engineering &amp; Systems</span>
+      <!-- 04. PROJECTS & EXPERIENCE (#research-experience) -->
+      <section id="research-experience">
+        <div class="container">
+          <span class="section-tag">03 / Engineering &amp; Systems</span>
           <h2 class="section-title">Projects &amp; Experience</h2>
-          <p class="section-sub">Production-grade software, AI systems, and research simulators built from the ground up.</p>
+          <p class="section-desc">Production-grade software, AI systems, and research simulators built from the ground up.</p>
+
+          <div class="projects-grid">
+            <!-- Project 1: EWU_MIND -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Computer Vision / Assistive AI</span>
+                <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">EWU_MIND: Assistive Vision Engine</h3>
+              <p class="project-desc">
+                Real-time multi-modal computer vision and sensor fusion assistive pipeline created to enable spatial awareness, obstacle clearance, and navigation support using lightweight neural backbones.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">OpenCV</span>
+                <span class="project-tag">PyTorch</span>
+                <span class="project-tag">Edge AI</span>
+              </div>
+            </div>
+
+            <!-- Project 2: AI Chess Engine -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Heuristic &amp; Minimax Search</span>
+                <a href="https://github.com/asicoltd/AI_Chess" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">AI Chess Engine</h3>
+              <p class="project-desc">
+                High-performance chess engine implementing Alpha-Beta pruning, iterative deepening, piece-square evaluation matrices, and transposition tables for optimal tactical depth.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">C++</span>
+                <span class="project-tag">Python</span>
+                <span class="project-tag">Alpha-Beta</span>
+                <span class="project-tag">Bitboards</span>
+              </div>
+            </div>
+
+            <!-- Project 3: ASICoin -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Distributed Ledger / Crypto</span>
+                <a href="https://github.com/asicoltd/ASICoin" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">ASICoin: Blockchain from Scratch</h3>
+              <p class="project-desc">
+                A distributed proof-of-work blockchain implementation featuring cryptographic transaction validation (SHA-256), UTXO tracking, peer-to-peer gossip networking, and dynamic mining difficulty adjustments.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">P2P Sockets</span>
+                <span class="project-tag">SHA-256</span>
+                <span class="project-tag">Cryptography</span>
+              </div>
+            </div>
+
+            <!-- Project 4: ONE DTN Simulator Extension -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Networking Research</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">ONE DTN Routing &amp; Buffer Evaluation</h3>
+              <p class="project-desc">
+                Extensive simulation and comparative evaluation of Epidemic, Prophet, and Spray-and-Wait routing algorithms across intermittent, partitioned mobile ad-hoc networks with varying buffer policies.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Java</span>
+                <span class="project-tag">The ONE Simulator</span>
+                <span class="project-tag">Network Graphs</span>
+              </div>
+            </div>
+
+            <!-- Project 5: Medicine Shop Management -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Full Stack Enterprise</span>
+                <a href="https://github.com/asicoltd/Medicine-Shop-Management-System" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">Medicine Shop Management System</h3>
+              <p class="project-desc">
+                Robust relational enterprise pharmacy inventory, invoice generation, point-of-sale, and stock monitoring software ensuring zero-loss audit trails and real-time ledger accounting.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">C# / .NET</span>
+                <span class="project-tag">SQL Server</span>
+                <span class="project-tag">WPF</span>
+              </div>
+            </div>
+
+            <!-- Project 6: Ride Sharing Platform Architecture -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Distributed Systems</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">Distributed Ride-Sharing Platform</h3>
+              <p class="project-desc">
+                Microservices-oriented architecture handling geospatial proximity lookups, driver-rider matching algorithms, real-time WebSocket state streaming, and trip routing.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Node.js</span>
+                <span class="project-tag">Redis Geo</span>
+                <span class="project-tag">PostgreSQL</span>
+                <span class="project-tag">WebSockets</span>
+              </div>
+            </div>
+
+            <!-- Project 7: Automated Lending Library -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Information Systems</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">Digital Lending Library System</h3>
+              <p class="project-desc">
+                Automated resource cataloging, member checkout tracking, fine calculation schedules, and bibliographic indexing system with multi-role access controls.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">PHP</span>
+                <span class="project-tag">MySQL</span>
+                <span class="project-tag">REST APIs</span>
+              </div>
+            </div>
+
+            <!-- Project 8: Scouting Automation & Scoring Tools -->
+            <div class="project-card">
+              <div class="project-header">
+                <span class="project-cat">Automation &amp; Tooling</span>
+                <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-github-btn" title="View on GitHub">GitHub ↗</a>
+              </div>
+              <h3 class="project-title">Event Scoring &amp; Scouting Platform</h3>
+              <p class="project-desc">
+                Custom scoring, dispatch, and badge evaluation web utilities used for tracking real-time scout jamboree logistics, patrol grading, and field navigation challenges.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">JavaScript</span>
+                <span class="project-tag">HTML5 / CSS3</span>
+                <span class="project-tag">LocalStorage</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="projects-grid">
-          <!-- Project 1: EWU_MIND -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Computer Vision / Assistive AI</span>
-              <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">EWU_MIND: Assistive Vision Engine</h3>
-            <p class="project-desc">
-              Real-time multi-modal computer vision and sensor fusion assistive pipeline created to enable spatial awareness, obstacle clearance, and navigation support using lightweight neural backbones.
-            </p>
-            <div class="project-stack">
-              <span>Python</span>
-              <span>OpenCV</span>
-              <span>PyTorch</span>
-              <span>Edge Devices</span>
-            </div>
-          </div>
-
-          <!-- Project 2: AI Chess Engine -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Heuristic &amp; Minimax Search</span>
-              <a href="https://github.com/asicoltd/AI_Chess" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">AI Chess Engine</h3>
-            <p class="project-desc">
-              High-performance chess engine implementing Alpha-Beta pruning, iterative deepening, piece-square evaluation matrices, and transposition tables for optimal tactical depth.
-            </p>
-            <div class="project-stack">
-              <span>C++</span>
-              <span>Python</span>
-              <span>Alpha-Beta</span>
-              <span>Bitboards</span>
-            </div>
-          </div>
-
-          <!-- Project 3: ASICoin -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Distributed Ledger / Crypto</span>
-              <a href="https://github.com/asicoltd/ASICoin" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">ASICoin: Blockchain from Scratch</h3>
-            <p class="project-desc">
-              A distributed proof-of-work blockchain implementation featuring cryptographic transaction validation (SHA-256), UTXO tracking, peer-to-peer gossip networking, and dynamic mining difficulty adjustments.
-            </p>
-            <div class="project-stack">
-              <span>Python</span>
-              <span>P2P Sockets</span>
-              <span>SHA-256</span>
-              <span>Cryptography</span>
-            </div>
-          </div>
-
-          <!-- Project 4: ONE DTN Simulator Extension -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Networking Research</span>
-              <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">ONE DTN Routing &amp; Buffer Evaluation</h3>
-            <p class="project-desc">
-              Extensive simulation and comparative evaluation of Epidemic, Prophet, and Spray-and-Wait routing algorithms across intermittent, partitioned mobile ad-hoc networks with varying buffer policies.
-            </p>
-            <div class="project-stack">
-              <span>Java</span>
-              <span>The ONE Simulator</span>
-              <span>Network Graphs</span>
-            </div>
-          </div>
-
-          <!-- Project 5: Medicine Shop Management -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Full Stack Enterprise</span>
-              <a href="https://github.com/asicoltd/Medicine-Shop-Management-System" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">Medicine Shop Management System</h3>
-            <p class="project-desc">
-              Robust relational enterprise pharmacy inventory, invoice generation, point-of-sale, and stock monitoring software ensuring zero-loss audit trails and real-time ledger accounting.
-            </p>
-            <div class="project-stack">
-              <span>C# / .NET</span>
-              <span>SQL Server</span>
-              <span>WPF / WinForms</span>
-            </div>
-          </div>
-
-          <!-- Project 6: Ride Sharing Platform Architecture -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Distributed Systems</span>
-              <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">Distributed Ride-Sharing Platform</h3>
-            <p class="project-desc">
-              Microservices-oriented architecture handling geospatial proximity lookups, driver-rider matching algorithms, real-time WebSocket state streaming, and trip routing.
-            </p>
-            <div class="project-stack">
-              <span>Node.js</span>
-              <span>Redis Geo</span>
-              <span>PostgreSQL</span>
-              <span>WebSockets</span>
-            </div>
-          </div>
-
-          <!-- Project 7: Automated Lending Library -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Information Systems</span>
-              <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">Digital Lending Library System</h3>
-            <p class="project-desc">
-              Automated resource cataloging, member checkout tracking, fine calculation schedules, and bibliographic indexing system with multi-role access controls.
-            </p>
-            <div class="project-stack">
-              <span>PHP</span>
-              <span>MySQL</span>
-              <span>REST APIs</span>
-            </div>
-          </div>
-
-          <!-- Project 8: Scouting Automation & Scoring Tools -->
-          <div class="project-card">
-            <div class="project-header">
-              <span class="project-category">Automation &amp; Tooling</span>
-              <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View on GitHub">GitHub ↗</a>
-            </div>
-            <h3 class="project-title">Event Scoring &amp; Scouting Platform</h3>
-            <p class="project-desc">
-              Custom scoring, dispatch, and badge evaluation web utilities used for tracking real-time scout jamboree logistics, patrol grading, and field navigation challenges.
-            </p>
-            <div class="project-stack">
-              <span>JavaScript</span>
-              <span>HTML5 / CSS3</span>
-              <span>LocalStorage API</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="projects-footer">
-          <p>More open-source repositories, benchmarks, and experimental scripts available on GitHub.</p>
-          <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            <span>Explore All 30+ Repositories</span> ↗
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. TECHNICAL SKILLS SECTION (#skills) -->
-    <section class="section skills-section" id="skills">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">04 / Competencies</span>
+      <!-- 05. TECHNICAL SKILLS (#skills) -->
+      <section id="skills">
+        <div class="container">
+          <span class="section-tag">04 / Competencies</span>
           <h2 class="section-title">Technical Skills</h2>
-          <p class="section-sub">Methodologies, languages, and technologies battle-tested through academic research and production builds.</p>
-        </div>
+          <p class="section-desc">Methodologies, languages, and technologies battle-tested through academic research and production builds.</p>
 
-        <div class="skills-grid">
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <span class="cat-icon">💻</span>
-              <h3>Programming Languages</h3>
+          <div class="skills-grid">
+            <div class="skills-box">
+              <h4><span>💻</span> Programming Languages</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">C / C++</span>
+                <span class="skill-pill">JavaScript / ES6+</span>
+                <span class="skill-pill">Java</span>
+                <span class="skill-pill">C# / .NET</span>
+                <span class="skill-pill">SQL</span>
+                <span class="skill-pill">Bash / Shell</span>
+                <span class="skill-pill">Solidity</span>
+              </div>
             </div>
-            <div class="skill-pill-list">
-              <span class="skill-pill">Python</span>
-              <span class="skill-pill">C / C++</span>
-              <span class="skill-pill">JavaScript / ES6+</span>
-              <span class="skill-pill">Java</span>
-              <span class="skill-pill">C# / .NET</span>
-              <span class="skill-pill">SQL</span>
-              <span class="skill-pill">Bash / Shell</span>
-              <span class="skill-pill">Solidity</span>
-            </div>
-          </div>
 
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <span class="cat-icon">🧠</span>
-              <h3>AI &amp; Machine Learning</h3>
+            <div class="skills-box">
+              <h4><span>🧠</span> AI &amp; Machine Learning</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">PyTorch</span>
+                <span class="skill-pill">TensorFlow</span>
+                <span class="skill-pill">Scikit-Learn</span>
+                <span class="skill-pill">OpenCV</span>
+                <span class="skill-pill">SHAP &amp; LIME</span>
+                <span class="skill-pill">Reinforcement Learning</span>
+                <span class="skill-pill">XGBoost</span>
+                <span class="skill-pill">Pandas / NumPy</span>
+              </div>
             </div>
-            <div class="skill-pill-list">
-              <span class="skill-pill">PyTorch</span>
-              <span class="skill-pill">TensorFlow</span>
-              <span class="skill-pill">Scikit-Learn</span>
-              <span class="skill-pill">OpenCV</span>
-              <span class="skill-pill">SHAP &amp; LIME (XAI)</span>
-              <span class="skill-pill">Reinforcement Learning</span>
-              <span class="skill-pill">XGBoost &amp; LightGBM</span>
-              <span class="skill-pill">Pandas &amp; NumPy</span>
-            </div>
-          </div>
 
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <span class="cat-icon">🌐</span>
-              <h3>Web &amp; Distributed Systems</h3>
+            <div class="skills-box">
+              <h4><span>🌐</span> Web &amp; Distributed Systems</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">Node.js</span>
+                <span class="skill-pill">Express</span>
+                <span class="skill-pill">RESTful APIs</span>
+                <span class="skill-pill">WebSockets</span>
+                <span class="skill-pill">PostgreSQL</span>
+                <span class="skill-pill">MongoDB</span>
+                <span class="skill-pill">Redis</span>
+                <span class="skill-pill">DTN Routing</span>
+              </div>
             </div>
-            <div class="skill-pill-list">
-              <span class="skill-pill">Node.js</span>
-              <span class="skill-pill">Express</span>
-              <span class="skill-pill">RESTful APIs</span>
-              <span class="skill-pill">WebSockets</span>
-              <span class="skill-pill">PostgreSQL</span>
-              <span class="skill-pill">MongoDB</span>
-              <span class="skill-pill">Redis</span>
-              <span class="skill-pill">Delay Tolerant Networks</span>
-            </div>
-          </div>
 
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <span class="cat-icon">⚙️</span>
-              <h3>Tools &amp; Infrastructure</h3>
-            </div>
-            <div class="skill-pill-list">
-              <span class="skill-pill">Git &amp; GitHub</span>
-              <span class="skill-pill">Linux / POSIX</span>
-              <span class="skill-pill">Docker</span>
-              <span class="skill-pill">LaTeX / Overleaf</span>
-              <span class="skill-pill">Three.js / WebGL</span>
-              <span class="skill-pill">Jupyter Lab</span>
-              <span class="skill-pill">VS Code</span>
-              <span class="skill-pill">CI/CD Pipelines</span>
+            <div class="skills-box">
+              <h4><span>⚙️</span> Tools &amp; Infrastructure</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">Git &amp; GitHub</span>
+                <span class="skill-pill">Linux / POSIX</span>
+                <span class="skill-pill">Docker</span>
+                <span class="skill-pill">LaTeX / Overleaf</span>
+                <span class="skill-pill">Three.js / WebGL</span>
+                <span class="skill-pill">Jupyter Lab</span>
+                <span class="skill-pill">VS Code</span>
+                <span class="skill-pill">CI/CD</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 6. EDUCATION SECTION (#education) -->
-    <section class="section education-section" id="education">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">05 / Academic Foundation</span>
+      <!-- 06. EDUCATION (#education) -->
+      <section id="education">
+        <div class="container">
+          <span class="section-tag">05 / Academic Foundation</span>
           <h2 class="section-title">Education</h2>
-          <p class="section-sub">Formal computer science training and foundational coursework.</p>
-        </div>
+          <p class="section-desc">Formal computer science training and foundational coursework.</p>
 
-        <div class="education-card">
-          <div class="edu-top">
-            <div class="edu-institution">
-              <h3 class="edu-degree">Bachelor of Science in Computer Science and Engineering</h3>
-              <h4 class="edu-school">East West University (EWU)</h4>
-              <span class="edu-location">Dhaka, Bangladesh</span>
+          <div class="education-card">
+            <div class="edu-header">
+              <div>
+                <h3 class="edu-inst">East West University (EWU)</h3>
+                <h4 class="edu-deg">Bachelor of Science in Computer Science and Engineering</h4>
+              </div>
+              <span class="edu-badge">Graduate</span>
             </div>
-            <div class="edu-timeframe">
-              <span class="time-badge">Graduate</span>
-            </div>
-          </div>
 
-          <p class="edu-description">
-            Comprehensive curriculum focused on core theoretical computer science, algorithmic complexity, systems architecture, distributed databases, and machine learning research.
-          </p>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
+              Comprehensive curriculum focused on core theoretical computer science, algorithmic complexity, systems architecture, distributed databases, and machine learning research.
+            </p>
 
-          <div class="edu-courses">
-            <span class="course-label">Selected Relevant Coursework:</span>
-            <div class="course-tags">
-              <span class="course-tag">Data Structures &amp; Algorithms</span>
-              <span class="course-tag">Artificial Intelligence</span>
-              <span class="course-tag">Machine Learning</span>
-              <span class="course-tag">Computer Vision</span>
-              <span class="course-tag">Operating Systems</span>
-              <span class="course-tag">Computer Networks &amp; Security</span>
-              <span class="course-tag">Database Management Systems</span>
-              <span class="course-tag">Discrete Mathematics</span>
-              <span class="course-tag">Compiler Design</span>
-              <span class="course-tag">Software Engineering</span>
+            <div class="edu-courses-label">Selected Relevant Coursework:</div>
+            <div class="edu-courses-pills">
+              <span class="skill-pill">Data Structures &amp; Algorithms</span>
+              <span class="skill-pill">Artificial Intelligence</span>
+              <span class="skill-pill">Machine Learning</span>
+              <span class="skill-pill">Computer Vision</span>
+              <span class="skill-pill">Operating Systems</span>
+              <span class="skill-pill">Computer Networks &amp; Security</span>
+              <span class="skill-pill">Database Management Systems</span>
+              <span class="skill-pill">Discrete Mathematics</span>
+              <span class="skill-pill">Compiler Design</span>
+              <span class="skill-pill">Software Engineering</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 7. CO-CURRICULAR & SOCIAL WORK (#social-work) -->
-    <section class="section social-section" id="social-work">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">06 / Leadership &amp; Community</span>
+      <!-- 07. CO-CURRICULAR & SOCIAL WORK (#social-work) -->
+      <section id="social-work">
+        <div class="container">
+          <span class="section-tag">06 / Leadership &amp; Community</span>
           <h2 class="section-title">Co-Curricular &amp; Social Work</h2>
-          <p class="section-sub">Commitment to community service, competitive problem-solving, and continuous self-discipline.</p>
-        </div>
+          <p class="section-desc">Commitment to community service, competitive problem-solving, and continuous self-discipline.</p>
 
-        <div class="social-grid">
-          <!-- Item 1: Competitive Programming -->
-          <div class="social-card">
-            <div class="social-icon">🏆</div>
-            <h3 class="social-title">Competitive Programming</h3>
-            <p class="social-desc">
-              Active participant in national programming contests and university ICPC preliminary contests, solving data structure and algorithmic challenges on Codeforces and LeetCode.
-            </p>
-          </div>
-
-          <!-- Item 2: Amateur Radio -->
-          <div class="social-card">
-            <div class="social-icon">📡</div>
-            <h3 class="social-title">Amateur Radio Operator (S21NEO)</h3>
-            <p class="social-desc">
-              Licensed amateur radio operator exploring RF propagation, VHF/UHF transceivers, antenna impedance tuning, and emergency communication networks during severe weather.
-            </p>
-          </div>
-
-          <!-- Item 3: Debating & Public Speaking -->
-          <div class="social-card">
-            <div class="social-icon">🎙️</div>
-            <h3 class="social-title">Debating &amp; Public Speaking</h3>
-            <p class="social-desc">
-              Represented institution in parliamentary and policy debates, honing argumentation, structured critique, and communication skills for research presentations.
-            </p>
-          </div>
-
-          <!-- Item 4: Scouting Movement -->
-          <div class="social-card">
-            <div class="social-icon">🏕️</div>
-            <h3 class="social-title">Bangladesh Scouts Movement</h3>
-            <p class="social-desc">
-              Long-standing member and patrol leader in scouting, spearheading disaster relief programs, tree plantation drives, and organizing scout camp jamborees.
-            </p>
-          </div>
-
-          <!-- Item 5: Voluntary Blood Donation -->
-          <div class="social-card">
-            <div class="social-icon">🩸</div>
-            <h3 class="social-title">Voluntary Blood Donation</h3>
-            <p class="social-desc">
-              Regular blood donor and organizer for local patient emergency campaigns, mobilizing community networks to connect donors with critical care patients.
-            </p>
-          </div>
-
-          <!-- Item 6: Martial Arts & Athletics -->
-          <div class="social-card">
-            <div class="social-icon">🥋</div>
-            <h3 class="social-title">Martial Arts &amp; Endurance Running</h3>
-            <p class="social-desc">
-              Dedicated practitioner of karate and endurance distance running, developing physical resilience, intense mental stamina, and disciplined focus under pressure.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. CONTACT SECTION (#contact) -->
-    <section class="section contact-section" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label">07 / Connect</span>
-          <h2 class="section-title">Get In Touch</h2>
-          <p class="section-sub">Open for research collaborations, engineering opportunities, and technical discussions.</p>
-        </div>
-
-        <div class="contact-wrapper">
-          <div class="contact-details">
-            <div class="contact-item">
-              <span class="contact-icon">✉️</span>
-              <div>
-                <div class="contact-type">Direct Email</div>
-                <a href="mailto:asifhasan.cse@gmail.com" class="contact-value">asifhasan.cse@gmail.com</a>
-              </div>
+          <div class="social-grid">
+            <!-- Item 1: Competitive Programming -->
+            <div class="social-card">
+              <span class="social-icon">🏆</span>
+              <h3 class="social-card-title">Competitive Programming</h3>
+              <p class="social-card-desc">
+                Active participant in national programming contests and university ICPC preliminary contests, solving data structure and algorithmic challenges on Codeforces and LeetCode.
+              </p>
             </div>
 
-            <div class="contact-item">
-              <span class="contact-icon">💻</span>
-              <div>
-                <div class="contact-type">GitHub Profile</div>
-                <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="contact-value">github.com/asicoltd</a>
-              </div>
+            <!-- Item 2: Amateur Radio -->
+            <div class="social-card">
+              <span class="social-icon">📡</span>
+              <h3 class="social-card-title">Amateur Radio Operator (S21NEO)</h3>
+              <p class="social-card-desc">
+                Licensed amateur radio operator exploring RF propagation, VHF/UHF transceivers, antenna impedance tuning, and emergency communication networks during severe weather.
+              </p>
             </div>
 
-            <div class="contact-item">
-              <span class="contact-icon">👔</span>
-              <div>
-                <div class="contact-type">LinkedIn</div>
-                <a href="https://www.linkedin.com/in/asicoltd" target="_blank" rel="noopener noreferrer" class="contact-value">linkedin.com/in/asicoltd</a>
-              </div>
+            <!-- Item 3: Debating & Public Speaking -->
+            <div class="social-card">
+              <span class="social-icon">🎙️</span>
+              <h3 class="social-card-title">Debating &amp; Public Speaking</h3>
+              <p class="social-card-desc">
+                Represented institution in parliamentary and policy debates, honing argumentation, structured critique, and communication skills for research presentations.
+              </p>
             </div>
 
-            <div class="contact-item">
-              <span class="contact-icon">📍</span>
-              <div>
-                <div class="contact-type">Location</div>
-                <span class="contact-value">Dhaka, Bangladesh</span>
-              </div>
+            <!-- Item 4: Scouting Movement -->
+            <div class="social-card">
+              <span class="social-icon">🏕️</span>
+              <h3 class="social-card-title">Bangladesh Scouts Movement</h3>
+              <p class="social-card-desc">
+                Long-standing member and patrol leader in scouting, spearheading disaster relief programs, tree plantation drives, and organizing scout camp jamborees.
+              </p>
+            </div>
+
+            <!-- Item 5: Voluntary Blood Donation -->
+            <div class="social-card">
+              <span class="social-icon">🩸</span>
+              <h3 class="social-card-title">Voluntary Blood Donation</h3>
+              <p class="social-card-desc">
+                Regular blood donor and organizer for local patient emergency campaigns, mobilizing community networks to connect donors with critical care patients.
+              </p>
+            </div>
+
+            <!-- Item 6: Martial Arts & Athletics -->
+            <div class="social-card">
+              <span class="social-icon">🥋</span>
+              <h3 class="social-card-title">Martial Arts &amp; Endurance Running</h3>
+              <p class="social-card-desc">
+                Dedicated practitioner of karate and endurance distance running, developing physical resilience, intense mental stamina, and disciplined focus under pressure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08. CONTACT & FOOTER (#contact) -->
+      <section class="contact-section" id="contact">
+        <div class="container">
+          <div class="contact-card">
+            <span class="section-tag">07 / Connect</span>
+            <h2 class="contact-title">Get In Touch</h2>
+            <p class="contact-desc">
+              Open for research collaborations, engineering opportunities, and technical discussions.
+            </p>
+            <div class="contact-buttons">
+              <a href="mailto:asifhasan.cse@gmail.com" class="btn btn-primary">
+                <span>Send An Email</span> ↗
+              </a>
+            </div>
+            <div class="footer-channels">
+              <a href="mailto:asifhasan.cse@gmail.com" class="channel-link">✉️ asifhasan.cse@gmail.com</a>
+              <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="channel-link">💻 github.com/asicoltd</a>
+              <a href="https://www.linkedin.com/in/asicoltd" target="_blank" rel="noopener noreferrer" class="channel-link">👔 linkedin.com/in/asicoltd</a>
+              <span class="channel-link">📍 Dhaka, Bangladesh</span>
             </div>
           </div>
 
-          <div class="contact-callout">
-            <h3>Let's build something remarkable.</h3>
-            <p>
-              Whether you are interested in discussing XAI methodologies, algorithmic systems, or discussing upcoming graduate research openings, my inbox is always open.
-            </p>
-            <a href="mailto:asifhasan.cse@gmail.com" class="btn btn-primary">
-              <span>Send An Email</span> ↗
-            </a>
+          <div class="footer-bottom">
+            <span>◆ Asif Hasan • Built with Precision</span>
+            <span>&copy; <span id="current-year"></span> All rights reserved.</span>
+            <a href="#home" class="channel-link">Back to Top ↑</a>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-left">
-        <span class="brand-symbol">◆</span>
-        <span>Asif Hasan • Built with Precision</span>
-      </div>
-      <div class="footer-center">
-        <span>&copy; <span id="current-year"></span> All rights reserved.</span>
-      </div>
-      <div class="footer-right">
-        <a href="#home">Back to Top ↑</a>
-      </div>
-    </div>
-  </footer>
+      </section>
+    </main>
+  </div>
 
   <!-- ========================================== -->
   <!-- INTERACTIVE MINI-APPS LAUNCHER MODAL       -->
-  <!-- (Cleanly isolated, accessed only via CTA) -->
   <!-- ========================================== -->
   <div class="interactive-modal" id="interactive-modal" aria-hidden="true">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     <div class="modal-dialog">
       <div class="modal-header">
         <div class="modal-title-group">
-          <span class="modal-badge">Interactive Lab</span>
-          <h3 class="modal-title" id="modal-title">Creative Mini-Apps</h3>
+          <span class="badge-green">Interactive Lab</span>
+          <h3 class="modal-title" id="interactive-modal-title">Creative Mini-Apps</h3>
         </div>
         <div class="modal-actions">
           <button class="modal-back-btn" id="modal-back-btn" style="display: none;">
@@ -737,58 +605,53 @@
       <div class="modal-body" id="modal-body">
         <!-- Stage 1: App Selection Menu -->
         <div class="app-launcher-menu" id="app-launcher-menu">
-          <p class="launcher-intro">
+          <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6;">
             Choose an interactive mini-app to explore playful algorithms, game theory, and AI perception directly inside this sandbox:
           </p>
 
           <div class="app-launcher-grid">
-            <!-- App 1: Find AI (Fixed with live JPEG API) -->
+            <!-- App 1: Find AI -->
             <div class="app-launcher-item" data-app-url="quiz.html" data-app-title="Find AI (Quiz)">
-              <div class="app-item-icon">👁️</div>
-              <div class="app-item-content">
-                <h4>Find AI</h4>
-                <p>Can you tell apart a synthetic AI-generated human face from a real photograph? Test your visual perception against GANs.</p>
-                <span class="app-play-tag">Launch App →</span>
+              <div class="app-launcher-icon">👁️</div>
+              <div class="app-launcher-text">
+                <span class="app-launcher-name">Find AI</span>
+                <span class="app-launcher-desc">Can you tell apart a synthetic AI face from a real photograph? Test your visual perception against GANs.</span>
               </div>
             </div>
 
             <!-- App 2: Loss / Draw -->
             <div class="app-launcher-item" data-app-url="neverWin.html" data-app-title="Loss / Draw (Tic-Tac-Toe)">
-              <div class="app-item-icon">❌</div>
-              <div class="app-item-content">
-                <h4>Loss / Draw</h4>
-                <p>An unbeatable Minimax Tic-Tac-Toe agent with alpha-beta pruning. Can you force a draw or will it capitalize on your mistake?</p>
-                <span class="app-play-tag">Launch App →</span>
+              <div class="app-launcher-icon">❌</div>
+              <div class="app-launcher-text">
+                <span class="app-launcher-name">Loss / Draw</span>
+                <span class="app-launcher-desc">An unbeatable Minimax Tic-Tac-Toe agent with alpha-beta pruning. Can you force a draw or will it capitalize on your mistake?</span>
               </div>
             </div>
 
             <!-- App 3: Are You AI? -->
             <div class="app-launcher-item" data-app-url="whichAI.html" data-app-title="Are You AI? (Cognitive Quiz)">
-              <div class="app-item-icon">🤖</div>
-              <div class="app-item-content">
-                <h4>Are You AI?</h4>
-                <p>A cognitive Turing test quiz analyzing behavioral patterns and philosophical paradoxes to score human vs synthetic traits.</p>
-                <span class="app-play-tag">Launch App →</span>
+              <div class="app-launcher-icon">🤖</div>
+              <div class="app-launcher-text">
+                <span class="app-launcher-name">Are You AI?</span>
+                <span class="app-launcher-desc">A cognitive Turing test quiz analyzing behavioral patterns and philosophical paradoxes to score human vs synthetic traits.</span>
               </div>
             </div>
 
             <!-- App 4: Self Reflection -->
             <div class="app-launcher-item" data-app-url="questions.html" data-app-title="Self Reflection">
-              <div class="app-item-icon">🪞</div>
-              <div class="app-item-content">
-                <h4>Self Reflection</h4>
-                <p>Interactive self-inquiry questionnaire designed to prompt introspection on personal growth, creativity, and perspective.</p>
-                <span class="app-play-tag">Launch App →</span>
+              <div class="app-launcher-icon">🪞</div>
+              <div class="app-launcher-text">
+                <span class="app-launcher-name">Self Reflection</span>
+                <span class="app-launcher-desc">Interactive self-inquiry questionnaire designed to prompt introspection on personal growth, creativity, and perspective.</span>
               </div>
             </div>
 
             <!-- App 5: Are We Same? -->
             <div class="app-launcher-item" data-app-url="areWeSame.html" data-app-title="Are We Same?">
-              <div class="app-item-icon">🧩</div>
-              <div class="app-item-content">
-                <h4>Are We Same?</h4>
-                <p>Curated personality alignment checklist comparing your working style, coding quirks, and habits against Asif's profile.</p>
-                <span class="app-play-tag">Launch App →</span>
+              <div class="app-launcher-icon">🧩</div>
+              <div class="app-launcher-text">
+                <span class="app-launcher-name">Are We Same?</span>
+                <span class="app-launcher-desc">Curated personality alignment checklist comparing your working style, coding quirks, and habits against Asif's profile.</span>
               </div>
             </div>
           </div>
@@ -802,8 +665,24 @@
     </div>
   </div>
 
-  <!-- Toast Notification (BibTeX copy, etc.) -->
-  <div class="toast-notification" id="toast-notification"></div>
+  <!-- BibTeX Citation Modal -->
+  <div class="modal-overlay" id="bibtex-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">BibTeX Citation</h3>
+        <button class="modal-close-btn" id="close-bibtex-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre class="bibtex-pre" id="bibtex-content"></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" id="copy-bibtex-btn">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-alert" id="toast-alert"></div>
 
   <!-- Scripts: Three.js, GSAP, Lenis, and Custom Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
