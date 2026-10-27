@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+  <!-- Primary Academic & SEO Metadata -->
+  <title>Asif Hasan | AI & Machine Learning Researcher | Explainable Systems</title>
+  <meta name="description" content="Academic portfolio of Asif Hasan, an AI/ML researcher specializing in explainable IoT intrusion detection, reinforcement learning trading systems, and high-dimensional decision manifolds. Author of three Springer publications.">
+  <meta name="author" content="Asif Hasan">
+  <link rel="canonical" href="https://asif.info.bd/new/">
+
+  <!-- Open Graph / Academic Social -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Asif Hasan | AI & Machine Learning Researcher">
+  <meta property="og:description" content="Research on Explainable IoT Security, Delay-Tolerant Networking, and Reinforcement Learning. 3x Springer LNNS published.">
+  <meta property="og:url" content="https://asif.info.bd/new/">
+  <meta property="og:image" content="https://asif.info.bd/profile.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Asif Hasan | AI & Machine Learning Researcher">
+  <meta name="twitter:description" content="Explainable IoT Intrusion Detection, Reinforcement Learning, and Applied Deep Learning.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data: Schema.org Person & Researcher -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Asif Hasan",
+    "alternateName": "Md Asif Hasan",
+    "jobTitle": "AI & Machine Learning Researcher",
+    "url": "https://asif.info.bd/new/",
+    "image": "https://asif.info.bd/profile.jpg",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "East West University"
+    },
+    "sameAs": [
+      "https://github.com/asicoltd",
+      "https://www.linkedin.com/in/asif-hasan-099/",
+      "https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25"
+    ],
+    "knowsAbout": [
+      "Explainable Artificial Intelligence",
+      "IoT Intrusion Detection",
+      "Reinforcement Learning",
+      "Delay-Tolerant Networking",
+      "Deep Neural Networks"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- WebGL2 Fullscreen Coordinate System -->
+  <div id="webgl-canvas-container" aria-hidden="true">
+    <canvas id="webgl-canvas"></canvas>
+    <div class="webgl-fallback"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- ======================================================================
+         Navigation Bar (Backdrop-Blur Glassmorphism + Kinetic Roll Links)
+         ====================================================================== -->
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a href="#home" class="brand-link" aria-label="Asif Hasan Home">
+          <div class="brand-glyph">AH</div>
+          <span class="brand-name">ASIF HASAN</span>
+          <span class="brand-status">AI RESEARCH</span>
+        </a>
+
+        <nav>
+          <ul class="nav-menu">
+            <li>
+              <a href="#research" class="roll-link">
+                <span class="roll-link-inner">
+                  <span class="roll-link-top">Publications</span>
+                  <span class="roll-link-bottom">Publications</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#systems" class="roll-link">
+                <span class="roll-link-inner">
+                  <span class="roll-link-top">Systems</span>
+                  <span class="roll-link-bottom">Systems</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#academic" class="roll-link">
+                <span class="roll-link-inner">
+                  <span class="roll-link-top">Background</span>
+                  <span class="roll-link-bottom">Background</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#repositories" class="roll-link">
+                <span class="roll-link-inner">
+                  <span class="roll-link-top">Open Source</span>
+                  <span class="roll-link-bottom">Open Source</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="roll-link">
+                <span class="roll-link-inner">
+                  <span class="roll-link-top">Contact</span>
+                  <span class="roll-link-bottom">Contact</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="assets/docs/PhD_Research_Proposal_Md_Asif_Hasan.pdf" target="_blank" rel="noopener" class="btn btn-accent btn-sm" aria-label="Download PhD Research Proposal (PDF)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span class="btn-proposal-text-desktop">Research Proposal (PDF)</span>
+            <span class="btn-proposal-text-mobile" aria-hidden="true">Proposal ↗</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         01. Hero Section (Explainable Attractor Manifold + Telemetry Card)
+         ====================================================================== -->
+    <section id="home" class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-row">
+            <div class="badge">
+              <span class="badge-pulse"></span>
+              <span>Prospective PhD Applicant</span>
+            </div>
+            <div class="badge badge-springer">
+              <span>3x Springer LNNS Published</span>
+            </div>
+            <div class="badge">
+              <span>East West University</span>
+            </div>
+          </div>
+
+          <h1 class="hero-name">ASIF HASAN</h1>
+
+          <p class="hero-bio">
+            <strong>AI & Machine Learning Researcher</strong> focusing on <strong>Explainable IoT Intrusion Detection</strong>, <strong>Multi-Agent Reinforcement Learning</strong>, and high-dimensional decision manifolds. Architecting robust neural architectures for bandwidth-constrained, adversarial networks.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="assets/docs/PhD_Research_Proposal_Md_Asif_Hasan.pdf" target="_blank" rel="noopener" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download Proposal (PDF)</span>
+            </a>
+            <a href="#research" class="btn btn-secondary">
+              <span>Peer-Reviewed Papers ↓</span>
+            </a>
+            <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Telemetry & Manifold Simulation HUD -->
+        <div class="hero-telemetry">
+          <div class="telemetry-card">
+            <div class="telemetry-header">
+              <span class="telemetry-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                <span>Attractor Topology</span>
+              </span>
+              <span id="telemetry-state-val" class="telemetry-badge">MONITORING</span>
+            </div>
+
+            <div class="telemetry-metrics">
+              <div class="metric-item">
+                <div class="metric-label">Latent Nodes</div>
+                <div class="metric-value">680</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">Clusters</div>
+                <div class="metric-value">5 Clustered</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">Perturbation Entropy</div>
+                <div id="metric-entropy" class="metric-value">0.04 bits</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">Explainability</div>
+                <div class="metric-value">SHAP Rays</div>
+              </div>
+            </div>
+
+            <div class="telemetry-controls">
+              <button id="trigger-intrusion-btn" class="telemetry-btn" type="button">
+                <span>Simulate Anomaly & Attribution (SHAP)</span>
+                <span class="btn-indicator"></span>
+              </button>
+            </div>
+
+            <div class="telemetry-caption">
+              Visualizing IoT feature clusters and attribution vectors across high-dimensional manifolds in WebGL.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         02. Peer-Reviewed Publications (The 3 Springer Papers)
+         ====================================================================== -->
+    <section id="research" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Peer-Reviewed Contributions</div>
+          <h2 class="section-title">Springer Research Publications</h2>
+          <p class="section-desc">
+            Primary scientific contributions published in the Springer <em>Lecture Notes in Networks and Systems (LNNS)</em> series. Focused on ensemble deep learning, endoscopic diagnostics, and real-time computer vision.
+          </p>
+        </div>
+
+        <div class="publications-grid">
+
+          <!-- Paper 1 -->
+          <article class="pub-card" data-tilt>
+            <div class="pub-meta-row">
+              <span class="pub-venue-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>DMIS 2024 • Springer LNNS</span>
+              </span>
+              <span class="pub-year">DOI: 10.1007/978-981-96-6063-6_25</span>
+            </div>
+
+            <h3 class="pub-title">
+              <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25" target="_blank" rel="noopener">
+                Ensemble Deep Learning for Enhanced Detection and Classification of Hand, Foot, and Mouth Disease
+              </a>
+            </h3>
+
+            <p class="pub-abstract">
+              Addresses the critical challenge of high clinical variance and diagnostic latency in pediatric cutaneous pathologies. Formulates a heterogeneous ensemble architecture utilizing stacked convolutional backbones with multi-head attention. Experimental benchmarks demonstrate substantial robustness improvements over single-estimator models, mitigating localized false positives across noisy clinical datasets.
+            </p>
+
+            <div class="pub-footer">
+              <div class="pub-tags">
+                <span class="pub-tag">Ensemble Stacking</span>
+                <span class="pub-tag">Deep Neural Networks</span>
+                <span class="pub-tag">Clinical Diagnostic ML</span>
+                <span class="pub-tag">Feature Fusion</span>
+              </div>
+              <div class="pub-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-bibtex" data-pub="hfmd">
+                  <span>BibTeX</span>
+                </button>
+                <a href="https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                  <span>Read on Springer ↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Paper 2 -->
+          <article class="pub-card" data-tilt>
+            <div class="pub-meta-row">
+              <span class="pub-venue-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>DMIS 2024 • Springer LNNS</span>
+              </span>
+              <span class="pub-year">DOI: 10.1007/978-981-96-6066-7_32</span>
+            </div>
+
+            <h3 class="pub-title">
+              <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32" target="_blank" rel="noopener">
+                Classification of Peptic Ulcer and Digestive Tract Disorders Using Endoscopic Images
+              </a>
+            </h3>
+
+            <p class="pub-abstract">
+              Investigates deep mucosal feature extraction on upper gastrointestinal endoscopic examinations. Implements specialized data normalization and focal-loss weighting to mitigate severe endoscopic reflection artifacts and minority pathology imbalance, delivering reliable classification thresholds suited for auxiliary real-time endoscopic triage.
+            </p>
+
+            <div class="pub-footer">
+              <div class="pub-tags">
+                <span class="pub-tag">Endoscopic Computer Vision</span>
+                <span class="pub-tag">Focal Loss Optimization</span>
+                <span class="pub-tag">Gastrointestinal Pathology</span>
+              </div>
+              <div class="pub-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-bibtex" data-pub="peptic">
+                  <span>BibTeX</span>
+                </button>
+                <a href="https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                  <span>Read on Springer ↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Paper 3 -->
+          <article class="pub-card" data-tilt>
+            <div class="pub-meta-row">
+              <span class="pub-venue-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>ICTCS 2024 • Springer LNNS</span>
+              </span>
+              <span class="pub-year">DOI: 10.1007/978-981-96-5607-3_13</span>
+            </div>
+
+            <h3 class="pub-title">
+              <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13" target="_blank" rel="noopener">
+                Rose Disease Detection Using YOLO: A Deep Learning-Based Approach
+              </a>
+            </h3>
+
+            <p class="pub-abstract">
+              Engineered a single-stage real-time detector tailored for edge hardware deployment in high-density agronomic settings. Optimizes multiscale feature pyramid pooling and anchor aspect ratios to detect early micro-lesions under erratic natural illumination, balancing inference latency with high average precision (AP).
+            </p>
+
+            <div class="pub-footer">
+              <div class="pub-tags">
+                <span class="pub-tag">YOLO Architecture</span>
+                <span class="pub-tag">Edge Deployment</span>
+                <span class="pub-tag">Foliar Micro-Pathology</span>
+                <span class="pub-tag">Real-Time Inference</span>
+              </div>
+              <div class="pub-actions">
+                <button type="button" class="btn btn-secondary btn-sm btn-bibtex" data-pub="rose">
+                  <span>BibTeX</span>
+                </button>
+                <a href="https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                  <span>Read on Springer ↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         03. Flagship Research Systems
+         ====================================================================== -->
+    <section id="systems" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">System Architectures</div>
+          <h2 class="section-title">Flagship Research Systems</h2>
+          <p class="section-desc">
+            Experimental implementations bridging theoretical machine learning models with distributed systems and physical networks.
+          </p>
+        </div>
+
+        <div class="systems-grid">
+
+          <!-- System 1 -->
+          <div class="system-card" data-tilt>
+            <div>
+              <div class="system-header">
+                <div class="system-code">SYSTEM // RES-01</div>
+                <h3 class="system-title">Explainable IoT Intrusion Detection & DTN Optimization</h3>
+              </div>
+              <p class="system-desc">
+                Investigates opportunistic communication reliability and attack detection across Delay-Tolerant Networks (DTN) in communication-compromised disaster scenarios using the ONE simulator.
+              </p>
+              <ul class="system-features">
+                <li>Analyzed packet drop and blackhole attack topologies in partitioned ad-hoc environments.</li>
+                <li>Coupled network simulation with gradient-based feature attribution to expose anomalous routing decisions.</li>
+                <li>Simulated realistic urban catastrophe mobility models for autonomous emergency node triage.</li>
+              </ul>
+            </div>
+            <div class="pub-footer" style="padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <div class="pub-tags">
+                <span class="pub-tag">ONE Simulator</span>
+                <span class="pub-tag">DTN Protocols</span>
+                <span class="pub-tag">Java / Python</span>
+                <span class="pub-tag">IoT Security</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- System 2 -->
+          <div class="system-card" data-tilt>
+            <div>
+              <div class="system-header">
+                <div class="system-code">SYSTEM // RES-02</div>
+                <h3 class="system-title">Deep RL Quantitative Trading & Temporal Micro-Dynamics</h3>
+              </div>
+              <p class="system-desc">
+                Multi-agent reinforcement learning execution engine examining non-stationary temporal dynamics and cross-asset price propagation across algorithmic financial markets.
+              </p>
+              <ul class="system-features">
+                <li>Formulated custom risk-penalized reward functions (Sharpe/Sortino) within continuous action spaces (PPO / DDPG).</li>
+                <li>LSTM-based temporal attention modeling cross-cryptocurrency price transmission mechanisms.</li>
+                <li>Order-book simulation assessing execution slippage and market microstructure impact.</li>
+              </ul>
+            </div>
+            <div class="pub-footer" style="padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+              <div class="pub-tags">
+                <span class="pub-tag">PyTorch</span>
+                <span class="pub-tag">PPO / DDPG</span>
+                <span class="pub-tag">Time Series</span>
+                <span class="pub-tag">Quantitative ML</span>
+              </div>
+              <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                <span>View Repository ↗</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         04. Academic Background & Rigorous Competencies
+         ====================================================================== -->
+    <section id="academic" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Scholarly Foundation</div>
+          <h2 class="section-title">Academic Background & Rigor</h2>
+          <p class="section-desc">
+            Formal degrees, mathematical grounding, and specialized technical competencies developed at East West University.
+          </p>
+        </div>
+
+        <div class="academic-grid">
+
+          <!-- Left: Education Timeline -->
+          <div class="academic-card">
+            <h3 class="system-title" style="margin-bottom: 1.5rem;">Degrees & Credentials</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-degree">M.Sc. in Computer Science & Engineering</div>
+                <div class="timeline-institution">East West University, Dhaka, Bangladesh</div>
+                <div class="timeline-meta">Focus: Advanced Deep Neural Networks, Reinforcement Learning, Explainable AI</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-degree">B.Sc. in Computer Science & Engineering</div>
+                <div class="timeline-institution">East West University, Dhaka, Bangladesh</div>
+                <div class="timeline-meta">Focus: Operating Systems, Distributed Systems, Algorithms & Machine Learning</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+              <div class="skills-title">Distinctive Field Competencies</div>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                <strong>Licensed HAM Radio Operator (Call Sign: S21NEO)</strong>: Practical telemetry, antenna resonance, and ad-hoc packet communication research under disrupted signal conditions.<br><br>
+                <strong>Algorithm Problem Solving</strong>: Solved &gt;1,000 algorithmic challenges on Codeforces, HackerRank, and Beecrowd with focus on graphs, dynamic programming, and combinatorial optimization.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Methodological Skills -->
+          <div class="academic-card">
+            <h3 class="system-title" style="margin-bottom: 1.5rem;">Research & Technical Competencies</h3>
+
+            <div class="skills-category">
+              <div class="skills-title">Machine Learning & Deep Architectures</div>
+              <div class="skills-chips">
+                <span class="skill-chip">PyTorch</span>
+                <span class="skill-chip">TensorFlow</span>
+                <span class="skill-chip">CUDA Acceleration</span>
+                <span class="skill-chip">Transformers & Attention</span>
+                <span class="skill-chip">Reinforcement Learning (PPO/DDPG)</span>
+                <span class="skill-chip">Ensemble Stacking</span>
+                <span class="skill-chip">YOLO Object Detection</span>
+                <span class="skill-chip">SHAP / Explainability</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <div class="skills-title">Systems, Networks & Security</div>
+              <div class="skills-chips">
+                <span class="skill-chip">IoT Intrusion Detection</span>
+                <span class="skill-chip">ONE Simulator</span>
+                <span class="skill-chip">Delay-Tolerant Networking</span>
+                <span class="skill-chip">Blockchain Consensus</span>
+                <span class="skill-chip">Smart Contracts</span>
+                <span class="skill-chip">Wireshark & Packet Triage</span>
+                <span class="skill-chip">Linux Kernel & Kali</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <div class="skills-title">Languages & Scientific Computing</div>
+              <div class="skills-chips">
+                <span class="skill-chip">Python</span>
+                <span class="skill-chip">C / C++</span>
+                <span class="skill-chip">Java</span>
+                <span class="skill-chip">SQL / PostgreSQL</span>
+                <span class="skill-chip">NumPy / SciPy</span>
+                <span class="skill-chip">Bash / Shell</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         05. Curated Open-Source Repository Archive
+         ====================================================================== -->
+    <section id="repositories" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Open Source & Artifacts</div>
+          <h2 class="section-title">Selected Code Repositories</h2>
+          <p class="section-desc">
+            Direct GitHub artifacts, dataset pipelines, and empirical implementations available for inspection.
+          </p>
+        </div>
+
+        <div class="repo-table-container">
+          <table class="repo-table">
+            <thead>
+              <tr>
+                <th>Repository</th>
+                <th>Research Focus</th>
+                <th>Primary Stack</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener" class="repo-name-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    <span>EWU_MIND</span>
+                  </a>
+                </td>
+                <td class="repo-desc">Neural Collaborative Filtering (NCF) news recommendation engine evaluated on the MIND benchmark.</td>
+                <td class="repo-lang">PyTorch • Python</td>
+                <td>
+                  <a href="https://github.com/asicoltd/EWU_MIND" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">GitHub ↗</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data" target="_blank" rel="noopener" class="repo-name-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    <span>Temporal-Crypto-Analysis</span>
+                  </a>
+                </td>
+                <td class="repo-desc">LSTM-based inter-asset temporal price forecasting and volatility spillover analysis.</td>
+                <td class="repo-lang">Python • Jupyter</td>
+                <td>
+                  <a href="https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">GitHub ↗</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="repo-name-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    <span>Main GitHub Profile</span>
+                  </a>
+                </td>
+                <td class="repo-desc">Full collection of open-source research prototypes, consensus experiments, and algorithms.</td>
+                <td class="repo-lang">Multi-Language</td>
+                <td>
+                  <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Profile ↗</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         06. Academic Contact & Discourse
+         ====================================================================== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="contact-card">
+          <div class="section-tag" style="justify-content: center;">Academic Discourse</div>
+          <h2 class="contact-title">Inquiries & Prospective Supervision</h2>
+          <p class="contact-lead">
+            Open to doctoral research discussions, PhD opportunities in Explainable AI / IoT Security, and collaborative research initiatives.
+          </p>
+
+          <div class="contact-links">
+            <a href="mailto:asifhasan099@gmail.com" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>asifhasan099@gmail.com</span>
+            </a>
+            <a href="https://www.linkedin.com/in/asif-hasan-099/" target="_blank" rel="noopener" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.738-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/asicoltd" target="_blank" rel="noopener" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>GitHub (@asicoltd)</span>
+            </a>
+            <a href="assets/docs/PhD_Research_Proposal_Md_Asif_Hasan.pdf" target="_blank" rel="noopener" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span class="btn-proposal-text-desktop">Research Proposal (PDF)</span>
+            <span class="btn-proposal-text-mobile">Proposal ↗</span>
+            </a>
+          </div>
+
+          <div class="footer-bottom">
+            <span>Asif Hasan © 2026 • AI & Machine Learning Researcher</span>
+            <span>Hosted locally • Designed with Mathematical & Spatial Continuity</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ======================================================================
+       BibTeX Modal Dialog
+       ====================================================================== -->
+  <div id="bibtex-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button id="modal-close-btn" class="modal-close" aria-label="Close BibTeX dialog">✕</button>
+      <div id="modal-title" class="modal-title">// BIBTEX CITATION ENTRY</div>
+      <pre id="bibtex-content" class="bibtex-pre"></pre>
+      <button id="copy-bibtex-btn" class="btn btn-accent btn-sm" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Citation to Clipboard</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Alert -->
+  <div id="toast-alert" class="toast-alert" role="status" aria-live="polite"></div>
+
+  <!-- Libraries: Three.js, GSAP, Lenis Smooth Scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+
+</body>
+</html>
