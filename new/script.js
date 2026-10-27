@@ -1,6 +1,6 @@
 /**
- * ASIF HASAN — PERSONAL PORTFOLIO CORE SCRIPT
- * Three.js Atmospheric Constellation, Lenis Smooth Scroll, Interactive Lab & Citation Handlers
+ * ASIF HASAN — PERSONAL PORTFOLIO SCRIPT (v4.0)
+ * Three.js Celestial Constellation, Lenis Smooth Scroll, Mini-App Launcher & BibTeX Handlers
  */
 
 (function () {
@@ -63,7 +63,7 @@
 
   if (canvas && isWebGLSupported() && typeof THREE !== 'undefined') {
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x08090d, 0.025);
+    scene.fog = new THREE.FogExp2(0x07090e, 0.025);
 
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 0, 22);
@@ -84,7 +84,7 @@
 
     if (renderer) {
       const isMobile = window.innerWidth < 768;
-      const PARTICLE_COUNT = isMobile ? 180 : 380;
+      const PARTICLE_COUNT = isMobile ? 180 : 360;
       const positions = new Float32Array(PARTICLE_COUNT * 3);
       const colors = new Float32Array(PARTICLE_COUNT * 3);
       const velocities = [];
@@ -104,9 +104,9 @@
         positions[i * 3 + 2] = z;
 
         velocities.push({
-          x: (Math.random() - 0.5) * 0.006,
-          y: (Math.random() - 0.5) * 0.006,
-          z: (Math.random() - 0.5) * 0.004
+          x: (Math.random() - 0.5) * 0.005,
+          y: (Math.random() - 0.5) * 0.005,
+          z: (Math.random() - 0.5) * 0.003
         });
 
         const rand = Math.random();
@@ -120,7 +120,6 @@
         colors[i * 3 + 2] = c.b;
       }
 
-      // Smooth Particle Texture
       function createDiscTexture() {
         const pCanvas = document.createElement('canvas');
         pCanvas.width = 64;
@@ -145,7 +144,7 @@
       particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
       const particleMaterial = new THREE.PointsMaterial({
-        size: isMobile ? 0.25 : 0.32,
+        size: isMobile ? 0.24 : 0.3,
         vertexColors: true,
         map: discTexture,
         transparent: true,
@@ -158,7 +157,7 @@
       scene.add(particleSystem);
 
       // Connecting Filaments
-      const MAX_LINES = isMobile ? 120 : 320;
+      const MAX_LINES = isMobile ? 120 : 300;
       const linePositions = new Float32Array(MAX_LINES * 2 * 3);
       const lineColors = new Float32Array(MAX_LINES * 2 * 3);
 
@@ -169,7 +168,7 @@
       const lineMaterial = new THREE.LineBasicMaterial({
         vertexColors: true,
         transparent: true,
-        opacity: 0.25,
+        opacity: 0.22,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
@@ -197,7 +196,6 @@
         requestAnimationFrame(animate);
         const time = clock.getElapsedTime();
 
-        // Mouse Damping
         mouse.x += (mouse.targetX - mouse.x) * 0.04;
         mouse.y += (mouse.targetY - mouse.y) * 0.04;
 
@@ -205,7 +203,6 @@
         camera.position.y = mouse.y * 1.5;
         camera.lookAt(0, 0, 0);
 
-        // Drift
         let lineIdx = 0;
         const distThreshold = isMobile ? 3.0 : 3.8;
 
@@ -214,12 +211,10 @@
           positions[i * 3 + 1] += velocities[i].y;
           positions[i * 3 + 2] += velocities[i].z;
 
-          // Bounds bounce
           if (Math.abs(positions[i * 3]) > 19) velocities[i].x *= -1;
           if (Math.abs(positions[i * 3 + 1]) > 13) velocities[i].y *= -1;
           if (Math.abs(positions[i * 3 + 2]) > 9) velocities[i].z *= -1;
 
-          // Lines
           if (lineIdx < MAX_LINES && i % 2 === 0) {
             for (let j = i + 1; j < PARTICLE_COUNT; j += 4) {
               const dx = positions[i * 3] - positions[j * 3];
@@ -237,7 +232,7 @@
                 linePositions[l + 4] = positions[j * 3 + 1];
                 linePositions[l + 5] = positions[j * 3 + 2];
 
-                const alpha = Math.max(0, 1 - dist / distThreshold) * 0.6;
+                const alpha = Math.max(0, 1 - dist / distThreshold) * 0.55;
                 lineColors[l] = 0.22 * alpha;
                 lineColors[l + 1] = 0.74 * alpha;
                 lineColors[l + 2] = 0.97 * alpha;
@@ -268,7 +263,7 @@
       // Scroll Dimming
       if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.to(container, {
-          opacity: 0.18,
+          opacity: 0.16,
           scrollTrigger: {
             trigger: '#about',
             start: 'top 80%',
@@ -281,50 +276,100 @@
   }
 
   // ==========================================================================
-  // 3. Interactive Lab (Mini-Apps Modal)
+  // 3. Mini-Apps Launcher Modal System
   // ==========================================================================
   const interactiveModal = document.getElementById('interactive-modal');
-  const interactiveFrame = document.getElementById('interactive-frame');
-  const interactiveTitle = document.getElementById('interactive-modal-title');
-  const closeInteractiveBtn = document.getElementById('close-interactive-btn');
+  const launcherMenu = document.getElementById('app-launcher-menu');
+  const iframeWrapper = document.getElementById('modal-iframe-wrapper');
+  const interactiveFrame = document.getElementById('modal-iframe') || document.getElementById('interactive-frame');
+  const modalTitle = document.getElementById('modal-title') || document.getElementById('interactive-modal-title');
+  const closeInteractiveBtn = document.getElementById('modal-close-btn') || document.getElementById('close-interactive-btn');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const backToMenuBtn = document.getElementById('modal-back-btn') || document.getElementById('btn-back-menu');
 
-  function openInteractiveApp(url, title) {
-    if (!interactiveModal || !interactiveFrame) return;
-    interactiveFrame.src = url;
-    if (interactiveTitle) interactiveTitle.textContent = title;
+  function openLauncherModal(targetAppUrl, targetAppTitle) {
+    if (!interactiveModal) return;
     interactiveModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    if (targetAppUrl) {
+      launchApp(targetAppUrl, targetAppTitle);
+    } else {
+      showLauncherMenu();
+    }
   }
 
-  function closeInteractiveApp() {
-    if (!interactiveModal || !interactiveFrame) return;
+  function showLauncherMenu() {
+    if (modalTitle) modalTitle.textContent = 'Creative Mini-Apps';
+    if (launcherMenu) launcherMenu.style.display = 'block';
+    if (iframeWrapper) {
+      iframeWrapper.style.display = 'none';
+      iframeWrapper.classList.remove('active');
+    }
+    if (backToMenuBtn) backToMenuBtn.style.display = 'none';
+    if (interactiveFrame) interactiveFrame.src = 'about:blank';
+  }
+
+  function launchApp(url, title) {
+    if (modalTitle) modalTitle.textContent = title || 'Mini-App';
+    if (launcherMenu) launcherMenu.style.display = 'none';
+    if (backToMenuBtn) backToMenuBtn.style.display = 'inline-flex';
+    if (iframeWrapper) {
+      iframeWrapper.style.display = 'block';
+      iframeWrapper.classList.add('active');
+    }
+    if (interactiveFrame) interactiveFrame.src = url;
+  }
+
+  function closeLauncherModal() {
+    if (!interactiveModal) return;
     interactiveModal.classList.remove('active');
-    interactiveFrame.src = '';
+    if (interactiveFrame) interactiveFrame.src = 'about:blank';
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('[data-interactive-url]').forEach((trigger) => {
-    trigger.addEventListener('click', (e) => {
+  // Bind "Play Mini-App" triggers
+  document.querySelectorAll('.app-launcher-btn, .btn-play-miniapp, [data-open-launcher]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const url = trigger.getAttribute('data-interactive-url');
-      const title = trigger.getAttribute('data-interactive-title') || 'Interactive Lab';
-      openInteractiveApp(url, title);
+      openLauncherModal();
     });
   });
 
+  // Bind app selection buttons inside the launcher menu
+  document.querySelectorAll('.app-launcher-item').forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = item.getAttribute('data-app-url');
+      const title = item.getAttribute('data-app-title');
+      launchApp(url, title);
+    });
+  });
+
+  if (backToMenuBtn) {
+    backToMenuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showLauncherMenu();
+    });
+  }
+
   if (closeInteractiveBtn) {
-    closeInteractiveBtn.addEventListener('click', closeInteractiveApp);
+    closeInteractiveBtn.addEventListener('click', closeLauncherModal);
+  }
+
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', closeLauncherModal);
   }
 
   if (interactiveModal) {
     interactiveModal.addEventListener('click', (e) => {
-      if (e.target === interactiveModal) closeInteractiveApp();
+      if (e.target === interactiveModal) closeLauncherModal();
     });
   }
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      closeInteractiveApp();
+      closeLauncherModal();
       closeBibtexModal();
     }
   });

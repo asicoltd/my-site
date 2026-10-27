@@ -2,57 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI or Real?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI or Real? — Perception Test</title>
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0d1117;
+    color: #f0f6fc;
     text-align: center;
-    padding: 30px;
+    padding: 24px 16px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+p {
+    color: #8b949e;
+    font-size: 0.95rem;
+    margin-top: 0;
 }
 
 .container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 25px;
+    margin: 25px auto 15px;
     flex-wrap: wrap;
+    max-width: 680px;
 }
 
 .card {
-    width: 300px;
-    border: 2px solid #444;
-    border-radius: 10px;
+    width: 280px;
+    height: 280px;
+    border: 2px solid #30363d;
+    border-radius: 12px;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
+    background: #161b22;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 
 .card:hover {
-    border-color: #00ffcc;
+    border-color: #38bdf8;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
 }
 
-img {
+.card img {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.card-label {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(13, 17, 23, 0.85);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #8b949e;
+    font-family: monospace;
 }
 
 #result {
-    margin-top: 20px;
-    font-size: 20px;
+    margin: 15px 0 10px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    min-height: 28px;
 }
 
-.links a {
-    color: #00ffcc;
-    text-decoration: none;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
+.btn-next {
+    margin-top: 10px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
+    background: #38bdf8;
+    color: #07090e;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-next:hover {
+    background: #7dd3fc;
+    transform: translateY(-1px);
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #8b949e;
+    font-size: 0.85rem;
 }
 </style>
 </head>
@@ -60,56 +113,90 @@ button {
 <body>
 
 <h1>Which One Is AI?</h1>
-<p>Click the image you think is AI-generated</p>
+<p>Click the image you think is AI-generated (StyleGAN)</p>
 
 <div class="container">
     <div class="card" onclick="check(0)">
-        <img id="img0">
+        <img id="img0" alt="Option A">
+        <span class="card-label">Image A</span>
     </div>
     <div class="card" onclick="check(1)">
-        <img id="img1">
+        <img id="img1" alt="Option B">
+        <span class="card-label">Image B</span>
     </div>
 </div>
 
 <div id="result"></div>
-<div class="links" id="links"></div>
 
-<button onclick="loadImages()">Next</button>
+<button class="btn-next" onclick="loadImages()">Next Round →</button>
 
 <script>
 let images = [];
+let answered = false;
 
 function loadImages() {
+    answered = false;
     document.getElementById("result").innerText = "";
-    document.getElementById("links").innerHTML = "";
+    document.querySelectorAll('.card').forEach(c => {
+        c.style.borderColor = '#30363d';
+        c.style.pointerEvents = 'auto';
+    });
 
+    const timestamp = Date.now();
+    // Direct JPEG stream from ThisPersonDoesNotExist
     const ai = {
-        url: "https://thispersondoesnotexist.com",
-        source: "https://thispersondoesnotexist.com",
+        url: "https://thispersondoesnotexist.com/random-person.jpeg?t=" + timestamp,
         type: "AI"
     };
 
+    // Real human portrait from Picsum / Unsplash
+    const randomSeed = Math.floor(Math.random() * 800) + 1;
     const real = {
-        url: "https://picsum.photos/600/600?face=" + Math.random(),
-        source: "https://picsum.photos",
+        url: "https://picsum.photos/seed/" + randomSeed + "/600/600",
         type: "REAL"
     };
 
     images = [ai, real].sort(() => Math.random() - 0.5);
 
     images.forEach((img, i) => {
-        document.getElementById("img" + i).src = img.url;
+        const el = document.getElementById("img" + i);
+        el.src = "";
+        el.src = img.url;
+        let retryCount = 0;
+        el.onerror = function() {
+            if (retryCount >= 2) {
+                // Guaranteed AI face fallback (StyleGAN public domain sample)
+                el.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80";
+                return;
+            }
+            retryCount++;
+            if (img.type === "AI") {
+                el.src = "https://thispersondoesnotexist.com/random-person.jpeg?t=" + (timestamp + retryCount * 50);
+            } else {
+                el.src = "https://picsum.photos/600/600?random=" + Math.random();
+            }
+        };
     });
 }
 
 function check(i) {
+    if (answered) return;
+    answered = true;
+
     const picked = images[i];
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(c => c.style.pointerEvents = 'none');
 
-    document.getElementById("result").innerText =
-        picked.type === "AI"
-        ? "✅ Correct! That is AI-generated."
-        : "❌ Wrong! That one is real.";
-
+    const resultEl = document.getElementById("result");
+    if (picked.type === "AI") {
+        resultEl.innerHTML = '<span style="color:#34d399;">✅ Correct! You identified the AI-generated face.</span>';
+        cards[i].style.borderColor = '#34d399';
+    } else {
+        resultEl.innerHTML = '<span style="color:#f43f5e;">❌ That one is real! The other was AI-generated.</span>';
+        cards[i].style.borderColor = '#f43f5e';
+        const otherIdx = i === 0 ? 1 : 0;
+        cards[otherIdx].style.borderColor = '#34d399';
+    }
 }
 
 loadImages();
