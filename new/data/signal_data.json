@@ -1,0 +1,196 @@
+{
+  "system": {
+    "identifier": "AH-2026",
+    "name": "Asif Hasan",
+    "callsign": "S21NEO",
+    "status": "SIGNAL ACQUIRED",
+    "tagline": "AI/ML Researcher & Systems Engineer",
+    "subtitle": "Investigating Explainable AI for IoT Security, Edge Inference, and Distributed Systems.",
+    "email": "asifhasan.cse@gmail.com",
+    "github": "https://github.com/asicoltd",
+    "linkedin": "https://www.linkedin.com/in/asicoltd",
+    "location": "Dhaka, Bangladesh"
+  },
+  "education": [
+    {
+      "degree": "M.Sc. in Computer Science and Engineering",
+      "institution": "East West University",
+      "location": "Dhaka, Bangladesh",
+      "status": "Currently Enrolled (In Progress)",
+      "focus": "Explainable Artificial Intelligence (XAI), IoT Intrusion Detection, and Deep Neural Networks."
+    },
+    {
+      "degree": "B.Sc. in Computer Science and Engineering",
+      "institution": "East West University",
+      "location": "Dhaka, Bangladesh",
+      "status": "Graduated",
+      "focus": "Core Theoretical Computer Science, Machine Learning, Operating Systems, and Distributed Networks."
+    }
+  ],
+  "publications": [
+    {
+      "id": "hfmd",
+      "type": "conference_proceeding",
+      "title": "Ensemble Deep Learning for Enhanced Detection and Classification of Hand, Foot, and Mouth Disease",
+      "authors": "Hasan, Md Asif and Collaborators",
+      "venue": "International Conference on Data Mining and Information Security (ICDMIS 2024)",
+      "series": "Lecture Notes in Networks and Systems (LNNS)",
+      "publisher": "Springer, Singapore",
+      "year": 2024,
+      "doi": "10.1007/978-981-96-6063-6_25",
+      "link": "https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25",
+      "abstract": "This study addresses the critical pediatric diagnostic challenge of accurately detecting Hand, Foot, and Mouth Disease (HFMD). Evaluates deep convolutional architectures and implements an ensemble voting pipeline to significantly improve classification accuracy and robustness against noise in dermatological imaging.",
+      "celestial_body": {
+        "name": "PLANET HFMD-24",
+        "color": "#00ff88",
+        "radius": 1.4,
+        "type": "procedural_terrestrial"
+      }
+    },
+    {
+      "id": "peptic",
+      "type": "conference_proceeding",
+      "title": "Classification of Peptic Ulcer and Digestive Tract Disorders Using Endoscopic Images",
+      "authors": "Hasan, Md Asif and Collaborators",
+      "venue": "International Conference on Data Mining and Information Security (ICDMIS 2024)",
+      "series": "Lecture Notes in Networks and Systems (LNNS)",
+      "publisher": "Springer, Singapore",
+      "year": 2024,
+      "doi": "10.1007/978-981-96-6066-7_32",
+      "link": "https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32",
+      "abstract": "Presents an automated diagnostic pipeline for examining gastrointestinal tract endoscopy frames. Implements fine-tuned transfer learning backbones with targeted feature extraction to assist clinical specialists in identifying peptic ulcers and gastrointestinal abnormalities with high sensitivity.",
+      "celestial_body": {
+        "name": "PLANET PEPTIC-24",
+        "color": "#00e5ff",
+        "radius": 1.6,
+        "type": "procedural_gas_giant"
+      }
+    },
+    {
+      "id": "rose",
+      "type": "conference_proceeding",
+      "title": "Rose Disease Detection Using YOLO: A Deep Learning-Based Approach",
+      "authors": "Hasan, Md Asif and Collaborators",
+      "venue": "9th International Conference on Information and Communication Technology for Competitive Strategies (ICTCS 2024)",
+      "series": "Lecture Notes in Networks and Systems (LNNS)",
+      "publisher": "Springer, Singapore",
+      "year": 2024,
+      "doi": "10.1007/978-981-96-5607-3_13",
+      "link": "https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13",
+      "abstract": "Deploys single-stage real-time object detection models (YOLO) for early botanical pathology identification. Accurately segments and classifies foliar rose diseases in natural field conditions to mitigate agricultural yield reduction.",
+      "celestial_body": {
+        "name": "PLANET ROSE-24",
+        "color": "#a855f7",
+        "radius": 1.3,
+        "type": "procedural_silicate"
+      }
+    },
+    {
+      "id": "thesis_nebula",
+      "type": "ms_thesis_active",
+      "title": "Explainable Artificial Intelligence (XAI) for IoT Intrusion Detection in Edge Gateways",
+      "authors": "Asif Hasan (M.Sc. Thesis)",
+      "venue": "East West University — Department of CSE (Active Thesis)",
+      "series": "M.Sc. Research In Progress",
+      "publisher": "Under Active Supervision",
+      "year": 2026,
+      "doi": "IN_PROGRESS",
+      "link": "#contact",
+      "abstract": "Active M.Sc. thesis research developing lightweight, transparent tree ensembles and deep neural networks with SHAP/LIME attribution pipelines for real-time cyberattack detection on resource-constrained IoT gateways.",
+      "celestial_body": {
+        "name": "PROTO-PLANET NEBULA // THESIS",
+        "color": "#10b981",
+        "radius": 2.2,
+        "type": "swirling_particle_nebula"
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "ewu_mind",
+      "title": "EWU_MIND: AI-Driven News Recommendation System",
+      "category": "MACHINE LEARNING",
+      "tech": ["PyTorch", "Python", "Neural Collaborative Filtering", "MIND Dataset"],
+      "description": "Personalized neural recommendation engine combining collaborative filtering with content embeddings to deliver low-latency, accurate ranking across large-scale news reader datasets.",
+      "github": "https://github.com/asicoltd/EWU_MIND"
+    },
+    {
+      "id": "ai_chess",
+      "title": "AI-Based Chess Engine",
+      "category": "REINFORCEMENT LEARNING",
+      "tech": ["Python", "Q-Learning", "Deep Q-Networks (DQN)", "MCTS"],
+      "description": "Autonomous competitive chess engine implementing Deep Q-Networks and Monte Carlo Tree Search (MCTS) to iteratively optimize positional evaluation and tactical move selections.",
+      "github": "https://github.com/asicoltd/AI_Chess"
+    },
+    {
+      "id": "asicoin",
+      "title": "ASICoin: Blockchain Cryptocurrency with AI Fraud Detection",
+      "category": "DISTRIBUTED LEDGER",
+      "tech": ["Python", "Blockchain", "AI Security", "Post-Quantum Cryptography"],
+      "description": "Cryptocurrency implementation exploring distributed consensus, cryptographic transaction validation, and AI-assisted anomaly detection for future-proof ledger protection.",
+      "github": "https://github.com/asicoltd/ASICoin"
+    },
+    {
+      "id": "one_dtn",
+      "title": "The ONE DTN Routing Protocol Simulator Extension",
+      "category": "NETWORKING RESEARCH",
+      "tech": ["Java", "Python", "The ONE Simulator", "Ad-Hoc Protocols"],
+      "description": "Extensive empirical simulation benchmarking Epidemic, PRoPHET, and Spray-and-Wait delay-tolerant routing protocols across partitioned, intermittent networks during emergency disasters.",
+      "github": "https://github.com/asicoltd"
+    },
+    {
+      "id": "medicine_shop",
+      "title": "Medicine Shop Inventory Management System",
+      "category": "ENTERPRISE SOFTWARE",
+      "tech": ["PHP", "MySQL", "JavaScript", "Relational Database"],
+      "description": "Production database software managing pharmaceutical stock, real-time invoicing, point-of-sale audits, and automated expiry date tracking.",
+      "github": "https://github.com/asicoltd/Medicine-Shop-Management-System"
+    },
+    {
+      "id": "crypto_sentiment",
+      "title": "Cryptocurrency Price Prediction via Sentiment Analysis",
+      "category": "DEEP LEARNING",
+      "tech": ["Python", "TensorFlow", "Keras", "NLP", "LSTM"],
+      "description": "Multimodal time-series forecasting model combining historical price movements with NLP sentiment embeddings extracted from financial news streams.",
+      "github": "https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
+    }
+  ],
+  "sideband": [
+    {
+      "code": "FREQ // 144-430 MHz",
+      "title": "Licensed Amateur Radio Operator (S21NEO)",
+      "frequency": "VHF / UHF Bands",
+      "description": "Licensed HAM radio operator (Callsign: S21NEO). Researching RF wave propagation, antenna impedance matching, emergency emergency radio networks, and packet radio communications during disasters."
+    },
+    {
+      "code": "FREQ // ICPC-ALGO",
+      "title": "Competitive Programming & Problem Solving",
+      "frequency": "Codeforces • HackerRank • Beecrowd",
+      "description": "Solved thousands of algorithmic and data structure problems across online judges. Active contestant in national programming contests and university ICPC preliminaries."
+    },
+    {
+      "code": "FREQ // ORATORY",
+      "title": "Debating & Public Oratory Champion",
+      "frequency": "Parliamentary Debate",
+      "description": "University-level debate champion, former General Secretary of college debate club. Trainer in structured rhetoric, policy critique, and scientific communication."
+    },
+    {
+      "code": "FREQ // SERVICE",
+      "title": "Senior Rover Mate — Scouting Movement",
+      "frequency": "Samatat Open Scout Group",
+      "description": "Senior Rover Mate spearheading community service, disaster relief campaigns, winter clothes distribution, youth leadership development, and scout jamborees."
+    },
+    {
+      "code": "FREQ // DONOR-20+",
+      "title": "Voluntary Blood Donor (20+ Donations)",
+      "frequency": "Quantum Foundation & Emergency Care",
+      "description": "Regular blood donor since 2017 with over 20 voluntary donations connecting donors with critically ill emergency patients."
+    },
+    {
+      "code": "FREQ // ENDURANCE",
+      "title": "Marathon Runner & Martial Arts Practitioner",
+      "frequency": "15 Marathon Events • Blue Belt Karate",
+      "description": "Completed 15 mini, half, and full marathons with Run Bangladesh; holds Blue Belt in Karate and Green Belt in Taekwondo, cultivating mental endurance and physical discipline."
+    }
+  ]
+}
