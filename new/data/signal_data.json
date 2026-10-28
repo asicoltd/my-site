@@ -4,8 +4,8 @@
     "name": "Asif Hasan",
     "callsign": "S21NEO",
     "status": "SIGNAL ACQUIRED",
-    "tagline": "AI/ML Researcher & Systems Engineer",
-    "subtitle": "Graduate researcher at East West University focusing on Explainable AI for IoT cybersecurity, deep learning, and distributed network architectures.",
+    "tagline": "AI/ML Researcher • Deep Neural Networks & Computer Vision",
+    "subtitle": "M.Sc. researcher at East West University focusing on Deep Neural Networks (DNN), Explainable AI (XAI) for edge IoT cybersecurity, and Computer Vision classification.",
     "email": "asifhasan.cse@gmail.com",
     "github": "https://github.com/asicoltd",
     "linkedin": "https://www.linkedin.com/in/asicoltd",
@@ -16,15 +16,15 @@
       "degree": "M.Sc. in Computer Science and Engineering",
       "institution": "East West University",
       "location": "Dhaka, Bangladesh",
-      "status": "Currently Enrolled (In Progress)",
-      "focus": "Explainable Artificial Intelligence (XAI), IoT Intrusion Detection, and Deep Neural Networks."
+      "status": "Currently Enrolled (Active Thesis)",
+      "focus": "Deep Neural Networks (DNN), Explainable Artificial Intelligence (XAI), and Edge IoT Intrusion Cyberdefense."
     },
     {
       "degree": "B.Sc. in Computer Science and Engineering",
       "institution": "East West University",
       "location": "Dhaka, Bangladesh",
       "status": "Graduated",
-      "focus": "Core Theoretical Computer Science, Machine Learning, Operating Systems, and Distributed Networks."
+      "focus": "Theoretical Computer Science, Machine Learning, Deep Convolutional Networks, Algorithms, and Distributed Systems."
     }
   ],
   "publications": [
@@ -39,7 +39,7 @@
       "year": 2024,
       "doi": "10.1007/978-981-96-6063-6_25",
       "link": "https://link.springer.com/chapter/10.1007/978-981-96-6063-6_25",
-      "abstract": "This study addresses the critical pediatric diagnostic challenge of accurately detecting Hand, Foot, and Mouth Disease (HFMD). Evaluates deep convolutional architectures and implements an ensemble voting pipeline to significantly improve classification accuracy and robustness against noise in dermatological imaging.",
+      "abstract": "This study addresses the critical pediatric diagnostic challenge of accurately detecting Hand, Foot, and Mouth Disease (HFMD). Evaluates deep convolutional neural network (CNN) architectures and implements an ensemble voting pipeline to significantly improve classification accuracy and robustness against noise in dermatological imaging.",
       "celestial_body": {
         "name": "PLANET HFMD-24",
         "badge": "Springer LNNS (ICDMIS 2024)",
@@ -59,7 +59,7 @@
       "year": 2024,
       "doi": "10.1007/978-981-96-6066-7_32",
       "link": "https://link.springer.com/chapter/10.1007/978-981-96-6066-7_32",
-      "abstract": "Presents an automated diagnostic pipeline for examining gastrointestinal tract endoscopy frames. Implements fine-tuned transfer learning backbones with targeted feature extraction to assist clinical specialists in identifying peptic ulcers and gastrointestinal abnormalities with high sensitivity.",
+      "abstract": "Presents an automated diagnostic pipeline for examining gastrointestinal tract endoscopy frames. Implements fine-tuned transfer learning backbones with deep feature extraction layers to assist clinical specialists in identifying peptic ulcers and gastrointestinal abnormalities with high sensitivity.",
       "celestial_body": {
         "name": "PLANET PEPTIC-24",
         "badge": "Springer LNNS (ICDMIS 2024)",
@@ -79,7 +79,7 @@
       "year": 2024,
       "doi": "10.1007/978-981-96-5607-3_13",
       "link": "https://link.springer.com/chapter/10.1007/978-981-96-5607-3_13",
-      "abstract": "Deploys single-stage real-time object detection models (YOLO) for early botanical pathology identification. Accurately segments and classifies foliar rose diseases in natural field conditions to mitigate agricultural yield reduction.",
+      "abstract": "Deploys single-stage real-time deep neural object detection models (YOLO) for early botanical pathology identification. Accurately segments and classifies foliar rose diseases in natural field conditions to mitigate agricultural yield reduction.",
       "celestial_body": {
         "name": "PLANET ROSE-24",
         "badge": "Springer LNNS (ICTCS 2024)",
@@ -113,8 +113,8 @@
     {
       "id": "ewu_mind",
       "title": "EWU_MIND: AI-Driven News Recommendation System",
-      "category": "MACHINE LEARNING",
-      "tech": ["PyTorch", "Python", "Neural Collaborative Filtering", "MIND Dataset"],
+      "category": "DEEP LEARNING / RECOMMENDATION",
+      "tech": ["PyTorch", "Python", "Neural Collaborative Filtering", "MIND Dataset", "Deep Learning"],
       "description": "Personalized neural recommendation engine combining collaborative filtering with content embeddings to deliver low-latency, accurate ranking across large-scale news reader datasets.",
       "github": "https://github.com/asicoltd/EWU_MIND"
     },
@@ -122,14 +122,22 @@
       "id": "ai_chess",
       "title": "AI-Based Chess Engine",
       "category": "REINFORCEMENT LEARNING",
-      "tech": ["Python", "Q-Learning", "Deep Q-Networks (DQN)", "MCTS"],
+      "tech": ["Python", "Deep Q-Networks (DQN)", "Q-Learning", "Monte Carlo Tree Search (MCTS)"],
       "description": "Autonomous competitive chess engine implementing Deep Q-Networks and Monte Carlo Tree Search (MCTS) to iteratively optimize positional evaluation and tactical move selections.",
       "github": "https://github.com/asicoltd/AI_Chess"
     },
     {
+      "id": "crypto_sentiment",
+      "title": "Cryptocurrency Price Prediction via Sentiment Analysis",
+      "category": "DEEP LEARNING / NLP",
+      "tech": ["Python", "TensorFlow", "Keras", "LSTM", "NLP Embeddings"],
+      "description": "Multimodal time-series forecasting model combining historical price movements with NLP sentiment embeddings extracted from financial news streams.",
+      "github": "https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
+    },
+    {
       "id": "asicoin",
-      "title": "ASICoin: Blockchain Cryptocurrency with AI Fraud Detection",
-      "category": "DISTRIBUTED LEDGER",
+      "title": "ASICoin: Blockchain with AI Anomaly Detection",
+      "category": "DISTRIBUTED LEDGER & AI SECURITY",
       "tech": ["Python", "Blockchain", "AI Security", "Post-Quantum Cryptography"],
       "description": "Cryptocurrency implementation exploring distributed consensus, cryptographic transaction validation, and AI-assisted anomaly detection for future-proof ledger protection.",
       "github": "https://github.com/asicoltd/ASICoin"
@@ -149,28 +157,20 @@
       "tech": ["PHP", "MySQL", "JavaScript", "Relational Database"],
       "description": "Production database software managing pharmaceutical stock, real-time invoicing, point-of-sale audits, and automated expiry date tracking.",
       "github": "https://github.com/asicoltd/Medicine-Shop-Management-System"
-    },
-    {
-      "id": "crypto_sentiment",
-      "title": "Cryptocurrency Price Prediction via Sentiment Analysis",
-      "category": "DEEP LEARNING",
-      "tech": ["Python", "TensorFlow", "Keras", "NLP", "LSTM"],
-      "description": "Multimodal time-series forecasting model combining historical price movements with NLP sentiment embeddings extracted from financial news streams.",
-      "github": "https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
     }
   ],
   "sideband": [
-    {
-      "code": "Amateur Radio Communication",
-      "title": "Licensed Amateur Radio Operator (S21NEO)",
-      "frequency": "VHF / UHF Bands",
-      "description": "Licensed HAM radio operator (Callsign: S21NEO). Researching RF wave propagation, antenna impedance matching, emergency emergency radio networks, and packet radio communications during disasters."
-    },
     {
       "code": "Algorithmic Problem Solving",
       "title": "Competitive Programming & Problem Solving",
       "frequency": "Codeforces • HackerRank • Beecrowd",
       "description": "Solved thousands of algorithmic and data structure problems across online judges. Active contestant in national programming contests and university ICPC preliminaries."
+    },
+    {
+      "code": "Amateur Radio Communication",
+      "title": "Licensed Amateur Radio Operator (S21NEO)",
+      "frequency": "VHF / UHF Bands",
+      "description": "Licensed HAM radio operator (Callsign: S21NEO). Researching RF wave propagation, antenna impedance matching, emergency radio networks, and packet radio communications during disasters."
     },
     {
       "code": "Debate & Scientific Oratory",

@@ -16,8 +16,8 @@
       name: "Asif Hasan",
       callsign: "S21NEO",
       status: "SIGNAL ACQUIRED",
-      tagline: "AI/ML Researcher & Systems Engineer",
-      subtitle: "Graduate researcher at East West University focusing on Explainable AI for IoT cybersecurity, deep learning, and distributed network architectures.",
+      tagline: "AI/ML Researcher • Deep Neural Networks & Computer Vision",
+      subtitle: "M.Sc. researcher at East West University focusing on Deep Neural Networks (DNN), Explainable AI (XAI) for edge IoT cybersecurity, and Computer Vision classification.",
       email: "asifhasan.cse@gmail.com",
       github: "https://github.com/asicoltd",
       linkedin: "https://www.linkedin.com/in/asicoltd",
@@ -151,8 +151,8 @@
       {
         id: "ewu_mind",
         title: "EWU_MIND: AI-Driven News Recommendation System",
-        category: "Machine Learning",
-        tech: ["PyTorch", "Python", "Neural Collaborative Filtering", "MIND Dataset"],
+        category: "Deep Learning / Recommendation",
+        tech: ["PyTorch", "Python", "Neural Collaborative Filtering", "MIND Dataset", "Deep Learning"],
         description: "Personalized neural recommendation engine combining collaborative filtering with content embeddings to deliver low-latency, accurate ranking across large-scale news reader datasets.",
         github: "https://github.com/asicoltd/EWU_MIND"
       },
@@ -160,14 +160,22 @@
         id: "ai_chess",
         title: "AI-Based Chess Engine",
         category: "Reinforcement Learning",
-        tech: ["Python", "Q-Learning", "Deep Q-Networks (DQN)", "MCTS"],
+        tech: ["Python", "Deep Q-Networks (DQN)", "Q-Learning", "Monte Carlo Tree Search (MCTS)"],
         description: "Autonomous competitive chess engine implementing Deep Q-Networks and Monte Carlo Tree Search (MCTS) to iteratively optimize positional evaluation and tactical move selections.",
         github: "https://github.com/asicoltd/AI_Chess"
       },
       {
+        id: "crypto_sentiment",
+        title: "Cryptocurrency Price Prediction via Sentiment Analysis",
+        category: "Deep Learning / NLP",
+        tech: ["Python", "TensorFlow", "Keras", "LSTM", "NLP Embeddings"],
+        description: "Multimodal time-series forecasting model combining historical price movements with NLP sentiment embeddings extracted from financial news streams.",
+        github: "https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
+      },
+      {
         id: "asicoin",
-        title: "ASICoin: Blockchain Cryptocurrency with AI Fraud Detection",
-        category: "Distributed Ledger",
+        title: "ASICoin: Blockchain with AI Anomaly Detection",
+        category: "Distributed Ledger & AI Security",
         tech: ["Python", "Blockchain", "AI Security", "Post-Quantum Cryptography"],
         description: "Cryptocurrency implementation exploring distributed consensus, cryptographic transaction validation, and AI-assisted anomaly detection for future-proof ledger protection.",
         github: "https://github.com/asicoltd/ASICoin"
@@ -187,28 +195,20 @@
         tech: ["PHP", "MySQL", "JavaScript", "Relational Database"],
         description: "Production database software managing pharmaceutical stock, real-time invoicing, point-of-sale audits, and automated expiry date tracking.",
         github: "https://github.com/asicoltd/Medicine-Shop-Management-System"
-      },
-      {
-        id: "crypto_sentiment",
-        title: "Cryptocurrency Price Prediction via Sentiment Analysis",
-        category: "Deep Learning",
-        tech: ["Python", "TensorFlow", "Keras", "NLP", "LSTM"],
-        description: "Multimodal time-series forecasting model combining historical price movements with NLP sentiment embeddings extracted from financial news streams.",
-        github: "https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
       }
     ],
     sideband: [
       {
-        code: "144 - 430 MHz",
+        code: "Algorithmic Problem Solving",
+        title: "Competitive Programming & Problem Solving",
+        frequency: "Codeforces • HackerRank • Beecrowd",
+        description: "Solved thousands of algorithmic and data structure problems across online judges. Active contestant in national programming contests and university ICPC preliminaries."
+      },
+      {
+        code: "Amateur Radio Communication",
         title: "Licensed Amateur Radio Operator (S21NEO)",
         frequency: "VHF / UHF Bands",
         description: "Licensed HAM radio operator (Callsign: S21NEO). Researching RF wave propagation, antenna impedance matching, emergency radio networks, and packet radio communications during disasters."
-      },
-      {
-        code: "Competitive Programming",
-        title: "Algorithmic Problem Solving",
-        frequency: "Codeforces • HackerRank • Beecrowd",
-        description: "Solved thousands of algorithmic and data structure problems across online judges. Active contestant in national programming contests and university ICPC preliminaries."
       },
       {
         code: "Parliamentary Debate",
@@ -694,7 +694,7 @@
     }
     isTransmitting = true;
     transmitCancelled = false;
-    showToast('Broadcasting callsign S21NEO in Morse...');
+    showToast('Establishing connection • Transmitting carrier sequence...');
 
     const ctx = isSoundEnabled ? getAudioContext() : null;
 
@@ -717,7 +717,7 @@
       await new Promise(r => setTimeout(r, step.dur));
     }
     if (!transmitCancelled) {
-      showToast('Transmission completed. Callsign S21NEO logged.');
+      showToast('Connection established • Reach out: asifhasan.cse@gmail.com');
     }
     isTransmitting = false;
     transmitCancelled = false;
