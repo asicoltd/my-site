@@ -439,7 +439,7 @@
     }
     isThreeRendering = false;
     try {
-      localStorage.setItem('signal_pill_pref', 'plain');
+      sessionStorage.setItem('signal_pill_pref', 'plain');
     } catch (_) {}
     window.scrollTo(0, 0);
   }
@@ -458,7 +458,7 @@
     isThreeRendering = true;
     if (startThreeLoop) startThreeLoop();
     try {
-      localStorage.setItem('signal_pill_pref', 'immersive');
+      sessionStorage.setItem('signal_pill_pref', 'immersive');
     } catch (_) {}
     window.scrollTo(0, 0);
   }
@@ -473,11 +473,12 @@
 
   returnImmersiveBtn?.addEventListener('click', activateImmersiveView);
 
+  // Default view is always the rich Immersive View.
+  // Plain View is available on-demand via the HUD toggle.
   try {
-    const savedPillPref = localStorage.getItem('signal_pill_pref');
-    if (savedPillPref === 'plain') {
-      activatePlainView();
-    } else if (!savedPillPref && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    localStorage.removeItem('signal_pill_pref');
+    const sessionPref = sessionStorage.getItem('signal_pill_pref');
+    if (sessionPref === 'plain') {
       activatePlainView();
     }
   } catch (_) {}
