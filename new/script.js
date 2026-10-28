@@ -94,35 +94,10 @@
   attachCursorHoverListeners();
 
   // ==========================================================================
-  // 3. Tactile 3D Card Tilt Physics & Holographic Radial Shimmer
+  // 3. Information Cards Architecture (Normal-Sized, Stable Baseline)
   // ==========================================================================
-  const tiltCards = document.querySelectorAll(
-    '.project-card, .pub-card, .about-focus-card, .social-card, .contact-card, .skills-box, .education-card'
-  );
-  tiltCards.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -5.5;
-      const rotateY = ((x - centerX) / centerX) * 5.5;
-
-      card.style.setProperty('--tilt-rx', `${rotateX.toFixed(2)}deg`);
-      card.style.setProperty('--tilt-ry', `${rotateY.toFixed(2)}deg`);
-      card.style.setProperty('--tilt-ty', '-4px');
-      card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
-      card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.setProperty('--tilt-rx', '0deg');
-      card.style.setProperty('--tilt-ry', '0deg');
-      card.style.setProperty('--tilt-ty', '0px');
-    });
-  });
+  // Cards maintain a rock-solid, calm baseline with zero mouse tilt wobble.
+  // Dynamic zoom is cleanly driven by user scroll interactions.
 
   // ==========================================================================
   // 4. Three.js: Sculpted Neural Torus Manifold & Orbital IoT Streams
@@ -320,12 +295,8 @@
       fillLight.position.set(0, -10, 5);
       scene.add(fillLight);
 
-      // --- Interactive Cursor Physics ---
-      const mouse3D = { x: 0, y: 0, targetX: 0, targetY: 0 };
-      window.addEventListener('mousemove', (e) => {
-        mouse3D.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse3D.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
-      }, { passive: true });
+      // Fixed Studio Key Light (Steady specular reflection, no mouse tracking)
+      keyLight.position.set(6, 6, 10);
 
       // Resize Handler
       window.addEventListener('resize', () => {
@@ -402,15 +373,6 @@
           lastFpsTime = now;
         }
 
-        // Frame-rate independent mouse lerp
-        const mouseDecay = 1 - Math.exp(-dt * 8);
-        mouse3D.x += (mouse3D.targetX - mouse3D.x) * mouseDecay;
-        mouse3D.y += (mouse3D.targetY - mouse3D.y) * mouseDecay;
-
-        // Dynamic light follow
-        keyLight.position.x = mouse3D.x * 12 + 4;
-        keyLight.position.y = mouse3D.y * 10 + 4;
-
         // Rim light orbit
         rimLight.position.x = Math.sin(elapsedTime * 0.6) * 10 - 2;
         rimLight.position.z = Math.cos(elapsedTime * 0.6) * 8 + 4;
@@ -419,9 +381,9 @@
         dustPoints.rotation.y = elapsedTime * 0.012 * motionFactor;
         dustPoints.rotation.x = elapsedTime * 0.006 * motionFactor;
 
-        // Torus Intrinsic Rotation & Mouse Lean
-        torusMesh.rotation.x = elapsedTime * 0.20 * motionFactor + mouse3D.y * 0.35;
-        torusMesh.rotation.y = elapsedTime * 0.28 * motionFactor + mouse3D.x * 0.45;
+        // Autonomous 3D Manifold Rotation (Zero mouse wobble or tracking)
+        torusMesh.rotation.x = elapsedTime * 0.18 * motionFactor;
+        torusMesh.rotation.y = elapsedTime * 0.25 * motionFactor;
         innerCoreMesh.rotation.x = -torusMesh.rotation.x * 1.25;
         innerCoreMesh.rotation.y = -torusMesh.rotation.y * 1.15;
         wireframeMesh.rotation.x = torusMesh.rotation.x;
@@ -519,7 +481,7 @@
   let isDynamicMotion = true;
 
   // ==========================================================================
-  // 4.6 Card Spatial Scroll Zoom Engine (Lusion-Style Dynamic Information Cards)
+  // 4.6 Card Spatial Scroll Zoom Engine (Normal-Sized Cards with Focal Scroll Zoom)
   // ==========================================================================
   const scrollCards = Array.from(document.querySelectorAll(
     '.about-focus-card, .pub-card, .project-card, .skills-box, .education-card, .social-card, .contact-card'
@@ -530,9 +492,7 @@
       for (let i = 0; i < scrollCards.length; i++) {
         const card = scrollCards[i];
         card.style.setProperty('--scroll-scale', '1');
-        card.style.setProperty('--scroll-opacity', '1');
-        card.style.setProperty('--scroll-y', '0px');
-        if (!card.classList.contains('card-in-focus')) card.classList.add('card-in-focus');
+        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
       }
       return;
     }
@@ -540,30 +500,20 @@
     const vh = window.innerHeight || 800;
     const vCenter = vh * 0.5;
     const isMobile = window.innerWidth < 768;
-    const focalSpan = Math.max(vh * (isMobile ? 0.75 : 0.62), 1);
-
-    const minScale = isMobile ? 0.93 : 0.88;
-    const maxScale = isMobile ? 1.00 : 1.025;
-    const minOpacity = isMobile ? 0.60 : 0.38;
-    const maxTravel = isMobile ? 14 : 26;
+    const focalSpan = Math.max(vh * (isMobile ? 0.55 : 0.48), 1);
+    const maxZoom = isMobile ? 1.04 : 1.075;
 
     for (let i = 0; i < scrollCards.length; i++) {
       const card = scrollCards[i];
       const rect = card.getBoundingClientRect();
 
-      // Frustum handling: set resting boundary states for off-screen cards
-      if (rect.bottom < -120) {
-        card.style.setProperty('--scroll-scale', minScale.toFixed(3));
-        card.style.setProperty('--scroll-opacity', minOpacity.toFixed(3));
-        card.style.setProperty('--scroll-y', `-${maxTravel}px`);
-        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
-        continue;
-      }
-      if (rect.top > vh + 120) {
-        card.style.setProperty('--scroll-scale', minScale.toFixed(3));
-        card.style.setProperty('--scroll-opacity', minOpacity.toFixed(3));
-        card.style.setProperty('--scroll-y', `${maxTravel}px`);
-        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
+      // If card is off-screen, keep it at normal size 1
+      if (rect.bottom < -100 || rect.top > vh + 100) {
+        card.style.setProperty('--scroll-scale', '1');
+        if (card.classList.contains('card-in-focus')) {
+          card.classList.remove('card-in-focus');
+          card.removeAttribute('aria-current');
+        }
         continue;
       }
 
@@ -572,24 +522,32 @@
 
       const rawDist = cardCenter - vCenter;
       const dist = rawDist / focalSpan;
-      const clampedDist = Math.max(-1.15, Math.min(1.15, dist));
-      const norm = Math.min(Math.abs(clampedDist), 1.0);
+      const clampedDist = Math.max(-1.0, Math.min(1.0, dist));
+      const norm = Math.abs(clampedDist);
 
-      // Smooth cosine bell curve: 1.0 at center, 0.0 at edge
-      const centerCloseness = 0.5 * (1 + Math.cos(norm * Math.PI));
+      // Cosine curve: 1.0 at center, 0.0 when norm >= 1.0
+      const zoomFactor = 0.5 * (1 + Math.cos(norm * Math.PI));
+      const easedZoom = Math.pow(zoomFactor, 1.4);
 
-      const scale = minScale + (maxScale - minScale) * centerCloseness;
-      const opacity = minOpacity + (1.0 - minOpacity) * centerCloseness;
-      const yOffset = clampedDist * maxTravel * (1 - centerCloseness);
+      // Card is normal size (1.0) when not in center focus, and zooms up when user scrolls onto it!
+      const scale = 1.0 + (maxZoom - 1.0) * easedZoom;
 
-      card.style.setProperty('--scroll-scale', scale.toFixed(3));
-      card.style.setProperty('--scroll-opacity', opacity.toFixed(3));
-      card.style.setProperty('--scroll-y', `${yOffset.toFixed(1)}px`);
-
-      if (norm < 0.38) {
-        if (!card.classList.contains('card-in-focus')) card.classList.add('card-in-focus');
+      if (Math.abs(scale - 1.0) < 0.002) {
+        card.style.setProperty('--scroll-scale', '1');
       } else {
-        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
+        card.style.setProperty('--scroll-scale', scale.toFixed(3));
+      }
+
+      if (easedZoom > 0.40) {
+        if (!card.classList.contains('card-in-focus')) {
+          card.classList.add('card-in-focus');
+          card.setAttribute('aria-current', 'true');
+        }
+      } else {
+        if (card.classList.contains('card-in-focus')) {
+          card.classList.remove('card-in-focus');
+          card.removeAttribute('aria-current');
+        }
       }
     }
   }

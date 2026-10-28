@@ -827,7 +827,7 @@ section {
 }
 
 /* ==========================================================================
-   Kinetic Information Card Architecture & Spatial Zoom Physics
+   Kinetic Information Card Architecture & Focal Scroll Zoom Physics
    ========================================================================== */
 .about-focus-card,
 .pub-card,
@@ -837,24 +837,13 @@ section {
 .social-card,
 .contact-card {
   --scroll-scale: 1;
-  --scroll-opacity: 1;
-  --scroll-y: 0px;
-  --tilt-rx: 0deg;
-  --tilt-ry: 0deg;
-  --tilt-ty: 0px;
-
-  transform: perspective(1000px)
-             scale(var(--scroll-scale, 1))
-             translateY(calc(var(--scroll-y, 0px) + var(--tilt-ty, 0px)))
-             rotateX(var(--tilt-rx, 0deg))
-             rotateY(var(--tilt-ry, 0deg));
-  opacity: var(--scroll-opacity, 1);
-  will-change: transform, opacity;
-  transition: border-color 0.3s ease,
+  transform: scale(var(--scroll-scale, 1)) translateZ(0);
+  opacity: 1;
+  will-change: transform;
+  transition: border-color 0.35s ease,
               box-shadow 0.35s ease,
-              background-color 0.3s ease,
-              transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.16s ease;
+              background-color 0.35s ease,
+              transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   backdrop-filter: blur(12px);
@@ -871,8 +860,8 @@ section {
 .contact-card.card-in-focus {
   background: var(--bg-card-focused);
   border-color: var(--border-active);
-  box-shadow: var(--shadow-card-focused);
-  z-index: 5;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.95), 0 0 40px rgba(56, 189, 248, 0.25);
+  z-index: 10;
 }
 
 .about-focus-card {
