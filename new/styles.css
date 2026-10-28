@@ -260,6 +260,12 @@ body {
   transition: var(--transition-fast);
 }
 
+.hud-icon-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 .hud-btn-toggle:hover, .hud-btn-lab:hover {
   background: rgba(0, 255, 119, 0.08);
   border-color: rgba(0, 255, 119, 0.3);
