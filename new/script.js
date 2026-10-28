@@ -238,10 +238,69 @@
   };
 
   // ==========================================================================
-  // 2. DOM Rendering Engine (Human-Grade Presentation)
+  // 2. Fluid Card Zoom-In/Zoom-Out on Scroll (Focal Sweet Spot)
+  // ==========================================================================
+  let isCardZoomAttached = false;
+  function initCardZoomEffect() {
+    const cards = document.querySelectorAll('.focal-zoom-card, .celestial-card, .system-node-card, .sideband-node, .metric-card');
+    if (cards.length === 0) return;
+
+    let ticking = false;
+    let vh = window.innerHeight;
+
+    function updateFocalCards() {
+      const focalCenter = vh * 0.5;
+      const focalBand = vh * 0.28;
+
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.bottom < -40 || rect.top > vh + 40) {
+          if (card.classList.contains('is-focal-zoomed')) {
+            card.classList.remove('is-focal-zoomed');
+          }
+          return;
+        }
+
+        const cardCenter = rect.top + rect.height * 0.5;
+        const distFromCenter = Math.abs(cardCenter - focalCenter);
+
+        const isZoomed = card.classList.contains('is-focal-zoomed');
+        const threshold = isZoomed ? (focalBand + 35) : focalBand;
+
+        if (distFromCenter < threshold) {
+          if (!isZoomed) card.classList.add('is-focal-zoomed');
+        } else {
+          if (isZoomed) card.classList.remove('is-focal-zoomed');
+        }
+      });
+      ticking = false;
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateFocalCards);
+        ticking = true;
+      }
+    };
+
+    if (!isCardZoomAttached) {
+      window.addEventListener('resize', () => {
+        vh = window.innerHeight;
+        onScroll();
+      }, { passive: true });
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      isCardZoomAttached = true;
+    }
+
+    requestAnimationFrame(updateFocalCards);
+  }
+
+  // ==========================================================================
+  // 3. DOM Rendering Engine (Human-Grade Presentation)
   // ==========================================================================
   function renderAllContent() {
-    // 2.1 Render Research Celestial Nodes
+    // 3.1 Render Research Celestial Nodes
     const researchContainer = document.getElementById('celestial-nodes-container');
     if (researchContainer) {
       researchContainer.innerHTML = SIGNAL_DATA.publications.map((pub) => {
@@ -271,7 +330,7 @@
       }).join('');
     }
 
-    // 2.2 Render Systems Constellation Nodes
+    // 3.2 Render Systems Constellation Nodes
     const systemsContainer = document.getElementById('constellation-nodes-container');
     if (systemsContainer) {
       systemsContainer.innerHTML = SIGNAL_DATA.projects.map((proj) => `
@@ -290,7 +349,7 @@
       `).join('');
     }
 
-    // 2.3 Render Sideband Frequencies
+    // 3.3 Render Sideband Frequencies
     const sidebandContainer = document.getElementById('sideband-nodes-container');
     if (sidebandContainer) {
       sidebandContainer.innerHTML = SIGNAL_DATA.sideband.map((side) => `
@@ -302,7 +361,7 @@
       `).join('');
     }
 
-    // 2.4 Render Plain Text Document (Blue Pill View)
+    // 3.4 Render Plain Text Document (Blue Pill View)
     const plainEdu = document.getElementById('plain-education-list');
     if (plainEdu) {
       plainEdu.innerHTML = SIGNAL_DATA.education.map(e => `
@@ -370,65 +429,6 @@
         }
       })
       .catch(() => {});
-  }
-
-  // ==========================================================================
-  // 3. Fluid Card Zoom-In/Zoom-Out on Scroll (Focal Sweet Spot)
-  // ==========================================================================
-  let isCardZoomAttached = false;
-  function initCardZoomEffect() {
-    const cards = document.querySelectorAll('.focal-zoom-card, .celestial-card, .system-node-card, .sideband-node, .metric-card');
-    if (cards.length === 0) return;
-
-    let ticking = false;
-    let vh = window.innerHeight;
-
-    function updateFocalCards() {
-      const focalCenter = vh * 0.5;
-      const focalBand = vh * 0.28;
-
-      cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        if (rect.bottom < -40 || rect.top > vh + 40) {
-          if (card.classList.contains('is-focal-zoomed')) {
-            card.classList.remove('is-focal-zoomed');
-          }
-          return;
-        }
-
-        const cardCenter = rect.top + rect.height * 0.5;
-        const distFromCenter = Math.abs(cardCenter - focalCenter);
-
-        const isZoomed = card.classList.contains('is-focal-zoomed');
-        const threshold = isZoomed ? (focalBand + 35) : focalBand;
-
-        if (distFromCenter < threshold) {
-          if (!isZoomed) card.classList.add('is-focal-zoomed');
-        } else {
-          if (isZoomed) card.classList.remove('is-focal-zoomed');
-        }
-      });
-      ticking = false;
-    }
-
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(updateFocalCards);
-        ticking = true;
-      }
-    };
-
-    if (!isCardZoomAttached) {
-      window.addEventListener('resize', () => {
-        vh = window.innerHeight;
-        onScroll();
-      }, { passive: true });
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      isCardZoomAttached = true;
-    }
-
-    requestAnimationFrame(updateFocalCards);
   }
 
   // ==========================================================================
@@ -814,7 +814,7 @@
     }
 
     drawerActions.innerHTML = `
-      ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">[ Springer Proceeding ↗ ]</a>` : `<span class="btn-telemetry-action">[ Active M.Sc. Thesis ]</span>`}
+      ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">Springer Proceeding ↗</a>` : `<span class="btn-telemetry-action" style="opacity:0.75">Active Research</span>`}
     `;
 
     drawer.classList.add('active');
@@ -834,7 +834,7 @@
     drawerBibtexBlock.style.display = 'none';
 
     drawerActions.innerHTML = `
-      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">[ GitHub Repository ↗ ]</a>
+      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">GitHub Repository ↗</a>
     `;
 
     drawer.classList.add('active');
