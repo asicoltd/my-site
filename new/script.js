@@ -96,7 +96,9 @@
   // ==========================================================================
   // 3. Tactile 3D Card Tilt Physics & Holographic Radial Shimmer
   // ==========================================================================
-  const tiltCards = document.querySelectorAll('.project-card, .pub-card, .about-focus-card, .social-card, .contact-card');
+  const tiltCards = document.querySelectorAll(
+    '.project-card, .pub-card, .about-focus-card, .social-card, .contact-card, .skills-box, .education-card'
+  );
   tiltCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -105,16 +107,20 @@
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -5.5;
+      const rotateY = ((x - centerX) / centerX) * 5.5;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      card.style.setProperty('--tilt-rx', `${rotateX.toFixed(2)}deg`);
+      card.style.setProperty('--tilt-ry', `${rotateY.toFixed(2)}deg`);
+      card.style.setProperty('--tilt-ty', '-4px');
       card.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
       card.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
     });
 
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      card.style.setProperty('--tilt-rx', '0deg');
+      card.style.setProperty('--tilt-ry', '0deg');
+      card.style.setProperty('--tilt-ty', '0px');
     });
   });
 
@@ -483,6 +489,7 @@
         }
 
         renderer.render(scene, camera);
+        updateCardZoomScroll();
       }
       animFrameId = requestAnimationFrame(animate);
 
@@ -506,10 +513,96 @@
   }
 
   // ==========================================================================
-  // 4.5 Lusion-Style Nav Motion Toggle
+  // 4.5 Lusion-Style Nav Motion Toggle & State
   // ==========================================================================
   const motionToggleBtn = document.getElementById('motion-toggle-btn');
   let isDynamicMotion = true;
+
+  // ==========================================================================
+  // 4.6 Card Spatial Scroll Zoom Engine (Lusion-Style Dynamic Information Cards)
+  // ==========================================================================
+  const scrollCards = Array.from(document.querySelectorAll(
+    '.about-focus-card, .pub-card, .project-card, .skills-box, .education-card, .social-card, .contact-card'
+  ));
+
+  function updateCardZoomScroll() {
+    if (document.body.classList.contains('calm-motion') || !isDynamicMotion) {
+      for (let i = 0; i < scrollCards.length; i++) {
+        const card = scrollCards[i];
+        card.style.setProperty('--scroll-scale', '1');
+        card.style.setProperty('--scroll-opacity', '1');
+        card.style.setProperty('--scroll-y', '0px');
+        if (!card.classList.contains('card-in-focus')) card.classList.add('card-in-focus');
+      }
+      return;
+    }
+
+    const vh = window.innerHeight || 800;
+    const vCenter = vh * 0.5;
+    const isMobile = window.innerWidth < 768;
+    const focalSpan = Math.max(vh * (isMobile ? 0.75 : 0.62), 1);
+
+    const minScale = isMobile ? 0.93 : 0.88;
+    const maxScale = isMobile ? 1.00 : 1.025;
+    const minOpacity = isMobile ? 0.60 : 0.38;
+    const maxTravel = isMobile ? 14 : 26;
+
+    for (let i = 0; i < scrollCards.length; i++) {
+      const card = scrollCards[i];
+      const rect = card.getBoundingClientRect();
+
+      // Frustum handling: set resting boundary states for off-screen cards
+      if (rect.bottom < -120) {
+        card.style.setProperty('--scroll-scale', minScale.toFixed(3));
+        card.style.setProperty('--scroll-opacity', minOpacity.toFixed(3));
+        card.style.setProperty('--scroll-y', `-${maxTravel}px`);
+        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
+        continue;
+      }
+      if (rect.top > vh + 120) {
+        card.style.setProperty('--scroll-scale', minScale.toFixed(3));
+        card.style.setProperty('--scroll-opacity', minOpacity.toFixed(3));
+        card.style.setProperty('--scroll-y', `${maxTravel}px`);
+        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
+        continue;
+      }
+
+      const cardCenter = rect.top + rect.height * 0.5;
+      if (isNaN(cardCenter)) continue;
+
+      const rawDist = cardCenter - vCenter;
+      const dist = rawDist / focalSpan;
+      const clampedDist = Math.max(-1.15, Math.min(1.15, dist));
+      const norm = Math.min(Math.abs(clampedDist), 1.0);
+
+      // Smooth cosine bell curve: 1.0 at center, 0.0 at edge
+      const centerCloseness = 0.5 * (1 + Math.cos(norm * Math.PI));
+
+      const scale = minScale + (maxScale - minScale) * centerCloseness;
+      const opacity = minOpacity + (1.0 - minOpacity) * centerCloseness;
+      const yOffset = clampedDist * maxTravel * (1 - centerCloseness);
+
+      card.style.setProperty('--scroll-scale', scale.toFixed(3));
+      card.style.setProperty('--scroll-opacity', opacity.toFixed(3));
+      card.style.setProperty('--scroll-y', `${yOffset.toFixed(1)}px`);
+
+      if (norm < 0.38) {
+        if (!card.classList.contains('card-in-focus')) card.classList.add('card-in-focus');
+      } else {
+        if (card.classList.contains('card-in-focus')) card.classList.remove('card-in-focus');
+      }
+    }
+  }
+
+  // Hook into Lenis and Window Scroll for guaranteed responsiveness
+  if (typeof lenis !== 'undefined' && lenis) {
+    lenis.on('scroll', updateCardZoomScroll);
+  }
+  window.addEventListener('scroll', updateCardZoomScroll, { passive: true });
+  window.addEventListener('resize', updateCardZoomScroll, { passive: true });
+  // Initial call to set focal states
+  updateCardZoomScroll();
+
   if (motionToggleBtn) {
     motionToggleBtn.addEventListener('click', () => {
       isDynamicMotion = !isDynamicMotion;
@@ -517,6 +610,7 @@
       if (icon) icon.textContent = isDynamicMotion ? '−' : '+';
       motionToggleBtn.setAttribute('title', isDynamicMotion ? 'Dynamic Motion Active' : 'Calm Motion Active');
       document.body.classList.toggle('calm-motion', !isDynamicMotion);
+      updateCardZoomScroll();
     });
   }
 
