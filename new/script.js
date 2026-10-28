@@ -174,28 +174,51 @@
         3
       );
 
-      // 1. Inner Physical Mesh with Specular Sheen
-      const torusMat = new THREE.MeshStandardMaterial({
-        color: 0x070b16,
-        roughness: 0.18,
-        metalness: 0.88,
-        wireframe: false
+      // 1. Primary Sculptural Manifold: High-Gloss Pearl Ceramic White
+      const torusMat = new THREE.MeshPhysicalMaterial({
+        color: 0xf5f7fb,
+        emissive: 0x080e18,
+        roughness: 0.12,
+        metalness: 0.08,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.06,
+        reflectivity: 0.95
       });
       const torusMesh = new THREE.Mesh(torusGeo, torusMat);
       manifoldGroup.add(torusMesh);
 
-      // 2. Outer Holographic Cybernetic Lattice
+      // 2. Interlocking Inner Core: High-Gloss Lacquer Onyx Black
+      const innerCoreGeo = new THREE.TorusKnotGeometry(
+        isMobile ? 1.8 : 2.2,
+        isMobile ? 0.42 : 0.52,
+        180,
+        32,
+        3,
+        4
+      );
+      const innerCoreMat = new THREE.MeshPhysicalMaterial({
+        color: 0x080b12,
+        emissive: 0x010306,
+        roughness: 0.10,
+        metalness: 0.65,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.04
+      });
+      const innerCoreMesh = new THREE.Mesh(innerCoreGeo, innerCoreMat);
+      manifoldGroup.add(innerCoreMesh);
+
+      // 3. Outer Holographic Cybernetic Lattice
       const wireframeGeo = new THREE.WireframeGeometry(torusGeo);
       const wireframeMat = new THREE.LineBasicMaterial({
         color: 0x38bdf8,
         transparent: true,
-        opacity: 0.28,
+        opacity: 0.22,
         blending: THREE.AdditiveBlending
       });
       const wireframeMesh = new THREE.LineSegments(wireframeGeo, wireframeMat);
       manifoldGroup.add(wireframeMesh);
 
-      // 3. Synaptic Vertex Nodes
+      // 4. Synaptic Vertex Nodes
       const pointsMat = new THREE.PointsMaterial({
         color: 0x38bdf8,
         size: isMobile ? 0.05 : 0.075,
@@ -267,9 +290,14 @@
       const dustPoints = new THREE.Points(dustGeo, dustMat);
       scene.add(dustPoints);
 
-      // --- Atmospheric Lights ---
+      // --- Atmospheric Lights & Studio Key Lighting ---
       const ambientLight = new THREE.AmbientLight(0x0a101f, 1.8);
       scene.add(ambientLight);
+
+      // Studio Directional Key Light (Creates tactile PBR specular sheen)
+      const studioMainLight = new THREE.DirectionalLight(0xffffff, 2.2);
+      studioMainLight.position.set(6, 8, 10);
+      scene.add(studioMainLight);
 
       // Dynamic Cyan Point Light (Follows mouse)
       const keyLight = new THREE.PointLight(0x38bdf8, 3.5, 55);
@@ -310,11 +338,11 @@
 
       // --- Data-Driven Choreography Keyframes ---
       const DESKTOP_KEYFRAMES = [
-        { p: 0.00, x: 3.6, y: 0.0, z: -1.5, scale: 1.00 },
-        { p: 0.18, x: -3.0, y: 0.2, z: -1.5, scale: 0.90 },
-        { p: 0.42, x: 3.2, y: -0.2, z: -2.2, scale: 0.95 },
-        { p: 0.72, x: 0.0, y: 0.0, z: -4.0, scale: 1.25 },
-        { p: 1.00, x: 0.0, y: 0.4, z: -1.6, scale: 1.05 }
+        { p: 0.00, x: 3.6, y: 0.0, z: -1.2, scale: 1.00 },
+        { p: 0.20, x: 4.2, y: 0.2, z: -2.8, scale: 0.95 },
+        { p: 0.45, x: 3.8, y: -0.2, z: -3.0, scale: 0.95 },
+        { p: 0.72, x: 0.0, y: 0.0, z: -5.0, scale: 1.30 },
+        { p: 1.00, x: 0.0, y: 0.4, z: -2.0, scale: 1.05 }
       ];
 
       // Smooth Hermite cubic interpolation for C1 velocity continuity
@@ -388,6 +416,8 @@
         // Torus Intrinsic Rotation & Mouse Lean
         torusMesh.rotation.x = elapsedTime * 0.20 * motionFactor + mouse3D.y * 0.35;
         torusMesh.rotation.y = elapsedTime * 0.28 * motionFactor + mouse3D.x * 0.45;
+        innerCoreMesh.rotation.x = -torusMesh.rotation.x * 1.25;
+        innerCoreMesh.rotation.y = -torusMesh.rotation.y * 1.15;
         wireframeMesh.rotation.x = torusMesh.rotation.x;
         wireframeMesh.rotation.y = torusMesh.rotation.y;
         pointsMesh.rotation.x = torusMesh.rotation.x;
@@ -438,6 +468,7 @@
 
         torusMesh.rotation.z = p * Math.PI * 2;
         wireframeMesh.rotation.z = torusMesh.rotation.z;
+        innerCoreMesh.rotation.z = -torusMesh.rotation.z;
 
         // Dynamic lighting shift across sections
         if (p < 0.3) {
@@ -472,6 +503,21 @@
       }
       window.addEventListener('beforeunload', disposeThree);
     }
+  }
+
+  // ==========================================================================
+  // 4.5 Lusion-Style Nav Motion Toggle
+  // ==========================================================================
+  const motionToggleBtn = document.getElementById('motion-toggle-btn');
+  let isDynamicMotion = true;
+  if (motionToggleBtn) {
+    motionToggleBtn.addEventListener('click', () => {
+      isDynamicMotion = !isDynamicMotion;
+      const icon = motionToggleBtn.querySelector('.toggle-icon');
+      if (icon) icon.textContent = isDynamicMotion ? '−' : '+';
+      motionToggleBtn.setAttribute('title', isDynamicMotion ? 'Dynamic Motion Active' : 'Calm Motion Active');
+      document.body.classList.toggle('calm-motion', !isDynamicMotion);
+    });
   }
 
   // ==========================================================================
