@@ -1,14 +1,14 @@
 /**
  * AH-2026: "THE SIGNAL"
- * Research Portfolio Architecture of Asif Hasan
- * Procedural Starfield & Celestial Bodies • Matrix Code Rain • Morse Audio Synthesis • Plain View Switcher
+ * Research & Systems Portfolio of Asif Hasan
+ * Procedural Space Depth • Scroll-Driven Card Focal Zoom • Web Audio Morse Synthesis • Plain View Switcher
  */
 
 (function () {
   'use strict';
 
   // ==========================================================================
-  // 1. Single Source of Truth: Audited Signal Dataset
+  // 1. Audited Single Source of Truth Dataset
   // ==========================================================================
   const SIGNAL_DATA = {
     system: {
@@ -17,7 +17,7 @@
       callsign: "S21NEO",
       status: "SIGNAL ACQUIRED",
       tagline: "AI/ML Researcher & Systems Engineer",
-      subtitle: "Investigating Explainable AI for IoT Security, Edge Inference, and Distributed Systems.",
+      subtitle: "Graduate researcher at East West University focusing on Explainable AI for IoT cybersecurity, deep learning, and distributed network architectures.",
       email: "asifhasan.cse@gmail.com",
       github: "https://github.com/asicoltd",
       linkedin: "https://www.linkedin.com/in/asicoltd",
@@ -63,7 +63,7 @@
 }`,
         celestial_body: {
           name: "PLANET HFMD-24",
-          badge: "CELESTIAL BODY // 01",
+          badge: "Springer LNNS (ICDMIS 2024)",
           color: "#00ff88"
         }
       },
@@ -90,7 +90,7 @@
 }`,
         celestial_body: {
           name: "PLANET PEPTIC-24",
-          badge: "CELESTIAL BODY // 02",
+          badge: "Springer LNNS (ICDMIS 2024)",
           color: "#00e5ff"
         }
       },
@@ -117,7 +117,7 @@
 }`,
         celestial_body: {
           name: "PLANET ROSE-24",
-          badge: "CELESTIAL BODY // 03",
+          badge: "Springer LNNS (ICTCS 2024)",
           color: "#a855f7"
         }
       },
@@ -142,7 +142,7 @@
 }`,
         celestial_body: {
           name: "PROTO-PLANET NEBULA // THESIS",
-          badge: "ACTIVE FORMATION // 04",
+          badge: "Active M.Sc. Thesis",
           color: "#10b981"
         }
       }
@@ -151,7 +151,7 @@
       {
         id: "ewu_mind",
         title: "EWU_MIND: AI-Driven News Recommendation System",
-        category: "MACHINE LEARNING",
+        category: "Machine Learning",
         tech: ["PyTorch", "Python", "Neural Collaborative Filtering", "MIND Dataset"],
         description: "Personalized neural recommendation engine combining collaborative filtering with content embeddings to deliver low-latency, accurate ranking across large-scale news reader datasets.",
         github: "https://github.com/asicoltd/EWU_MIND"
@@ -159,7 +159,7 @@
       {
         id: "ai_chess",
         title: "AI-Based Chess Engine",
-        category: "REINFORCEMENT LEARNING",
+        category: "Reinforcement Learning",
         tech: ["Python", "Q-Learning", "Deep Q-Networks (DQN)", "MCTS"],
         description: "Autonomous competitive chess engine implementing Deep Q-Networks and Monte Carlo Tree Search (MCTS) to iteratively optimize positional evaluation and tactical move selections.",
         github: "https://github.com/asicoltd/AI_Chess"
@@ -167,7 +167,7 @@
       {
         id: "asicoin",
         title: "ASICoin: Blockchain Cryptocurrency with AI Fraud Detection",
-        category: "DISTRIBUTED LEDGER",
+        category: "Distributed Ledger",
         tech: ["Python", "Blockchain", "AI Security", "Post-Quantum Cryptography"],
         description: "Cryptocurrency implementation exploring distributed consensus, cryptographic transaction validation, and AI-assisted anomaly detection for future-proof ledger protection.",
         github: "https://github.com/asicoltd/ASICoin"
@@ -175,7 +175,7 @@
       {
         id: "one_dtn",
         title: "The ONE DTN Routing Protocol Simulator Extension",
-        category: "NETWORKING RESEARCH",
+        category: "Networking Research",
         tech: ["Java", "Python", "The ONE Simulator", "Ad-Hoc Protocols"],
         description: "Extensive empirical simulation benchmarking Epidemic, PRoPHET, and Spray-and-Wait delay-tolerant routing protocols across partitioned, intermittent networks during emergency disasters.",
         github: "https://github.com/asicoltd"
@@ -183,7 +183,7 @@
       {
         id: "medicine_shop",
         title: "Medicine Shop Inventory Management System",
-        category: "ENTERPRISE SOFTWARE",
+        category: "Enterprise Software",
         tech: ["PHP", "MySQL", "JavaScript", "Relational Database"],
         description: "Production database software managing pharmaceutical stock, real-time invoicing, point-of-sale audits, and automated expiry date tracking.",
         github: "https://github.com/asicoltd/Medicine-Shop-Management-System"
@@ -191,7 +191,7 @@
       {
         id: "crypto_sentiment",
         title: "Cryptocurrency Price Prediction via Sentiment Analysis",
-        category: "DEEP LEARNING",
+        category: "Deep Learning",
         tech: ["Python", "TensorFlow", "Keras", "NLP", "LSTM"],
         description: "Multimodal time-series forecasting model combining historical price movements with NLP sentiment embeddings extracted from financial news streams.",
         github: "https://github.com/asicoltd/Temporal-Analysis-of-Cryptocurrency-Prices-LSTM-Based-ETH-Price-Prediction-from-BTC-Data"
@@ -199,37 +199,37 @@
     ],
     sideband: [
       {
-        code: "FREQ // 144-430 MHz",
+        code: "144 - 430 MHz",
         title: "Licensed Amateur Radio Operator (S21NEO)",
         frequency: "VHF / UHF Bands",
         description: "Licensed HAM radio operator (Callsign: S21NEO). Researching RF wave propagation, antenna impedance matching, emergency radio networks, and packet radio communications during disasters."
       },
       {
-        code: "FREQ // ICPC-ALGO",
-        title: "Competitive Programming & Problem Solving",
+        code: "Competitive Programming",
+        title: "Algorithmic Problem Solving",
         frequency: "Codeforces • HackerRank • Beecrowd",
         description: "Solved thousands of algorithmic and data structure problems across online judges. Active contestant in national programming contests and university ICPC preliminaries."
       },
       {
-        code: "FREQ // ORATORY",
+        code: "Parliamentary Debate",
         title: "Debating & Public Oratory Champion",
-        frequency: "Parliamentary Debate",
+        frequency: "University Level",
         description: "University-level debate champion, former General Secretary of college debate club. Trainer in structured rhetoric, policy critique, and scientific communication."
       },
       {
-        code: "FREQ // SERVICE",
+        code: "Community Leadership",
         title: "Senior Rover Mate — Scouting Movement",
         frequency: "Samatat Open Scout Group",
         description: "Senior Rover Mate spearheading community service, disaster relief campaigns, winter clothes distribution, youth leadership development, and scout jamborees."
       },
       {
-        code: "FREQ // DONOR-20+",
+        code: "Emergency Care",
         title: "Voluntary Blood Donor (20+ Donations)",
-        frequency: "Quantum Foundation & Emergency Care",
+        frequency: "Quantum Foundation",
         description: "Regular blood donor since 2017 with over 20 voluntary donations connecting donors with critically ill emergency patients."
       },
       {
-        code: "FREQ // ENDURANCE",
+        code: "Discipline & Endurance",
         title: "Marathon Runner & Martial Arts Practitioner",
         frequency: "15 Marathon Events • Blue Belt Karate",
         description: "Completed 15 mini, half, and full marathons with Run Bangladesh; holds Blue Belt in Karate and Green Belt in Taekwondo, cultivating mental endurance and physical discipline."
@@ -238,57 +238,63 @@
   };
 
   // ==========================================================================
-  // 2. DOM Rendering Engine (Populate Views from Single Source of Truth)
+  // 2. DOM Rendering Engine (Human-Grade Presentation)
   // ==========================================================================
   function renderAllContent() {
-    // 2.1 Render Research Celestial Nodes (Immersive View)
+    // 2.1 Render Research Celestial Nodes
     const researchContainer = document.getElementById('celestial-nodes-container');
     if (researchContainer) {
-      researchContainer.innerHTML = SIGNAL_DATA.publications.map((pub, idx) => `
-        <article class="celestial-card ${pub.id === 'thesis_nebula' ? 'is-active-thesis' : ''}" data-pub-id="${pub.id}" tabindex="0" role="region" aria-label="${pub.title}">
-          <div>
-            <div class="celestial-header">
-              <span class="celestial-beacon">
-                <span class="beacon-dot" style="background: ${pub.celestial_body.color}; box-shadow: 0 0 10px ${pub.celestial_body.color}"></span>
-                ${pub.celestial_body.badge}
-              </span>
-              <span class="celestial-doi-pill">${pub.id === 'thesis_nebula' ? 'M.SC. THESIS' : 'SPRINGER LNNS'}</span>
+      researchContainer.innerHTML = SIGNAL_DATA.publications.map((pub) => {
+        const badgeText = pub.celestial_body?.badge || (pub.id === 'thesis_nebula' ? 'Active M.Sc. Thesis' : 'Springer Proceedings');
+        const dotColor = pub.celestial_body?.color || '#00ff77';
+        return `
+          <article class="celestial-card focal-zoom-card ${pub.id === 'thesis_nebula' ? 'is-active-thesis' : ''}" data-pub-id="${pub.id}" tabindex="0" role="region" aria-label="${pub.title}">
+            <div>
+              <div class="celestial-header">
+                <span class="celestial-beacon">
+                  <span class="beacon-dot" style="background: ${dotColor}; box-shadow: 0 0 10px ${dotColor}"></span>
+                  ${badgeText}
+                </span>
+                <span class="celestial-doi-pill">${pub.year}</span>
+              </div>
+              <h3 class="celestial-title">${pub.title}</h3>
+              <p class="celestial-authors">${pub.authors}</p>
+              <p class="celestial-venue">${pub.venue}</p>
+              <p class="celestial-abstract">${pub.abstract}</p>
             </div>
-            <h3 class="celestial-title">${pub.title}</h3>
-            <p class="celestial-authors">${pub.authors}</p>
-            <p class="celestial-venue">${pub.venue}</p>
-            <p class="celestial-abstract">${pub.abstract}</p>
-          </div>
-          <div class="celestial-footer">
-            <button class="btn-telemetry-action btn-inspect-pub" data-pub-id="${pub.id}" aria-label="Decode telemetry for ${pub.title}">[ DECODE TELEMETRY ↗ ]</button>
-            ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action" aria-label="Springer proceeding link">[ SPRINGER DOI ↗ ]</a>` : `<span class="btn-telemetry-action" style="opacity:0.7">// IN PROGRESS</span>`}
-          </div>
-        </article>
-      `).join('');
+            <div class="celestial-footer">
+              <button class="btn-telemetry-action btn-inspect-pub" data-pub-id="${pub.id}" aria-label="Inspect metadata and copy BibTeX for ${pub.title}">[ View BibTeX &amp; Details ]</button>
+              ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action" aria-label="Open Springer publication proceeding">[ Springer DOI ↗ ]</a>` : `<span class="btn-telemetry-action" style="opacity:0.7">In Active Progress</span>`}
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
-    // 2.2 Render Systems Constellation Nodes (Immersive View)
+    // 2.2 Render Systems Constellation Nodes
     const systemsContainer = document.getElementById('constellation-nodes-container');
     if (systemsContainer) {
       systemsContainer.innerHTML = SIGNAL_DATA.projects.map((proj) => `
-        <article class="system-node-card btn-inspect-proj" data-proj-id="${proj.id}" tabindex="0" role="button" aria-label="${proj.title}">
+        <article class="system-node-card focal-zoom-card btn-inspect-proj" data-proj-id="${proj.id}" tabindex="0" role="button" aria-label="${proj.title}">
           <div>
-            <span class="system-category">// ${proj.category}</span>
+            <span class="system-category">${proj.category}</span>
             <h3 class="system-title">${proj.title}</h3>
             <p class="system-desc">${proj.description}</p>
           </div>
-          <div class="system-tags">
-            ${proj.tech.map(t => `<span class="system-tag">${t}</span>`).join('')}
+          <div>
+            <div class="system-tags">
+              ${proj.tech.map(t => `<span class="system-tag">${t}</span>`).join('')}
+            </div>
           </div>
         </article>
       `).join('');
     }
 
-    // 2.3 Render Sideband Frequencies (Immersive View)
+    // 2.3 Render Sideband Frequencies
     const sidebandContainer = document.getElementById('sideband-nodes-container');
     if (sidebandContainer) {
       sidebandContainer.innerHTML = SIGNAL_DATA.sideband.map((side) => `
-        <div class="sideband-node">
+        <div class="sideband-node focal-zoom-card">
           <span class="sideband-freq">${side.code}</span>
           <h3 class="sideband-title">${side.title}</h3>
           <p class="sideband-desc">${side.description}</p>
@@ -328,7 +334,7 @@
       plainProjects.innerHTML = SIGNAL_DATA.projects.map(proj => `
         <div class="plain-item">
           <h3 class="plain-item-title">${proj.title}</h3>
-          <p class="plain-item-meta">// ${proj.category} &bull; ${proj.tech.join(', ')}</p>
+          <p class="plain-item-meta">${proj.category} &bull; ${proj.tech.join(', ')}</p>
           <p class="plain-item-desc">${proj.description}</p>
           <div class="plain-item-links">
             <a href="${proj.github}" target="_blank" rel="noopener noreferrer">[ GitHub Repository ↗ ]</a>
@@ -347,97 +353,70 @@
         </div>
       `).join('');
     }
+
+    // Attach card zoom listeners after rendering
+    initCardZoomEffect();
   }
   renderAllContent();
 
-  // Runtime asynchronous fetch to guarantee single source of truth from signal_data.json
+  // Async SSOT fetch with graceful local cache fallback
   if (typeof fetch === 'function') {
     fetch('data/signal_data.json')
-      .then(response => {
-        if (response.ok) return response.json();
-        throw new Error('HTTP ' + response.status);
-      })
+      .then(res => res.ok ? res.json() : null)
       .then(data => {
-        if (data && data.publications && data.projects) {
+        if (data && data.publications) {
           Object.assign(SIGNAL_DATA, data);
           renderAllContent();
         }
       })
-      .catch(() => {
-        // Fallback already pre-rendered seamlessly from verified local cache
+      .catch(() => {});
+  }
+
+  // ==========================================================================
+  // 3. Fluid Card Zoom-In/Zoom-Out on Scroll
+  // ==========================================================================
+  function initCardZoomEffect() {
+    const cards = document.querySelectorAll('.focal-zoom-card, .celestial-card, .system-node-card, .sideband-node, .metric-card');
+    if (cards.length === 0) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-focal-zoomed');
+          } else {
+            entry.target.classList.remove('is-focal-zoomed');
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '-10% 0px -10% 0px',
+        threshold: 0.25
       });
-  }
 
-  // ==========================================================================
-  // 3. STOP 0: 2D Matrix Code Rain Canvas & Boot Dissolve
-  // ==========================================================================
-  const rainCanvas = document.getElementById('rain-canvas');
-  let rainCtx = null;
-  let rainAnimId = null;
-  let rainChars = '0123456789ABCDEFHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソタチツテトS21NEO';
-  let drops = [];
-  let fontSize = 14;
-
-  if (rainCanvas) {
-    rainCtx = rainCanvas.getContext('2d');
-    function resizeRain() {
-      rainCanvas.width = window.innerWidth;
-      rainCanvas.height = window.innerHeight;
-      const columns = Math.floor(rainCanvas.width / fontSize);
-      drops = [];
-      for (let i = 0; i < columns; i++) {
-        drops[i] = Math.floor(Math.random() * -50);
-      }
-    }
-    resizeRain();
-    window.addEventListener('resize', resizeRain, { passive: true });
-
-    function drawRain() {
-      rainCtx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-      rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height);
-
-      rainCtx.fillStyle = '#00ff66';
-      rainCtx.font = `${fontSize}px monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = rainChars[Math.floor(Math.random() * rainChars.length)];
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-
-        rainCtx.fillText(text, x, y);
-
-        if (y > rainCanvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-      rainAnimId = requestAnimationFrame(drawRain);
-    }
-    rainAnimId = requestAnimationFrame(drawRain);
-  }
-
-  // Boot Dismiss / Dissolve
-  const bootOverlay = document.getElementById('boot-overlay');
-  function dissolveBoot(targetView) {
-    if (bootOverlay) {
-      bootOverlay.classList.add('dissolved');
-      setTimeout(() => {
-        if (rainAnimId) cancelAnimationFrame(rainAnimId);
-      }, 900);
-    }
-    if (targetView === 'plain') {
-      activatePlainView();
+      cards.forEach(card => observer.observe(card));
     } else {
-      activateImmersiveView();
+      // Fallback scroll listener
+      function checkFocalCards() {
+        const viewportCenter = window.innerHeight / 2;
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.top + rect.height / 2;
+          const distFromCenter = Math.abs(viewportCenter - cardCenter);
+          if (distFromCenter < window.innerHeight * 0.35) {
+            card.classList.add('is-focal-zoomed');
+          } else {
+            card.classList.remove('is-focal-zoomed');
+          }
+        });
+      }
+      window.addEventListener('scroll', checkFocalCards, { passive: true });
+      checkFocalCards();
     }
   }
 
-  document.getElementById('btn-skip-boot')?.addEventListener('click', () => dissolveBoot('immersive'));
-  document.getElementById('btn-choose-red')?.addEventListener('click', () => dissolveBoot('immersive'));
-  document.getElementById('btn-choose-blue')?.addEventListener('click', () => dissolveBoot('plain'));
-
   // ==========================================================================
-  // 4. View Mode Switching: Red Pill (Immersive) vs Blue Pill (Plain Text)
+  // 4. View Mode Switching (Immersive vs Plain View)
   // ==========================================================================
   const viewImmersive = document.getElementById('view-immersive');
   const viewPlain = document.getElementById('view-plain');
@@ -456,7 +435,7 @@
     if (viewToggleBtn) {
       viewToggleBtn.setAttribute('aria-checked', 'true');
       const label = viewToggleBtn.querySelector('.view-label');
-      if (label) label.textContent = 'IMMERSIVE VIEW';
+      if (label) label.textContent = 'Immersive View';
     }
     isThreeRendering = false;
     try {
@@ -474,7 +453,7 @@
     if (viewToggleBtn) {
       viewToggleBtn.setAttribute('aria-checked', 'false');
       const label = viewToggleBtn.querySelector('.view-label');
-      if (label) label.textContent = 'PLAIN VIEW';
+      if (label) label.textContent = 'Plain View';
     }
     isThreeRendering = true;
     if (startThreeLoop) startThreeLoop();
@@ -494,7 +473,6 @@
 
   returnImmersiveBtn?.addEventListener('click', activateImmersiveView);
 
-  // Preference Check: Saved user choice takes priority; else auto-activate for reduced-motion
   try {
     const savedPillPref = localStorage.getItem('signal_pill_pref');
     if (savedPillPref === 'plain') {
@@ -505,12 +483,13 @@
   } catch (_) {}
 
   // ==========================================================================
-  // 5. Procedural 3D Space Flight Scene (Three.js)
+  // 5. Procedural Atmospheric Deep Space Flight (Three.js)
+  //    No foreground spheres colliding with text — pure background cosmic depth!
   // ==========================================================================
   const spaceCanvas = document.getElementById('space-canvas');
   if (spaceCanvas && typeof THREE !== 'undefined') {
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x030508, 0.015);
+    scene.fog = new THREE.FogExp2(0x070b12, 0.012);
 
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 0, 30);
@@ -524,125 +503,63 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-    // 5.1 Procedural Starfield (Twinkling Cosmic Depth)
-    const starCount = window.innerWidth < 768 ? 900 : 2200;
+    // 5.1 Deep Multi-Tier Starfield
+    const starCount = window.innerWidth < 768 ? 800 : 2000;
     const starGeo = new THREE.BufferGeometry();
     const starPos = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
+
+    const colorWhite = new THREE.Color(0xffffff);
+    const colorGreen = new THREE.Color(0x00ff77);
+    const colorCyan = new THREE.Color(0x38bdf8);
+
     for (let i = 0; i < starCount; i++) {
-      starPos[i * 3] = (Math.random() - 0.5) * 160;
-      starPos[i * 3 + 1] = (Math.random() - 0.5) * 160;
-      starPos[i * 3 + 2] = (Math.random() - 0.5) * 120 - 20;
+      starPos[i * 3] = (Math.random() - 0.5) * 180;
+      starPos[i * 3 + 1] = (Math.random() - 0.5) * 180;
+      starPos[i * 3 + 2] = (Math.random() - 0.5) * 160 - 30;
+
+      const randColor = Math.random();
+      let chosenColor = colorWhite;
+      if (randColor > 0.85) chosenColor = colorGreen;
+      else if (randColor > 0.70) chosenColor = colorCyan;
+
+      starColors[i * 3] = chosenColor.r;
+      starColors[i * 3 + 1] = chosenColor.g;
+      starColors[i * 3 + 2] = chosenColor.b;
     }
+
     starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
     const starMat = new THREE.PointsMaterial({
-      color: 0x00ff66,
       size: 0.18,
+      vertexColors: true,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0.7,
       blending: THREE.AdditiveBlending
     });
     const starPoints = new THREE.Points(starGeo, starMat);
     scene.add(starPoints);
 
-    // 5.2 Stop 2: Celestial Bodies (Planets + Active Nebula)
-    const celestialGroup = new THREE.Group();
-    celestialGroup.position.set(0, -18, -15);
-    scene.add(celestialGroup);
-
-    // Planet 1: HFMD (Emerald Terrestrial)
-    const p1Geo = new THREE.SphereGeometry(1.5, 32, 32);
-    const p1Mat = new THREE.MeshStandardMaterial({
-      color: 0x00ff88,
-      roughness: 0.4,
-      metalness: 0.2,
-      emissive: 0x003311
-    });
-    const planet1 = new THREE.Mesh(p1Geo, p1Mat);
-    planet1.position.set(-6, 2, 0);
-    celestialGroup.add(planet1);
-
-    // Planet 2: Peptic (Cyan Gas Giant with Ring)
-    const p2Geo = new THREE.SphereGeometry(1.8, 32, 32);
-    const p2Mat = new THREE.MeshStandardMaterial({
-      color: 0x00e5ff,
-      roughness: 0.3,
-      metalness: 0.3,
-      emissive: 0x002233
-    });
-    const planet2 = new THREE.Mesh(p2Geo, p2Mat);
-    planet2.position.set(-2, -3, 2);
-    celestialGroup.add(planet2);
-
-    // Planet 3: Rose (Silicate Amethyst)
-    const p3Geo = new THREE.SphereGeometry(1.4, 32, 32);
-    const p3Mat = new THREE.MeshStandardMaterial({
-      color: 0xa855f7,
-      roughness: 0.5,
-      metalness: 0.2,
-      emissive: 0x220033
-    });
-    const planet3 = new THREE.Mesh(p3Geo, p3Mat);
-    planet3.position.set(3, 3, -1);
-    celestialGroup.add(planet3);
-
-    // Body 4: Active Thesis Nebula (Swirling Volumetric Particle Cloud)
-    const nebulaCount = 600;
-    const nebulaGeo = new THREE.BufferGeometry();
-    const nebulaPos = new Float32Array(nebulaCount * 3);
-    for (let i = 0; i < nebulaCount; i++) {
-      const angle = i * 0.12;
-      const radius = 0.5 + Math.random() * 2.5;
-      nebulaPos[i * 3] = Math.cos(angle) * radius + (Math.random() - 0.5) * 0.4;
-      nebulaPos[i * 3 + 1] = Math.sin(angle) * radius + (Math.random() - 0.5) * 0.4;
-      nebulaPos[i * 3 + 2] = (Math.random() - 0.5) * 1.5;
+    // 5.2 Subtle Ambient Cosmic Dust Layer
+    const dustCount = 400;
+    const dustGeo = new THREE.BufferGeometry();
+    const dustPos = new Float32Array(dustCount * 3);
+    for (let i = 0; i < dustCount; i++) {
+      dustPos[i * 3] = (Math.random() - 0.5) * 120;
+      dustPos[i * 3 + 1] = (Math.random() - 0.5) * 120;
+      dustPos[i * 3 + 2] = (Math.random() - 0.5) * 80 - 15;
     }
-    nebulaGeo.setAttribute('position', new THREE.BufferAttribute(nebulaPos, 3));
-    const nebulaMat = new THREE.PointsMaterial({
-      color: 0x10b981,
-      size: 0.16,
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+    const dustMat = new THREE.PointsMaterial({
+      color: 0x00ff77,
+      size: 0.28,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.25,
       blending: THREE.AdditiveBlending
     });
-    const nebulaPoints = new THREE.Points(nebulaGeo, nebulaMat);
-    nebulaPoints.position.set(7, -1, 1);
-    celestialGroup.add(nebulaPoints);
-
-    // 5.3 Stop 3: Systems Constellation Star Map
-    const constellationGroup = new THREE.Group();
-    constellationGroup.position.set(0, -42, -20);
-    scene.add(constellationGroup);
-
-    const starCoords = [
-      new THREE.Vector3(-6, 2, 0),
-      new THREE.Vector3(-2, 5, 1),
-      new THREE.Vector3(3, 3, -2),
-      new THREE.Vector3(5, -1, 1),
-      new THREE.Vector3(1, -4, 0),
-      new THREE.Vector3(-4, -3, -1)
-    ];
-
-    const linePoints = [];
-    for (let i = 0; i < starCoords.length; i++) {
-      const next = starCoords[(i + 1) % starCoords.length];
-      linePoints.push(starCoords[i], next);
-    }
-    const constLineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
-    const constLineMat = new THREE.LineBasicMaterial({
-      color: 0x00ff66,
-      transparent: true,
-      opacity: 0.45
-    });
-    const constellationLines = new THREE.LineSegments(constLineGeo, constLineMat);
-    constellationGroup.add(constellationLines);
-
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x061109, 2.0);
-    scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
-    dirLight.position.set(8, 12, 10);
-    scene.add(dirLight);
+    const dustPoints = new THREE.Points(dustGeo, dustMat);
+    scene.add(dustPoints);
 
     // Resize handler
     window.addEventListener('resize', () => {
@@ -651,14 +568,13 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     }, { passive: true });
 
-    // Smooth Scroll Camera Tracking
+    // Smooth Scroll Camera Tracking (glides along Z without clipping)
     let targetScrollY = 0;
     let currentScrollY = 0;
     window.addEventListener('scroll', () => {
       targetScrollY = window.scrollY;
     }, { passive: true });
 
-    // Render Animation Loop
     let clock = new THREE.Clock();
     let threeAnimId = null;
 
@@ -667,26 +583,17 @@
       threeAnimId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Autonomous Starfield Drift
-      starPoints.rotation.y = elapsedTime * 0.008;
+      // Slow, majestic autonomous cosmic drift
+      starPoints.rotation.y = elapsedTime * 0.005;
+      dustPoints.rotation.y = -elapsedTime * 0.008;
 
-      // Autonomous Planetary Rotations
-      planet1.rotation.y = elapsedTime * 0.25;
-      planet2.rotation.y = elapsedTime * 0.35;
-      planet3.rotation.y = elapsedTime * 0.20;
-      nebulaPoints.rotation.z = -elapsedTime * 0.4;
-
-      // Constellation Drift
-      constellationGroup.rotation.y = Math.sin(elapsedTime * 0.15) * 0.1;
-
-      // Scroll-Driven Camera Flight
+      // Scroll-Driven Camera Depth (Z-axis flight)
       currentScrollY += (targetScrollY - currentScrollY) * 0.08;
       const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const scrollPct = Math.min(Math.max(currentScrollY / docHeight, 0), 1);
 
-      // Camera flies down the signal pipeline
-      camera.position.y = -scrollPct * 52;
-      camera.position.z = 30 - scrollPct * 12;
+      camera.position.y = -scrollPct * 30;
+      camera.position.z = 30 - scrollPct * 15;
 
       renderer.render(scene, camera);
     }
@@ -702,37 +609,37 @@
   }
 
   // ==========================================================================
-  // 6. Audio Synthesis: Morse Code Transmitter for Callsign [ S21NEO ]
+  // 6. Synthesized Morse Code Transmitter for Callsign [ S21NEO ]
   // ==========================================================================
   let audioCtx = null;
   let isSoundEnabled = false;
 
   const MORSE_S21NEO = [
     // S: ...
-    { tone: true, dur: 80 }, { tone: false, dur: 80 },
-    { tone: true, dur: 80 }, { tone: false, dur: 80 },
-    { tone: true, dur: 80 }, { tone: false, dur: 240 },
+    { tone: true, dur: 75 }, { tone: false, dur: 75 },
+    { tone: true, dur: 75 }, { tone: false, dur: 75 },
+    { tone: true, dur: 75 }, { tone: false, dur: 220 },
     // 2: ..---
-    { tone: true, dur: 80 }, { tone: false, dur: 80 },
-    { tone: true, dur: 80 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 240 },
+    { tone: true, dur: 75 }, { tone: false, dur: 75 },
+    { tone: true, dur: 75 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 220 },
     // 1: .----
-    { tone: true, dur: 80 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 240 },
+    { tone: true, dur: 75 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 220 },
     // N: -.
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 80 }, { tone: false, dur: 240 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 75 }, { tone: false, dur: 220 },
     // E: .
-    { tone: true, dur: 80 }, { tone: false, dur: 240 },
+    { tone: true, dur: 75 }, { tone: false, dur: 220 },
     // O: ---
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 80 },
-    { tone: true, dur: 240 }, { tone: false, dur: 400 }
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 75 },
+    { tone: true, dur: 220 }, { tone: false, dur: 350 }
   ];
 
   function getAudioContext() {
@@ -751,9 +658,9 @@
     soundToggleBtn.addEventListener('click', () => {
       isSoundEnabled = !isSoundEnabled;
       const label = soundToggleBtn.querySelector('.sound-label');
-      if (label) label.textContent = isSoundEnabled ? 'AUDIO: ON' : 'AUDIO: OFF';
-      soundToggleBtn.style.borderColor = isSoundEnabled ? 'var(--signal-green)' : 'rgba(255,255,255,0.15)';
-      soundToggleBtn.style.color = isSoundEnabled ? 'var(--signal-green)' : 'var(--text-body)';
+      if (label) label.textContent = isSoundEnabled ? 'Audio: On' : 'Audio: Off';
+      soundToggleBtn.style.borderColor = isSoundEnabled ? 'var(--signal-green)' : 'rgba(255,255,255,0.1)';
+      soundToggleBtn.style.color = isSoundEnabled ? 'var(--signal-green)' : 'var(--text-secondary)';
       if (isSoundEnabled) getAudioContext();
     });
   }
@@ -765,12 +672,12 @@
     if (isTransmitting) {
       transmitCancelled = true;
       isTransmitting = false;
-      showToast('TRANSMISSION ABORTED.');
+      showToast('Transmission paused.');
       return;
     }
     isTransmitting = true;
     transmitCancelled = false;
-    showToast('TRANSMITTING CALLSIGN [ S21NEO ] ... (CLICK AGAIN TO STOP)');
+    showToast('Broadcasting callsign S21NEO in Morse...');
 
     const ctx = isSoundEnabled ? getAudioContext() : null;
 
@@ -793,7 +700,7 @@
       await new Promise(r => setTimeout(r, step.dur));
     }
     if (!transmitCancelled) {
-      showToast('TRANSMISSION COMPLETE. CALLSIGN S21NEO LOGGED.');
+      showToast('Transmission completed. Callsign S21NEO logged.');
     }
     isTransmitting = false;
     transmitCancelled = false;
@@ -818,13 +725,13 @@
     function drawWaveform() {
       requestAnimationFrame(drawWaveform);
       waveTime += 0.05;
-      wavePulse *= 0.94; // decay pulse
+      wavePulse *= 0.94;
 
-      wCtx.fillStyle = '#020305';
+      wCtx.fillStyle = '#030509';
       wCtx.fillRect(0, 0, waveCanvas.width, waveCanvas.height);
 
       // Grid Lines
-      wCtx.strokeStyle = 'rgba(0, 255, 102, 0.1)';
+      wCtx.strokeStyle = 'rgba(0, 255, 119, 0.08)';
       wCtx.lineWidth = 1;
       for (let y = 15; y < waveCanvas.height; y += 15) {
         wCtx.beginPath();
@@ -834,10 +741,10 @@
       }
 
       // Signal Beam
-      wCtx.strokeStyle = '#00ff66';
+      wCtx.strokeStyle = '#00ff77';
       wCtx.lineWidth = 2;
-      wCtx.shadowBlur = 12;
-      wCtx.shadowColor = '#00ff66';
+      wCtx.shadowBlur = 10;
+      wCtx.shadowColor = '#00ff77';
       wCtx.beginPath();
 
       const centerY = waveCanvas.height / 2;
@@ -856,7 +763,7 @@
   }
 
   // ==========================================================================
-  // 8. Telemetry Drawer & BibTeX Inspection (Accessible with Focus Trapping)
+  // 8. Telemetry Drawer & BibTeX Inspection
   // ==========================================================================
   const drawer = document.getElementById('telemetry-drawer');
   const drawerTitle = document.getElementById('drawer-title');
@@ -890,7 +797,7 @@
     }
 
     drawerActions.innerHTML = `
-      ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">[ SPRINGER PROCEEDING ↗ ]</a>` : `<span class="btn-telemetry-action">[ ACTIVE M.SC. THESIS ]</span>`}
+      ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">[ Springer Proceeding ↗ ]</a>` : `<span class="btn-telemetry-action">[ Active M.Sc. Thesis ]</span>`}
     `;
 
     drawer.classList.add('active');
@@ -905,12 +812,12 @@
     lastFocusedElement = triggerEl || document.activeElement;
 
     drawerTitle.textContent = proj.title;
-    drawerMeta.textContent = `CATEGORY: ${proj.category} • TECH: ${proj.tech.join(', ')}`;
+    drawerMeta.textContent = `Category: ${proj.category} • Tech Stack: ${proj.tech.join(', ')}`;
     drawerAbstract.textContent = proj.description;
     drawerBibtexBlock.style.display = 'none';
 
     drawerActions.innerHTML = `
-      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">[ GITHUB REPOSITORY ↗ ]</a>
+      <a href="${proj.github}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action">[ GitHub Repository ↗ ]</a>
     `;
 
     drawer.classList.add('active');
@@ -933,7 +840,6 @@
   drawerCloseBtn?.addEventListener('click', closeDrawer);
   drawerBackdrop?.addEventListener('click', closeDrawer);
 
-  // Focus trap inside drawer
   drawer?.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
       const focusables = drawer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -966,7 +872,7 @@
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
-      showToast('✓ BIBTEX CITATION COPIED TO CLIPBOARD');
+      showToast('✓ BibTeX citation copied to clipboard');
     } catch (_) {
       showToast('BibTeX citation displayed below');
     }
@@ -976,7 +882,7 @@
     if (activeBibtexText) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(activeBibtexText)
-          .then(() => showToast('✓ BIBTEX CITATION COPIED TO CLIPBOARD'))
+          .then(() => showToast('✓ BibTeX citation copied to clipboard'))
           .catch(() => fallbackCopyText(activeBibtexText));
       } else {
         fallbackCopyText(activeBibtexText);
@@ -1114,11 +1020,11 @@
     if (!toast) return;
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2800);
+    setTimeout(() => toast.classList.remove('show'), 2600);
   }
 
   // ==========================================================================
-  // 11. Easter Eggs: Tab Title Lost/Acquired
+  // 11. Tab Title Easter Egg
   // ==========================================================================
   const originalDocTitle = document.title;
   window.addEventListener('blur', () => {

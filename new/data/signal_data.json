@@ -5,7 +5,7 @@
     "callsign": "S21NEO",
     "status": "SIGNAL ACQUIRED",
     "tagline": "AI/ML Researcher & Systems Engineer",
-    "subtitle": "Investigating Explainable AI for IoT Security, Edge Inference, and Distributed Systems.",
+    "subtitle": "Graduate researcher at East West University focusing on Explainable AI for IoT cybersecurity, deep learning, and distributed network architectures.",
     "email": "asifhasan.cse@gmail.com",
     "github": "https://github.com/asicoltd",
     "linkedin": "https://www.linkedin.com/in/asicoltd",
@@ -42,6 +42,7 @@
       "abstract": "This study addresses the critical pediatric diagnostic challenge of accurately detecting Hand, Foot, and Mouth Disease (HFMD). Evaluates deep convolutional architectures and implements an ensemble voting pipeline to significantly improve classification accuracy and robustness against noise in dermatological imaging.",
       "celestial_body": {
         "name": "PLANET HFMD-24",
+        "badge": "Springer LNNS (ICDMIS 2024)",
         "color": "#00ff88",
         "radius": 1.4,
         "type": "procedural_terrestrial"
@@ -61,6 +62,7 @@
       "abstract": "Presents an automated diagnostic pipeline for examining gastrointestinal tract endoscopy frames. Implements fine-tuned transfer learning backbones with targeted feature extraction to assist clinical specialists in identifying peptic ulcers and gastrointestinal abnormalities with high sensitivity.",
       "celestial_body": {
         "name": "PLANET PEPTIC-24",
+        "badge": "Springer LNNS (ICDMIS 2024)",
         "color": "#00e5ff",
         "radius": 1.6,
         "type": "procedural_gas_giant"
@@ -80,6 +82,7 @@
       "abstract": "Deploys single-stage real-time object detection models (YOLO) for early botanical pathology identification. Accurately segments and classifies foliar rose diseases in natural field conditions to mitigate agricultural yield reduction.",
       "celestial_body": {
         "name": "PLANET ROSE-24",
+        "badge": "Springer LNNS (ICTCS 2024)",
         "color": "#a855f7",
         "radius": 1.3,
         "type": "procedural_silicate"
@@ -99,8 +102,9 @@
       "abstract": "Active M.Sc. thesis research developing lightweight, transparent tree ensembles and deep neural networks with SHAP/LIME attribution pipelines for real-time cyberattack detection on resource-constrained IoT gateways.",
       "celestial_body": {
         "name": "PROTO-PLANET NEBULA // THESIS",
+        "badge": "Active M.Sc. Thesis",
         "color": "#10b981",
-        "radius": 2.2,
+        "radius": 2.2",
         "type": "swirling_particle_nebula"
       }
     }

@@ -3,275 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asif Hasan — AH-2026 // The Signal</title>
-  <meta name="description" content="AH-2026: The Signal. Research portfolio of Asif Hasan — AI/ML Researcher, M.Sc. Candidate, and Systems Engineer.">
+  <title>Asif Hasan — AI Researcher &amp; Systems Engineer</title>
+  <meta name="description" content="Portfolio of Asif Hasan — AI/ML Researcher, M.Sc. Candidate at East West University, and Systems Engineer. Springer publications, XAI IoT security research, and engineering builds.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="mode-immersive">
 
-  <!-- ========================================== -->
-  <!-- STOP 0: SYSTEM BOOT & PILL SELECTION       -->
-  <!-- ========================================== -->
-  <div id="boot-overlay" class="boot-overlay" role="dialog" aria-modal="true" aria-label="System Boot Sequence">
-    <canvas id="rain-canvas" class="rain-canvas" aria-hidden="true"></canvas>
-    
-    <div class="boot-terminal-window">
-      <div class="terminal-header">
-        <span class="terminal-dot"></span>
-        <span class="terminal-title">TERMINAL // AH-2026 INGRESS</span>
-        <button id="btn-skip-boot" class="btn-terminal-skip" title="Skip to Signal" aria-label="Skip boot sequence">[ SKIP BOOT ↗ ]</button>
-      </div>
-      
-      <div class="terminal-body">
-        <div id="boot-log-content" class="boot-log-content" role="status" aria-live="polite">
-          <p class="log-line">> INITIALIZING TELEMETRY SUBSYSTEM ...</p>
-          <p class="log-line">> CONNECTING RF CARRIER FREQUENCY [144.000 MHz] ...</p>
-          <p class="log-line">> AUTHENTICATING RESEARCH REPOSITORY [ASIF HASAN] ...</p>
-          <p class="log-line">> 3 SPRINGER LNNS PROCEEDINGS VERIFIED.</p>
-          <p class="log-line">> M.SC. THESIS NEBULA DETECTED [XAI FOR IOT SECURITY].</p>
-          <p class="log-line log-highlight">> SIGNAL ACQUIRED. WAKE UP, VISITOR ...</p>
-        </div>
+  <!-- Accessible Skip to Content Link -->
+  <a href="#origin" class="skip-to-content-link">Skip to main content</a>
 
-        <div class="boot-prompt-block">
-          <p class="prompt-text">SELECT YOUR INTERFACE FREQUENCY:</p>
-          <div class="pill-choice-group">
-            <button id="btn-choose-red" class="btn-pill btn-red-pill" aria-label="Choose Red Pill for Immersive 3D Flight">
-              <span class="pill-badge red-badge" aria-hidden="true"></span>
-              <span class="pill-text"><strong>RED PILL</strong> // IMMERSIVE SIGNAL FLIGHT</span>
-            </button>
-            <button id="btn-choose-blue" class="btn-pill btn-blue-pill" aria-label="Choose Blue Pill for Plain Text View">
-              <span class="pill-badge blue-badge" aria-hidden="true"></span>
-              <span class="pill-text"><strong>BLUE PILL</strong> // PLAIN TEXT VIEW</span>
-            </button>
-          </div>
-          <p class="boot-micro-note">// NO TYPING REQUIRED. NAVIGATION VIA SCROLL, HOVER, AND CLICK.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Persistent 3D Procedural Starfield & Cosmic Viewport -->
-  <div id="space-canvas-container" class="space-canvas-container">
+  <!-- Persistent 3D Procedural Starfield & Atmospheric Depth -->
+  <div id="space-canvas-container" class="space-canvas-container" aria-hidden="true">
     <canvas id="space-canvas"></canvas>
   </div>
 
-  <!-- Scanline & CRT Vignette Overlay (Restrained, Procedural) -->
+  <!-- Restrained CRT Scanline Layer -->
   <div class="crt-overlay" aria-hidden="true"></div>
 
   <!-- ========================================== -->
-  <!-- HUD NAVIGATION & TELEMETRY HEADER          -->
+  <!-- TOP NAVIGATION HEADER                      -->
   <!-- ========================================== -->
   <header class="hud-navbar" id="hud-navbar">
     <div class="hud-nav-left">
       <a href="#origin" class="hud-brand">
-        <span class="hud-signal-indicator">●</span>
-        <span class="hud-callsign">AH-2026 // S21NEO</span>
+        <span class="hud-signal-indicator"></span>
+        <span class="hud-name">Asif Hasan</span>
+        <span class="hud-callsign-badge">S21NEO</span>
       </a>
       <div class="hud-telemetry-badge d-none-mobile">
-        <span class="telemetry-label">CARRIER:</span>
-        <span class="telemetry-val">144.000 MHz</span>
-        <span class="telemetry-sep">//</span>
-        <span class="telemetry-label">STATUS:</span>
-        <span class="telemetry-val text-signal-green" id="hud-status-text">TRANSMITTING</span>
+        <span class="telemetry-freq">144.000 MHz</span>
+        <span class="telemetry-sep">•</span>
+        <span class="telemetry-status">Active Signal</span>
       </div>
     </div>
 
-    <nav class="hud-nav-links d-none-tablet">
-      <a href="#origin" class="hud-nav-link">[ 01 ORIGIN ]</a>
-      <a href="#research-belt" class="hud-nav-link">[ 02 RESEARCH ]</a>
-      <a href="#systems-constellation" class="hud-nav-link">[ 03 SYSTEMS ]</a>
-      <a href="#sideband" class="hud-nav-link">[ 04 SIDEBAND ]</a>
-      <a href="#transmission" class="hud-nav-link">[ 05 TRANSMIT ]</a>
+    <nav class="hud-nav-links d-none-tablet" aria-label="Main Navigation">
+      <a href="#origin" class="hud-nav-link">Origin</a>
+      <a href="#research-belt" class="hud-nav-link">Research</a>
+      <a href="#systems-constellation" class="hud-nav-link">Systems</a>
+      <a href="#sideband" class="hud-nav-link">Sideband</a>
+      <a href="#transmission" class="hud-nav-link">Contact</a>
     </nav>
 
     <div class="hud-nav-right">
-      <!-- Audio Toggle -->
-      <button id="hud-sound-toggle" class="hud-btn-toggle" title="Toggle Synthesized Audio Feedback" aria-label="Toggle Morse Audio">
+      <!-- Audio Morse Toggle -->
+      <button id="hud-sound-toggle" class="hud-btn-toggle" title="Toggle Synthesized Morse Audio" aria-label="Toggle Morse Audio">
         <span class="hud-icon">♫</span>
-        <span class="sound-label">AUDIO: OFF</span>
+        <span class="sound-label">Audio: Off</span>
       </button>
 
-      <!-- Pill View Toggle (Red vs Blue) -->
+      <!-- Pill View Toggle (Immersive vs Plain) -->
       <button id="hud-view-toggle" class="hud-btn-toggle hud-pill-toggle" role="switch" aria-checked="false" title="Switch between Immersive and Plain View" aria-label="Toggle between Immersive and Plain View Mode">
         <span class="toggle-pill-dot" aria-hidden="true"></span>
-        <span class="view-label">PLAIN VIEW</span>
+        <span class="view-label">Plain View</span>
       </button>
 
       <!-- Lab Apps Button -->
-      <button class="hud-btn-lab btn-play-miniapp" title="Launch Sandbox Mini-Apps">
-        <span>LAB APPS // 05</span>
+      <button class="hud-btn-lab btn-play-miniapp" title="Launch Interactive Mini-Apps" aria-label="Launch Lab Mini-Apps">
+        <span>Lab Apps // 05</span>
       </button>
     </div>
   </header>
 
   <!-- ========================================== -->
-  <!-- 1. IMMERSIVE SPACE VIEW (RED PILL JOURNEY) -->
+  <!-- 1. IMMERSIVE SPACE VIEW (CARD-ZOOM FLIGHT) -->
   <!-- ========================================== -->
   <div id="view-immersive" class="view-container">
 
     <!-- STOP 1: ORIGIN (#origin) -->
     <section class="signal-stop stop-origin" id="origin">
       <div class="origin-content">
-        <div class="hud-tag-row">
-          <span class="hud-tag">[ SYSTEM INITIALIZED ]</span>
-          <span class="hud-tag">[ M.SC. RESEARCH DIRECTIVE ]</span>
-          <span class="hud-tag">[ DHAKA, BANGLADESH ]</span>
+        <div class="hero-chip-row">
+          <span class="hero-chip">East West University</span>
+          <span class="hero-chip">Explainable AI &amp; IoT</span>
+          <span class="hero-chip">Amateur Radio S21NEO</span>
         </div>
 
-        <h1 class="origin-title">
-          <span class="glitch-text" data-text="ASIF HASAN">ASIF HASAN</span>
-        </h1>
+        <h1 class="origin-title">Asif Hasan</h1>
 
         <p class="origin-subtitle">
           AI/ML Researcher &bull; M.Sc. Candidate &bull; Systems Engineer
         </p>
 
         <p class="origin-statement">
-          A signal travels from code out into space. Investigating <strong>Explainable Artificial Intelligence (XAI)</strong> for edge IoT intrusion detection, reinforcement learning engines, and delay-tolerant distributed communication architectures.
+          Graduate researcher at East West University investigating <strong>Explainable Artificial Intelligence (XAI)</strong> for edge IoT cybersecurity, reinforcement learning tactical engines, and delay-tolerant distributed communication architectures.
         </p>
 
         <div class="origin-metrics-grid">
-          <div class="metric-card">
-            <span class="metric-code">// PEER-REVIEWED</span>
+          <div class="metric-card focal-zoom-card">
+            <span class="metric-code">Peer-Reviewed</span>
             <span class="metric-val">03</span>
             <span class="metric-label">Springer LNNS Proceedings</span>
           </div>
-          <div class="metric-card">
-            <span class="metric-code">// M.SC. THESIS</span>
-            <span class="metric-val">ACTIVE</span>
+          <div class="metric-card focal-zoom-card">
+            <span class="metric-code">M.Sc. Thesis</span>
+            <span class="metric-val">Active</span>
             <span class="metric-label">IoT Intrusion Detection (XAI)</span>
           </div>
-          <div class="metric-card">
-            <span class="metric-code">// HAM CALLSIGN</span>
+          <div class="metric-card focal-zoom-card">
+            <span class="metric-code">Amateur Radio</span>
             <span class="metric-val">S21NEO</span>
-            <span class="metric-label">Licensed Amateur Radio</span>
+            <span class="metric-label">Licensed HAM Operator</span>
           </div>
         </div>
 
         <div class="scroll-travel-hint">
-          <span class="hint-brackets">[</span>
-          <span class="hint-text">SCROLL TO TRAVEL DEEPER INTO THE SIGNAL</span>
+          <span class="hint-text">Scroll down to explore research and systems</span>
           <span class="hint-arrow">↓</span>
-          <span class="hint-brackets">]</span>
         </div>
       </div>
     </section>
 
     <!-- STOP 2: RESEARCH BELT (#research-belt) -->
     <section class="signal-stop stop-research" id="research-belt">
-      <div class="section-hud-bar">
-        <span class="section-code">[ STOP 02 // CELESTIAL RESEARCH BELT ]</span>
-        <span class="section-meta">ORBITAL BODIES: 4 (3 PUBLISHED + 1 ACTIVE THESIS NEBULA)</span>
+      <div class="section-header-block">
+        <span class="section-badge">02 // Peer-Reviewed Scholarly Output</span>
+        <h2 class="stop-heading">Publications &amp; Active Thesis</h2>
+        <p class="stop-desc">
+          Peer-reviewed conference proceedings published with Springer LNNS alongside active graduate thesis research in Explainable AI.
+        </p>
       </div>
 
       <div class="research-belt-container">
-        <div class="belt-intro">
-          <h2 class="stop-heading">Scholarly Output &amp; Active Nebula</h2>
-          <p class="stop-desc">
-            Hover celestial bodies to scan orbital frequency; click any body to lock camera trajectory and decode verified publication metadata.
-          </p>
-        </div>
-
-        <!-- Interactive Planet Selection Grid (Accessible & Visual Sync) -->
-        <div class="celestial-nodes-grid" id="celestial-nodes-container">
-          <!-- Dynamically populated from signal_data.json -->
-        </div>
+        <!-- Interactive Card-Zoom Grid (Populated from signal_data.json) -->
+        <div class="celestial-nodes-grid" id="celestial-nodes-container"></div>
       </div>
     </section>
 
     <!-- STOP 3: SYSTEMS CONSTELLATION (#systems-constellation) -->
     <section class="signal-stop stop-systems" id="systems-constellation">
-      <div class="section-hud-bar">
-        <span class="section-code">[ STOP 03 // SYSTEMS CONSTELLATION ]</span>
-        <span class="section-meta">VERIFIED BUILDS: 6 NODES // ALL CODE AUDITED</span>
+      <div class="section-header-block">
+        <span class="section-badge">03 // Engineering Constellation</span>
+        <h2 class="stop-heading">Engineering Systems &amp; Software</h2>
+        <p class="stop-desc">
+          Production software, neural recommendation pipelines, reinforcement learning agents, and distributed simulation algorithms.
+        </p>
       </div>
 
       <div class="systems-constellation-container">
-        <div class="systems-intro">
-          <h2 class="stop-heading">Engineering Constellation</h2>
-          <p class="stop-desc">
-            Production algorithms, distributed ledger consensus, and empirical simulators linked into a star-chart network.
-          </p>
-        </div>
-
-        <div class="constellation-nodes-grid" id="constellation-nodes-container">
-          <!-- Dynamically populated from signal_data.json -->
-        </div>
+        <!-- Interactive Card-Zoom Grid (Populated from signal_data.json) -->
+        <div class="constellation-nodes-grid" id="constellation-nodes-container"></div>
       </div>
     </section>
 
     <!-- STOP 4: SIDEBAND (#sideband) -->
     <section class="signal-stop stop-sideband" id="sideband">
-      <div class="section-hud-bar">
-        <span class="section-code">[ STOP 04 // SIDEBAND FREQUENCIES ]</span>
-        <span class="section-meta">MODULATION: AMATEUR RADIO • ATHLETICS • SCOUTING • ORATORY</span>
+      <div class="section-header-block">
+        <span class="section-badge">04 // Frequencies &amp; Disciplines</span>
+        <h2 class="stop-heading">Sideband Frequencies</h2>
+        <p class="stop-desc">
+          The essential frequencies that shape my engineering ethos: amateur radio, algorithmic problem solving, debate, scouting, and athletics.
+        </p>
       </div>
 
       <div class="sideband-container">
-        <div class="sideband-intro">
-          <h2 class="stop-heading">The Sideband Frequencies</h2>
-          <p class="stop-desc">
-            In radio engineering, sidebands are the frequencies above and below the carrier where the actual modulation and information lives.
-          </p>
-        </div>
-
-        <div class="sideband-nodes-grid" id="sideband-nodes-container">
-          <!-- Dynamically populated from signal_data.json -->
-        </div>
+        <!-- Interactive Card-Zoom Grid (Populated from signal_data.json) -->
+        <div class="sideband-nodes-grid" id="sideband-nodes-container"></div>
       </div>
     </section>
 
     <!-- STOP 5: TRANSMISSION (#transmission) -->
     <section class="signal-stop stop-transmission" id="transmission">
-      <div class="section-hud-bar">
-        <span class="section-code">[ STOP 05 // SIGNAL TRANSMISSION ]</span>
-        <span class="section-meta">CALLSIGN: S21NEO • ENCRYPTION: NONE • OPEN CHANNEL</span>
+      <div class="section-header-block text-center">
+        <span class="section-badge">05 // Open Transmission Channel</span>
+        <h2 class="stop-heading">Connect &amp; Collaborate</h2>
+        <p class="stop-desc">
+          Open for graduate research inquiries, distributed systems collaboration, and algorithmic challenges.
+        </p>
       </div>
 
-      <div class="transmission-card">
-        <h2 class="transmission-title">TRANSMIT TO ASIF HASAN</h2>
-        <p class="transmission-desc">
-          Open for graduate research inquiries, distributed systems collaboration, and algorithmic engineering challenges.
-        </p>
-
-        <!-- Oscilloscope Waveform Canvas -->
+      <div class="transmission-card focal-zoom-card">
+        <!-- Real-time CRT Oscilloscope Waveform -->
         <div class="oscilloscope-wrapper">
-          <canvas id="waveform-canvas" class="waveform-canvas" width="800" height="90"></canvas>
+          <canvas id="waveform-canvas" class="waveform-canvas" width="800" height="90" aria-label="Oscilloscope waveform visualizer"></canvas>
         </div>
 
         <div class="transmission-actions">
-          <button id="btn-transmit-signal" class="btn-transmit">
+          <button id="btn-transmit-signal" class="btn-transmit" aria-label="Transmit Morse Code for callsign S21NEO">
             <span class="transmit-radar-pulse"></span>
-            <span class="transmit-label">TRANSMIT CALLSIGN [ S21NEO ]</span>
+            <span class="transmit-label">Transmit Morse Callsign [ S21NEO ]</span>
           </button>
         </div>
 
         <div class="channels-list">
           <a href="mailto:asifhasan.cse@gmail.com" class="channel-link">
-            <span class="channel-code">// EMAIL</span>
+            <span class="channel-code">Email</span>
             <span class="channel-val">asifhasan.cse@gmail.com</span>
           </a>
           <a href="https://github.com/asicoltd" target="_blank" rel="noopener noreferrer" class="channel-link">
-            <span class="channel-code">// GITHUB</span>
+            <span class="channel-code">GitHub</span>
             <span class="channel-val">github.com/asicoltd</span>
           </a>
           <a href="https://www.linkedin.com/in/asicoltd" target="_blank" rel="noopener noreferrer" class="channel-link">
-            <span class="channel-code">// LINKEDIN</span>
+            <span class="channel-code">LinkedIn</span>
             <span class="channel-val">linkedin.com/in/asicoltd</span>
           </a>
           <div class="channel-link">
-            <span class="channel-code">// QTH</span>
+            <span class="channel-code">Location</span>
             <span class="channel-val">Dhaka, Bangladesh [23.8103° N, 90.4125° E]</span>
           </div>
         </div>
 
         <div class="terminal-footer-row">
-          <span>◆ AH-2026 "THE SIGNAL" &bull; PROCEDURAL WEBGL ARCHITECTURE</span>
-          <span>NO COPYRIGHT. VERIFIED REFERENCE SYSTEM.</span>
-          <a href="#origin" class="back-to-origin-link">[ RETURN TO ORIGIN ↑ ]</a>
+          <span>&copy; Asif Hasan &bull; Verified Academic &amp; Systems Portfolio</span>
+          <a href="#origin" class="back-to-origin-link">Return to top ↑</a>
         </div>
       </div>
     </section>
@@ -279,13 +217,13 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- 2. PLAIN VIEW (BLUE PILL // ACCESSIBLE)    -->
+  <!-- 2. PLAIN VIEW (ACCESSIBLE / FAST TEXT)     -->
   <!-- ========================================== -->
   <main id="view-plain" class="view-plain-document" style="display: none;">
     <div class="plain-container">
       <div class="plain-header">
-        <span class="plain-tag">// AH-2026 PLAIN TEXT REFERENCE VIEW</span>
-        <h1 class="plain-title">ASIF HASAN</h1>
+        <span class="plain-tag">Plain Text Reference View</span>
+        <h1 class="plain-title">Asif Hasan</h1>
         <p class="plain-lead">
           AI/ML Researcher &bull; M.Sc. Candidate at East West University &bull; Systems Engineer &bull; Amateur Radio Callsign <code>S21NEO</code>.
         </p>
@@ -301,9 +239,7 @@
       <!-- Plain: Education -->
       <section class="plain-section">
         <h2 class="plain-heading">1. Education</h2>
-        <div id="plain-education-list">
-          <!-- Populated from signal_data.json -->
-        </div>
+        <div id="plain-education-list"></div>
       </section>
 
       <hr class="plain-divider">
@@ -311,9 +247,7 @@
       <!-- Plain: Publications -->
       <section class="plain-section">
         <h2 class="plain-heading">2. Peer-Reviewed Publications &amp; Active Research</h2>
-        <div id="plain-publications-list">
-          <!-- Populated from signal_data.json -->
-        </div>
+        <div id="plain-publications-list"></div>
       </section>
 
       <hr class="plain-divider">
@@ -321,30 +255,26 @@
       <!-- Plain: Systems -->
       <section class="plain-section">
         <h2 class="plain-heading">3. Verified Engineering Systems &amp; Code</h2>
-        <div id="plain-projects-list">
-          <!-- Populated from signal_data.json -->
-        </div>
+        <div id="plain-projects-list"></div>
       </section>
 
       <hr class="plain-divider">
 
       <!-- Plain: Sideband -->
       <section class="plain-section">
-        <h2 class="plain-heading">4. Sideband (Co-Curricular, Amateur Radio &amp; Disciplines)</h2>
-        <div id="plain-sideband-list">
-          <!-- Populated from signal_data.json -->
-        </div>
+        <h2 class="plain-heading">4. Sideband (Amateur Radio, Problem Solving &amp; Leadership)</h2>
+        <div id="plain-sideband-list"></div>
       </section>
 
       <div class="plain-footer">
         <p>&copy; Asif Hasan &bull; All claims verified against primary conference proceedings &amp; source code repositories.</p>
-        <button id="btn-return-immersive" class="btn-plain-toggle">[ SWITCH TO IMMERSIVE SIGNAL ↗ ]</button>
+        <button id="btn-return-immersive" class="btn-plain-toggle">Switch to Immersive View ↗</button>
       </div>
     </div>
   </main>
 
   <!-- ========================================== -->
-  <!-- HUD TELEMETRY DRAWER / INSPECTION MODAL    -->
+  <!-- TELEMETRY & BIBTEX INSPECTION DRAWER       -->
   <!-- ========================================== -->
   <div class="telemetry-drawer" id="telemetry-drawer" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="drawer-backdrop" id="drawer-backdrop"></div>
@@ -352,7 +282,7 @@
       <div class="drawer-header">
         <div class="drawer-badge-group">
           <span class="drawer-signal-dot"></span>
-          <span class="drawer-node-code" id="drawer-node-code">// TELEMETRY DECODED</span>
+          <span class="drawer-node-code" id="drawer-node-code">Verified Publication Telemetry</span>
         </div>
         <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Inspection Panel">&times;</button>
       </div>
@@ -371,7 +301,7 @@
         <!-- Optional BibTeX Box -->
         <div class="drawer-bibtex-block" id="drawer-bibtex-block" style="display: none;">
           <div class="bibtex-header-row">
-            <span class="bibtex-label">BIBTEX CITATION:</span>
+            <span class="bibtex-label">BibTeX Citation</span>
             <button class="btn-copy-bibtex" id="btn-copy-bibtex-action">Copy</button>
           </div>
           <pre class="bibtex-code" id="drawer-bibtex-code"></pre>
@@ -388,7 +318,7 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <div class="modal-title-group">
-          <span class="section-tag" style="margin-bottom: 0;">LAB ENVIRONMENT</span>
+          <span class="section-tag" style="margin-bottom: 0;">Lab Environment</span>
           <h3 class="modal-title" id="interactive-modal-title">Creative Mini-Apps</h3>
         </div>
         <div class="modal-actions">
@@ -407,31 +337,31 @@
 
           <div class="app-launcher-grid">
             <div class="app-launcher-item" data-app-url="../quiz.html" data-app-title="Find AI // GAN Perception Test">
-              <span class="app-launcher-code">// APP.01</span>
+              <span class="app-launcher-code">App 01</span>
               <h4 class="app-launcher-name">Find AI</h4>
               <p class="app-launcher-desc">Can you distinguish synthetic StyleGAN AI faces from real photographs?</p>
             </div>
 
             <div class="app-launcher-item" data-app-url="../neverWin.html" data-app-title="Loss / Draw // Minimax Game Engine">
-              <span class="app-launcher-code">// APP.02</span>
+              <span class="app-launcher-code">App 02</span>
               <h4 class="app-launcher-name">Loss / Draw</h4>
               <p class="app-launcher-desc">Unbeatable Minimax Tic-Tac-Toe agent with alpha-beta pruning.</p>
             </div>
 
             <div class="app-launcher-item" data-app-url="../whichAI.html" data-app-title="Are You AI? // Turing Paradigm Test">
-              <span class="app-launcher-code">// APP.03</span>
+              <span class="app-launcher-code">App 03</span>
               <h4 class="app-launcher-name">Are You AI?</h4>
               <p class="app-launcher-desc">Turing test quiz scoring human vs synthetic reasoning patterns.</p>
             </div>
 
             <div class="app-launcher-item" data-app-url="../questions.html" data-app-title="Self Reflection // Cognitive Inquiry">
-              <span class="app-launcher-code">// APP.04</span>
+              <span class="app-launcher-code">App 04</span>
               <h4 class="app-launcher-name">Self Reflection</h4>
               <p class="app-launcher-desc">Interactive inquiry prompting introspection on creative and algorithmic growth.</p>
             </div>
 
             <div class="app-launcher-item" data-app-url="../areWeSame.html" data-app-title="Are We Same? // Alignment Matrix">
-              <span class="app-launcher-code">// APP.05</span>
+              <span class="app-launcher-code">App 05</span>
               <h4 class="app-launcher-name">Are We Same?</h4>
               <p class="app-launcher-desc">Alignment checklist comparing working style and habits with Asif's profile.</p>
             </div>
@@ -448,9 +378,8 @@
   <!-- Toast Notification Pill -->
   <div class="signal-toast" id="signal-toast" aria-live="polite"></div>
 
-  <!-- Three.js (r128) & Lenis Smooth Scroll -->
+  <!-- Three.js (r128) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
