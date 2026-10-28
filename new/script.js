@@ -373,46 +373,62 @@
   }
 
   // ==========================================================================
-  // 3. Fluid Card Zoom-In/Zoom-Out on Scroll
+  // 3. Fluid Card Zoom-In/Zoom-Out on Scroll (Focal Sweet Spot)
   // ==========================================================================
+  let isCardZoomAttached = false;
   function initCardZoomEffect() {
     const cards = document.querySelectorAll('.focal-zoom-card, .celestial-card, .system-node-card, .sideband-node, .metric-card');
     if (cards.length === 0) return;
 
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-focal-zoomed');
-          } else {
-            entry.target.classList.remove('is-focal-zoomed');
-          }
-        });
-      }, {
-        root: null,
-        rootMargin: '-10% 0px -10% 0px',
-        threshold: 0.25
-      });
+    let ticking = false;
+    let vh = window.innerHeight;
 
-      cards.forEach(card => observer.observe(card));
-    } else {
-      // Fallback scroll listener
-      function checkFocalCards() {
-        const viewportCenter = window.innerHeight / 2;
-        cards.forEach(card => {
-          const rect = card.getBoundingClientRect();
-          const cardCenter = rect.top + rect.height / 2;
-          const distFromCenter = Math.abs(viewportCenter - cardCenter);
-          if (distFromCenter < window.innerHeight * 0.35) {
-            card.classList.add('is-focal-zoomed');
-          } else {
+    function updateFocalCards() {
+      const focalCenter = vh * 0.5;
+      const focalBand = vh * 0.28;
+
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.bottom < -40 || rect.top > vh + 40) {
+          if (card.classList.contains('is-focal-zoomed')) {
             card.classList.remove('is-focal-zoomed');
           }
-        });
-      }
-      window.addEventListener('scroll', checkFocalCards, { passive: true });
-      checkFocalCards();
+          return;
+        }
+
+        const cardCenter = rect.top + rect.height * 0.5;
+        const distFromCenter = Math.abs(cardCenter - focalCenter);
+
+        const isZoomed = card.classList.contains('is-focal-zoomed');
+        const threshold = isZoomed ? (focalBand + 35) : focalBand;
+
+        if (distFromCenter < threshold) {
+          if (!isZoomed) card.classList.add('is-focal-zoomed');
+        } else {
+          if (isZoomed) card.classList.remove('is-focal-zoomed');
+        }
+      });
+      ticking = false;
     }
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateFocalCards);
+        ticking = true;
+      }
+    };
+
+    if (!isCardZoomAttached) {
+      window.addEventListener('resize', () => {
+        vh = window.innerHeight;
+        onScroll();
+      }, { passive: true });
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      isCardZoomAttached = true;
+    }
+
+    requestAnimationFrame(updateFocalCards);
   }
 
   // ==========================================================================
