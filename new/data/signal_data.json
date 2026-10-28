@@ -101,7 +101,7 @@
       "link": "#contact",
       "abstract": "Active M.Sc. thesis research developing lightweight, transparent tree ensembles and deep neural networks with SHAP/LIME attribution pipelines for real-time cyberattack detection on resource-constrained IoT gateways.",
       "celestial_body": {
-        "name": "PROTO-PLANET NEBULA // THESIS",
+        "name": "M.Sc. Thesis Nebula",
         "badge": "Active M.Sc. Thesis",
         "color": "#10b981",
         "radius": 2.2,
@@ -161,37 +161,37 @@
   ],
   "sideband": [
     {
-      "code": "FREQ // 144-430 MHz",
+      "code": "Amateur Radio Communication",
       "title": "Licensed Amateur Radio Operator (S21NEO)",
       "frequency": "VHF / UHF Bands",
       "description": "Licensed HAM radio operator (Callsign: S21NEO). Researching RF wave propagation, antenna impedance matching, emergency emergency radio networks, and packet radio communications during disasters."
     },
     {
-      "code": "FREQ // ICPC-ALGO",
+      "code": "Algorithmic Problem Solving",
       "title": "Competitive Programming & Problem Solving",
       "frequency": "Codeforces • HackerRank • Beecrowd",
       "description": "Solved thousands of algorithmic and data structure problems across online judges. Active contestant in national programming contests and university ICPC preliminaries."
     },
     {
-      "code": "FREQ // ORATORY",
+      "code": "Debate & Scientific Oratory",
       "title": "Debating & Public Oratory Champion",
       "frequency": "Parliamentary Debate",
       "description": "University-level debate champion, former General Secretary of college debate club. Trainer in structured rhetoric, policy critique, and scientific communication."
     },
     {
-      "code": "FREQ // SERVICE",
+      "code": "Community & Scout Leadership",
       "title": "Senior Rover Mate — Scouting Movement",
       "frequency": "Samatat Open Scout Group",
       "description": "Senior Rover Mate spearheading community service, disaster relief campaigns, winter clothes distribution, youth leadership development, and scout jamborees."
     },
     {
-      "code": "FREQ // DONOR-20+",
+      "code": "Voluntary Blood Donation",
       "title": "Voluntary Blood Donor (20+ Donations)",
       "frequency": "Quantum Foundation & Emergency Care",
       "description": "Regular blood donor since 2017 with over 20 voluntary donations connecting donors with critically ill emergency patients."
     },
     {
-      "code": "FREQ // ENDURANCE",
+      "code": "Endurance & Physical Discipline",
       "title": "Marathon Runner & Martial Arts Practitioner",
       "frequency": "15 Marathon Events • Blue Belt Karate",
       "description": "Completed 15 mini, half, and full marathons with Run Bangladesh; holds Blue Belt in Karate and Green Belt in Taekwondo, cultivating mental endurance and physical discipline."

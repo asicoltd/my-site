@@ -141,7 +141,7 @@
   note={M.Sc. Thesis in Progress}
 }`,
         celestial_body: {
-          name: "PROTO-PLANET NEBULA // THESIS",
+          name: "M.Sc. Thesis Nebula",
           badge: "Active M.Sc. Thesis",
           color: "#10b981"
         }
@@ -263,8 +263,8 @@
               <p class="celestial-abstract">${pub.abstract}</p>
             </div>
             <div class="celestial-footer">
-              <button class="btn-telemetry-action btn-inspect-pub" data-pub-id="${pub.id}" aria-label="Inspect metadata and copy BibTeX for ${pub.title}">[ View BibTeX &amp; Details ]</button>
-              ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action" aria-label="Open Springer publication proceeding">[ Springer DOI ↗ ]</a>` : `<span class="btn-telemetry-action" style="opacity:0.7">In Active Progress</span>`}
+              <button class="btn-telemetry-action btn-inspect-pub" data-pub-id="${pub.id}" aria-label="Inspect metadata and copy BibTeX for ${pub.title}">View BibTeX &amp; Abstract</button>
+              ${pub.doi !== 'IN_PROGRESS' ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="btn-telemetry-action" aria-label="Open Springer publication proceeding">Springer Proceeding ↗</a>` : `<span class="btn-telemetry-action" style="opacity:0.75">Active Research</span>`}
             </div>
           </article>
         `;
@@ -322,8 +322,8 @@
           <p class="plain-item-meta">${p.authors} &bull; ${p.venue} (${p.year})</p>
           <p class="plain-item-desc">${p.abstract}</p>
           <div class="plain-item-links">
-            ${p.doi !== 'IN_PROGRESS' ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer">[ Springer Proceeding ↗ ]</a>` : `<span>[ Active Thesis ]</span>`}
-            <a href="#" class="btn-inspect-pub" data-pub-id="${p.id}">[ View BibTeX ]</a>
+            ${p.doi !== 'IN_PROGRESS' ? `<a href="${p.link}" target="_blank" rel="noopener noreferrer">Springer Proceeding ↗</a>` : `<span>Active M.Sc. Thesis</span>`}
+            <a href="#" class="btn-inspect-pub" data-pub-id="${p.id}">View BibTeX &amp; Citation</a>
           </div>
         </div>
       `).join('');
@@ -337,7 +337,7 @@
           <p class="plain-item-meta">${proj.category} &bull; ${proj.tech.join(', ')}</p>
           <p class="plain-item-desc">${proj.description}</p>
           <div class="plain-item-links">
-            <a href="${proj.github}" target="_blank" rel="noopener noreferrer">[ GitHub Repository ↗ ]</a>
+            <a href="${proj.github}" target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a>
           </div>
         </div>
       `).join('');
@@ -1045,10 +1045,10 @@
   // ==========================================================================
   const originalDocTitle = document.title;
   window.addEventListener('blur', () => {
-    document.title = '[ Signal lost... ]';
+    document.title = 'Signal lost...';
   });
   window.addEventListener('focus', () => {
-    document.title = '[ Signal acquired ]';
+    document.title = 'Signal acquired';
     setTimeout(() => {
       document.title = originalDocTitle;
     }, 1800);
